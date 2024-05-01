@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/style.css">
+    <link rel="stylesheet" href="./styles/fonts.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="main-page">
+
+        <div class="loading-screen">
+            <img class="logo logo-animation" src="assets/img/logo.svg" />
+        </div>
+        <div class="loading-screen-mobile">
+            <img class="logo" src="assets/img/logo_white.svg" />
+        </div>
+        <div class="signup-container">
+            <span>Not a Join user?</span>
+            <a href="signup.html">
+                <button>Sign up</button>
+            </a>
+        </div>
+
+        <div class="login-container">
+            <h1>Log in</h1>
+            <div class="line"></div>
+            <div id="login-form">
+                <div class="input-container">
+                    <input required id="email" type="text" placeholder="E-Mail" />
+                    <input required id="password" type="password" placeholder="Password" />
+                    <span id="error" style="display: none">Ups! Wrong password. Try again.
+                    </span>
+                </div>
+                <div class="options">
+                    <div class="remember-container">
+                        <input id="remember" type="checkbox" />
+                        <label for="remember">Remember me</label>
+                    </div>
+                </div>
+                <div class="login-buttons">
+                    <button type="button" id="login"><b>Log in</b></button>
+                    <button type="button" id="guest-login">
+                        <b>Guest Log in</b>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <footer class="footer">
+            <a target="_blank" href="privacy_police.html">Privacy Policy</a>
+            <a target="_blank" href="legal_notice.html">Legal Notice</a>
+        </footer>
+    </div>
+</body>
+
+</html>
