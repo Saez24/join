@@ -15,28 +15,33 @@
         <div class="login-container">
             <h1>Sign up</h1>
             <div class="line"></div>
-            <div id="login-form">
-                <div class="input-container">
-                    <input required id="signup-name" type="text" placeholder="Name" class="input-fields-signup">
-                    <input required id="signup-email" type="email" placeholder="E-Mail" class="input-fields-signup"/>
-                    <input required id="signup-password" type="password" placeholder="Password" class="input-fields-signup"/>
-                    <input required id="signup-confirmpassword" type="password" placeholder="Password" class="input-fields-signup"/>
-                    <span id="error" style="display: none">Ups! Wrong password. Try again.
-                    </span>
-                </div>
-                <div class="options">
-                    <div class="remember-container">
-                        <input id="remember" type="checkbox" />
-                        <label for="remember">Remember me</label>
+            <form onsubmit="signUp();">
+                <div id="login-form">
+                    <div class="input-container">
+                        <input required id="signup-name" type="text" placeholder="Name" class="input-fields-signup">
+                        <input required id="signup-email" type="email" placeholder="E-Mail"
+                            class="input-fields-signup" />
+                        <input required id="signup-password" type="password" placeholder="Password"
+                            class="input-fields-signup" />
+                        <input required id="signup-confirmpassword" type="password" placeholder="Password"
+                            class="input-fields-signup" />
+                        <span id="signup-error" style="display: none">Ups! Your passwords don't match.
+                        </span>
+                    </div>
+                    <div class="options">
+                        <div class="remember-container">
+                            <input id="remember" type="checkbox" />
+                            <label for="remember">Remember me</label>
+                        </div>
+                    </div>
+                    <div class="login-buttons">
+                        <button type="button" id="login"><b>Log in</b></button>
+                        <button type="button" id="guest-login">
+                            <b>Guest Log in</b>
+                        </button>
                     </div>
                 </div>
-                <div class="login-buttons">
-                    <button type="button" id="login"><b>Log in</b></button>
-                    <button type="button" id="guest-login">
-                        <b>Guest Log in</b>
-                    </button>
-                </div>
-            </div>
+            </form>
         </div>
         <footer class="footer">
             <a target="_blank" href="privacy_police.html">Privacy Policy</a>
