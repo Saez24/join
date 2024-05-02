@@ -110,11 +110,25 @@ body {
 }
 
 .line {
-    width: 100px;
-    height: 2px;
+    width: 150px;
+    height: 3px;
     background-color: #29abe2;
     margin-top: 20px;
     margin-bottom: 20px;
+}
+
+.input-fields-signup {
+    padding: 10px;
+    width: 100%;
+    border-radius: 5px;
+    border-color: #d1d1d1;
+    border: 1px solid #d1d1d1;
+    text-indent: 10px;
+    font-family: "Inter";
+}
+
+::placeholder {
+    color: #D1D1D1; 
 }
 
 #login-form {
@@ -150,6 +164,30 @@ body {
     font-weight: 400;
     text-indent: 10px;
     font-size: 14px;
+}
+
+#signup-name {
+    background-image: url("../assets/img/person.png");
+    background-repeat: no-repeat;
+    background-position: center right 10px;
+}
+
+#signup-email {
+    background-image: url("../assets/img/mail.png");
+    background-repeat: no-repeat;
+    background-position: center right 10px;
+}
+
+#signup-password {
+    background-image: url("../assets/img/lock.png");
+    background-repeat: no-repeat;
+    background-position: center right 10px;
+}
+
+#signup-confirmpassword {
+    background-image: url("../assets/img/lock.png");
+    background-repeat: no-repeat;
+    background-position: center right 10px;
 }
 
 #email {
