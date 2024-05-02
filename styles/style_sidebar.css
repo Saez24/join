@@ -60,7 +60,6 @@ body {
 }
 
 .sidebar-bottom {
-    margin-top: 120px;
     display: flex;
     flex-direction: column;
     gap: 28px;
