@@ -65,7 +65,7 @@ body {
     flex-direction: column;
     gap: 28px;
     width: 100%;
-    padding-left: 64px;
+    padding: 243px 0 0 52px;
 }
 
 .bottom-row {
@@ -74,6 +74,7 @@ body {
     font-size: 16px;
     color: #CDCDCD;
     width: 100%;
+    padding: 0 56px 0 56px;
 }
 
 .bottom-row:hover {
@@ -86,5 +87,4 @@ body {
 .direction-left{
     display: flex;
     left: 0;
-    justify-content: flex-start !important;
 }
