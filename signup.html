@@ -15,7 +15,7 @@
         <div class="login-container">
             <h1>Sign up</h1>
             <div class="line"></div>
-            <form onsubmit="signUp();">
+            <form onsubmit="signUp()">
                 <div id="login-form">
                     <div class="input-container">
                         <input required id="signup-name" type="text" placeholder="Name" class="input-fields-signup">
@@ -29,16 +29,13 @@
                         </span>
                     </div>
                     <div class="options">
-                        <div class="remember-container">
-                            <input id="remember" type="checkbox" />
-                            <label for="remember">Remember me</label>
+                        <div class="acceptprivacy-container">
+                            <input id="checkbox-privacy" type="checkbox" />
+                            <label for="checkbox-privacy">I accept the <span>Privacy policy</span></label>
                         </div>
                     </div>
                     <div class="login-buttons">
-                        <button type="button" id="login"><b>Log in</b></button>
-                        <button type="button" id="guest-login">
-                            <b>Guest Log in</b>
-                        </button>
+                        <button class="signup-btn"><b>Sign up</b></button>
                     </div>
                 </div>
             </form>
