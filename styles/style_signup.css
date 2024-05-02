@@ -173,6 +173,17 @@ body {
     font-size: 16px;
 }
 
+.signup-btn:hover {
+    border: 0px;
+    background: #29ABE2;
+    transition: 100ms ease-in-out;
+    box-shadow: 0px 0px 14px 3px #00000053;
+}
+
+.signup-btn:focus {
+    background: #091931;
+}
+
 .acceptprivacy-container {
     width: 422px;
     height: 24px;
