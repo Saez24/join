@@ -1,0 +1,90 @@
+body {
+    margin: 0;
+    display: flex;
+}
+
+.sidebar {
+    position: fixed;
+    left: 0;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 232px;
+    height: 100vh;
+    padding: 64px 0px 64px 0px;
+    background-color: #2a3647;
+}
+
+#content {
+    flex: 1;
+}
+
+.logo-sidebar {
+    margin-bottom: 114.02px;
+    width: 100.03px;
+    height: 121.97px;
+}
+
+#sidebarMenu {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    color: #CDCDCD;
+    gap: 15px;
+    overflow: hidden;
+}
+
+.sidebar-menu-row {
+    cursor: pointer;
+    display: flex;
+    height: 46px;
+    width: 100%;
+    padding-left: 56px;
+    gap: 8px;
+    align-items: center;
+    background-color: #2a3647;
+}
+
+.selected {
+    background-color: #091931;
+    color: white;
+}
+
+.icon {
+    height: 28px;
+    width: 28px;
+}
+
+.sidebar-menu-row:hover {
+    filter: brightness(1.1);
+    color: white;
+}
+
+.sidebar-bottom {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    width: 100%;
+    padding: 243px 0 0 52px;
+}
+
+.bottom-row {
+    display: flex;
+    cursor: pointer;
+    font-size: 16px;
+    color: #CDCDCD;
+    width: 100%;
+    padding: 0 56px 0 56px;
+}
+
+.bottom-row:hover {
+    cursor: pointer;
+    font-weight: bold;
+    color: #29abe2;
+
+}
+
+.direction-left{
+    display: flex;
+    left: 0;
+}
