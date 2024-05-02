@@ -222,7 +222,7 @@ body {
 .checkbox-remember {
     left: 300px;
     z-index: 0;
-    -webkit-appearance: none;
+    appearance: none;
 }
 
 .checkbox-remember::before {
