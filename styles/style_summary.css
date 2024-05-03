@@ -16,39 +16,47 @@ body {
     align-items: center;
 }
 
-.gap-32 {
-    gap: 32px;
+.j-between {
+    justify-content: space-between;
+}
+
+.f-column {
+    flex-direction: column;
 }
 
 .f-size-27 {
     font-size: 27px;
     font-weight: 400;
     color: rgba(42, 54, 71, 1);
-
+    margin: 0;
 }
 
 .f-size-64 {
     font-size: 64px;
     font-weight: 600;
     color: rgba(0, 0, 0, 1);
+    margin: 0;
 }
 
 .f-size-20 {
     font-size: 20px;
     font-weight: 400;
     color: rgba(42, 54, 71, 1);
+    margin: 0;
 }
 
 .f-size-21 {
     font-size: 21px;
     font-weight: 700;
     color: rgba(42, 54, 71, 1);
+    margin: 0;
 }
 
 .f-size-47 {
     font-size: 47px;
     font-weight: 500;
     color: rgba(42, 54, 71, 1);
+    margin: 0;
 }
 
 span {
@@ -61,13 +69,39 @@ h1 {
     font-size: 61px;
     font-weight: 700;
     color: rgba(0, 0, 0, 1);
-
 }
 
-.summary-cont {
-
+.gap-80 {
+    gap: 80px;
 }
 
 .headline-cont {
+    margin: 206px 0 0 328px;  /*Positionswerte - Mit width der Sidebar und height der topbar subtrahieren */
+    gap: 30px;
+}
 
+.metrics-cont {
+    position: relative;
+    top: 335px;
+    left: 328px;
+    width: 560px;
+    height: 562px;
+    gap: 30px;
+}
+
+.top-cont {
+    width: 264px;
+    height: 168px;
+    border-radius: 30px;
+    gap: 18px;
+    background-color: rgba(255, 255, 255, 1);
+}
+
+.top-cont:hover {
+    cursor: pointer;
+    background-color: rgb(42,54,71);
+}
+
+.top-cont:hover p {
+    color: rgb(255, 255, 255);
 }
