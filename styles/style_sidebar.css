@@ -65,7 +65,7 @@ body {
     flex-direction: column;
     gap: 28px;
     width: 100%;
-    padding: 243px 0 0 52px;
+    padding: 243px 0 0 0;
 }
 
 .bottom-row {
@@ -84,7 +84,7 @@ body {
 
 }
 
-.direction-left{
+.direction-left {
     display: flex;
     left: 0;
 }
