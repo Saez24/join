@@ -1,0 +1,73 @@
+body {
+    margin: 0;
+    background-color: rgb(246,247,248);
+    font-family: "Inter";
+}
+
+.d-flex {
+    display: flex;
+}
+
+.j-center {
+    justify-content: center;
+}
+
+.a-center {
+    align-items: center;
+}
+
+.gap-32 {
+    gap: 32px;
+}
+
+.f-size-27 {
+    font-size: 27px;
+    font-weight: 400;
+    color: rgba(42, 54, 71, 1);
+
+}
+
+.f-size-64 {
+    font-size: 64px;
+    font-weight: 600;
+    color: rgba(0, 0, 0, 1);
+}
+
+.f-size-20 {
+    font-size: 20px;
+    font-weight: 400;
+    color: rgba(42, 54, 71, 1);
+}
+
+.f-size-21 {
+    font-size: 21px;
+    font-weight: 700;
+    color: rgba(42, 54, 71, 1);
+}
+
+.f-size-47 {
+    font-size: 47px;
+    font-weight: 500;
+    color: rgba(42, 54, 71, 1);
+}
+
+span {
+    font-size: 64;
+    font-weight: 700;
+    color: rgba(41, 171, 226, 1);
+}
+
+h1 {
+    font-size: 61px;
+    font-weight: 700;
+    color: rgba(0, 0, 0, 1);
+
+}
+
+.summary-cont {
+
+}
+
+.headline-cont {
+
+}
