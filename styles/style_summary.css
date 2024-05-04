@@ -2,7 +2,8 @@ body {
     margin: 0;
     background-color: rgb(246,247,248);
     font-family: "Inter";
-    display: contents !important; /*Change to flex if you wish to center the key metrics*/
+    /* display: contents !important; Change to flex if you wish to center the key metrics. But loses body background-color */
+    display: block !important;
 }
 
 .d-flex {
@@ -80,14 +81,22 @@ h1 {
     gap: 80px;
 }
 
+.summary-cont {
+    position: relative;
+    top: 206px;
+    left: 328px;
+    width: 1208px;
+    height: 691px;
+}
+
 .headline-cont {
-    margin: 206px 0 0 328px; 
+    /* margin: 206px 0 0 328px;  */
     gap: 30px;
     height: 73px;
 }
 
 .metrics-cont {
-    margin: 56px 0 0 328px;
+    margin: 56px 0 0 0;
     height: 562px;
     width: 560px;
     gap: 30px;
