@@ -117,6 +117,11 @@ h1 {
     background-color: rgb(255, 255, 255);
     box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.1);
     transition: transform 80ms ease-out;
+    transform-origin: left;
+}
+
+.tranform-origin-right {
+    transform-origin: right;
 }
 
 .top-cont:hover {
@@ -149,6 +154,7 @@ h1 {
     background-color: rgb(255, 255, 255);
     box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.1);
     transition: transform 80ms ease-out;
+    transform-origin: top left;
 }
 
 .middle-cont:hover {
