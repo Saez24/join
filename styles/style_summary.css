@@ -2,6 +2,7 @@ body {
     margin: 0;
     background-color: rgb(246,247,248);
     font-family: "Inter";
+    display: contents !important; /*Change to flex if you wish to center the key metrics*/
 }
 
 .d-flex {
@@ -18,6 +19,10 @@ body {
 
 .j-between {
     justify-content: space-between;
+}
+
+.d-none {
+    display: none;
 }
 
 .f-column {
@@ -76,16 +81,15 @@ h1 {
 }
 
 .headline-cont {
-    margin: 206px 0 0 328px;  /*Positionswerte - Mit width der Sidebar und height der topbar subtrahieren */
+    margin: 206px 0 0 328px; 
     gap: 30px;
+    height: 73px;
 }
 
 .metrics-cont {
-    position: relative;
-    top: 335px;
-    left: 328px;
-    width: 560px;
+    margin: 56px 0 0 328px;
     height: 562px;
+    width: 560px;
     gap: 30px;
 }
 
@@ -94,7 +98,7 @@ h1 {
     height: 168px;
     border-radius: 30px;
     gap: 18px;
-    background-color: rgba(255, 255, 255, 1);
+    background-color: rgb(255, 255, 255);
 }
 
 .top-cont:hover {
@@ -105,3 +109,15 @@ h1 {
 .top-cont:hover p {
     color: rgb(255, 255, 255);
 }
+
+.top-cont:hover img:first-child {
+    display: none;
+  }
+  
+  .top-cont:hover img:nth-child(1) + #checkmarkWhite { /*nth peseudo element targets the first child of the parent container. Could also use img:first-child, but nth is universal*/
+    display: block;
+  }
+
+  .top-cont:hover img:nth-child(1) + #penWhite {
+    display: block;
+  }

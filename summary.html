@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="./scripts/templates.js"></script>
     <link rel="stylesheet" href="./styles/style_summary.css">
     <link rel="stylesheet" href="./styles/fonts.css">
     <title>Summary</title>
@@ -11,26 +12,27 @@
 </head>
 
 <body>
+    <div id="sidebarContainer"></div>
     <div class="summary-cont"> <!-- evtl diesen Div löschen, weil ungenutzt -->
         <div class="d-flex a-center headline-cont">
             <h1>JOIN 360</h1>
-            <img src="./assets/img/board_seperator_blue.png">
+            <img src="./assets/img/board_seperator_blue.png" alt="seperator">
             <p class="f-size-27">Key Metrics at a Glance</p>
         </div>
         <div class="d-flex gap-80">
             <div class="metrics-cont"> 
                 <div class="d-flex j-between">
                     <div class="top-cont d-flex j-center a-center">
-                        <img src="./assets/img/board_pen_dark.png">
-                        <img src="./assets/img/board_pen_white.png">
+                        <img src="./assets/img/board_pen_dark.png" alt="pen">
+                        <img src="./assets/img/board_pen_white.png" alt="pen" class="d-none" id="penWhite">
                         <div class="d-flex j-center a-center f-column">
                             <p class="f-size-64" id="summaryToDos">1</p>
                             <p class="f-size-20 ">To-do</p>
                         </div>
                     </div>
                     <div class="top-cont d-flex j-center a-center">
-                        <img src="./assets/img/board_checkmark_dark.png">
-                        <img src="./assets/img/board_checkmark_white.png">
+                        <img src="./assets/img/board_checkmark_dark.png" alt="checkmark">
+                        <img src="./assets/img/board_checkmark_white.png" alt="checkmark" class="d-none" id="checkmarkWhite">
                         <div class="d-flex j-center a-center f-column">
                             <p class="f-size-64" id="summaryToDos">1</p>
                             <p class="f-size-20 ">Done</p>
