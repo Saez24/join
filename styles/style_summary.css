@@ -95,6 +95,14 @@ h1 {
     gap: 13px;
 }
 
+.gap-32 {
+    gap: 32px;
+}
+
+.gap-28 {
+    gap: 28px;
+}
+
 .summary-cont {
     margin-left: 232px;
 }
