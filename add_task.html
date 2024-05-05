@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/style_addtask.css">
+    <link rel="stylesheet" href="./styles/fonts.css">
+    <script src="./scripts/templates.js"></script>
+    <title>Add Task</title>
+    <link rel="icon" href="./assets/img/favicon.png" type="image/x-icon">
+</head>
+
+<body>
+    <div id="sidebarContainer"></div>
+    <div>
+        <h1>Add Task</h1>
+        <div class="main">
+            <div class="left-container">
+                <div class="inputfields">
+                    <lable>Title*</lable>
+                    <input required type="text" placeholder="Enter a title">
+                </div>
+                <div class="textarea">
+                    <lable>Description</lable>
+                    <textarea class="textarea" name="Description" id="description"
+                        placeholder="Enter a Description"></textarea>
+                </div>
+                <div class="inputfields">
+                    <label for="cars">Assigned to</label>
+
+                    <select name="assignedto" id="assignedto">
+                        <option value="volvo">Volvo</option>
+                    </select>
+                </div>
+            </div>
+            <div class="separator"></div>
+            <div class="left-container">
+                <div class="inputfields">
+                    <lable>Due Date*</lable>
+                    <input required type="date" placeholder="dd/mm/yyyy">
+                </div>
+                <div class="textarea">
+                    <lable>Description</lable>
+                    <textarea class="textarea" name="Description" id="description"
+                        placeholder="Enter a Description"></textarea>
+                </div>
+                <div class="inputfields">
+                    <label for="cars">Category*</label>
+                    <select name="assignedto" id="assignedto">
+                        <option value="volvo">Volvo</option>
+                    </select>
+                </div>
+                <div class="inputfields">
+                    <lable>Subtasks</lable>
+                    <input type="text" placeholder="Add new subtask">
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+</body>
+
+</html>

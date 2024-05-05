@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./styles/style.css">
+    <link rel="stylesheet" href="./styles/style_signup.css">
     <link rel="stylesheet" href="./styles/fonts.css">
     <title>Sign up</title>
     <link rel="icon" href="./assets/img/favicon.png" type="image/x-icon">
@@ -12,11 +12,14 @@
 
 <body>
     <div class="main-page">
-        <div class="login-container">
+        <div class="signup-logo">
+            <img src="assets/img/logo.svg" />
+        </div>
+        <div class="signup-container">
             <h1>Sign up</h1>
             <div class="line"></div>
-            <form onsubmit="signUp()">
-                <div id="login-form">
+            <form class="signup-content" onsubmit="signUp()">
+                <div id="signup-form">
                     <div class="input-container">
                         <input required id="signup-name" type="text" placeholder="Name" class="input-fields-signup">
                         <input required id="signup-email" type="email" placeholder="E-Mail"
@@ -30,11 +33,12 @@
                     </div>
                     <div class="options">
                         <div class="acceptprivacy-container">
-                            <input id="checkbox-privacy" type="checkbox" />
-                            <label for="checkbox-privacy">I accept the <span>Privacy policy</span></label>
+                            <input class="checkbox-privacy" id="checkbox-privacy" type="checkbox" />
+                            <label for="checkbox-privacy">I accept the &nbsp;<a target="_blank"
+                                    href="privacy_police.html">Privacy Policy</a></label>
                         </div>
                     </div>
-                    <div class="login-buttons">
+                    <div class="signup-buttons">
                         <button class="signup-btn"><b>Sign up</b></button>
                     </div>
                 </div>

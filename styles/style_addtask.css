@@ -1,0 +1,58 @@
+.main {
+    display: flex;
+    position: absolute;
+    left: 328px;
+    gap: 32px;
+    align-items: center;
+}
+
+.left-container {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 440px;
+}
+
+.inputfields {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+
+
+}
+
+input {
+    height: 22px;
+    border-radius: 10px;
+    border: 1px solid #D1D1D1;
+    padding: 12px 21px 12px 21px;
+}
+
+.textarea {
+    gap: 4px;
+    display: flex;
+    flex-direction: column;
+    height: 120px;
+    max-height: 120px;
+    width: 396px;
+    max-width: 396px;
+}
+
+textarea {
+    border-radius: 10px;
+    border: 1px solid #D1D1D1;
+    padding: 12px 21px 12px 21px;
+    gap: 10px;
+}
+
+select {
+    height: 48px;
+    border-radius: 10px;
+    border: 1px solid #D1D1D1;
+    padding: 12px 21px 12px 21px;
+}
+
+.separator {
+    height: 424px;
+    border: 1px solid #D1D1D1;
+}
