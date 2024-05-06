@@ -258,7 +258,7 @@ h1 {
     .middle-cont {
         width: 396px;
         height: 110px;
-        gap: 20px;
+        gap: 10px;
     }
 
     .bottom-cont {
@@ -290,6 +290,7 @@ h1 {
 
     .seperator-grey-responsive {
         display: block;
+        margin: 0 24px 0 24px;
     }
 
     .seperator-grey {
@@ -321,5 +322,20 @@ h1 {
 
     .headline-cont {
         margin: 0;
+    }
+}
+
+@media (max-width: 450px) {
+    .metrics-cont {
+        width: 280px;
+    }
+
+    .middle-cont {
+        width: 280px;
+        gap: 2px;
+    }
+
+    .seperator-grey-responsive {
+        margin: 0 6px 0 6px;
     }
 }
