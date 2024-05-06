@@ -104,11 +104,11 @@ h1 {
 }
 
 .summary-cont {
-    margin-left: 232px;
+    margin: 206px 0 0 232px;
 }
 
 .headline-cont {
-    margin: 206px 0 0 96px;
+    margin: 0 0 0 96px;
     gap: 30px;
     height: 73px;
 }
@@ -204,15 +204,122 @@ h1 {
     gap: 3px;
 }
 
+.summary-seperator-blue-responsive {
+    display: none;
+}
+
+.seperator-grey-responsive {
+    display: none;
+}
+
 @media (max-width: 1330px) {
-    .greeter-cont{
+    .greeter-cont {
         display: none;
     }
 }
 
 @media (max-width: 1000px) {
-    .headline-cont{
+    .headline-cont {
         flex-direction: column;
         align-items: flex-start;
+        height: 104px;
+        gap: 8px;
+    }
+
+    h1 {
+        font-size: 47px;
+        margin: 0;
+    }
+
+    .f-size-27 {
+        font-size: 20px;
+    }
+
+    .summary-seperator-blue {
+        display: none;
+    }
+
+    .summary-seperator-blue-responsive {
+        display: block;
+        margin-top: 8px;
+    }
+
+    .metrics-cont {
+        width: 396px;
+        gap: 16px;
+    }
+
+    .top-cont {
+        width: 186px;
+        height: 110px;
+        gap: 10px;
+    }
+
+    .middle-cont {
+        width: 396px;
+        height: 110px;
+        gap: 20px;
+    }
+
+    .bottom-cont {
+        width: 116px;
+        height: 116px;
+        gap: 13px;
+    }
+
+    .summary-icons {
+        width: 40px;
+        height: 40px;
+    }
+
+    .f-size-64 {
+        font-size: 47px;
+    }
+
+    .f-size-20 {
+        font-size: 14px;
+    }
+
+    .f-size-16 {
+        font-size: 14px;
+    }
+
+    .f-size-21 {
+        font-size: 16px;
+    }
+
+    .seperator-grey-responsive {
+        display: block;
+    }
+
+    .seperator-grey {
+        display: none;
+    }
+
+    .gap-32 {
+        gap: 16px;
+    }
+
+    .gap-28 {
+        gap: 15px;
+    }
+}
+
+@media (max-width: 750px) {
+    .summary-cont {
+        margin: 206px 0 0 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
+
+    .metrics-cont {
+        margin: 56px 0 0 0;
+        height: 384px;
+    }
+
+    .headline-cont {
+        margin: 0;
     }
 }
