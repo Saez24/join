@@ -1,9 +1,18 @@
+.addtask-content {
+    width: 50%;
+}
+
 .main {
     display: flex;
     position: absolute;
     left: 328px;
     gap: 32px;
-    align-items: center;
+    align-items: flex-start;
+}
+
+h1 {
+    font-weight: 700;
+    font-size: 61px;
 }
 
 .left-container {
@@ -13,12 +22,17 @@
     width: 440px;
 }
 
+.right-container {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 440px;
+}
+
 .inputfields {
     display: flex;
     flex-direction: column;
-    gap: 4px;
-
-
+    gap: 8px;
 }
 
 input {
@@ -26,6 +40,56 @@ input {
     border-radius: 10px;
     border: 1px solid #D1D1D1;
     padding: 12px 21px 12px 21px;
+    cursor: pointer;
+    font-size: 20px;
+    font-weight: 400;
+}
+
+input:empty {
+    color: #D1D1D1;
+}
+
+.datefield {
+    background-image: url("../assets/img/event.png");
+    background-repeat: no-repeat;
+    background-position: center right 18px;
+
+}
+
+input[type=date]::-webkit-calendar-picker-indicator {
+    visibility: hidden;
+}
+
+.prio {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.prio-buttons {
+    display: flex;
+    gap: 8px;
+    width: 440px;
+    justify-content: center;
+}
+
+.prio-buttons button {
+    border-radius: 10px;
+    height: 56px;
+    width: 142px;
+    border: 0px;
+    background: #FFFFFF;
+    font-weight: 400;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    cursor: pointer;
+}
+
+.prio-buttons button:hover {
+    box-shadow: 0px 4px 4px 0px #00000040;
 }
 
 .textarea {
@@ -43,6 +107,8 @@ textarea {
     border: 1px solid #D1D1D1;
     padding: 12px 21px 12px 21px;
     gap: 10px;
+    font-size: 20px;
+    font-weight: 400;
 }
 
 select {
@@ -50,9 +116,25 @@ select {
     border-radius: 10px;
     border: 1px solid #D1D1D1;
     padding: 12px 21px 12px 21px;
+    cursor: pointer;
+    appearance: none;
+    font-size: 20px;
+    font-weight: 400;
+}
+
+.dropdown-content {
+    background-image: url("../assets/img/arrow_drop.png");
+    background-repeat: no-repeat;
+    background-position: center right 18px;
 }
 
 .separator {
-    height: 424px;
+    height: 350px;
     border: 1px solid #D1D1D1;
+}
+
+.subtask {
+    background-image: url("../assets/img/plus.png");
+    background-repeat: no-repeat;
+    background-position: center right 18px;
 }
