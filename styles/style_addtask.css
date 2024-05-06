@@ -7,6 +7,10 @@
     padding-right: 28px;
 }
 
+::placeholder {
+    font-family: 'Inter';
+}
+
 .addtask-content {
     position: absolute;
     top: 136px;
