@@ -43,9 +43,12 @@
                 <div class="prio">
                     <span>Prio</span>
                     <div class="prio-buttons">
-                        <button>Urgent <img src="./assets/img/prio_alta.png" alt=""></button>
-                        <button>Medium <img src="./assets/img/prio_media.png" alt=""></button>
-                        <button>Low <img src="./assets/img/prio_baja.png" alt=""></button>
+                        <button onclick="urgentButton()" id="urgent">Urgent <img src="./assets/img/prio_alta.png"
+                                alt=""></button>
+                        <button onclick="mediumButton()" id="medium">Medium <img src="./assets/img/prio_media.png"
+                                alt=""></button>
+                        <button onclick="lowButton()" id="low">Low <img src="./assets/img/prio_baja.png"
+                                alt=""></button>
                     </div>
                 </div>
                 <div class="inputfields">
@@ -58,7 +61,12 @@
                     <span>Subtasks</span>
                     <input onclick="addSubtask()" id="addsubtask" class="subtask" type="text"
                         placeholder="Add new subtask">
-                    <input id="subtask" class="aktive-subtask" type="text">
+                    <div id="aktive-subtask-block">
+                        <input id="subtask" class="aktive-subtask" type="text"><button onclick="closeAddSubtask()"
+                            class="subtask-close"><img src="./assets/img/close.png" alt=""></button><img
+                            class="subtask-separator" src="./assets/img/separator.png" alt=""><button
+                            class="subtask-check"><img src="./assets/img/check_black.png" alt=""></button>
+                    </div>
                 </div>
             </div>
         </div>

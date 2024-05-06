@@ -3,16 +3,22 @@
     left: 328px;
     gap: 32px;
     align-items: flex-start;
+    padding-left: 28px;
+    padding-right: 28px;
 }
 
 .addtask-content {
     position: absolute;
-    top: 200px;
+    top: 136px;
+    max-width: calc(100% - 232px);
+    max-height: calc(100% - 136px);
+    margin-left: 232px;
 }
 
 h1 {
     font-weight: 700;
     font-size: 61px;
+    padding-left: 28px;
 }
 
 .required:after {
@@ -144,18 +150,63 @@ select {
     background-position: center right 18px;
 }
 
+.subtask-close {
+    background: #FFFFFF;
+    border: 0px;
+    position: relative;
+    left: 380px;
+    cursor: pointer;
+    padding: 0;
+    height: 24px;
+    top: -35px;
+}
+
+.subtask-separator {
+    background: #FFFFFF;
+    border: 0px;
+    position: relative;
+    left: 380px;
+    cursor: pointer;
+    padding: 0;
+    height: 18px;
+    top: -39px;
+}
+
+.subtask-check {
+    background: #FFFFFF;
+    border: 0px;
+    position: relative;
+    left: 384px;
+    cursor: pointer;
+    padding: 0;
+    height: 24px;
+    top: -40px;
+}
+
+.subtask-check img {
+    height: 15px;
+    width: 18px;
+}
+
+.subtask-close img {
+    height: 24px;
+    width: 24px;
+}
+
 .aktive-subtask {
+    width: 396px;
+}
+
+#aktive-subtask-block {
     display: none;
-    background-image: url("../assets/img/close.png"), url("../assets/img/separator.png"),
-        url("../assets/img/check_black.png");
-    background-repeat: no-repeat, no-repeat;
-    background-position: center right 39px, center right 38px, center right 18px;
+    height: 48px;
 }
 
 .bottom-container {
     display: flex;
     justify-content: space-between;
     padding-top: 100px;
+    padding-left: 28px;
 }
 
 .submit-buttons {
