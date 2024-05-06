@@ -8,16 +8,21 @@
     <link rel="stylesheet" href="../../../styles/style.css">
     <link rel="stylesheet" href="../../../styles/fonts.css">
     <script src="./scripts/script.js"></script>
+    <script src="./scripts/templates.js"></script>
 </head>
 
 <body>
     <div class="sidebar">
         <img class="logo-sidebar" src="./assets/img/logo_white.svg" alt="">
         <div id="sidebarMenu">
-            <div class="sidebar-menu-row" id="summaryBtn"><img class="icon" src="./assets/img/summary.png" alt="">Summary</div>
-            <div class="sidebar-menu-row" id="addTaskBtn"><img class="icon" src="./assets/img/addtask.png" alt="">Add Task</div>
-            <div class="sidebar-menu-row" id="boardBtn"><img class="icon" src="./assets/img/board.png" alt="">Board</div>
-            <div class="sidebar-menu-row" id="contactsBtn"><img class="icon" src="./assets/img/contacts.png" alt="">Contacts</div>
+            <div class="sidebar-menu-row" id="summaryBtn"><img class="icon" src="./assets/img/summary.png"
+                    alt="">Summary</div>
+            <div class="sidebar-menu-row" id="addTaskBtn"><img class="icon" src="./assets/img/addtask.png" alt="">Add
+                Task</div>
+            <div class="sidebar-menu-row" id="boardBtn"><img class="icon" src="./assets/img/board.png" alt="">Board
+            </div>
+            <div class="sidebar-menu-row" id="contactsBtn"><img class="icon" src="./assets/img/contacts.png"
+                    alt="">Contacts</div>
         </div>
         <div class="sidebar-bottom">
             <div class="bottom-row" id="privacyPolicyBtn">
@@ -28,9 +33,16 @@
             </div>
         </div>
     </div>
-
-    <div id="content"></div>
-
+    <div class="main">
+        <div class="header">
+            <p>Kanban Project Management Tool</p>
+            <div class="top-right">
+                <div class="bounding-box"><img class="help-icon" src="assets/img/help.png" alt="Help"></div>
+                <div><img class="profile-icon" src="assets/img/profile.png" alt="Help"></div>
+            </div>
+        </div>
+        <div id="content"></div>
+    </div>
 </body>
 
 </html>

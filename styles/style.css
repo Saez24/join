@@ -9,7 +9,7 @@ body {
 .main-page {
     position: relative;
     width: 1440px;
-    height: 1024px;
+    height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
