@@ -1,18 +1,28 @@
-.addtask-content {
-    width: 50%;
-}
-
-.main {
+.main-addtask {
     display: flex;
-    position: absolute;
     left: 328px;
     gap: 32px;
     align-items: flex-start;
 }
 
+.addtask-content {
+    position: absolute;
+    top: 200px;
+}
+
 h1 {
     font-weight: 700;
     font-size: 61px;
+}
+
+.required:after {
+    content: "*";
+    color: red;
+}
+
+.required-2::before {
+    content: "*";
+    color: red;
 }
 
 .left-container {
@@ -45,15 +55,10 @@ input {
     font-weight: 400;
 }
 
-input:empty {
-    color: #D1D1D1;
-}
-
 .datefield {
     background-image: url("../assets/img/event.png");
     background-repeat: no-repeat;
     background-position: center right 18px;
-
 }
 
 input[type=date]::-webkit-calendar-picker-indicator {
@@ -98,7 +103,7 @@ input[type=date]::-webkit-calendar-picker-indicator {
     flex-direction: column;
     height: 120px;
     max-height: 120px;
-    width: 396px;
+    width: 100%;
     max-width: 396px;
 }
 
@@ -137,4 +142,76 @@ select {
     background-image: url("../assets/img/plus.png");
     background-repeat: no-repeat;
     background-position: center right 18px;
+}
+
+.aktive-subtask {
+    display: none;
+    background-image: url("../assets/img/close.png"), url("../assets/img/separator.png"),
+        url("../assets/img/check_black.png");
+    background-repeat: no-repeat, no-repeat;
+    background-position: center right 39px, center right 38px, center right 18px;
+}
+
+.bottom-container {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 100px;
+}
+
+.submit-buttons {
+    display: flex;
+    gap: 8px;
+    height: 56px;
+    width: 309px;
+    justify-content: flex-end;
+}
+
+.submit-buttons img {
+    height: 24px;
+    width: 24px;
+}
+
+.clear-button {
+    background: #F6F7F8;
+    border-radius: 10px;
+    width: 110px;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 21px;
+    display: flex;
+    align-items: center;
+    background-image: url("../assets/img/cancel.png");
+    background-repeat: no-repeat;
+    background-position: center right 10px;
+    padding: 16px;
+}
+
+.clear-button:hover {
+    background-image: url("../assets/img/cancel_blue.png");
+    border: 2px solid #29ABE2;
+    color: #29ABE2;
+    transition: 100ms ease-in-out;
+    box-shadow: 0px 0px 14px 3px #00000053;
+}
+
+.create-button {
+    background: #2A3647;
+    border-radius: 10px;
+    width: 183px;
+    color: white;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 21px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+}
+
+.create-button:hover {
+    border: 0px;
+    background: #29ABE2;
+    transition: 100ms ease-in-out;
+    box-shadow: 0px 0px 14px 3px #00000053;
+    ;
 }
