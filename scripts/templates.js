@@ -56,6 +56,10 @@ function selectLegalNotice() {
     window.location.href = "legal_notice.html";
 }
 
+function selectIndex() {
+    window.location.href = "index.html";
+}
+
 
 document.addEventListener("DOMContentLoaded", function(){
     let currentPage = window.location.pathname;  
@@ -70,3 +74,7 @@ document.addEventListener("DOMContentLoaded", function(){
         }
     }
 });
+
+function showSubmenu() {
+    document.getElementById('submenu').classList.toggle('show-submenu');
+}

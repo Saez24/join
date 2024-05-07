@@ -15,14 +15,16 @@
     <div class="sidebar">
         <img class="logo-sidebar" src="./assets/img/logo_white.svg" alt="">
         <div id="sidebarMenu">
-            <div class="sidebar-menu-row" id="summaryBtn" onclick="selectSummary()"><img class="icon" src="./assets/img/summary.png"
-                    alt="">Summary</div>
-            <div class="sidebar-menu-row" id="add_taskBtn" onclick="selectAddTask()"><img class="icon" src="./assets/img/addtask.png" alt="">Add
+            <div class="sidebar-menu-row" id="summaryBtn" onclick="selectSummary()"><img class="icon"
+                    src="./assets/img/summary.png" alt="">Summary</div>
+            <div class="sidebar-menu-row" id="add_taskBtn" onclick="selectAddTask()"><img class="icon"
+                    src="./assets/img/addtask.png" alt="">Add
                 Task</div>
-            <div class="sidebar-menu-row" id="boardBtn" onclick="selectBoard()"><img class="icon" src="./assets/img/board.png" alt="">Board
+            <div class="sidebar-menu-row" id="boardBtn" onclick="selectBoard()"><img class="icon"
+                    src="./assets/img/board.png" alt="">Board
             </div>
-            <div class="sidebar-menu-row" id="contactsBtn" onclick="selectContacts()"><img class="icon" src="./assets/img/contacts.png"
-                    alt="">Contacts</div>
+            <div class="sidebar-menu-row" id="contactsBtn" onclick="selectContacts()"><img class="icon"
+                    src="./assets/img/contacts.png" alt="">Contacts</div>
         </div>
         <div class="sidebar-bottom">
             <div class="bottom-row" id="privacy_policyBtn" onclick="selectPrivacyPolicy()">
@@ -38,7 +40,18 @@
             <p>Kanban Project Management Tool</p>
             <div class="top-right">
                 <div class="bounding-box"><img class="help-icon" src="assets/img/help.png" alt="Help"></div>
-                <div><img class="profile-icon" src="assets/img/profile.png" alt="Help"></div>
+                <div onclick="showSubmenu()"><img class="profile-icon" src="assets/img/profile.png" alt="Help"></div>
+            </div>
+        </div>
+        <div class="submenu" id="submenu">
+            <div class="submenu-link" onclick="selectLegalNotice()">
+                <p class="submenu-link-text">Legal Notice</p>
+            </div>
+            <div class="submenu-link" onclick="selectPrivacyPolicy()">
+                <p class="submenu-link-text">Privacy Policy</p>
+            </div>
+            <div class="submenu-link" onclick="selectIndex()">
+                <p  class="submenu-link-text">Logout</p>
             </div>
         </div>
         <div id="content"></div>
