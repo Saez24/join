@@ -22,7 +22,7 @@
                     <span class="required">Title</span>
                     <input id="tasktitle" required type="text" placeholder="Enter a title">
                 </div>
-                <div class="textarea">
+                <div class="description">
                     <span>Description</span>
                     <textarea class="textarea" name="Description" id="description"
                         placeholder="Enter a Description"></textarea>
@@ -61,12 +61,7 @@
                     <span>Subtasks</span>
                     <input onclick="addSubtask()" id="addsubtask" class="subtask" type="text"
                         placeholder="Add new subtask">
-                    <div id="aktive-subtask-block">
-                        <input id="subtask" class="aktive-subtask" type="text"><button onclick="closeAddSubtask()"
-                            class="subtask-close"><img src="./assets/img/close.png" alt=""></button><img
-                            class="subtask-separator" src="./assets/img/separator.png" alt=""><button
-                            class="subtask-check"><img src="./assets/img/check_black.png" alt=""></button>
-                    </div>
+                    <input onclick="handleSubtaskClick(event)" id="subtask" class="aktive-subtask" type="text">
                 </div>
             </div>
         </div>
