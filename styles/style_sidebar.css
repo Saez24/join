@@ -164,7 +164,7 @@ body {
 }
 
 .show-submenu {
-    transform: translateX(-16px);
+    transform: translateX(0);
 }
 
 .submenu-link {
