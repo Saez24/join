@@ -67,7 +67,6 @@ function handleSubtaskClickAdd(event) {
     }
 }
 
-
 function addSubtask() {
     var inputContent = document.getElementById("subtask").value;
     if (inputContent.trim() !== "") {
