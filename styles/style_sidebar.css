@@ -5,6 +5,10 @@ body {
     overflow-x: hidden;
 }
 
+.d-none {
+    display: none;
+}
+
 .sidebar {
     position: fixed;
     left: 0;
@@ -191,11 +195,56 @@ body {
 
 @media (max-width: 750px) {
     .sidebar {
+        position: fixed;
+        right: 0px;
+        bottom: 0;
+        display: flex;
+        align-items: center;
+        flex-direction: row;
+        width: calc(100% - 32px);
+        height: 80px;
+        /* overflow: hidden; */
+        padding: 16px 16px 0px 16px;
+    }
+
+    #sidebarMenu{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        color: #CDCDCD;
+        gap: 0;
+        height: 100%;
+        padding: 0;
+    }
+
+    .logo-sidebar{
         display: none;
+    }
+
+    .sidebar-bottom{
+        display: none;
+    }
+    
+    .sidebar-menu-row {
+        cursor: pointer;
+        display: flex;
+        flex-direction: column;
+        height: 80px;
+        width: 76px;
+        gap: 8px;
+        align-items: center;
+        padding-left: 0;
+        background-color: #2a3647;
+    }
+
+    .selected{
+        border-radius: 8px;
     }
 
     .main {
         margin-left: 0;
-        width: 100vw;
+        width: 100%;
     }
+
 }
