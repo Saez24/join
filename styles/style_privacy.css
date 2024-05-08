@@ -15,6 +15,12 @@
     gap: 10px;
 }
 
+.headline-help {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
 h1 {
     font-size: 58px;
     margin: 0;
@@ -50,5 +56,10 @@ mark {
         margin-left: 20px;
         margin-right: 20px;
         width: 100%;
+    }
+
+    h1 {
+        font-size: 32px;
+        font-weight: 900;
     }
 }
