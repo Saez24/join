@@ -7,56 +7,76 @@
     <link rel="stylesheet" href="./styles/style_board.css">
     <link rel="stylesheet" href="./styles/fonts.css">
     <script src="./scripts/templates.js"></script>
+    <script src="./scripts/add_task.js"></script>
     <title>Add Task</title>
     <link rel="icon" href="./assets/img/favicon.png" type="image/x-icon">
 </head>
 
 <body>
     <div id="sidebarContainer"></div>
-    <div>
+    <div class="addtask-content">
         <h1>Add Task</h1>
-        <div class="main">
+        <div class="main-addtask">
             <div class="left-container">
                 <div class="inputfields">
-                    <lable>Title*</lable>
-                    <input required type="text" placeholder="Enter a title">
+                    <span class="required">Title</span>
+                    <input id="tasktitle" required type="text" placeholder="Enter a title">
                 </div>
-                <div class="textarea">
-                    <lable>Description</lable>
+                <div class="description">
+                    <span>Description</span>
                     <textarea class="textarea" name="Description" id="description"
                         placeholder="Enter a Description"></textarea>
                 </div>
                 <div class="inputfields">
-                    <label for="cars">Assigned to</label>
-
-                    <select name="assignedto" id="assignedto">
-                        <option value="volvo">Volvo</option>
+                    <span>Assigned to</span>
+                    <select class="dropdown-content" name="assignedto" id="assignedto">
+                        <option value="">Select contacts to assign</option>
                     </select>
                 </div>
             </div>
             <div class="separator"></div>
-            <div class="left-container">
+            <div class="right-container">
                 <div class="inputfields">
-                    <lable>Due Date*</lable>
-                    <input required type="date" placeholder="dd/mm/yyyy">
+                    <span class="required">Due Date</span>
+                    <input class="datefield" required type="date" placeholder="dd/mm/yyyy">
                 </div>
-                <div class="textarea">
-                    <lable>Description</lable>
-                    <textarea class="textarea" name="Description" id="description"
-                        placeholder="Enter a Description"></textarea>
+                <div class="prio">
+                    <span>Prio</span>
+                    <div class="prio-buttons">
+                        <button onclick="urgentButton()" id="urgent">Urgent <img src="./assets/img/prio_alta.png"
+                                alt=""></button>
+                        <button onclick="mediumButton()" id="medium">Medium <img src="./assets/img/prio_media.png"
+                                alt=""></button>
+                        <button onclick="lowButton()" id="low">Low <img src="./assets/img/prio_baja.png"
+                                alt=""></button>
+                    </div>
                 </div>
                 <div class="inputfields">
-                    <label for="cars">Category*</label>
-                    <select name="assignedto" id="assignedto">
-                        <option value="volvo">Volvo</option>
+                    <span class="required">Category</span>
+                    <select class="dropdown-content" name="taskcategory" id="taskcategory">
+                        <option value="">Select task category</option>
                     </select>
                 </div>
                 <div class="inputfields">
-                    <lable>Subtasks</lable>
-                    <input type="text" placeholder="Add new subtask">
+                    <span>Subtasks</span>
+                    <input onclick="openAddSubtaskField()" id="addsubtask" class="subtask" type="text"
+                        placeholder="Add new subtask">
+                    <input onclick="handleSubtaskClick(event), handleSubtaskClickAdd(event)" id="subtask"
+                        class="aktive-subtask" type="text">
+                </div>
+                <div>
+                    <ul id="addsubtasks"></ul>
                 </div>
             </div>
-
+        </div>
+        <div class="bottom-container">
+            <div>
+                <span class="required-2">This field is required</span>
+            </div>
+            <div class="submit-buttons">
+                <button class="clear-button">Clear </button>
+                <button class="create-button">Create Task <img src="./assets/img/check.png" alt=""></button>
+            </div>
         </div>
     </div>
 

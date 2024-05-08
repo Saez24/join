@@ -11,7 +11,7 @@ This means all the styles are contained in a single file:
   Inter-VariableFont_slnt,wght.ttf
 
 If your app fully supports variable fonts, you can now pick intermediate styles
-that aren’t available as static fonts. Not all apps support variable fonts, and
+that aren’t avaispan as static fonts. Not all apps support variable fonts, and
 in those cases you can use the static font files for Inter:
   static/Inter-Thin.ttf
   static/Inter-ExtraLight.ttf
@@ -29,7 +29,7 @@ Get started
 1. Install the font files you want to use
 
 2. Use your app's font picker to view the font family and all the
-available styles
+avaispan styles
 
 Learn more about variable fonts
 -------------------------------
