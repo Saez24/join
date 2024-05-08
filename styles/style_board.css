@@ -1,26 +1,20 @@
-/* Allgemeine Styles */
-
-/* Body */
 body {
-    /* padding-left: 230px; */
     display: flex;
 }
 
-/* Rechter Header */
+
 #sidebarContainer {
     width: 231px;
 }
 
-/* Hauptbereich des Boards */
 .mainBoard {
     padding-top: 79.5px;
     padding-left: 64px;
-    flex: 1; /* Flexibles Wachstum für den Hauptbereich */
+    flex: 1; 
 }
 
-/* Überschrift des Boards */
 .boardHeadline {
-    width: calc(100% - 231px); /* Berechnung der Breite abzüglich des Sidebar-Headers */
+    width: calc(100% - 231px); 
     display: flex;
     justify-content: space-between;
     margin-bottom: 48px;
@@ -29,14 +23,12 @@ body {
     margin: 0;
 }
 
-/* Aktionen in der Board-Überschrift */
 .boardHeadlineActions {
     display: flex;
     gap: 32px;
     align-items: center;
 }
 
-/* Suchfeld für Aufgaben */
 .searchTask {
     display: flex;
     background-color: white;
@@ -47,7 +39,6 @@ body {
     align-items: center;
 }
 
-/* Eingabefeld für die Aufgabensuche */
 #inputSearchTask {
     flex: 1;
     border-style: none;
@@ -57,7 +48,6 @@ body {
     width: 100%;
 }
 
-/* Lupe-Symbol */
 .magnifyingGlass {
     width: 32px;
     height: 32px;
@@ -65,7 +55,6 @@ body {
     border-radius: 50%;
 }
 
-/* Button für neue Aufgabe */
 .addTaskButton {
     border-radius: 10px;
     font-size: 21px;
@@ -85,16 +74,13 @@ body {
     width: 18,67px;
 }
 
-/* Aufgabenbereich */
 
-/* Container für Aufgaben */
 .boardTasks {
     display: flex;
     align-items: flex-start;
     gap: 26px;
 }
 
-/* Status der Aufgaben */
 .statusTasks {
     display: flex;
     flex-direction: column;
@@ -102,7 +88,6 @@ body {
     font-size: 20px;
 }
 
-/* Überschrift für den Status der Aufgaben */
 .headlineStatusTasks {
     display: flex;
     align-items: center;
@@ -110,7 +95,6 @@ body {
     margin: 0;
 }
 
-/* Titel des Aufgabenstatus */
 .taskStatusTitle {
     flex: 1;
     color: #42526E;
@@ -118,7 +102,6 @@ body {
     font-weight: 700;
 }
 
-/* CSS für die Aufgabenbox */
 .toDoBox {
     background-color: white;
     border-radius: 20px;
@@ -127,7 +110,6 @@ body {
     padding: 16px;
 }
 
-/* Kategorie-Box innerhalb der Aufgaben */
 .CategoryBox {
     color: white;
     Padding: 6px 16px;
@@ -141,18 +123,15 @@ body {
     align-items: center;
 }
 
-/* Überschrift der Aufgabe */
 .HeadlineBox {
     overflow: hidden;
     font-weight: 700;
 }
 
-/* Beschreibung der Aufgabe */
 .descriptionBox {
     color: #A8A8A8;
 }
 
-/* Zugeteilter Name */
 .assignedName {
     color: white;
     border-radius: 50%;
