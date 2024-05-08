@@ -169,19 +169,14 @@ select {
     display: flex;
     justify-content: space-between;
     padding: 75px 28px 0 28px;
+    align-items: center;
 }
 
 .submit-buttons {
     display: flex;
     gap: 8px;
     height: 56px;
-    width: 309px;
     justify-content: flex-end;
-}
-
-.submit-buttons img {
-    height: 24px;
-    width: 24px;
 }
 
 .clear-button {
@@ -221,6 +216,11 @@ select {
     gap: 4px;
 }
 
+.create-button img {
+    width: 24px;
+    height: 24px;
+}
+
 .create-button:hover {
     border: 0px;
     background: #29ABE2;
@@ -239,7 +239,7 @@ select {
     }
 
     input {
-        height: 12px;
+        height: 14px;
         font-size: 14px;
     }
 
@@ -263,8 +263,12 @@ select {
 
     .prio-buttons button {
         font-size: 14px;
-        height: 42px;
+        height: 41px;
         gap: 4px;
+    }
+
+    .prio-buttons button img {
+        width: 14px;
     }
 
     .submit-buttons {
@@ -286,9 +290,77 @@ select {
 
 @media (max-width: 750px) {
     .addtask-content {
-        margin: 206px 0 0 0;
-        max-width: calc(100% - 0px);
+        margin: 140px 0 0 0;
+        max-width: 100%;
+        width: 100%;
+        height: 870px;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+    h1 {
+        margin: 0px 0px 18px 0px;
+        padding-left: 0;
+    }
+
+    .main-addtask {
+        flex-direction: column;
+        padding-bottom: 20px;
+        padding-right: 0;
+        padding-left: 0;
+    }
+
+    .right-container {
+        width: 100%;
+    }
+
+    .left-container {
+        width: 100%;
+    }
+
+    .separator {
+        display: none;
+    }
+
+    textarea {
+        height: 88px;
+    }
+
+    .prio-buttons button {
+        width: 121, 33px;
+        font-size: 16px;
+        gap: 8px;
+    }
+
+    .prio-buttons button img {
+        width: 20px;
+    }
+
+    .bottom-container-mobile {
+        position: fixed;
+        bottom: 0;
+        display: flex;
+        justify-content: space-between;
+        padding: 20px;
+        align-items: center;
+        z-index: 999;
+        background-color: rgb(246, 247, 248);
+        height: 24px;
+        width: 100%;
+    }
+
+    .bottom-container {
+        display: none !important;
+    }
+
+    .clear-button {
+        display: none;
+    }
+
+    .create-button {
+        font-size: 18px;
+        background-size: 16px 16px;
+        width: 154px;
+        height: 42px;
     }
 }
-
-@media (max-width: 560px) {}
