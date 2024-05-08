@@ -1,0 +1,53 @@
+.everything {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    color: black;
+    padding-left: 232px;
+    padding-top: 150px;
+    width: calc(100% - 232px);
+    background-color: #F6F7F8;
+    overflow-x: hidden;
+    margin-left: 70px;
+    margin-right: 70px;
+    font-weight: 500;
+    gap: 10px;
+}
+
+h1 {
+    font-size: 58px;
+    margin: 0;
+    margin-bottom: 30px;
+}
+
+h2 {
+    font-size: 28px;
+    margin: 0;
+}
+h3 {
+    margin: 0;
+    font-size: 22px;
+
+}
+
+
+h4 {
+    font-size: 18px;
+    margin: 0;
+}
+
+mark {
+    color: 
+    #29ABE2;
+    background-color: #F6F7F8;
+}
+
+@media screen and (max-width: 750px) {
+    .everything {
+        padding-left: 0;
+        padding-top: 150px;
+        margin-left: 20px;
+        margin-right: 20px;
+        width: 100%;
+    }
+}
