@@ -5,10 +5,6 @@ body {
     overflow-x: hidden;
 }
 
-.d-none {
-    display: none;
-}
-
 .sidebar {
     position: fixed;
     left: 0;
@@ -163,7 +159,7 @@ body {
     position: absolute;
     top: 136px;
     right: 0;
-    transform: translateX(170px);
+    transform: translateX(171px);
     transition: all 80ms ease-out;
 }
 
@@ -191,6 +187,10 @@ body {
 .submenu-link-text {
     font-size: 16px;
     margin: 0;
+}
+
+.d-none {
+    display: none;
 }
 
 @media (max-width: 750px) {
