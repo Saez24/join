@@ -156,7 +156,7 @@ body {
     padding: 10px;
     background-color: rgb(42, 54, 74);
     z-index: 1;
-    position: absolute;
+    position: fixed;
     top: 136px;
     right: 0;
     transform: translateX(171px);
@@ -166,7 +166,6 @@ body {
 .show-submenu {
     transform: translateX(0);
 }
-
 
 .submenu-link {
     width: 130px;
