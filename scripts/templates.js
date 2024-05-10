@@ -90,12 +90,12 @@ function showSubmenu() {
     let submenu = document.getElementById('submenu');
     if (!submenu.classList.contains('show-submenu')) {
         submenu.classList.remove('d-none');
-        setTimeout(function () {
+        setTimeout(function() {
             submenu.classList.add('show-submenu');
         }, 80);
     } else {
         submenu.classList.remove('show-submenu');
-        setTimeout(function () {
+        setTimeout(function() {
             submenu.classList.add('d-none');
         }, 80);
     }
