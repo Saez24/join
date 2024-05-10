@@ -76,7 +76,7 @@ document.addEventListener("DOMContentLoaded", function(){
 });
 
 function showSubmenu() {
-    var submenu = document.getElementById('submenu');
+    let submenu = document.getElementById('submenu');
     if (!submenu.classList.contains('show-submenu')) {
         submenu.classList.remove('d-none');
         setTimeout(function() {
