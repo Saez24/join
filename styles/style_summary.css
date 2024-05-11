@@ -61,6 +61,13 @@ body {
     margin: 0;
 }
 
+.f-size-36 {
+    font-size: 36px;
+    font-weight: 400;
+    color: rgba(42, 54, 71, 1);
+    margin: 0;
+}
+
 .f-size-47 {
     font-size: 47px;
     font-weight: 500;
@@ -77,6 +84,12 @@ body {
 
 span {
     font-size: 64px;
+    font-weight: 700;
+    color: rgba(41, 171, 226, 1);
+}
+
+.span-responsive {
+    font-size: 47px;
     font-weight: 700;
     color: rgba(41, 171, 226, 1);
 }
@@ -212,6 +225,10 @@ h1 {
     display: none;
 }
 
+.good-morning-cont {
+    display: none;
+}
+
 @media (max-width: 1330px) {
     .greeter-cont {
         display: none;
@@ -322,6 +339,24 @@ h1 {
 
     .headline-cont {
         margin: 0;
+    }
+
+    .good-morning-cont {
+        display: flex;
+        position: fixed;
+        top: 140px;
+        left: 0;
+        z-index: 2;
+        width: 100%;
+        text-align: center;
+        height: calc(100vh - 236px);
+        background-color: rgb(246, 247, 248);
+        opacity: 1; 
+        transition: opacity 800ms ease-out;
+    }
+
+    .good-morning-cont.fade-out {
+        opacity: 0;
     }
 }
 
