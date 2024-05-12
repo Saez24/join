@@ -240,6 +240,7 @@ body {
         align-items: center;
         padding: 0 8px 0 8px;
         background-color: #2a3647;
+        font-size: 14px;
     }
 
     .selected {
@@ -259,6 +260,8 @@ body {
 
     .icon {
         padding-top: 12px;
+        height: 24px;
+        width: 24px;
     }
 
     #headline {
@@ -273,11 +276,6 @@ body {
 
     .header {
         height: 80px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        background-color: #ffffff;
-        position: relative;
         padding: 20px 32px 20px 32px;
     }
 }
