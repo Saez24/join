@@ -191,7 +191,7 @@ select:active {
 
 .submit-buttons {
     display: flex;
-    gap: 8px;
+    gap: 20px;
     height: 56px;
     justify-content: flex-end;
 }

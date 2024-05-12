@@ -6,12 +6,12 @@ body {
 .mainBoard {
     padding-top: 79.5px;
     padding-left: 64px;
-    flex: 1; 
+    flex: 1;
 }
 
 .boardHeadline {
     padding-top: 100px;
-    width: calc(100% - 231px); 
+    width: calc(100% - 231px);
     display: flex;
     justify-content: space-between;
     margin-bottom: 48px;
@@ -67,7 +67,7 @@ body {
 
 .addTaskButton img {
     align-items: center;
-    width: 18,67px;
+    width: 18, 67px;
 }
 
 
@@ -141,4 +141,66 @@ body {
     line-height: 40px;
     font-size: 18px;
     background-color: #584c7c;
+}
+
+.add_task_to_board {
+    cursor: pointer;
+}
+
+.dialog-bg {
+    background-color: rgba(0, 0, 0, 0.2);
+    z-index: 999;
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.add_task_dialog {
+    border-bottom-left-radius: 16px;
+    border-bottom-right-radius: 16px;
+    border-top-left-radius: 16px;
+    border-top-right-radius: 16px;
+    box-sizing: border-box;
+    color: rgb(36, 46, 48);
+    background-color: rgb(255, 255, 255);
+    display: flex;
+    flex-direction: column;
+    left: 70px;
+    right: 0;
+    height: 700px;
+    line-height: 20px;
+    opacity: 1;
+    position: relative;
+    text-rendering: optimizelegibility;
+    width: 900px;
+    z-index: 4006;
+}
+
+.addtask-content-dialog {
+    max-width: 100% !important;
+    max-height: 100% !important;
+    margin: 90px 0 0 0 !important;
+}
+
+.close_dialog_btn {
+    position: absolute;
+    border: 0;
+    top: 44px;
+    right: 4%;
+    width: 32px;
+    background-color: white;
+    cursor: pointer;
+}
+
+.dialog h1 {
+    margin-top: 0px;
+}
+
+.d_none {
+    display: none;
 }
