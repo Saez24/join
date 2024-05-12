@@ -238,7 +238,7 @@ body {
         height: 100%;
         width: 76px;
         align-items: center;
-        padding: 0 8px 0 8px;
+        padding: 0;
         background-color: #2a3647;
         font-size: 14px;
     }
