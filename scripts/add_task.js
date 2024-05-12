@@ -77,3 +77,10 @@ function addSubtask() {
     }
 }
 
+function selectCategory() {
+    document.getElementById('taskcategory').style.display = 'block';
+}
+
+function selectAssingTo() {
+    document.getElementById('assignedto').style.display = 'block';
+}
