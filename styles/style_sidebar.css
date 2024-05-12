@@ -245,8 +245,12 @@ body {
     }
 
     .main {
-        margin-left: 0;
+        position: fixed;
+        z-index: 999;
+        background-color: rgb(246, 247, 248);
+        height: 24px;
         width: 100%;
+        margin: 0;
     }
 
     .icon {
@@ -269,6 +273,6 @@ body {
         align-items: center;
         background-color: #ffffff;
         position: relative;
-        padding: 0px 32px 0px 32px;
+        padding: 20px 32px 20px 32px;
     }
 }
