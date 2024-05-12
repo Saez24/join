@@ -193,6 +193,10 @@ body {
     display: none;
 }
 
+#joinHeader {
+    display: none;
+}
+
 @media (max-width: 750px) {
     .sidebar {
         position: fixed;
@@ -264,6 +268,7 @@ body {
     #joinHeader {
         width: 32px;
         height: 39.02px;
+        display: block;
     }
 
     .header {
