@@ -109,7 +109,6 @@ function handleSubtaskClickAdd() {
     }
 }
 
-
 function selectCategory() {
     var categoryContainer = document.getElementById('taskcategory');
     if (categoryContainer.style.display === 'block') {
@@ -130,9 +129,4 @@ function selectAssingTo() {
 
 function dropdownSelect(element) {
     element.classList.toggle("selected_dropdown");
-}
-
-function closeDropdown() {
-    assignToContainer.style.display = 'none';
-    categoryContainer.style.display = 'none';
 }
