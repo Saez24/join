@@ -8,6 +8,7 @@
 
 ::placeholder {
     font-family: 'Inter';
+    padding-left: 16px;
 }
 
 .addtask-content-header {
@@ -19,7 +20,7 @@
     top: 136px;
     max-width: calc(100% - 232px);
     max-height: calc(100% - 136px);
-    margin: 206px 0 0 232px;
+    margin: 215px 0 0 240px;
 }
 
 h1 {
@@ -62,12 +63,13 @@ input {
     height: 22px;
     border-radius: 10px;
     border: 1px solid #D1D1D1;
-    padding: 12px 21px 12px 21px;
+    padding: 12px 0 12px 0;
     cursor: pointer;
     font-size: 20px;
     font-weight: 400;
     font-family: 'Inter';
 }
+
 
 .datefield {
     background-image: url("../assets/img/event.png");
@@ -81,6 +83,7 @@ input[type="date"] {
 
 input[type=date]:invalid {
     color: lightgray;
+    padding-left: 21px;
 }
 
 input:focus::-webkit-datetime-edit {
@@ -131,7 +134,7 @@ input[type=date]::-webkit-calendar-picker-indicator {
 textarea {
     border-radius: 10px;
     border: 1px solid #D1D1D1;
-    padding: 12px 21px 12px 21px;
+    padding: 12px 0 12px 0;
     gap: 10px;
     font-size: 20px;
     font-weight: 400;
@@ -139,6 +142,10 @@ textarea {
     max-height: 120px;
     resize: none;
     font-family: 'Inter';
+}
+
+.dropdown_container {
+    position: relative;
 }
 
 .dropdown-content {
@@ -153,6 +160,7 @@ textarea {
     background-image: url("../assets/img/arrow_drop.png");
     background-repeat: no-repeat;
     background-position: center right 18px;
+    width: 100%;
 }
 
 .dropdown_selection {
@@ -165,7 +173,8 @@ textarea {
     background-repeat: no-repeat;
     background-position: center right 20px;
     height: 24px;
-    width: 95%;
+    width: calc(100% - 20px);
+    /* Berücksichtigen Sie das Padding */
 }
 
 .dropdown_selection:hover {
@@ -194,6 +203,10 @@ textarea {
     width: 95%;
 }
 
+label {
+    padding-left: 10px;
+}
+
 .checkbox {
     appearance: none;
     border: 0;
@@ -202,29 +215,27 @@ textarea {
 .dropdown_box {
     display: none;
     background-color: #ffffff;
-    border-bottom-left-radius: 16px;
-    border-bottom-right-radius: 16px;
-    border-top-left-radius: 16px;
-    border-top-right-radius: 16px;
+    border-radius: 16px;
     position: absolute;
-    bottom: 38px;
-    width: 440px;
-    height: 185px;
-    overflow: scroll;
+    top: calc(100% + 0px);
+    left: 0;
+    width: 100%;
+    max-height: 185px;
+    overflow-y: auto;
+    z-index: 999;
 }
 
 .category_dropdown_box {
     display: none;
     background-color: #ffffff;
-    border-bottom-left-radius: 16px;
-    border-bottom-right-radius: 16px;
-    border-top-left-radius: 16px;
-    border-top-right-radius: 16px;
-    position: relative;
-    /* bottom: 128px;
-    width: 440px; */
-    height: 185px;
-    overflow: scroll;
+    border-radius: 16px;
+    position: absolute;
+    top: calc(100% + 0px);
+    left: 0;
+    width: 100%;
+    max-height: 185px;
+    overflow-y: auto;
+    z-index: 999;
 }
 
 .separator {
@@ -256,7 +267,7 @@ li {
 .bottom-container {
     display: flex;
     justify-content: space-between;
-    padding: 75px 60px 0 60px;
+    padding: 130px 60px 0 60px;
     align-items: center;
 }
 
@@ -392,7 +403,7 @@ li {
     }
 
     .addtask-content {
-        margin: 110px 0 0 0;
+        margin: 96px 0 0 0;
         max-width: 100%;
         width: 100%;
         height: 870px;
@@ -442,7 +453,7 @@ li {
     .bottom-container-mobile {
         display: flex !important;
         position: fixed;
-        bottom: 96px;
+        bottom: 80px;
         justify-content: space-around;
         align-items: center;
         z-index: 999;

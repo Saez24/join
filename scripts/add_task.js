@@ -131,3 +131,8 @@ function selectAssingTo() {
 function dropdownSelect(element) {
     element.classList.toggle("selected_dropdown");
 }
+
+function closeDropdown() {
+    assignToContainer.style.display = 'none';
+    categoryContainer.style.display = 'none';
+}

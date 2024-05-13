@@ -31,19 +31,36 @@
                 </div>
                 <div class="inputfields">
                     <span>Assigned to</span>
-                    <input onclick="selectAssingTo()" id="assignedtoinput" class="dropdown-content" name="assignedto"
-                        placeholder="Select contacts to assign">
-                    <div id="assignedto" class="dropdown_box">
-                        <div class="dropdown_selection" onclick="dropdownSelect(this)">
-                            <label for="assignedto1">Name Name</label>
-                            <input class="checkbox" type="checkbox" id="assignedto1">
-                        </div>
-                        <div class="dropdown_selection" onclick="dropdownSelect(this)">
-                            <label for="assignedto2">Name Name</label>
-                            <input class="checkbox" type="checkbox" id="assignedto2">
+                    <div class="dropdown_container">
+                        <input onclick="selectAssingTo()" id="assignedtoinput" class="dropdown-content"
+                            name="assignedto" placeholder="Select contacts to assign">
+                        <div id="assignedto" class="dropdown_box">
+                            <div class="dropdown_selection" onclick="dropdownSelect(this)">
+                                <label for="assignedto1">Name Name</label>
+                                <input class="checkbox" type="checkbox" id="assignedto1">
+                            </div>
+                            <div class="dropdown_selection" onclick="dropdownSelect(this)">
+                                <label for="assignedto2">Name Name</label>
+                                <input class="checkbox" type="checkbox" id="assignedto2">
+                            </div>
+                            <div class="dropdown_selection" onclick="dropdownSelect(this)">
+                                <label for="assignedto2">Name Name</label>
+                                <input class="checkbox" type="checkbox" id="assignedto3">
+                            </div>
+                            <div class="dropdown_selection" onclick="dropdownSelect(this)">
+                                <label for="assignedto2">Name Name</label>
+                                <input class="checkbox" type="checkbox" id="assignedto4">
+                            </div>
+                            <div class="dropdown_selection" onclick="dropdownSelect(this)">
+                                <label for="assignedto2">Name Name</label>
+                                <input class="checkbox" type="checkbox" id="assignedto5">
+                            </div>
+                            <div class="dropdown_selection" onclick="dropdownSelect(this)">
+                                <label for="assignedto2">Name Name</label>
+                                <input class="checkbox" type="checkbox" id="assignedto6">
+                            </div>
                         </div>
                     </div>
-                    </input>
                 </div>
             </div>
             <div class="separator"></div>
@@ -65,19 +82,20 @@
                 </div>
                 <div class="inputfields">
                     <span class="required">Category</span>
-                    <input onclick="selectCategory()" id="taskcategoryinput" class="dropdown-content"
-                        name="taskcategory" placeholder="Select task category">
-                    <div id="taskcategory" class="category_dropdown_box">
-                        <div class="dropdown_selection" id="dropdown_selection" onclick="dropdownSelect(this)">
-                            <label for="category1">Category 1</label>
-                            <input class="checkbox" type="checkbox" id="category1">
-                        </div>
-                        <div class="dropdown_selection" onclick="dropdownSelect(this)">
-                            <label for="category2">Category 2</label>
-                            <input class="checkbox" type="checkbox" id="category2">
+                    <div class="dropdown_container">
+                        <input onclick="selectCategory()" id="taskcategoryinput" class="dropdown-content"
+                            name="taskcategory" placeholder="Select task category">
+                        <div id="taskcategory" class="category_dropdown_box">
+                            <div class="dropdown_selection" id="dropdown_selection" onclick="dropdownSelect(this)">
+                                <label for="category1">Category 1</label>
+                                <input class="checkbox" type="checkbox" id="category1">
+                            </div>
+                            <div class="dropdown_selection" onclick="dropdownSelect(this)">
+                                <label for="category2">Category 2</label>
+                                <input class="checkbox" type="checkbox" id="category2">
+                            </div>
                         </div>
                     </div>
-                    </input>
                 </div>
                 <div class="inputfields">
                     <span>Subtasks</span>
