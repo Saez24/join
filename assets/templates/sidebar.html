@@ -13,7 +13,7 @@
 
 <body>
     <div class="sidebar">
-        <img class="logo-sidebar" src="./assets/img/logo_white.svg" alt="">
+        <img class="logo-sidebar" src="./assets/img/logo_white.svg" onclick="selectSummary()" style="cursor: pointer;">
         <div id="sidebarMenu">
             <div class="sidebar-menu-row" id="summaryBtn" onclick="selectSummary()"><img class="icon"
                     src="./assets/img/summary.png" alt="">Summary</div>
@@ -38,7 +38,7 @@
     <div class="main">
         <div class="header">
             <p id="headline">Kanban Project Management Tool</p>
-            <img src="assets/img/logo.png" alt="" id="joinHeader">
+            <img src="assets/img/logo.png" alt="" id="joinHeader" onclick="selectSummary()" style="cursor: pointer;">
             <div class="top-right">
                 <div class="bounding-box"><img class="help-icon" src="assets/img/help.png" alt="Help"></div>
                 <div onclick="showSubmenu()"><img class="profile-icon" src="assets/img/profile.png" alt="Help"></div>
