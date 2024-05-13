@@ -1,31 +1,71 @@
+var counter = 0;
+var activeButton = null;
+
+const buttonImages = {
+    urgent: './assets/img/prio_alta.png',
+    medium: './assets/img/prio_media.png',
+    low: './assets/img/prio_baja.png'
+};
+
+const buttonNames = {
+    urgent: 'Urgent',
+    medium: 'Medium',
+    low: 'Low'
+};
+
+const buttonColors = {
+    urgent: { background: '#FF3D00', color: '#FFFFFF' },
+    medium: { background: '#FFA800', color: '#FFFFFF' },
+    low: { background: '#7AE229', color: '#FFFFFF' }
+};
+
+function resetButtonStyles(button) {
+    button.style.background = '';
+    button.style.color = '';
+    button.querySelector('img').src = buttonImages[button.id];
+}
+
+function setActiveButton(button) {
+    if (activeButton === button) {
+        // Bei einem Klick auf denselben Button
+        resetButtonStyles(button);
+        activeButton = null; // Setze den aktiven Button zurück
+    } else {
+        // Bei einem Klick auf einen anderen Button
+        if (activeButton) {
+            resetButtonStyles(activeButton); // Setze den vorherigen aktiven Button zurück
+        }
+        button.style.background = buttonColors[button.id].background;
+        button.style.color = buttonColors[button.id].color;
+        activeButton = button;
+    }
+}
+
 function urgentButton() {
-    let urgendButton = document.getElementById('urgent');
-    urgendButton.style.background = '#FF3D00';
-    urgendButton.style.color = '#FFFFFF';
-    urgendButton.innerHTML = '';
-    urgendButton.innerHTML += /*html*/`
-    Urgend <img src="./assets/img/prio_alta_white.png" alt="">
-    `;
+    let urgentButton = document.getElementById('urgent');
+    urgentButton.innerHTML = '';
+    urgentButton.innerHTML += `Urgend <img src="./assets/img/prio_alta_white.png" alt="">`;
+    urgentButton.style.background = buttonColors.urgent.background;
+    urgentButton.style.color = buttonColors.urgent.color;
+    setActiveButton(urgentButton);
 }
 
 function mediumButton() {
-    let urgendButton = document.getElementById('medium');
-    urgendButton.style.background = '#FFA800';
-    urgendButton.style.color = '#FFFFFF';
-    urgendButton.innerHTML = '';
-    urgendButton.innerHTML += /*html*/`
-    Medium <img src="./assets/img/prio_media_white.png" alt="">
-    `;
+    let mediumButton = document.getElementById('medium');
+    mediumButton.innerHTML = '';
+    mediumButton.innerHTML += `Medium <img src="./assets/img/prio_media_white.png" alt="">`;
+    mediumButton.style.background = buttonColors.medium.background;
+    mediumButton.style.color = buttonColors.medium.color;
+    setActiveButton(mediumButton);
 }
 
 function lowButton() {
-    let urgendButton = document.getElementById('low');
-    urgendButton.style.background = '#7AE229';
-    urgendButton.style.color = '#FFFFFF';
-    urgendButton.innerHTML = '';
-    urgendButton.innerHTML += /*html*/`
-    Low <img src="./assets/img/prio_baja_white.png" alt="">
-    `;
+    let lowButton = document.getElementById('low');
+    lowButton.innerHTML = '';
+    lowButton.innerHTML += `Low <img src="./assets/img/prio_baja_white.png" alt="">`;
+    lowButton.style.background = buttonColors.low.background;
+    lowButton.style.color = buttonColors.low.color;
+    setActiveButton(lowButton);
 }
 
 function openAddSubtaskField() {
@@ -54,33 +94,40 @@ function handleSubtaskClick(event) {
     }
 }
 
-function handleSubtaskClickAdd(event) {
+function handleSubtaskClickAdd() {
     var input = document.getElementById("subtask");
     var inputContent = input.value.trim();
     if (inputContent !== "") {
         var ul = document.getElementById("addsubtasks");
         var li = document.createElement("li");
         li.textContent = inputContent;
+        li.setAttribute("id", "subtask_" + counter); // Hier wird die fortlaufende ID gesetzt
         ul.appendChild(li);
         closeAddSubtaskField();
         input.value = "";
+        counter++; // Erhöhe den Zähler für die nächste ID
     }
 }
 
-function addSubtask() {
-    var inputContent = document.getElementById("subtask").value;
-    if (inputContent.trim() !== "") {
-        var ul = document.getElementById("addsubtasks");
-        var li = document.createElement("li");
-        li.textContent = inputContent;
-        ul.appendChild(li);
-    }
-}
 
 function selectCategory() {
-    document.getElementById('taskcategory').style.display = 'block';
+    var categoryContainer = document.getElementById('taskcategory');
+    if (categoryContainer.style.display === 'block') {
+        categoryContainer.style.display = 'none';
+    } else {
+        categoryContainer.style.display = 'block';
+    }
 }
 
 function selectAssingTo() {
-    document.getElementById('assignedto').style.display = 'block';
+    var assignToContainer = document.getElementById('assignedto');
+    if (assignToContainer.style.display === 'block') {
+        assignToContainer.style.display = 'none';
+    } else {
+        assignToContainer.style.display = 'block';
+    }
+}
+
+function dropdownSelect(element) {
+    element.classList.toggle("selected_dropdown");
 }

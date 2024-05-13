@@ -160,6 +160,43 @@ textarea {
     align-items: center;
     justify-content: space-between;
     padding: 10px;
+    cursor: pointer;
+    background-image: url("../assets/img/unchecked.png");
+    background-repeat: no-repeat;
+    background-position: center right 20px;
+    height: 24px;
+    width: 95%;
+}
+
+.dropdown_selection:hover {
+    background: #D1D1D1;
+    border-radius: 10px;
+    background-image: url("../assets/img/unchecked.png");
+    background-repeat: no-repeat;
+    background-position: center right 20px;
+    height: 24px;
+    width: 95%;
+}
+
+.selected_dropdown {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    cursor: pointer;
+    color: #FFFFFF;
+    background: #091931;
+    border-radius: 10px;
+    background-image: url("../assets/img/Check_button_white.png");
+    background-repeat: no-repeat;
+    background-position: center right 20px;
+    height: 24px;
+    width: 95%;
+}
+
+.checkbox {
+    appearance: none;
+    border: 0;
 }
 
 .dropdown_box {
@@ -183,9 +220,9 @@ textarea {
     border-bottom-right-radius: 16px;
     border-top-left-radius: 16px;
     border-top-right-radius: 16px;
-    position: absolute;
-    bottom: 128px;
-    width: 440px;
+    position: relative;
+    /* bottom: 128px;
+    width: 440px; */
     height: 185px;
     overflow: scroll;
 }
@@ -207,6 +244,13 @@ textarea {
     background-image: url('../assets/img/close.png'), url('../assets/img/separator.png'), url('../assets/img/check_black.png');
     background-repeat: no-repeat;
     background-position: center right 28px, center right 28px, center right 8px;
+}
+
+li {
+    background-image: url("../assets/img/delete.png"), url('../assets/img/separator.png'), url('../assets/img/check_black.png');
+    background-repeat: no-repeat;
+    background-position: center right 30px, center right 28px, center right 8px;
+    cursor: pointer;
 }
 
 .bottom-container {
