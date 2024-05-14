@@ -171,11 +171,11 @@ async function addTaskLoadNames() {
     }
 }
 
-function generateNameHTML(nameKey, firstname, lastname, id) {
+function generateNameHTML(nameKey, firstname, lastname, firstInitial, lastInitial, id) {
     const randomColor = "#" + Math.floor(Math.random() * 16777215).toString(16);
     return /*html*/ `
         <div class="dropdown_selection" onclick="dropdownSelect(this)">
-            <button class="shortname" style="background-color: ${randomColor};"><span>${nameKey}</span></button><span>${firstname} ${lastname}</span>
+            <button class="shortname" style="background-color: ${randomColor};"><span>${firstInitial}${lastInitial}</span></button><span>${firstname} ${lastname}</span>
             <input class="checkbox" type="checkbox" id="assignedto_${nameKey}_${id}">
         </div>
     `;
@@ -190,7 +190,9 @@ function renderNamesHTML(names) {
             const name = names[nameKey];
             const firstname = name.firstname;
             const lastname = name.lastname;
-            namesHTML += generateNameHTML(nameKey, firstname, lastname, id++);
+            const firstInitial = firstname.charAt(0);
+            const lastInitial = lastname.charAt(0);
+            namesHTML += generateNameHTML(nameKey, firstname, lastname, firstInitial, lastInitial, id++);
         }
     }
     return namesHTML;
