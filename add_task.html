@@ -12,7 +12,7 @@
     <link rel="icon" href="./assets/img/favicon.png" type="image/x-icon">
 </head>
 
-<body>
+<body onload="addTaskOnLoad()">
     <div id="sidebarContainer"></div>
     <div id="addtask-content" class="addtask-content addtask-content-dialog">
         <div class="addtask-content-header">
@@ -35,30 +35,7 @@
                         <input onclick="selectAssingTo()" id="assignedtoinput" class="dropdown-content"
                             name="assignedto" placeholder="Select contacts to assign">
                         <div id="assignedto" class="dropdown_box">
-                            <div class="dropdown_selection" onclick="dropdownSelect(this)">
-                                <label>Name Name</label>
-                                <input class="checkbox" type="checkbox" id="assignedto1">
-                            </div>
-                            <div class="dropdown_selection" onclick="dropdownSelect(this)">
-                                <label>Name Name</label>
-                                <input class="checkbox" type="checkbox" id="assignedto2">
-                            </div>
-                            <div class="dropdown_selection" onclick="dropdownSelect(this)">
-                                <label>Name Name</label>
-                                <input class="checkbox" type="checkbox" id="assignedto3">
-                            </div>
-                            <div class="dropdown_selection" onclick="dropdownSelect(this)">
-                                <label>Name Name</label>
-                                <input class="checkbox" type="checkbox" id="assignedto4">
-                            </div>
-                            <div class="dropdown_selection" onclick="dropdownSelect(this)">
-                                <label>Name Name</label>
-                                <input class="checkbox" type="checkbox" id="assignedto5">
-                            </div>
-                            <div class="dropdown_selection" onclick="dropdownSelect(this)">
-                                <label>Name Name</label>
-                                <input class="checkbox" type="checkbox" id="assignedto6">
-                            </div>
+
                         </div>
                     </div>
                 </div>
@@ -86,14 +63,7 @@
                         <input onclick="selectCategory()" id="taskcategoryinput" class="dropdown-content"
                             name="taskcategory" placeholder="Select task category">
                         <div id="taskcategory" class="category_dropdown_box">
-                            <div class="dropdown_selection" id="dropdown_selection" onclick="dropdownSelect(this)">
-                                <label>Category 1</label>
-                                <input class="checkbox" type="checkbox" id="category1">
-                            </div>
-                            <div class="dropdown_selection" onclick="dropdownSelect(this)">
-                                <label>Category 2</label>
-                                <input class="checkbox" type="checkbox" id="category2">
-                            </div>
+
                         </div>
                     </div>
                 </div>

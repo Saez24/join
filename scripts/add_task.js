@@ -1,3 +1,7 @@
+const BASE_URL = "https://remotestorage-b0ea0-default-rtdb.europe-west1.firebasedatabase.app/"
+var names
+var category
+var id = 0;
 var counter = 0;
 var activeButton = null;
 
@@ -102,11 +106,30 @@ function handleSubtaskClickAdd() {
         var li = document.createElement("li");
         li.textContent = inputContent;
         li.setAttribute("id", "subtask_" + counter); // Hier wird die fortlaufende ID gesetzt
+        li.onclick = function (event) {
+            handleSubtaskDelete(event);
+        };
         ul.appendChild(li);
         closeAddSubtaskField();
         input.value = "";
         counter++; // Erhöhe den Zähler für die nächste ID
     }
+}
+
+function deleteSubtask() {
+    var ul = document.getElementById("addsubtasks");
+    ul.innerHTML = '';
+}
+
+function handleSubtaskDelete(event) {
+    var input = document.getElementById("addsubtask");
+    var clickX = event.clientX;
+    var inputRight = input.getBoundingClientRect().right;
+
+    // Überprüfe, ob der Klick innerhalb des Bereichs des Bilds close.png liegt
+    clickX >= inputRight - 8
+    deleteSubtask();
+
 }
 
 function selectCategory() {
@@ -129,4 +152,75 @@ function selectAssingTo() {
 
 function dropdownSelect(element) {
     element.classList.toggle("selected_dropdown");
+}
+
+function addTaskOnLoad() {
+    console.log("test");
+    addTaskLoadNames()
+}
+
+async function addTaskLoadNames() {
+    try {
+        let response = await fetch(BASE_URL + ".json");
+        let data = await response.json();
+        renderAddTaskNames(data.names);
+        renderAddTaskCategorys(data.category)
+        console.log(data);
+    } catch (error) {
+        console.error("Error fetching data:", error);
+    }
+}
+
+function generateNameHTML(nameKey, firstname, lastname, id) {
+    const randomColor = "#" + Math.floor(Math.random() * 16777215).toString(16);
+    return /*html*/ `
+        <div class="dropdown_selection" onclick="dropdownSelect(this)">
+            <button class="shortname" style="background-color: ${randomColor};"><span>${nameKey}</span></button><label>${firstname} ${lastname}</label>
+            <input class="checkbox" type="checkbox" id="assignedto_${nameKey}_${id}">
+        </div>
+    `;
+}
+
+function renderNamesHTML(names) {
+    let namesHTML = '';
+    let id = 0;
+
+    for (let nameKey in names) {
+        if (names.hasOwnProperty(nameKey)) {
+            const name = names[nameKey];
+            const firstname = name.firstname;
+            const lastname = name.lastname;
+            namesHTML += generateNameHTML(nameKey, firstname, lastname, id++);
+        }
+    }
+
+    return namesHTML;
+}
+
+function renderNamesToDOM(namesHTML) {
+    let namesContainer = document.getElementById("assignedto");
+    namesContainer.innerHTML = namesHTML;
+}
+
+function renderAddTaskNames(names) {
+    const namesHTML = renderNamesHTML(names);
+    renderNamesToDOM(namesHTML);
+}
+
+function renderAddTaskCategorys(categories) {
+    let categoryContainer = document.getElementById("taskcategory");
+    categoryContainer.innerHTML = '';
+
+    for (let categoryKey in categories) {
+        if (categories.hasOwnProperty(categoryKey)) {
+            const category = categories[categoryKey];
+            const categoryId = id++;
+            categoryContainer.innerHTML += /*html*/ `
+            <div class="dropdown_selection" onclick="dropdownSelect(this)">
+                    <label>${category.task}</label>
+                    <input class="checkbox" type="checkbox" id="category_${categoryId}">
+                </div>
+        `;
+        }
+    }
 }
