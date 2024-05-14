@@ -175,7 +175,7 @@ function generateNameHTML(nameKey, firstname, lastname, id) {
     const randomColor = "#" + Math.floor(Math.random() * 16777215).toString(16);
     return /*html*/ `
         <div class="dropdown_selection" onclick="dropdownSelect(this)">
-            <button class="shortname" style="background-color: ${randomColor};"><span>${nameKey}</span></button><label>${firstname} ${lastname}</label>
+            <button class="shortname" style="background-color: ${randomColor};"><span>${nameKey}</span></button><span>${firstname} ${lastname}</span>
             <input class="checkbox" type="checkbox" id="assignedto_${nameKey}_${id}">
         </div>
     `;
@@ -193,7 +193,6 @@ function renderNamesHTML(names) {
             namesHTML += generateNameHTML(nameKey, firstname, lastname, id++);
         }
     }
-
     return namesHTML;
 }
 
@@ -222,5 +221,20 @@ function renderAddTaskCategorys(categories) {
                 </div>
         `;
         }
+    }
+}
+
+function clearContent() {
+    var inputs = document.getElementsByTagName("input");
+    var textareas = document.getElementsByTagName("textarea");
+
+    for (var i = 0; i < inputs.length; i++) {
+        if (inputs[i].type === "text" || inputs[i].type === "date") {
+            inputs[i].value = "";
+        }
+    }
+
+    for (var j = 0; j < textareas.length; j++) {
+        textareas[j].value = "";
     }
 }
