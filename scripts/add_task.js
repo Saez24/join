@@ -48,7 +48,7 @@ function setActiveButton(button) {
 function urgentButton() {
     let urgentButton = document.getElementById('urgent');
     urgentButton.innerHTML = '';
-    urgentButton.innerHTML += `Urgend <img src="./assets/img/prio_alta_white.png" alt="">`;
+    urgentButton.innerHTML += `Urgent <img src="./assets/img/prio_alta_white.png" alt="">`;
     urgentButton.style.background = buttonColors.urgent.background;
     urgentButton.style.color = buttonColors.urgent.color;
     setActiveButton(urgentButton);
