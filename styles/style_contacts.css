@@ -36,9 +36,6 @@
     flex-direction: column;
 }
 
-.contact-cont {
-}
-
 .contact-left {
     width: calc(467px - 48px);
     height: 594px;
