@@ -1,3 +1,5 @@
+
+/** Funktioniert Instant */
 // greet = "yes";
 
 // function checkGreeting() {
@@ -17,7 +19,15 @@ function checkGreeting() {
         summaryFadeOut();
         localStorage.setItem('greet', 'no');
     }else {
-        greeter.classList.add("d-none");
+                // Disable CSS transitions temporarily
+                greeter.style.transition = "none";
+                // Hide the element immediately
+                greeter.classList.add("d-none");
+                // Enable CSS transitions after a short delay
+                setTimeout(function() {
+                    greeter.style.transition = "";
+                }, 100);
+        // greeter.classList.add("d-none");
     }
 }
 

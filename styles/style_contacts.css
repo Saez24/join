@@ -1,0 +1,80 @@
+.contact-overlay {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: rgba(0,0,0, 0.3);
+    z-index: 1000;
+}
+
+.d-flex {
+    display: flex;
+}
+
+.j-center {
+    justify-content: center;
+}
+
+.a-center {
+    align-items: center;
+}
+
+.j-between {
+    justify-content: space-between;
+}
+
+.t-align-center {
+    text-align: center;
+}
+
+.d-none {
+    display: none;
+}
+
+.f-column {
+    flex-direction: column;
+}
+
+.contact-cont {
+}
+
+.contact-left {
+    width: calc(467px - 48px);
+    height: 594px;
+    background-color: rgb(42,54,71);
+    border-radius: 30px 0 0 30px;
+    gap: 12px;
+    padding-left 48px;
+}
+
+.contact-right {
+    width: 700px;
+    height: 594px;
+    background-color: rgb(255,255,255);
+    border-radius: 0 30px 30px 0;
+}
+
+.contacts-logo {
+    width: 55.6px;
+    height: 66.48px;
+}
+
+.contacts-underline {
+    height: 3px;
+    width: 90px;
+}
+
+.f-size-61 {
+    font-size: 61px;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 1);
+    margin: 0;
+}
+
+.f-size-27 {
+    font-size: 27px;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 1);
+    margin: 0;
+}
