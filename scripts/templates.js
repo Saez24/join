@@ -5,26 +5,13 @@
 fetch('./assets/templates/sidebar.html')
     .then(response => response.text())
     .then(html => {
-        // Inject the sidebar HTML content into the sidebar container
         document.getElementById('sidebarContainer').innerHTML = html;
-
-        // Get the path of the current page
         let currentPage = window.location.pathname;
-
-        // Define page names without special characters
         let pages = ['add_task', 'board', 'summary', 'contacts', 'privacy_policy', 'legal_notice'];
-
-        // Loop through the page names
         for (let i = 0; i < pages.length; i++) {
-            // Remove special characters from the page name to match button IDs
             let buttonId = pages[i].replaceAll("'", "");
-
-            // Check if the current page path includes the button ID
             if (currentPage.includes(buttonId)) {
-                // Get the corresponding button element
                 let button = document.getElementById(buttonId + 'Btn');
-
-                // If the button exists, add the 'selected' class to it
                 if (button) {
                     button.classList.add('selected');
                 }

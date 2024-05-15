@@ -3,19 +3,8 @@
  * Loads the content of add_task.html into the dialog and adds necessary styles.
  */
 function openDialog() {
-    /**
-     * The HTML element representing the dialog.
-     * @type {HTMLElement}
-     */
     let dialog = document.getElementById('dialog');
-
-    // Remove the 'd_none' class to display the dialog
     dialog.classList.remove('d_none');
-
-    /**
-     * The HTML link element for adding task styles.
-     * @type {HTMLLinkElement}
-     */
     let cssLink = document.createElement('link');
     cssLink.rel = 'stylesheet';
     cssLink.href = './styles/style_addtask.css';
@@ -37,13 +26,7 @@ function openDialog() {
  * Closes the dialog for adding a new task.
  */
 function closeDialog() {
-    /**
-     * The HTML element representing the dialog.
-     * @type {HTMLElement}
-     */
     let dialog = document.getElementById('dialog');
-
-    // Add the 'd_none' class to hide the dialog
     dialog.classList.add('d_none');
 }
 

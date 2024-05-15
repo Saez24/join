@@ -1,23 +1,23 @@
 const BASE_URL = "https://remotestorage-b0ea0-default-rtdb.europe-west1.firebasedatabase.app/"
-var names
-var category
-var id = 0;
-var counter = 0;
-var activeButton = null;
+let names
+let category
+let id = 0;
+let counter = 0;
+let activeButton = null;
 
-const buttonImages = {
+let buttonImages = {
     urgent: './assets/img/prio_alta.png',
     medium: './assets/img/prio_media.png',
     low: './assets/img/prio_baja.png'
 };
 
-const buttonNames = {
+let buttonNames = {
     urgent: 'Urgent',
     medium: 'Medium',
     low: 'Low'
 };
 
-const buttonColors = {
+let buttonColors = {
     urgent: { background: '#FF3D00', color: '#FFFFFF' },
     medium: { background: '#FFA800', color: '#FFFFFF' },
     low: { background: '#7AE229', color: '#FFFFFF' }
@@ -28,25 +28,10 @@ const buttonColors = {
  * @param {HTMLElement} button - The HTML element of the button whose styles are to be reset.
  */
 function resetButtonStyles(button) {
-    /**
-     * Resets the background color of the button to the default value.
-     * @type {string}
-     */
     button.style.background = '';
-
-    /**
-     * Resets the text color of the button to the default value.
-     * @type {string}
-     */
     button.style.color = '';
-
-    /**
-     * Resets the image of the button to the default image based on the button's ID.
-     * @type {string}
-     */
     button.querySelector('img').src = buttonImages[button.id];
 }
-
 
 /**
  * Sets the active state for the given button.
@@ -70,24 +55,16 @@ function setActiveButton(button) {
     }
 }
 
-
 /**
  * Sets the styles and active state for the urgent button.
  */
 function urgentButton() {
-    /**
-     * The urgent button element.
-     * @type {HTMLElement}
-     */
     let urgentButton = document.getElementById('urgent');
-
-    // Clear the button's content
     urgentButton.innerHTML = '';
-    // Set the button's content and styles
     urgentButton.innerHTML += `Urgent <img src="./assets/img/prio_alta_white.png" alt="">`;
     urgentButton.style.background = buttonColors.urgent.background;
     urgentButton.style.color = buttonColors.urgent.color;
-    // Set the urgent button as active
+    // Set the low button as active
     setActiveButton(urgentButton);
 }
 
@@ -95,19 +72,11 @@ function urgentButton() {
  * Sets the styles and active state for the medium button.
  */
 function mediumButton() {
-    /**
-     * The medium button element.
-     * @type {HTMLElement}
-     */
     let mediumButton = document.getElementById('medium');
-
-    // Clear the button's content
     mediumButton.innerHTML = '';
-    // Set the button's content and styles
     mediumButton.innerHTML += `Medium <img src="./assets/img/prio_media_white.png" alt="">`;
     mediumButton.style.background = buttonColors.medium.background;
     mediumButton.style.color = buttonColors.medium.color;
-    // Set the medium button as active
     setActiveButton(mediumButton);
 }
 
@@ -115,19 +84,11 @@ function mediumButton() {
  * Sets the styles and active state for the low button.
  */
 function lowButton() {
-    /**
-     * The low button element.
-     * @type {HTMLElement}
-     */
     let lowButton = document.getElementById('low');
-
-    // Clear the button's content
     lowButton.innerHTML = '';
-    // Set the button's content and styles
     lowButton.innerHTML += `Low <img src="./assets/img/prio_baja_white.png" alt="">`;
     lowButton.style.background = buttonColors.low.background;
     lowButton.style.color = buttonColors.low.color;
-    // Set the low button as active
     setActiveButton(lowButton);
 }
 
@@ -135,21 +96,9 @@ function lowButton() {
  * Opens the subtask field for adding a new subtask.
  */
 function openAddSubtaskField() {
-    /**
-     * The HTML element representing the field for adding a new subtask.
-     * @type {HTMLElement}
-     */
     let addSubtaskField = document.getElementById('addsubtask');
-
-    /**
-     * The HTML element representing the subtask.
-     * @type {HTMLElement}
-     */
     let subtaskField = document.getElementById('subtask');
-
-    // Hide the field for adding a new subtask
     addSubtaskField.style.display = 'none';
-    // Display the subtask field
     subtaskField.style.display = 'block';
 }
 
@@ -157,21 +106,9 @@ function openAddSubtaskField() {
  * Closes the subtask field.
  */
 function closeAddSubtaskField() {
-    /**
-     * The HTML element representing the field for adding a new subtask.
-     * @type {HTMLElement}
-     */
     let addSubtaskField = document.getElementById('addsubtask');
-
-    /**
-     * The HTML element representing the subtask.
-     * @type {HTMLElement}
-     */
     let subtaskField = document.getElementById('subtask');
-
-    // Display the field for adding a new subtask
     addSubtaskField.style.display = 'block';
-    // Hide the subtask field
     subtaskField.style.display = 'none';
 }
 
@@ -182,29 +119,13 @@ function closeAddSubtaskField() {
  * @param {MouseEvent} event - The click event object.
  */
 function handleSubtaskClick(event) {
-    /**
-     * The HTML element representing the subtask field.
-     * @type {HTMLElement}
-     */
-    var input = document.getElementById("subtask");
-
-    /**
-     * The X-coordinate of the click event.
-     * @type {number}
-     */
-    var clickX = event.clientX;
-
-    /**
-     * The right boundary of the subtask field.
-     * @type {number}
-     */
-    var inputRight = input.getBoundingClientRect().right;
-
+    let input = document.getElementById("subtask");
+    let clickX = event.clientX;
+    let inputRight = input.getBoundingClientRect().right;
     // Check if the click is within the area of the close.png image
     if (clickX >= inputRight - 56 && clickX <= inputRight - 28) {
         closeAddSubtaskField();
     } else {
-        // Check if the click is within the area of the check_black.png image
         if (clickX >= inputRight - 8) {
             handleSubtaskClickAdd(event);
         }
@@ -217,53 +138,19 @@ function handleSubtaskClick(event) {
  * sets its content and attributes, appends it to the list of subtasks, and closes the subtask field.
  */
 function handleSubtaskClickAdd() {
-    /**
-     * The HTML element representing the subtask field.
-     * @type {HTMLInputElement}
-     */
-    var input = document.getElementById("subtask");
-
-    /**
-     * The trimmed content of the subtask field.
-     * @type {string}
-     */
-    var inputContent = input.value.trim();
-
-    // Check if the input content is not empty
+    let input = document.getElementById("subtask");
+    let inputContent = input.value.trim();
     if (inputContent !== "") {
-        /**
-         * The HTML element representing the list of subtasks.
-         * @type {HTMLUListElement}
-         */
-        var ul = document.getElementById("addsubtasks");
-
-        /**
-         * The newly created list item element.
-         * @type {HTMLLIElement}
-         */
-        var li = document.createElement("li");
-
-        // Set the text content of the list item to the input content
+        let ul = document.getElementById("addsubtasks");
+        let li = document.createElement("li");
         li.textContent = inputContent;
-
-        // Set the ID attribute of the list item with a counter
         li.setAttribute("id", "subtask_" + counter);
-
-        // Set the click event handler to handle subtask deletion
         li.onclick = function (event) {
             handleSubtaskDelete(event);
         };
-
-        // Append the list item to the list of subtasks
         ul.appendChild(li);
-
-        // Close the subtask field
         closeAddSubtaskField();
-
-        // Clear the input field
         input.value = "";
-
-        // Increment the counter for the next ID
         counter++;
     }
 }
@@ -272,13 +159,7 @@ function handleSubtaskClickAdd() {
  * Deletes all subtasks by clearing the content of the subtask list.
  */
 function deleteSubtask() {
-    /**
-     * The HTML element representing the list of subtasks.
-     * @type {HTMLUListElement}
-     */
-    var ul = document.getElementById("addsubtasks");
-
-    // Clear the content of the subtask list
+    let ul = document.getElementById("addsubtasks");
     ul.innerHTML = '';
 }
 
@@ -289,25 +170,9 @@ function deleteSubtask() {
  * @param {MouseEvent} event - The click event object.
  */
 function handleSubtaskDelete(event) {
-    /**
-     * The HTML element representing the subtask field.
-     * @type {HTMLElement}
-     */
-    var input = document.getElementById("addsubtask");
-
-    /**
-     * The X-coordinate of the click event.
-     * @type {number}
-     */
-    var clickX = event.clientX;
-
-    /**
-     * The right boundary of the subtask field.
-     * @type {number}
-     */
-    var inputRight = input.getBoundingClientRect().right;
-
-    // Check if the click is within the area of the close.png image
+    let input = document.getElementById("addsubtask");
+    let clickX = event.clientX;
+    let inputRight = input.getBoundingClientRect().right;
     if (clickX >= inputRight - 8) {
         deleteSubtask();
     }
@@ -318,13 +183,7 @@ function handleSubtaskDelete(event) {
  * If the container is currently visible, hides it; otherwise, shows it.
  */
 function selectCategory() {
-    /**
-     * The HTML element representing the container for selecting task categories.
-     * @type {HTMLElement}
-     */
-    var categoryContainer = document.getElementById('taskcategory');
-
-    // Toggle the visibility of the category selection container
+    let categoryContainer = document.getElementById('taskcategory');
     if (categoryContainer.style.display === 'block') {
         categoryContainer.style.display = 'none';
     } else {
@@ -337,20 +196,13 @@ function selectCategory() {
  * If the container is currently visible, hides it; otherwise, shows it.
  */
 function selectAssingTo() {
-    /**
-     * The HTML element representing the container for selecting the assigned-to user.
-     * @type {HTMLElement}
-     */
-    var assignToContainer = document.getElementById('assignedto');
-
-    // Toggle the visibility of the assign-to selection container
+    let assignToContainer = document.getElementById('assignedto');
     if (assignToContainer.style.display === 'block') {
         assignToContainer.style.display = 'none';
     } else {
         assignToContainer.style.display = 'block';
     }
 }
-
 
 /**
  * Toggles the selected_dropdown class of the given element, used for dropdown selection.
@@ -394,7 +246,7 @@ async function addTaskLoadNames() {
  * @returns {string} The generated HTML.
  */
 function generateNameHTML(nameKey, firstname, lastname, firstInitial, lastInitial, id) {
-    const randomColor = "#" + Math.floor(Math.random() * 16777215).toString(16);
+    let randomColor = "#" + Math.floor(Math.random() * 16777215).toString(16);
     return /*html*/ `
         <div class="dropdown_selection" onclick="dropdownSelect(this)">
             <button class="shortname" style="background-color: ${randomColor};"><span>${firstInitial}${lastInitial}</span></button><span>${firstname} ${lastname}</span>
@@ -410,15 +262,14 @@ function generateNameHTML(nameKey, firstname, lastname, firstInitial, lastInitia
  */
 function renderNamesHTML(names) {
     let namesHTML = '';
-    let id = 0;
 
     for (let nameKey in names) {
         if (names.hasOwnProperty(nameKey)) {
-            const name = names[nameKey];
-            const firstname = name.firstname;
-            const lastname = name.lastname;
-            const firstInitial = firstname.charAt(0);
-            const lastInitial = lastname.charAt(0);
+            let name = names[nameKey];
+            let firstname = name.firstname;
+            let lastname = name.lastname;
+            let firstInitial = firstname.charAt(0);
+            let lastInitial = lastname.charAt(0);
             namesHTML += generateNameHTML(nameKey, firstname, lastname, firstInitial, lastInitial, id++);
         }
     }
@@ -439,7 +290,7 @@ function renderNamesToDOM(namesHTML) {
  * @param {Object} names - An object containing names.
  */
 function renderAddTaskNames(names) {
-    const namesHTML = renderNamesHTML(names);
+    let namesHTML = renderNamesHTML(names);
     renderNamesToDOM(namesHTML);
 }
 
@@ -451,12 +302,10 @@ function renderAddTaskCategorys(categories) {
     let categoryContainer = document.getElementById("taskcategory");
     categoryContainer.innerHTML = '';
 
-    let id = 0;
-
     for (let categoryKey in categories) {
         if (categories.hasOwnProperty(categoryKey)) {
-            const category = categories[categoryKey];
-            const categoryId = id++;
+            let category = categories[categoryKey];
+            let categoryId = id++;
             categoryContainer.innerHTML += /*html*/ `
             <div class="dropdown_selection" onclick="dropdownSelect(this)">
                     <label>${category.task}</label>
@@ -471,16 +320,16 @@ function renderAddTaskCategorys(categories) {
  * Clears the content of text inputs and textareas.
  */
 function clearContent() {
-    var inputs = document.getElementsByTagName("input");
-    var textareas = document.getElementsByTagName("textarea");
+    let inputs = document.getElementsByTagName("input");
+    let textareas = document.getElementsByTagName("textarea");
 
-    for (var i = 0; i < inputs.length; i++) {
+    for (let i = 0; i < inputs.length; i++) {
         if (inputs[i].type === "text" || inputs[i].type === "date") {
             inputs[i].value = "";
         }
     }
 
-    for (var j = 0; j < textareas.length; j++) {
+    for (let j = 0; j < textareas.length; j++) {
         textareas[j].value = "";
     }
 }
