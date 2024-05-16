@@ -194,6 +194,116 @@
 
 .contact-create-btn:hover {
     cursor: pointer;
-    background-color: #29ABE2;
+    background-color: rgb(41, 171, 226);
     box-shadow: 0px 8px 8px 0px rgba(0, 0, 0, 0.2);
+}
+
+.contact-close-white {
+    display: none;
+    padding: 0px 20px 0 0;
+}
+
+.contact-close-btn-white:hover {
+    cursor: pointer;
+    background-color: rgb(41, 171, 226);
+    border-radius: 50%;
+}
+
+@media (max-width: 1200px) {
+    .contact-person {
+        display: none;
+    }
+
+    .contact-right {
+        width: 422px;
+    }
+
+    .contact-form {
+        width: 288px;
+    }
+
+    .contact-form-cont {
+        width: 322px;
+    }
+
+    .contact-create-btn,
+    .contact-cancel-btn {
+        font-size: 16px;
+        padding: 0;
+    }
+
+    .contact-left {
+        width: calc(267px - 48px);
+    }
+
+    .f-size-61 {
+        font-size: 31px;
+    }
+
+    .f-size-27 {
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 750px) {
+
+    .contact-cont {
+        flex-direction: column;
+    }
+
+    .contact-left {
+        height: 267px;
+        border-radius: 30px 30px 0 0;
+        width: calc(310px - 20px);
+        padding: 20px 0 0 20px;
+        justify-content: start;
+    }
+
+    .contact-right {
+        height: 422px;
+        flex-direction: column;
+        border-radius: 0 0 30px 30px;
+        width: 310px;
+    }
+
+    .contact-form-cont {
+        align-items: center;
+    }
+
+    .contact-person {
+        display: flex;
+    }
+
+    .contact-close,
+    .contacts-logo,
+    .contact-cancel-btn {
+        display: none;
+    }
+
+    .contact-form-btn {
+        justify-content: center;
+    }
+
+    .contact-form {
+        align-items: center;
+    }
+
+    .contact-input-fields {
+        width: 90%;
+    }
+
+    .contact-person,
+    .contact-form-cont {
+        position: relative;
+        top: -80px;
+    }
+
+    .contact-close-white {
+        display: flex;
+    }
+
+    .f-size-61 {
+        font-size: 37px;
+        padding-top: 30px;
+    }
 }
