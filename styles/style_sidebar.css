@@ -15,6 +15,7 @@ body {
     height: 100vh;
     padding: 64px 0px 64px 0px;
     background-color: #2a3647;
+    z-index: 999;
 }
 
 #content {
@@ -193,6 +194,10 @@ body {
     display: none;
 }
 
+#joinHeader {
+    display: none;
+}
+
 @media (max-width: 750px) {
     .sidebar {
         position: fixed;
@@ -204,11 +209,11 @@ body {
         width: calc(100% - 32px);
         height: 80px;
         /* overflow: hidden; */
-        padding: 16px 16px 0px 16px;
+        padding: 0px 16px 0px 16px;
         z-index: 1;
     }
 
-    #sidebarMenu{
+    #sidebarMenu {
         display: flex;
         flex-direction: row;
         justify-content: space-between;
@@ -219,33 +224,59 @@ body {
         padding: 0;
     }
 
-    .logo-sidebar{
+    .logo-sidebar {
         display: none;
     }
 
-    .sidebar-bottom{
+    .sidebar-bottom {
         display: none;
     }
-    
+
     .sidebar-menu-row {
         cursor: pointer;
         display: flex;
         flex-direction: column;
-        height: 80px;
+        height: 100%;
         width: 76px;
-        gap: 8px;
         align-items: center;
-        padding-left: 0;
+        padding: 0;
         background-color: #2a3647;
+        font-size: 14px;
     }
 
-    .selected{
+    .selected {
         border-radius: 8px;
+        background-color: #091931;
+        color: white;
     }
 
     .main {
-        margin-left: 0;
+        position: fixed;
+        z-index: 999;
+        background-color: rgb(246, 247, 248);
+        height: 24px;
         width: 100%;
+        margin: 0;
     }
 
+    .icon {
+        padding-top: 12px;
+        height: 24px;
+        width: 24px;
+    }
+
+    #headline {
+        display: none;
+    }
+
+    #joinHeader {
+        width: 32px;
+        height: 39.02px;
+        display: block;
+    }
+
+    .header {
+        height: 80px;
+        padding: 20px 32px 20px 32px;
+    }
 }

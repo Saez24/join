@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./styles/style_board.css">
-    <link rel="stylesheet" href="./styles/fonts.css">
     <script src="./scripts/templates.js"></script>
+    <script src="./scripts/board.js"></script>
     <title>Board</title>
     <link rel="icon" href="./assets/img/favicon.png" type="image/x-icon">
 </head>
@@ -14,7 +14,6 @@
 <body>
     <div id="sidebarContainer"></div>
     <div class="wrapped_maxWidth">
-
         <div class="boardHeadline">
             <h1>Board</h1>
             <div class="boardHeadlineActions">
@@ -23,80 +22,101 @@
                     <div class="verticalLineSearchTask"></div>
                     <img class="magnifyingGlass" src="./assets/img/search.svg" width="32" height="32" alt="Lupe">
                 </div>
-                <button class="button buttonFilled buttonWithIcon addTaskButton">
-                    Find Task
+                <button class="addTaskButton">
+                    Add task
                     <img src="./assets/img/addWhite.png" alt="Plus-Symbol">
                 </button>
             </div>
         </div>
+        
         <div class="boardTasks">
             <div class="statusTasks">
                 <div class="headlineStatusTasks">
                     <h5 class="taskStatusTitle">To do</h5>
-                    <img src="./assets/img/add.svg" width="24" height="24" alt="Pfeil nach unten">
+<div class="imageContainer">
+    <img onclick="openDialog()" class="add_task_to_board" src="./assets/img/add.svg" width="24">
+</div>
                 </div>
                 <div class="tasks">
-                    <div class="toDoBox">
-                        <button class="CategoryBox">User Story</button>
-                        <p class="HeadlineBox">Headline</p>
-                        <p class="descriptionBox">Beschreibung Einfügen</p>
-                        <progress value="0" max="100"></progress>
-                        <p>0/2 Subtask</p>
-                        <div class="assignedName">AS</div>
-                        <img class="prioImg" src="">
+                    <div class="toDoBox_noTask">
+                        <p class="noTaskMessage">no task to do</p>
                     </div>
                 </div>
             </div>
             <div class="statusTasks">
                 <div class="headlineStatusTasks">
                     <h5 class="taskStatusTitle">In progress</h5>
-                    <img src="./assets/img/add.svg" width="24" height="24" alt="Pfeil nach unten">
-                </div>
-                <div class="toDoBox">
-                    <button class="CategoryBox">User Story</button>
-                    <p class="HeadlineBox">Headline</p>
-                    <p class="descriptionBox">Beschreibung Einfügen</p>
-                    <progress value="0" max="100"></progress>
-                    <p>0/2 Subtask</p>
-                    <div class="assignedName">AS</div>
-                    <img class="prioImg" src="">
-                </div>
-            </div>
-            <div class="statusTasks">
-                <div class="headlineStatusTasks">
-                    <h5 class="taskStatusTitle">Await feedback</h5>
-                    <img src="./assets/img/add.svg" width="24" height="24" alt="Pfeil nach unten">
+                    <img onclick="openDialog()" class="add_task_to_board" src="./assets/img/add.svg" width="24"
+                        height="24" alt="Pfeil nach unten">
                 </div>
                 <div class="tasks">
                     <div class="toDoBox">
                         <button class="CategoryBox">User Story</button>
                         <p class="HeadlineBox">Headline</p>
                         <p class="descriptionBox">Beschreibung Einfügen</p>
-                        <progress value="0" max="100"></progress>
-                        <p>0/2 Subtask</p>
-                        <div class="assignedName">AS</div>
-                        <img class="prioImg" src="">
+                        <div class="subtaskProgress">
+                            <progress value="0" max="100"></progress>
+                            <p class="subtaskCount">0/2 Subtask</p>
+                        </div>
+                        <div class="nameSection">
+                            <div class="assignedName colorName">AS</div>
+                            <div class="assignedName colorName">MB</div>
+                            <div class="prioImgContainer"><img class="prioImg" src="./assets/img/prio_media.png"></div>
+                        </div>
+
                     </div>
                 </div>
-                <div class="statusTasks">
-                    <div class="headlineStatusTasks">
-                        <h5 class="taskStatusTitle">Done</h5>
-                    </div>
-                    <div class="tasks">
-                        <div class="toDoBox">
-                            <button class="CategoryBox">User Story</button>
-                            <p class="HeadlineBox">Headline</p>
-                            <p class="descriptionBox">Beschreibung Einfügen</p>
-                            <progress value="0" max="100"></progress>
-                            <p>0/2 Subtask</p>
-                            <div class="assignedName">AS</div>
-                            <img class="prioImg" src="">
+            </div>
+            <div class="statusTasks">
+                <div class="headlineStatusTasks">
+                    <h5 class="taskStatusTitle">Await feedback</h5>
+                    <img onclick="openDialog()" class="add_task_to_board" src="./assets/img/add.svg" width="24"
+                        height="24" alt="Pfeil nach unten">
+                </div>
+                <div class="tasks">
+                    <div class="toDoBox">
+                        <button class="CategoryBox">User Story</button>
+                        <p class="HeadlineBox">Headline</p>
+                        <p class="descriptionBox">Beschreibung Einfügen</p>
+                        <div class="subtaskProgress">
+                            <progress value="50" max="100"></progress>
+                            <p class="subtaskCount">0/2 Subtask</p>
+                        </div>
+                        <div class="nameSection">
+                            <div class="assignedName colorName">AS</div>
+                            <div class="assignedName colorName">MB</div>
+                            <div class="prioImgContainer"><img class="prioImg" src="./assets/img/prio_alta.png"></div>
                         </div>
                     </div>
                 </div>
             </div>
-            </main>
-        </div>
+            <div class="statusTasks">
+                <div class="headlineStatusTasks">
+                    <h5 class="taskStatusTitle">Done</h5>
+                </div>
+                <div class="tasks">
+                    <div class="toDoBox">
+                        <button class="CategoryBox">User Story</button>
+                        <p class="HeadlineBox">Headline</p>
+                        <p class="descriptionBox">Beschreibung Einfügen</p>
+                        <div class="subtaskProgress">
+                            <progress value="0" max="100"></progress>
+                            <p class="subtaskCount">0/2 Subtask</p>
+                        </div>
+                        <div class="nameSection">
+                            <div class="assignedName colorName">AS</div>
+                            <div class="assignedName colorName">MB</div>
+                            <div class="prioImgContainer"><img class="prioImg" src="./assets/img/prio_baja.png"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+    <div id="dialog" class="dialog-bg d_none">
+        <div id="add_task_dialog_content" class="add_task_dialog"><button onclick="closeDialog()"
+                class="close_dialog_btn"><img src="./assets/img/close.png" alt=""></button></div>
+
+    </div>
 </body>
 
 </html>
