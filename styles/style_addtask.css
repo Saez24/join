@@ -534,3 +534,22 @@ li {
         height: 42px;
     }
 }
+
+@media (max-width: 750px) {
+    .create-button {
+        font-size: 14px;
+        background-size: 16px 16px;
+        width: 124px;
+        height: 38px;
+    }
+}
+
+@media (max-width: 360px) {
+    .bottom-container-mobile {
+        justify-content: space-evenly;
+    }
+
+    .submit-buttons {
+        gap: 0;
+    }
+}

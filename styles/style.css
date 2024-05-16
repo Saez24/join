@@ -1,6 +1,6 @@
 body {
     margin: 0;
-    background-color: rgb(246,247,248);
+    background-color: rgb(246, 247, 248);
     font-family: "Inter";
     display: flex;
     justify-content: center;
@@ -271,6 +271,7 @@ body {
 
 #guest-login:focus {
     background: #091931;
+    color: #FFFFFF;
 }
 
 #login {
