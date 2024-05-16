@@ -18,13 +18,48 @@
     <div class="contact-overlay d-flex j-center a-center">
         <div class="contact-cont d-flex">
             <div class="contact-left d-flex f-column j-center">
+                <div class="contact-close-white j-end a-center">
+                    <div class="contact-close-btn-white d-flex j-center a-center">
+                        <img src="./assets/img/contacts_close_white.png">
+                    </div>
+                </div>
                 <img class="contacts-logo" src="./assets/img/contacts_logo.png">
                 <span class="f-size-61">Add contact</span>
                 <span class="f-size-27">Tasks are better with a team!</span>
                 <img class="contacts-underline" src="./assets/img/contacts_underline_blue.png">
 
             </div>
-            <div class="contact-right d-flex">
+            <div class="contact-right d-flex j-evenly a-center">
+                <div class="contact-person d-flex j-center a-center">
+                    <img src="./assets/img/contacts_person_big.png">
+                </div>
+                <div class="contact-form-cont d-flex f-column">
+                    <div class="contact-close d-flex j-end a-center">
+                        <div class="contact-close-btn d-flex j-center a-center">
+                            <img src="./assets/img/contacs_close.png">
+                        </div>
+                    </div>
+                    <form onsubmit="addContact()" class="contact-form d-flex f-column j-between">
+                        <input required="" id="contact-name" type="text" placeholder="Name"
+                            class="contact-input-fields">
+                        <input required="" id="contact-email" type="email" placeholder="Email"
+                            class="contact-input-fields">
+                        <input required="" id="contact-phone" type="tel" placeholder="Phone"
+                            class="contact-input-fields">
+                        <div class="contact-form-btn d-flex">
+                            <button type="button" id="contact-cancel-contact" onclick="closeOverlay()"
+                                class="contact-cancel-btn d-flex a-center j-center">Cancel
+                                <img src="./assets/img/contacts_iconoir_cancel.png">
+                                <img src="./assets/img/contacts_iconoir_cancel_blue.png" id="contact-cancel-blue"
+                                    class="d-none">
+                            </button>
+                            <button type="submit" id="contact-create-contact"
+                                class="contact-create-btn d-flex a-center j-center">Create contact
+                                <img src="./assets/img/contacts_check.png">
+                            </button>
+                        </div>
+                    </form>
+                </div>
 
             </div>
         </div>

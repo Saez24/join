@@ -4,7 +4,7 @@
     right: 0;
     bottom: 0;
     left: 0;
-    background-color: rgba(0,0,0, 0.3);
+    background-color: rgba(0, 0, 0, 0.3);
     z-index: 1000;
 }
 
@@ -16,12 +16,20 @@
     justify-content: center;
 }
 
+.j-end {
+    justify-content: flex-end;
+}
+
 .a-center {
     align-items: center;
 }
 
 .j-between {
     justify-content: space-between;
+}
+
+.j-evenly {
+    justify-content: space-evenly;
 }
 
 .t-align-center {
@@ -39,7 +47,7 @@
 .contact-left {
     width: calc(467px - 48px);
     height: 594px;
-    background-color: rgb(42,54,71);
+    background-color: rgb(42, 54, 71);
     border-radius: 30px 0 0 30px;
     gap: 12px;
     padding-left: 48px;
@@ -48,7 +56,7 @@
 .contact-right {
     width: 700px;
     height: 594px;
-    background-color: rgb(255,255,255);
+    background-color: rgb(255, 255, 255);
     border-radius: 0 30px 30px 0;
 }
 
@@ -74,4 +82,228 @@
     font-weight: 400;
     color: rgba(255, 255, 255, 1);
     margin: 0;
+}
+
+.contact-person {
+    height: 120px;
+    width: 120px;
+    background-color: rgb(209, 209, 209);
+    border: 3px solid white;
+    border-radius: 70px;
+    box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.1);
+}
+
+.contact-form-cont {
+    width: 422px;
+}
+
+.contact-close {
+    position: relative;
+    top: -110px;
+}
+
+.contact-close-btn {
+    cursor: pointer;
+    border-radius: 50%;
+}
+
+.contact-close-btn:hover {
+
+    background-color: rgb(238, 238, 238);
+}
+
+.contact-form {
+    width: 400px;
+    height: 258px;
+}
+
+.contact-input-fields {
+    padding: 10px;
+    width: 100%;
+    border-radius: 5px;
+    border-color: #d1d1d1;
+    border: 1px solid #d1d1d1;
+    text-indent: 10px;
+    font-family: "Inter";
+}
+
+#contact-name {
+    background-image: url(../assets/img/person.png);
+    background-repeat: no-repeat;
+    background-position: center right 10px;
+}
+
+#contact-email {
+    background-image: url(../assets/img/contacts_mail.png);
+    background-repeat: no-repeat;
+    background-position: center right 10px;
+}
+
+#contact-phone {
+    background-image: url(../assets/img/contacts_call.png);
+    background-repeat: no-repeat;
+    background-position: center right 10px;
+}
+
+.contact-form-btn {
+    gap: 24px;
+    margin-top: 16px;
+}
+
+.contact-cancel-btn {
+    width: 126px;
+    height: 56px;
+    border-radius: 10px;
+    border: 1px solid rgb(42, 54, 71);
+    background-color: white;
+    padding: 8px;
+    gap: 4px;
+    font-size: 20px;
+    font-weight: 400;
+    transition: box-shadow 100ms ease-in-out;
+}
+
+.contact-cancel-btn:hover {
+    cursor: pointer;
+    color: #29ABE2;
+    border: 1px solid #29ABE2;
+    box-shadow: 0px 8px 8px 0px rgba(0, 0, 0, 0.2);
+}
+
+.contact-cancel-btn:hover img:first-child {
+    display: none;
+}
+
+.contact-cancel-btn:hover img:nth-child(1)+#contact-cancel-blue {
+    display: block;
+}
+
+.contact-create-btn {
+    width: 214px;
+    height: 57px;
+    border-radius: 10px;
+    border: none;
+    padding: 16px;
+    background-color: rgb(42, 54, 71);
+    color: white;
+    gap: 4px;
+    font-size: 21px;
+    font-weight: 700;
+    transition: box-shadow 100ms ease-in-out;
+}
+
+.contact-create-btn:hover {
+    cursor: pointer;
+    background-color: rgb(41, 171, 226);
+    box-shadow: 0px 8px 8px 0px rgba(0, 0, 0, 0.2);
+}
+
+.contact-close-white {
+    display: none;
+    padding: 0px 20px 0 0;
+}
+
+.contact-close-btn-white:hover {
+    cursor: pointer;
+    background-color: rgb(41, 171, 226);
+    border-radius: 50%;
+}
+
+@media (max-width: 1200px) {
+    .contact-person {
+        display: none;
+    }
+
+    .contact-right {
+        width: 422px;
+    }
+
+    .contact-form {
+        width: 288px;
+    }
+
+    .contact-form-cont {
+        width: 322px;
+    }
+
+    .contact-create-btn,
+    .contact-cancel-btn {
+        font-size: 16px;
+        padding: 0;
+    }
+
+    .contact-left {
+        width: calc(267px - 48px);
+    }
+
+    .f-size-61 {
+        font-size: 31px;
+    }
+
+    .f-size-27 {
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 750px) {
+
+    .contact-cont {
+        flex-direction: column;
+    }
+
+    .contact-left {
+        height: 267px;
+        border-radius: 30px 30px 0 0;
+        width: calc(310px - 20px);
+        padding: 20px 0 0 20px;
+        justify-content: start;
+    }
+
+    .contact-right {
+        height: 422px;
+        flex-direction: column;
+        border-radius: 0 0 30px 30px;
+        width: 310px;
+    }
+
+    .contact-form-cont {
+        align-items: center;
+    }
+
+    .contact-person {
+        display: flex;
+    }
+
+    .contact-close,
+    .contacts-logo,
+    .contact-cancel-btn {
+        display: none;
+    }
+
+    .contact-form-btn {
+        justify-content: center;
+    }
+
+    .contact-form {
+        align-items: center;
+    }
+
+    .contact-input-fields {
+        width: 90%;
+    }
+
+    .contact-person,
+    .contact-form-cont {
+        position: relative;
+        top: -80px;
+    }
+
+    .contact-close-white {
+        display: flex;
+    }
+
+    .f-size-61 {
+        font-size: 37px;
+        padding-top: 30px;
+    }
 }

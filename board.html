@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="./styles/style_board.css">
     <script src="./scripts/templates.js"></script>
     <script src="./scripts/board.js"></script>
+    <script src="./scripts/add_task.js"></script>
     <title>Board</title>
     <link rel="icon" href="./assets/img/favicon.png" type="image/x-icon">
 </head>
@@ -33,9 +34,8 @@
             <div class="statusTasks">
                 <div class="headlineStatusTasks">
                     <h5 class="taskStatusTitle">To do</h5>
-<div class="imageContainer">
-    <img onclick="openDialog()" class="add_task_to_board" src="./assets/img/add.svg" width="24">
-</div>
+                    <img onclick="openDialog(), addTaskOnLoad()" class="add_task_to_board" src="./assets/img/add.svg"
+                        width="24" height="24" alt="Pfeil nach unten">
                 </div>
                 <div class="tasks">
                     <div class="toDoBox_noTask">
@@ -46,8 +46,8 @@
             <div class="statusTasks">
                 <div class="headlineStatusTasks">
                     <h5 class="taskStatusTitle">In progress</h5>
-                    <img onclick="openDialog()" class="add_task_to_board" src="./assets/img/add.svg" width="24"
-                        height="24" alt="Pfeil nach unten">
+                    <img onclick="openDialog(),addTaskOnLoad()" class="add_task_to_board" src="./assets/img/add.svg"
+                        width="24" height="24" alt="Pfeil nach unten">
                 </div>
                 <div class="tasks">
                     <div class="toDoBox">
@@ -70,8 +70,8 @@
             <div class="statusTasks">
                 <div class="headlineStatusTasks">
                     <h5 class="taskStatusTitle">Await feedback</h5>
-                    <img onclick="openDialog()" class="add_task_to_board" src="./assets/img/add.svg" width="24"
-                        height="24" alt="Pfeil nach unten">
+                    <img onclick="openDialog(),addTaskOnLoad()" class="add_task_to_board" src="./assets/img/add.svg"
+                        width="24" height="24" alt="Pfeil nach unten">
                 </div>
                 <div class="tasks">
                     <div class="toDoBox">
@@ -111,9 +111,10 @@
                     </div>
                 </div>
             </div>
+        </div>
     </div>
     <div id="dialog" class="dialog-bg d_none">
-        <div id="add_task_dialog_content" class="add_task_dialog"><button onclick="closeDialog()"
+        <div id="add_task_dialog_content" class="add_task_dialog"><button onclick="closeDialog(),clearContent()"
                 class="close_dialog_btn"><img src="./assets/img/close.png" alt=""></button></div>
 
     </div>

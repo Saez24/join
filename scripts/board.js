@@ -1,10 +1,16 @@
+/**
+ * Opens a dialog for adding a new task.
+ * Loads the content of add_task.html into the dialog and adds necessary styles.
+ */
 function openDialog() {
-    document.getElementById('dialog').classList.remove('d_none');
+    let dialog = document.getElementById('dialog');
+    dialog.classList.remove('d_none');
     let cssLink = document.createElement('link');
     cssLink.rel = 'stylesheet';
     cssLink.href = './styles/style_addtask.css';
     document.head.appendChild(cssLink);
 
+    // Fetch the content of add_task.html
     fetch('./add_task.html')
         .then(response => response.text())
         .then(html => {
@@ -14,8 +20,13 @@ function openDialog() {
             document.getElementById('add_task_dialog_content').appendChild(addTaskContent);
         })
         .catch(error => console.error('Error fetching add_task.html:', error));
-};
-
-function closeDialog() {
-    document.getElementById('dialog').classList.add('d_none');
 }
+
+/**
+ * Closes the dialog for adding a new task.
+ */
+function closeDialog() {
+    let dialog = document.getElementById('dialog');
+    dialog.classList.add('d_none');
+}
+

@@ -1,3 +1,7 @@
+/**
+ * Fetches the sidebar HTML content and injects it into the sidebar container.
+ * Also, sets the 'selected' class for the button corresponding to the current page.
+ */
 fetch('./assets/templates/sidebar.html')
     .then(response => response.text())
     .then(html => {
@@ -15,6 +19,7 @@ fetch('./assets/templates/sidebar.html')
         }
     })
     .catch(error => console.error('Error fetching sidebar:', error));
+
 
 // document.addEventListener("DOMContentLoaded", function () {
 //     let currentPage = window.location.pathname;
