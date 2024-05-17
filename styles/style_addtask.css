@@ -74,6 +74,10 @@ input {
     font-family: 'Inter';
 }
 
+input:hover {
+    border-color: #29ABE2;
+}
+
 .datefield {
     background-image: url("../assets/img/event.png");
     background-repeat: no-repeat;
@@ -147,13 +151,17 @@ textarea {
     font-family: 'Inter';
 }
 
+textarea:hover {
+    border-color: #29ABE2;
+}
+
 .dropdown_container {
     display: block;
     position: relative;
 }
 
 .dropdown-content:hover {
-    border: 1px solid #7a7a7a;
+    border-color: #29ABE2;
 }
 
 .dropdown-content {

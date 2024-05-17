@@ -8,6 +8,9 @@
     <link rel="stylesheet" href="./styles/fonts.css">
     <title>Sign up</title>
     <link rel="icon" href="./assets/img/favicon.png" type="image/x-icon">
+    <script type="module" src="./scripts/signup.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/ui/6.0.1/firebase-ui-auth.js"></script>
+    <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/6.0.1/firebase-ui-auth.css" />
 </head>
 
 <body>
@@ -21,12 +24,11 @@
             <form class="signup-content" onsubmit="signUp()">
                 <div id="signup-form">
                     <div class="input-container">
-                        <input required id="signup-name" type="text" placeholder="Name" class="input-fields-signup">
-                        <input required id="signup-email" type="email" placeholder="E-Mail"
+                        <input required id="name" type="text" placeholder="Name" class="input-fields-signup">
+                        <input required id="email" type="email" placeholder="E-Mail" class="input-fields-signup" />
+                        <input required id="password" type="password" placeholder="Password"
                             class="input-fields-signup" />
-                        <input required id="signup-password" type="password" placeholder="Password"
-                            class="input-fields-signup" />
-                        <input required id="signup-confirmpassword" type="password" placeholder="Password"
+                        <input required id="confirmpassword" type="password" placeholder="Password"
                             class="input-fields-signup" />
                         <span id="signup-error" style="display: none">Ups! Your passwords don't match.
                         </span>
@@ -39,7 +41,7 @@
                         </div>
                     </div>
                     <div class="signup-buttons">
-                        <button class="signup-btn"><b>Sign up</b></button>
+                        <button id="signup" class="signup-btn"><b>Sign up</b></button>
                     </div>
                 </div>
             </form>
