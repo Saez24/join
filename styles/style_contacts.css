@@ -1,11 +1,18 @@
+body {
+    overflow-x: hidden;
+    overflow-y:hidden;
+}
+
 .contact-overlay {
     position: fixed;
     top: 0;
     right: 0;
     bottom: 0;
     left: 0;
-    background-color: rgba(0, 0, 0, 0.3);
+    background-color: rgba(0, 0, 0, 0);
     z-index: 1000;
+    transform: translateX(100vw);
+    transition: transform 300ms ease-out, background-color 100ms ease-out;
 }
 
 .d-flex {
@@ -209,6 +216,20 @@
     border-radius: 50%;
 }
 
+.contact-cont {
+    position: fixed;
+    transform: translateX(100vw);
+    transition: transform 300ms ease-out;
+}
+
+.slide-in-from-right { /*Reference to classes "contact-overlay" and "contact-cont"*/
+    transform: translateX(0);
+}
+
+.fade-to-grey-overlay {
+     background-color: rgba(0, 0, 0, 0.3);
+}
+
 @media (max-width: 1200px) {
     .contact-person {
         display: none;
@@ -305,5 +326,31 @@
     .f-size-61 {
         font-size: 37px;
         padding-top: 30px;
+    }
+
+    .contact-overlay {
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        background-color: rgba(0, 0, 0, 0);
+        z-index: 1000;
+        transform: translateY(100vh);
+        transition: transform 300ms ease-out, background-color 100ms ease-out;
+    }
+
+    .contact-cont {
+        position: fixed;
+        transform: translateY(100vh);
+        transition: transform 300ms ease-out;
+    }
+    
+    .slide-in-from-right { /*Reference to classes "contact-overlay" and "contact-cont"*/
+        transform: translateY(0);
+    }
+    
+    .fade-to-grey-overlay {
+         background-color: rgba(0, 0, 0, 0.3);
     }
 }

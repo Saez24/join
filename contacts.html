@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="./scripts/templates.js"></script>
+    <script src="./scripts/contacts.js"></script>
     <link rel="stylesheet" href="./styles/style_contacts.css">
     <link rel="stylesheet" href="./styles/fonts.css">
     <title>Contacts</title>
@@ -14,12 +15,14 @@
 <body>
     <div id="sidebarContainer" onload="manageStyles()"></div>
 
+    <button onclick="slideInFromRight()" style="position: fixed; top: 200px;">Add contact</button>
+
     <!-- ADD CONTACT OVERLAY -->
-        <div class="contact-overlay d-flex j-center a-center">
-        <div class="contact-cont d-flex">
+        <div class="contact-overlay d-flex j-center a-center" id="contact-overlay" onclick="closeOverlayWhenGreyAreaWasClicked()">
+        <div class="contact-cont d-flex" id="contact-cont">
             <div class="contact-left d-flex f-column j-center">
                 <div class="contact-close-white j-end a-center">
-                    <div class="contact-close-btn-white d-flex j-center a-center">
+                    <div class="contact-close-btn-white d-flex j-center a-center" onclick="slideOutToRight()">
                         <img src="./assets/img/contacts_close_white.png">
                     </div>
                 </div>
@@ -35,7 +38,7 @@
                 </div>
                 <div class="contact-form-cont d-flex f-column">
                     <div class="contact-close d-flex j-end a-center">
-                        <div class="contact-close-btn d-flex j-center a-center">
+                        <div class="contact-close-btn d-flex j-center a-center" onclick="slideOutToRight()">
                             <img src="./assets/img/contacs_close.png">
                         </div>
                     </div>
