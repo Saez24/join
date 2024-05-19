@@ -14,8 +14,17 @@
 
 <body>
     <div id="sidebarContainer" onload="manageStyles()"></div>
-
-    <button onclick="slideInFromRight()" style="position: fixed; top: 200px;">Add contact</button>
+<div class="contacts-left">
+        <button onclick="slideInFromRight()" class="add-contact-btn">
+            <div class="button-row">
+                <div class="add-new-contact-text">Add new contact</div>
+                <img src="assets/img/contacts_add_contact.png" alt="add contact" class="add-contact-icon">
+            </div>
+        </button>
+        <div class="contact-row"></div>
+</div>
+<div class="main-contacts"></div>
+    
 
     <!-- ADD CONTACT OVERLAY -->
         <div class="contact-overlay d-flex j-center a-center" id="contact-overlay" onclick="closeOverlayWhenGreyAreaWasClicked()">

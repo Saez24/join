@@ -1,6 +1,76 @@
 body {
     overflow-x: hidden;
     overflow-y:hidden;
+    display: flex;
+}
+
+.contacts-left{
+    display: flex;
+    flex-direction: column;
+    width: 456px;
+    height: 100vh;
+    background-color: #ffffff;
+    left: 232px;
+    position: relative;
+    }
+
+.main-contacts{
+    display: flex;
+    flex-direction: column;
+}
+
+.contact-row{
+
+    }
+
+.main-contacts{
+    display: flex;
+    flex: 1;
+    height: 100vh;
+    background-color: #29ABE2;
+}
+
+.add-contact-btn{
+    cursor: pointer;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    background-color: #2a3647;
+    width: 352px;
+    height: 56px;
+    color: white;
+    font-family: 'Inter';
+    font-weight: 700;
+    position: fixed; 
+    top: calc(116px + 22.5px);
+    border-radius: 10px;
+    border-style: none;
+    left: calc(232px + 52px);
+}
+
+.add-contact-btn:hover{
+    filter: brightness(1.2);
+}
+
+.add-new-contact-text{
+    display: flex; 
+    align-items: center;
+    font-size: 21px;
+}
+
+.button-row{
+    display: flex;
+    flex-direction: row;
+    gap: 16px;
+    align-items: center;
+}
+
+.add-contact-icon{
+    width: 29.33px;
+    height: 20.91px;
+    top: 17.76px;
+    left: 256.83px;
 }
 
 .contact-overlay {
