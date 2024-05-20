@@ -90,6 +90,11 @@ input[type="date"] {
 input[type=date]:invalid {
     color: lightgray;
     padding-left: 12px;
+    padding-right: 12px;
+}
+
+input[type=date] {
+    padding-left: 12px;
 }
 
 input[type=text] {

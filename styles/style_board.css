@@ -229,6 +229,7 @@ h1 {
     text-rendering: optimizelegibility;
     width: 900px;
     z-index: 4006;
+    transition: transform 300ms ease-out, background-color 100ms ease-out;
 }
 
 .addtask-content-dialog {
