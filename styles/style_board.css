@@ -29,7 +29,7 @@ h5 {
     display: flex;
     gap: 32px;
     align-items: center;
-    justify-content: space-between; 
+    justify-content: space-between;
 }
 
 .searchTask {
@@ -61,8 +61,8 @@ h5 {
 }
 
 .addTaskButton {
-    border: none; 
-    outline: none; 
+    border: none;
+    outline: none;
     border-radius: 10px;
     font-size: 21px;
     font-weight: 700;
@@ -84,8 +84,8 @@ h5 {
 }
 
 .addTaskButton:hover {
-    background-color: #29ABE2; 
-    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3); 
+    background-color: #29ABE2;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
 }
 
 .boardTasks {
@@ -103,7 +103,7 @@ h5 {
 
 @media only screen and (min-width: 768px) {
     .statusTasks {
-        width: calc(25% - 26px); 
+        width: calc(25% - 26px);
     }
 }
 
@@ -232,6 +232,15 @@ h5 {
     z-index: 4006;
 }
 
+.addtask-content-dialog {
+    margin: 60px 0 0 0 !important;
+}
+
+.addtask-content {
+    max-width: 100% !important;
+    max-height: 100% !important;
+}
+
 .close_dialog_btn {
     position: absolute;
     border: 0;
@@ -279,6 +288,7 @@ h5 {
 
 @media screen and (max-width: 1200px) {
     .boardHeadline {
+        font-size: 32px;
         justify-content: space-between; 
     }
 
@@ -304,106 +314,5 @@ h5 {
 
     .statusTasks {
         width: calc(50% - 26px);
-    }
-}
-
-@media screen and (max-width: 1000px) {
-    .boardHeadline {
-        flex-direction: column;
-        align-items: flex-start;
-        font-size: 34px;
-    }
-
-    .boardHeadline h1 {
-        margin-bottom: 10px;
-    }
-
-    .boardHeadlineActions {
-        width: 100%;
-        display: flex;
-        justify-content: space-between;
-        align-items: flex-start;
-    }
-
-    .searchTask {
-        width: 100%;
-        margin-bottom: 10px;
-    }
-
-    .addTaskButton {
-        align-self: flex-start;
-        margin-top: -80px;
-    }
-
-    .searchTask {
-        margin: 0;
-        width: 100%;
-    }
-}
-
-@media screen and (max-width: 750px) {
-    .wrapped_maxWidth {
-        width: 100%;
-        max-width: 1220px;
-        margin-left: 26px;
-    }
-
-    .boardHeadline {
-        flex-direction: column;
-        align-items: flex-start;
-        width: 100%;
-        font-size: 24px;
-    }
-
-    .boardHeadlineActions {
-        flex-direction: column;
-        width: 100%;
-        align-items: flex-start;
-    }
-
-    .searchTask {
-        width: 100%;
-        margin: 0 0 10px 0;
-    }
-
-    #inputSearchTask {
-        width: 100%;
-    }
-
-    .addTaskButton {
-        align-self: flex-end;
-        margin-top: -150px; 
-        margin-bottom: 100px;
-        width: 40px;
-        height: 40px;
-        padding: 0; 
-        font-size: 0;
-        min-width: 0px;
-    }
-
-    .addTaskButton img {
-        margin: 0; 
-        width: 20px; 
-        height: auto;
-    }
-}
-
-
-@media screen and (max-width: 600px) {
-    .boardTasks {
-        flex-direction: column;
-        align-items: stretch;
-    }
-
-    .statusTasks {
-        width: 100%;
-    }
-
-    .toDoBox {
-        margin-right: 10px;
-       
-    }
-    .toDoBox_noTask {
-        margin-right: 10px;
     }
 }

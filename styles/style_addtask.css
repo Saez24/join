@@ -8,7 +8,6 @@
 
 ::placeholder {
     font-family: 'Inter';
-    padding-left: 16px;
 }
 
 .addtask-content-header {
@@ -20,7 +19,7 @@
     top: 136px;
     max-width: calc(100% - 232px);
     max-height: calc(100% - 136px);
-    margin: 215px 0 0 240px;
+    margin: 170px 0 0 240px;
 }
 
 h1 {
@@ -90,7 +89,11 @@ input[type="date"] {
 
 input[type=date]:invalid {
     color: lightgray;
-    padding-left: 21px;
+    padding-left: 12px;
+}
+
+input[type=text] {
+    padding-left: 12px;
 }
 
 input:focus::-webkit-datetime-edit {
@@ -141,7 +144,7 @@ input[type=date]::-webkit-calendar-picker-indicator {
 textarea {
     border-radius: 10px;
     border: 1px solid #D1D1D1;
-    padding: 12px 0 12px 0;
+    padding: 12px 12px 12px 12px;
     gap: 10px;
     font-size: 18px;
     font-weight: 400;
@@ -170,6 +173,10 @@ textarea:hover {
     background-repeat: no-repeat;
     background-position: center right 18px;
     width: 100%;
+}
+
+.dropdown-content::placeholder {
+    padding-left: 12px;
 }
 
 .dropdown_selection {
