@@ -29,7 +29,7 @@ h1 {
     display: flex;
     gap: 32px;
     align-items: center;
-    justify-content: space-between; 
+    justify-content: space-between;
 }
 
 .searchTask {
@@ -61,8 +61,8 @@ h1 {
 }
 
 .addTaskButton {
-    border: none; 
-    outline: none; 
+    border: none;
+    outline: none;
     border-radius: 10px;
     font-size: 21px;
     font-weight: 700;
@@ -83,8 +83,8 @@ h1 {
 }
 
 .addTaskButton:hover {
-    background-color: #29ABE2; 
-    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3); 
+    background-color: #29ABE2;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
 }
 
 .boardTasks {
@@ -103,7 +103,7 @@ h1 {
 
 @media only screen and (min-width: 768px) {
     .statusTasks {
-        width: calc(25% - 26px); 
+        width: calc(25% - 26px);
     }
 }
 
@@ -231,6 +231,15 @@ h1 {
     z-index: 4006;
 }
 
+.addtask-content-dialog {
+    margin: 60px 0 0 0 !important;
+}
+
+.addtask-content {
+    max-width: 100% !important;
+    max-height: 100% !important;
+}
+
 .close_dialog_btn {
     position: absolute;
     border: 0;
@@ -279,7 +288,7 @@ h1 {
 @media screen and (max-width: 1200px) {
     .boardHeadline {
         font-size: 32px;
-        justify-content: space-between; 
+        justify-content: space-between;
     }
 
     .searchTask {
