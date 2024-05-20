@@ -1,10 +1,10 @@
 body {
     overflow-x: hidden;
-    overflow-y:hidden;
+    overflow-y: hidden;
     display: flex;
 }
 
-.contacts-left{
+.contacts-left {
     display: flex;
     flex-direction: column;
     width: 456px;
@@ -12,25 +12,23 @@ body {
     background-color: #ffffff;
     left: 232px;
     position: relative;
-    }
+}
 
-.main-contacts{
+.main-contacts {
     display: flex;
     flex-direction: column;
 }
 
-.contact-row{
+.contact-row {}
 
-    }
-
-.main-contacts{
+.main-contacts {
     display: flex;
     flex: 1;
     height: 100vh;
     background-color: #29ABE2;
 }
 
-.add-contact-btn{
+.add-contact-btn {
     cursor: pointer;
     display: flex;
     flex-direction: row;
@@ -42,31 +40,31 @@ body {
     color: white;
     font-family: 'Inter';
     font-weight: 700;
-    position: fixed; 
+    position: fixed;
     top: calc(116px + 22.5px);
     border-radius: 10px;
     border-style: none;
     left: calc(232px + 52px);
 }
 
-.add-contact-btn:hover{
+.add-contact-btn:hover {
     filter: brightness(1.2);
 }
 
-.add-new-contact-text{
-    display: flex; 
+.add-new-contact-text {
+    display: flex;
     align-items: center;
     font-size: 21px;
 }
 
-.button-row{
+.button-row {
     display: flex;
     flex-direction: row;
     gap: 16px;
     align-items: center;
 }
 
-.add-contact-icon{
+.add-contact-icon {
     width: 29.33px;
     height: 20.91px;
     top: 17.76px;
@@ -292,12 +290,13 @@ body {
     transition: transform 300ms ease-out;
 }
 
-.slide-in-from-right { /*Reference to classes "contact-overlay" and "contact-cont"*/
+.slide-in-from-right {
+    /*Reference to classes "contact-overlay" and "contact-cont"*/
     transform: translateX(0);
 }
 
 .fade-to-grey-overlay {
-     background-color: rgba(0, 0, 0, 0.3);
+    background-color: rgba(0, 0, 0, 0.3);
 }
 
 @media (max-width: 1200px) {
@@ -415,12 +414,13 @@ body {
         transform: translateY(100vh);
         transition: transform 300ms ease-out;
     }
-    
-    .slide-in-from-right { /*Reference to classes "contact-overlay" and "contact-cont"*/
+
+    .slide-in-from-right {
+        /*Reference to classes "contact-overlay" and "contact-cont"*/
         transform: translateY(0);
     }
-    
+
     .fade-to-grey-overlay {
-         background-color: rgba(0, 0, 0, 0.3);
+        background-color: rgba(0, 0, 0, 0.3);
     }
 }

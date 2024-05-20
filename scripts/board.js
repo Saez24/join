@@ -3,7 +3,12 @@
  */
 function openDialog() {
     let dialog = document.getElementById('dialog');
-    dialog.classList.remove('d_none');
+    let dialogslide = document.getElementById('add_task_dialog_content');
+    setTimeout(() => {
+        dialogslide.classList.add('add_task_dialog_slide_in')
+        dialog.classList.add('add_task_dialog_slide_in')
+        dialog.classList.remove('d_none');
+    }, 300);
     ensureCssLoaded();
     loadAddTaskContent();
     addTaskOnLoad();
@@ -49,7 +54,9 @@ function loadAddTaskContent() {
  */
 function closeDialog() {
     let dialog = document.getElementById('dialog');
-    dialog.classList.add('d_none');
+    setTimeout(() => {
+        dialog.classList.add('d_none');
+    }, 100);
 }
 
 /**
@@ -59,4 +66,5 @@ function closeDialog() {
 function closeOnBackground(event) {
     event.stopPropagation();
 }
+
 

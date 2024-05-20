@@ -230,7 +230,12 @@ h5 {
     text-rendering: optimizelegibility;
     width: 900px;
     z-index: 4006;
+    transform: translateX(100vw);
     transition: transform 300ms ease-out, background-color 100ms ease-out;
+}
+
+.add_task_dialog_slide_in {
+    transform: translateX(0);
 }
 
 .addtask-content-dialog {
@@ -290,7 +295,7 @@ h5 {
 @media screen and (max-width: 1200px) {
     .boardHeadline {
         font-size: 32px;
-        justify-content: space-between; 
+        justify-content: space-between;
     }
 
     .searchTask {
