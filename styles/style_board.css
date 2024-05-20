@@ -7,6 +7,10 @@ h1 {
     margin: 0;
 }
 
+h5 {
+    margin: 0;
+}
+
 .wrapped_maxWidth {
     width: 100%;
     max-width: 1220px;
@@ -14,13 +18,9 @@ h1 {
 }
 
 .boardHeadline {
-    padding-top: 100px;
-    width: calc(100% - 231px);
     display: flex;
     justify-content: space-between;
-    margin-bottom: 48px;
     font-size: 38px;
-    font-weight: 700px;
     margin: 0;
     padding-top: 150px;
 }
@@ -74,11 +74,12 @@ h1 {
     gap: 4px;
     background-color: #2A3647;
     color: white;
+    margin-right: 10px;
 }
 
 .addTaskButton img {
     align-items: center;
-    width: 18, 67px;
+    width: 18px;
     margin: 10px;
 }
 
@@ -100,7 +101,6 @@ h1 {
     font-size: 20px;
 }
 
-
 @media only screen and (min-width: 768px) {
     .statusTasks {
         width: calc(25% - 26px);
@@ -112,6 +112,7 @@ h1 {
     align-items: center;
     margin-bottom: 15.5px;
     margin: 0;
+    gap: 26px;
 }
 
 .taskStatusTitle {
@@ -119,6 +120,8 @@ h1 {
     color: #42526E;
     font-size: 26px;
     font-weight: 700;
+    margin-bottom: 26px;
+    margin-top: 26px;
 }
 
 .toDoBox {
@@ -127,6 +130,7 @@ h1 {
     filter: drop-shadow(0px 0px 5px rgba(0, 0, 0, 0.1));
     font-size: 16px;
     padding: 18px;
+    min-width: 200px;
 }
 
 .toDoBox:hover {
@@ -205,9 +209,6 @@ h1 {
     right: 0;
     bottom: 0;
     top: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
 }
 
 .add_task_dialog {
@@ -289,13 +290,13 @@ h1 {
 @media screen and (max-width: 1200px) {
     .boardHeadline {
         font-size: 32px;
-        justify-content: space-between;
+        justify-content: space-between; 
     }
 
     .searchTask {
-        max-width: 50%;
         margin-left: 10%;
         margin-right: 10%;
+        height: 38px;
     }
 
     .addTaskButton {
@@ -309,6 +310,7 @@ h1 {
 
     .boardTasks {
         flex-wrap: wrap;
+        margin-bottom: 100px;
     }
 
     .statusTasks {
