@@ -150,7 +150,7 @@ async function postData(path = "names", data = {}) {
  */
 async function addName(newName) {
     try {
-        const result = await postData('names', newName);
+        let result = await postData('names', newName);
         console.log("New name successfully added:", result);
     } catch (error) {
         console.error("Error adding the new name:", error);

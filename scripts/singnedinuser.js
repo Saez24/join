@@ -5,7 +5,7 @@ import { getAuth, onAuthStateChanged, signOut, deleteUser } from "https://www.gs
 // https://firebase.google.com/docs/web/setup#available-libraries
 
 // Your web app's Firebase configuration
-const firebaseConfig = {
+let firebaseConfig = {
     apiKey: "AIzaSyDrm2QShTbbwiC0gpPDPP2LfdkdwQTZ5MI",
     authDomain: "remotestorage-b0ea0.firebaseapp.com",
     databaseURL: "https://remotestorage-b0ea0-default-rtdb.europe-west1.firebasedatabase.app",
@@ -16,23 +16,21 @@ const firebaseConfig = {
 };
 // Initialize Firebase
 let app = initializeApp(firebaseConfig);
-const auth = getAuth();
-const user = auth.currentUser;
+let auth = getAuth();
+let user = auth.currentUser;
 let logout = document.getElementById("logout");
 
 onAuthStateChanged(auth, (user) => {
     if (user) {
         // The user object has basic properties such as display name, email, etc.
-        const displayName = user.displayName;
-        const email = user.email;
+        let displayName = user.displayName;
+        let email = user.email;
         console.log(email);
-        const photoURL = user.photoURL;
-        const emailVerified = user.emailVerified;
 
         // The user's ID, unique to the Firebase project. Do NOT use
         // this value to authenticate with your backend server, if
         // you have one. Use User.getToken() instead.
-        const uid = user.uid;
+        let uid = user.uid;
     }
 });
 logout.addEventListener('click', function (event) {
