@@ -1,8 +1,8 @@
 const BASE_URL = "https://remotestorage-b0ea0-default-rtdb.europe-west1.firebasedatabase.app/"
 
-let amountTaskToDos = "";
+let amountTaskToDos = 0;
 let amountTaskDone = "";
-let amountTaskUrgent = "";
+let amountTaskUrgent = 0;
 let amountTasksInBoard = 0;
 let amountTasksInProgress = "";
 let amountTasksAwaitingFeedback = "";
@@ -25,7 +25,15 @@ async function determineTasksInBoard() {
     amountTasksInBoard = responseToJson.length;
 }
 
-
+/** Counts all urgent tasks and updates the global variable "amountTaskUrgent", which will later be required to render the summary html page. */
+async function determineUrgentTasks() {
+    let responseToJson = await loadData('/tasks');
+    for (let i = 0; i < responseToJson.length; i++) {
+        if (responseToJson[i].prio === "urgent") {
+            amountTaskUrgent++;
+        }
+    }
+}
 
 
 /** Checks if the user has been visited the summary page during log-in. If so, the local storage key "greet" will be set to "no" and the good morning message will not be displayed. */
