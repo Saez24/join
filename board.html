@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="./styles/style_board.css">
     <script src="./scripts/templates.js"></script>
     <script src="./scripts/board.js"></script>
+    <script src="./scripts/add_task.js"></script>
     <title>Board</title>
     <link rel="icon" href="./assets/img/favicon.png" type="image/x-icon">
 </head>
@@ -28,14 +29,14 @@
                 </button>
             </div>
         </div>
-        
+
         <div class="boardTasks">
             <div class="statusTasks">
                 <div class="headlineStatusTasks">
                     <h5 class="taskStatusTitle">To do</h5>
-<div class="imageContainer">
-    <img onclick="openDialog()" class="add_task_to_board" src="./assets/img/add.svg" width="24">
-</div>
+                    <div class="imageContainer">
+                        <img onclick="openDialog()" class="add_task_to_board" src="./assets/img/add.svg" width="24">
+                    </div>
                 </div>
                 <div class="tasks">
                     <div class="toDoBox_noTask">
@@ -111,12 +112,13 @@
                     </div>
                 </div>
             </div>
-    </div>
-    <div id="dialog" class="dialog-bg d_none">
-        <div id="add_task_dialog_content" class="add_task_dialog"><button onclick="closeDialog()"
-                class="close_dialog_btn"><img src="./assets/img/close.png" alt=""></button></div>
+        </div>
+        <div onclick="closeDialog()" id="dialog" class="dialog-bg d_none">
+            <div onclick="closeOnBackground(event)" id="add_task_dialog_content" class="add_task_dialog"><button
+                    onclick="closeDialog()" class="close_dialog_btn"><img src="./assets/img/close.png" alt=""></button>
+            </div>
 
-    </div>
+        </div>
 </body>
 
 </html>

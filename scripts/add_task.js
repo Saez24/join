@@ -192,6 +192,24 @@ function selectCategory() {
 }
 
 /**
+ * Closes the category dropdown menu if it is currently open.
+ */
+function closeSelectCategory() {
+    let categoryContainer = document.getElementById('taskcategory');
+    if (categoryContainer.style.display === 'block') {
+        categoryContainer.style.display = 'none';
+    }
+}
+
+/**
+ * Prevents event propagation.
+ * @param {Event} event - The event object.
+ */
+function closeOnBackground(event) {
+    event.stopPropagation();
+}
+
+/**
  * Toggles the visibility of the assign-to selection container.
  * If the container is currently visible, hides it; otherwise, shows it.
  */
@@ -201,6 +219,16 @@ function selectAssingTo() {
         assignToContainer.style.display = 'none';
     } else {
         assignToContainer.style.display = 'block';
+    }
+}
+
+/**
+ * Closes the assignto dropdown menu if it is currently open.
+ */
+function closeAssingTo() {
+    let assignToContainer = document.getElementById('assignedto');
+    if (assignToContainer.style.display === 'block') {
+        assignToContainer.style.display = 'none';
     }
 }
 
@@ -332,4 +360,14 @@ function clearContent() {
     for (let j = 0; j < textareas.length; j++) {
         textareas[j].value = "";
     }
+}
+
+/**
+ * Sets the minimum date of the date input field to today's date.
+ */
+function setDateRestriction() {
+    let today = new Date();
+    let formattedDate = today.getFullYear() + '-' + ('0' + (today.getMonth() + 1)).slice(-2) + '-' + ('0' + today.getDate()).slice(-2);
+    let dateField = document.getElementById("duedate");
+    dateField.min = formattedDate;
 }
