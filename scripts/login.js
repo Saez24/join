@@ -1,6 +1,6 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+import { getAuth, signInWithEmailAndPassword, signInAnonymously } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -16,21 +16,36 @@ const firebaseConfig = {
 // Initialize Firebase
 let app = initializeApp(firebaseConfig);
 let auth = getAuth();
-
+let guestLogin = document.getElementById("guest-login");
+let login = document.getElementById("login");
 
 login.addEventListener('click', function (event) {
     event.preventDefault()
-    let login = document.getElementById("login");
+
     let email = document.getElementById("email").value;
     let password = document.getElementById("password").value;
 
     signInWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
-            window.location.href = "summary.html"
+            window.location.href = "add_task.html"
         })
         .catch((error) => {
             let errorCode = error.code;
             let errorMessage = error.message;
             alert(errorMessage)
         });
-})
+});
+
+guestLogin.addEventListener('click', function (event) {
+    event.preventDefault()
+
+    signInAnonymously(auth)
+        .then(() => {
+            window.location.href = "add_task.html"
+        })
+        .catch((error) => {
+            let errorCode = error.code;
+            let errorMessage = error.message;
+            // ...
+        });
+});

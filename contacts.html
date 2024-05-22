@@ -14,16 +14,23 @@
 
 <body>
     <div id="sidebarContainer" onload="manageStyles()"></div>
-<div class="contacts-left">
+    <div class="contacts-left">
         <button onclick="slideInFromRight()" class="add-contact-btn">
             <div class="button-row">
                 <div class="add-new-contact-text">Add new contact</div>
                 <img src="assets/img/contacts_add_contact.png" alt="add contact" class="add-contact-icon">
             </div>
         </button>
-        <div class="contact-row"></div>
+        <div id="contactForSchleife">
+        <div class="capital-category"></div>
+        <div class="contact-row">
+        </div>
+            
+        </div>
+    </div>
+<div class="main-contacts" onload="renderContacts()" id="contactSummary">
+
 </div>
-<div class="main-contacts"></div>
     
 
     <!-- ADD CONTACT OVERLAY -->

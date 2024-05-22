@@ -26,10 +26,10 @@ function slideOutToRight() {
 
 
 function closeOverlayWhenGreyAreaWasClicked() { //https://www.tutorialspoint.com/online_html_editor.php
-  
+
     document.onclick = function (e) {
         if (e.target.id === 'contact-overlay') {
-            slideOutToRight ();
+            slideOutToRight();
         }
     };
 }

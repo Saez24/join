@@ -192,6 +192,24 @@ function selectCategory() {
 }
 
 /**
+ * Closes the category dropdown menu if it is currently open.
+ */
+function closeSelectCategory() {
+    let categoryContainer = document.getElementById('taskcategory');
+    if (categoryContainer.style.display === 'block') {
+        categoryContainer.style.display = 'none';
+    }
+}
+
+/**
+ * Prevents event propagation.
+ * @param {Event} event - The event object.
+ */
+function closeOnBackground(event) {
+    event.stopPropagation();
+}
+
+/**
  * Toggles the visibility of the assign-to selection container.
  * If the container is currently visible, hides it; otherwise, shows it.
  */
@@ -201,6 +219,16 @@ function selectAssingTo() {
         assignToContainer.style.display = 'none';
     } else {
         assignToContainer.style.display = 'block';
+    }
+}
+
+/**
+ * Closes the assignto dropdown menu if it is currently open.
+ */
+function closeAssingTo() {
+    let assignToContainer = document.getElementById('assignedto');
+    if (assignToContainer.style.display === 'block') {
+        assignToContainer.style.display = 'none';
     }
 }
 
@@ -238,39 +266,38 @@ async function addTaskLoadNames() {
 /**
  * Generates HTML for displaying a name with a color-coded short name and a checkbox.
  * @param {string} nameKey - The key of the name.
- * @param {string} firstname - The first name.
- * @param {string} lastname - The last name.
+ * @param {string} name - The name.
  * @param {string} firstInitial - The first initial of the first name.
  * @param {string} lastInitial - The first initial of the last name.
  * @param {number} id - The ID for the HTML element.
  * @returns {string} The generated HTML.
  */
-function generateNameHTML(nameKey, firstname, lastname, firstInitial, lastInitial, id) {
+function generateNameHTML(nameKey, name, firstInitial, lastInitial, id) {
     let randomColor = "#" + Math.floor(Math.random() * 16777215).toString(16);
     return /*html*/ `
         <div class="dropdown_selection" onclick="dropdownSelect(this)">
-            <button class="shortname" style="background-color: ${randomColor};"><span>${firstInitial}${lastInitial}</span></button><span>${firstname} ${lastname}</span>
+            <button class="shortname" style="background-color: ${randomColor};"><span>${firstInitial}${lastInitial}</span></button><span>${name}</span>
             <input class="checkbox" type="checkbox" id="assignedto_${nameKey}_${id}">
         </div>
     `;
 }
 
 /**
- * Renders HTML for names to be added to the DOM.
- * @param {Object} names - An object containing names.
- * @returns {string} The HTML to be rendered.
+ * Generiert das HTML für die Namen, einschließlich der Initialen.
+ * @param {Object} names - Das Objekt, das die Namen enthält.
+ * @returns {string} - Das generierte HTML für die Namen.
  */
 function renderNamesHTML(names) {
     let namesHTML = '';
 
     for (let nameKey in names) {
         if (names.hasOwnProperty(nameKey)) {
-            let name = names[nameKey];
-            let firstname = name.firstname;
-            let lastname = name.lastname;
-            let firstInitial = firstname.charAt(0);
-            let lastInitial = lastname.charAt(0);
-            namesHTML += generateNameHTML(nameKey, firstname, lastname, firstInitial, lastInitial, id++);
+            let nameObj = names[nameKey];
+            let name = nameObj.name;
+            let nameParts = name.split(' ');
+            let firstInitial = nameParts[0].charAt(0).toUpperCase();
+            let lastInitial = nameParts.length > 1 ? nameParts[1].charAt(0).toUpperCase() : '';
+            namesHTML += generateNameHTML(nameKey, name, firstInitial, lastInitial, id++);
         }
     }
     return namesHTML;
@@ -332,4 +359,14 @@ function clearContent() {
     for (let j = 0; j < textareas.length; j++) {
         textareas[j].value = "";
     }
+}
+
+/**
+ * Sets the minimum date of the date input field to today's date.
+ */
+function setDateRestriction() {
+    let today = new Date();
+    let formattedDate = today.getFullYear() + '-' + ('0' + (today.getMonth() + 1)).slice(-2) + '-' + ('0' + today.getDate()).slice(-2);
+    let dateField = document.getElementById("duedate");
+    dateField.min = formattedDate;
 }

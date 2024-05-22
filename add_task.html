@@ -8,11 +8,12 @@
     <link rel="stylesheet" href="./styles/fonts.css">
     <script src="./scripts/templates.js"></script>
     <script src="./scripts/add_task.js"></script>
+    <script type="module" src="./scripts/singnedinuser.js"></script>
     <title>Add Task</title>
     <link rel="icon" href="./assets/img/favicon.png" type="image/x-icon">
 </head>
 
-<body onload="addTaskOnLoad(),mediumButton()">
+<body onclick="closeSelectCategory(), closeAssingTo()" onload="addTaskOnLoad(),mediumButton()">
     <div id="sidebarContainer"></div>
     <div id="addtask-content" class="addtask-content addtask-content-dialog">
         <div class="addtask-content-header">
@@ -32,9 +33,9 @@
                 <div class="inputfields">
                     <span>Assigned to</span>
                     <div class="dropdown_container">
-                        <input onclick="selectAssingTo()" id="assignedtoinput" class="dropdown-content"
-                            name="assignedto" placeholder="Select contacts to assign">
-                        <div id="assignedto" class="dropdown_box">
+                        <input onclick="selectAssingTo(), closeOnBackground(event)" id="assignedtoinput"
+                            class="dropdown-content" name="assignedto" placeholder="Select contacts to assign">
+                        <div onclick="closeOnBackground(event)" id="assignedto" class="dropdown_box">
 
                         </div>
                     </div>
@@ -44,7 +45,8 @@
             <div class="right-container">
                 <div class="inputfields">
                     <span class="required">Due Date</span>
-                    <input id="duedate" class="datefield" required type="date" placeholder="dd/mm/yyyy">
+                    <input onfocus="setDateRestriction()" id="duedate" name="duedate" class="datefield" required
+                        type="date" placeholder="dd/mm/yyyy">
                 </div>
                 <div class="prio">
                     <span>Prio</span>
@@ -60,9 +62,9 @@
                 <div class="inputfields">
                     <span class="required">Category</span>
                     <div class="dropdown_container">
-                        <input onclick="selectCategory()" id="taskcategoryinput" class="dropdown-content"
-                            name="taskcategory" placeholder="Select task category">
-                        <div id="taskcategory" class="category_dropdown_box">
+                        <input onclick="selectCategory(), closeOnBackground(event)" id="taskcategoryinput"
+                            class="dropdown-content" name="taskcategory" placeholder="Select task category">
+                        <div onclick="closeOnBackground(event)" id="taskcategory" class="category_dropdown_box">
 
                         </div>
                     </div>

@@ -1,6 +1,6 @@
 body {
     margin: 0;
-    background-color: rgb(246,247,248);
+    background-color: rgb(246, 247, 248);
     font-family: "Inter";
     display: flex;
     justify-content: center;
@@ -191,7 +191,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding-top: 32px;
+    /* padding-top: 32px; */
 }
 
 .acceptprivacy-container a {
@@ -253,6 +253,15 @@ footer a {
 footer a:hover {
     font-weight: bold;
     color: #29ABE2;
+}
+
+.error-message {
+    display: none;
+    color: red;
+}
+
+.error-message-placeholder {
+    height: 10px;
 }
 
 @media (max-width: 730px) {
