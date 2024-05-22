@@ -174,20 +174,20 @@ function editSubtask(subtaskId) {
 /**
  * Saves the edited subtask content.
  * @param {string} subtaskId - The ID of the subtask to be saved.
- * @param {Event} event - The click event.
+ * @param {Event} event - The blur event.
  */
 function saveEditedSubtask(subtaskId, event) {
     let input = document.getElementById(subtaskId + '-edit');
     let inputRect = input.getBoundingClientRect();
     let clickX = event.clientX - inputRect.left; // Mouse click position relative to the input field
 
-    // Calculate the right position of the delete icon
-    let deleteIconRight = inputRect.width - 16;
+    // Calculate the positions of the icons
+    let deleteIconLeft = inputRect.width - 16; // Left position of the delete icon (assuming width is 16px)
+    let checkIconLeft = deleteIconLeft - 34; // Assuming check icon is 34px to the left of the delete icon
 
-    // Check if the click is within the area of the delete icon
-    if (clickX >= deleteIconRight - 24) { // Assuming delete icon width is 16px
+    if (clickX >= deleteIconLeft - 2) {
         deleteSubtask(subtaskId + '-container');
-    } else if (!event.target.classList.contains('edit-subtask')) {
+    } else if (clickX >= checkIconLeft - 2 && clickX < deleteIconLeft - 18) {
         let newContent = input.value.trim();
         if (newContent !== "") {
             document.getElementById(subtaskId).innerHTML = newContent;
