@@ -1,3 +1,5 @@
+const colors = ['#FFFF00', '#FFC0CB', '#ADD8E6', '#90EE90', '#FFB6C1', '#FFA07A', '#FFD700', '#D8BFD8', '#E0FFFF', '#FAFAD2'];
+
 function slideInFromRight() {
     let contactOverlay = document.getElementById('contact-overlay');
     let contactCont = document.getElementById('contact-cont');
