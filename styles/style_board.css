@@ -1,7 +1,52 @@
 body {
     display: flex;
     width: 100%;
+    gap: 26px;
 }
+
+.TaskBox {
+    width: 252px !important;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    margin-bottom: 12px;
+    padding: 12px 16px;
+}
+
+.taskBoxBackground {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 999;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.3);
+    overflow: clip;
+}
+
+.popupContent {
+    background-color: white;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+.closePopup {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    cursor: pointer;
+}
+
+.hidden {
+    display: none;
+}
+
+/* Other CSS styles */
 
 h1 {
     margin: 0;
@@ -29,7 +74,7 @@ h5 {
     display: flex;
     gap: 32px;
     align-items: center;
-    justify-content: space-between;
+    justify-content: space-between; 
 }
 
 .searchTask {
@@ -61,8 +106,8 @@ h5 {
 }
 
 .addTaskButton {
-    border: none;
-    outline: none;
+    border: none; 
+    outline: none; 
     border-radius: 10px;
     font-size: 21px;
     font-weight: 700;
@@ -84,8 +129,8 @@ h5 {
 }
 
 .addTaskButton:hover {
-    background-color: #29ABE2;
-    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
+    background-color: #29ABE2; 
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3); 
 }
 
 .boardTasks {
@@ -103,7 +148,7 @@ h5 {
 
 @media only screen and (min-width: 768px) {
     .statusTasks {
-        width: calc(25% - 26px);
+        width: calc(25% - 26px); 
     }
 }
 
@@ -232,15 +277,6 @@ h5 {
     z-index: 4006;
 }
 
-.addtask-content-dialog {
-    margin: 60px 0 0 0 !important;
-}
-
-.addtask-content {
-    max-width: 100% !important;
-    max-height: 100% !important;
-}
-
 .close_dialog_btn {
     position: absolute;
     border: 0;
@@ -288,7 +324,6 @@ h5 {
 
 @media screen and (max-width: 1200px) {
     .boardHeadline {
-        font-size: 32px;
         justify-content: space-between; 
     }
 
@@ -314,5 +349,29 @@ h5 {
 
     .statusTasks {
         width: calc(50% - 26px);
+    }
+}
+
+@media screen and (max-width: 750px) {
+    .boardHeadline {
+        flex-direction: column;
+    }
+
+    .searchTask {
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    .boardTasks {
+        gap: 0;
+        margin-bottom: 50px;
+    }
+
+    .statusTasks {
+        width: 100%;
+    }
+
+    .searchTask, .addTaskButton {
+        margin-bottom: 20px;
     }
 }

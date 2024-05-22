@@ -25,8 +25,11 @@ function openDialog() {
 /**
  * Closes the dialog for adding a new task.
  */
-function closeDialog() {
-    let dialog = document.getElementById('dialog');
-    dialog.classList.add('d_none');
+function toggleVisibility(elementId, hide) {
+    const element = document.getElementById(elementId);
+    if (hide) {
+        element.classList.add('hidden', 'd_none');
+    } else {
+        element.classList.remove('hidden', 'd_none');
+    }
 }
-
