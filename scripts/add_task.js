@@ -120,20 +120,20 @@ function selectAssingTo() {
  * creates a button with the initials and color associated with the checkbox.
  */
 function loadSelectedAssignTo() {
-    const selectedAssignToDiv = document.getElementById("selectedAssignTo");
-    const checkboxes = document.querySelectorAll(".checkbox");
+    let selectedAssignToDiv = document.getElementById("selectedAssignTo");
+    let checkboxes = document.querySelectorAll(".checkbox");
 
     // Clear the selectedAssignTo div first
     selectedAssignToDiv.innerHTML = '';
 
     checkboxes.forEach(checkbox => {
         if (checkbox.checked) {
-            const initials = checkbox.getAttribute("data-initials");
-            const color = checkbox.getAttribute("data-color");
-            const checkboxId = checkbox.id;
+            let initials = checkbox.getAttribute("data-initials");
+            let color = checkbox.getAttribute("data-color");
+            let checkboxId = checkbox.id;
 
             // Create and append the selected name button
-            const button = document.createElement("button");
+            let button = document.createElement("button");
             button.className = "selectedAssignTo";
             button.id = `selected_${checkboxId}`;
             button.style.backgroundColor = color;
@@ -164,7 +164,7 @@ function closeAssingTo() {
 function dropdownSelect(element) {
     element.classList.toggle("selected_dropdown");
     if (element.closest("#assignedto")) {
-        const checkbox = element.querySelector(".checkbox");
+        let checkbox = element.querySelector(".checkbox");
 
         if (checkbox) {
             checkbox.checked = !checkbox.checked;
@@ -465,7 +465,7 @@ function clearContent() {
 
     assignedto.innerHTML = "";
 
-    const dropdownSelections = document.getElementsByClassName("dropdown_selection");
+    let dropdownSelections = document.getElementsByClassName("dropdown_selection");
     for (let k = 0; k < dropdownSelections.length; k++) {
         dropdownSelections[k].classList.remove("selected_dropdown");
     }
