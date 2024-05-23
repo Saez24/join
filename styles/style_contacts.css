@@ -20,11 +20,19 @@ body {
 .contact-row {
     display: flex;
     height: 78px;
-    width: 352px;
-    padding: 17px 36px 17px 36px;
+    width: 374px;
+    padding: 15px 24px 15px 24px;
     align-items: center;
-    justify-content: space-between;
+    justify-content: space-around;
     gap: 10px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.contact-row:hover {
+    background-color: #2a3647;
+    .contact-name-row{
+    color: white}
 }
 
 .initials{
@@ -38,6 +46,7 @@ body {
     align-items: center;
     border-radius: 45px;
     position: relative;
+    border: 2px solid white;
 }
 
 .name-and-email{
@@ -211,11 +220,11 @@ h2{
 }
 
 .dividing-line {
-    /* padding-top: 8px 0 8px 0; */
     gap: 10px;
     height: 1px;
     background-color: #D1D1D1;
     width: 100%;
+    margin-bottom: 8px;
 }
 
 .contact-right {
