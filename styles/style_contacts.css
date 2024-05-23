@@ -212,7 +212,6 @@ h2{
 .capital-category {
     display: flex;
     width: 352px;
-    /* background-color: aqua; */
     height: 58px;
     padding: 17px 36px 17px 36px;
     align-items: center;
@@ -282,7 +281,6 @@ h2{
 }
 
 .contact-close-btn:hover {
-
     background-color: rgb(238, 238, 238);
 }
 
