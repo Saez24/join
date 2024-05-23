@@ -13,7 +13,7 @@
     <link rel="icon" href="./assets/img/favicon.png" type="image/x-icon">
 </head>
 
-<body onclick="closeSelectCategory(), closeAssingTo()" onload="addTaskOnLoad(),mediumButton()">
+<body onclick="closeSelectCategory(), closeAssingTo()" onload="addTaskLoadNames(),mediumButton()">
     <div id="sidebarContainer"></div>
     <div id="addtask-content" class="addtask-content addtask-content-dialog">
         <div class="addtask-content-header">
@@ -36,8 +36,9 @@
                         <input onclick="selectAssingTo(), closeOnBackground(event)" id="assignedtoinput"
                             class="dropdown-content" name="assignedto" placeholder="Select contacts to assign">
                         <div onclick="closeOnBackground(event)" id="assignedto" class="dropdown_box">
-
                         </div>
+                    </div>
+                    <div id="selectedAssignTo">
                     </div>
                 </div>
             </div>
@@ -63,7 +64,7 @@
                     <span class="required">Category</span>
                     <div class="dropdown_container">
                         <input onclick="selectCategory(), closeOnBackground(event)" id="taskcategoryinput"
-                            class="dropdown-content" name="taskcategory" placeholder="Select task category">
+                            class="dropdown-category-content" name="taskcategory" placeholder="Select task category">
                         <div onclick="closeOnBackground(event)" id="taskcategory" class="category_dropdown_box">
 
                         </div>
