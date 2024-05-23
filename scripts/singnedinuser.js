@@ -18,29 +18,35 @@ let firebaseConfig = {
 let app = initializeApp(firebaseConfig);
 let auth = getAuth();
 let user = auth.currentUser;
-let logout = document.getElementById("logout");
 
-onAuthStateChanged(auth, (user) => {
-    if (user) {
-        // The user object has basic properties such as display name, email, etc.
-        let displayName = user.displayName;
-        let email = user.email;
-        console.log(email);
+document.addEventListener('DOMContentLoaded', () => {
+    let logout = document.getElementById("logout");
 
-        // The user's ID, unique to the Firebase project. Do NOT use
-        // this value to authenticate with your backend server, if
-        // you have one. Use User.getToken() instead.
-        let uid = user.uid;
-    }
-});
-logout.addEventListener('click', function (event) {
-    event.preventDefault()
+    onAuthStateChanged(auth, (user) => {
+        if (user) {
+            // The user object has basic properties such as display name, email, etc.
+            let displayName = user.displayName;
+            let email = user.email;
+            console.log(email);
 
-    signOut(auth).then(() => {
-        // Sign-out successful.
-        window.location.href = "index.html"
-    }).catch((error) => {
-        // An error happened.
+            // The user's ID, unique to the Firebase project. Do NOT use
+            // this value to authenticate with your backend server, if
+            // you have one. Use User.getToken() instead.
+            let uid = user.uid;
+        }
     });
 
+    if (logout) {
+        logout.addEventListener('click', function (event) {
+            event.preventDefault();
+
+            signOut(auth).then(() => {
+                // Sign-out successful.
+                window.location.href = "index.html";
+            }).catch((error) => {
+                // An error happened.
+                console.error("Error during sign out:", error);
+            });
+        });
+    }
 });
