@@ -34,7 +34,7 @@
                 <div class="headlineStatusTasks">
                     <h5 class="taskStatusTitle">To do</h5>
                     <div class="imageContainer">
-                        <img onclick="toggleVisibility('dialog', false)" class="add_task_to_board" src="./assets/img/add.svg" width="24">
+                        <img onclick="changeDisplay('dialog', false)" class="add_task_to_board" src="./assets/img/add.svg" width="24" alt="Add task">
                     </div>
                 </div>
                 <div class="tasks">
@@ -46,10 +46,10 @@
             <div class="statusTasks">
                 <div class="headlineStatusTasks">
                     <h5 class="taskStatusTitle">In progress</h5>
-                    <img onclick="toggleVisibility('dialog', false)" class="add_task_to_board" src="./assets/img/add.svg" width="24" height="24" alt="Pfeil nach unten">
+                    <img onclick="changeDisplay('dialog', false)" class="add_task_to_board" src="./assets/img/add.svg" width="24" height="24" alt="Add task">
                 </div>
                 <div class="tasks">
-                    <div class="toDoBox" onclick="toggleVisibility('popup', false)">
+                    <div class="toDoBox" onclick="changeDisplay('popup', false)">
                         <button class="CategoryBox">User Story</button>
                         <p class="HeadlineBox">Headline</p>
                         <p class="descriptionBox">Beschreibung Einfügen</p>
@@ -60,7 +60,9 @@
                         <div class="nameSection">
                             <div class="assignedName colorName">AS</div>
                             <div class="assignedName colorName">MB</div>
-                            <div class="prioImgContainer"><img class="prioImg" src="./assets/img/prio_media.png"></div>
+                            <div class="prioImgContainer">
+                                <img class="prioImg" src="./assets/img/prio_media.png" alt="Priority">
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -68,10 +70,10 @@
             <div class="statusTasks">
                 <div class="headlineStatusTasks">
                     <h5 class="taskStatusTitle">Await feedback</h5>
-                    <img onclick="toggleVisibility('dialog', false)" class="add_task_to_board" src="./assets/img/add.svg" width="24" height="24" alt="Pfeil nach unten">
+                    <img onclick="changeDisplay('dialog', false)" class="add_task_to_board" src="./assets/img/add.svg" width="24" height="24" alt="Add task">
                 </div>
                 <div class="tasks">
-                    <div class="toDoBox" onclick="toggleVisibility('popup', false)">
+                    <div class="toDoBox" onclick="changeDisplay('popup', false)">
                         <button class="CategoryBox">User Story</button>
                         <p class="HeadlineBox">Headline</p>
                         <p class="descriptionBox">Beschreibung Einfügen</p>
@@ -82,7 +84,9 @@
                         <div class="nameSection">
                             <div class="assignedName colorName">AS</div>
                             <div class="assignedName colorName">MB</div>
-                            <div class="prioImgContainer"><img class="prioImg" src="./assets/img/prio_alta.png"></div>
+                            <div class="prioImgContainer">
+                                <img class="prioImg" src="./assets/img/prio_alta.png" alt="Priority">
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -92,7 +96,7 @@
                     <h5 class="taskStatusTitle">Done</h5>
                 </div>
                 <div class="tasks">
-                    <div class="toDoBox" onclick="toggleVisibility('popup', false)">
+                    <div class="toDoBox" onclick="changeDisplay('popup', false)">
                         <button class="CategoryBox">User Story</button>
                         <p class="HeadlineBox">Headline</p>
                         <p class="descriptionBox">Beschreibung Einfügen</p>
@@ -103,7 +107,9 @@
                         <div class="nameSection">
                             <div class="assignedName colorName">AS</div>
                             <div class="assignedName colorName">MB</div>
-                            <div class="prioImgContainer"><img class="prioImg" src="./assets/img/prio_baja.png"></div>
+                            <div class="prioImgContainer">
+                                <img class="prioImg" src="./assets/img/prio_baja.png" alt="Priority">
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -111,17 +117,46 @@
         
             <div id="popup" class="taskBoxBackground hidden">
                 <div class="TaskDetails">
-                    <span class="closePopup" onclick="toggleVisibility('popup', true)">X</span>
-                    <h1>Task Details</h1>
-                    <p>Details about the task...</p>
+                    <span class="closePopup" onclick="changeDisplay('popup', true)">X</span>
+                    <button class="CategoryBox">User Story</button>
+                    <p class="HeadlineBox">Headline</p>
+                    <p class="descriptionBox">Beschreibung Einfügen</p>
+                    <div>
+                        <p>Due date:</p>
+                        <p>10/05/2023</p>
+                    </div>
+                    <div>
+                        <p>Priortiy:</p>
+                        <p>Medium</p>
+                        <img class="prioImg" src="./assets/img/prio_baja.png" alt="Priority">
+                    </div>
+                    <div>Assigned To:</div>
+                    <div>
+                        <div class="assignedName colorName">AS</div>
+                        <p>Anna Schuster</p>
+                    </div>
+                    <div>
+                        <div class="assignedName colorName">AS</div>
+                        <p>Anna Schuster</p>
+                    </div>
+                    <div>Subtasks
+                        <p>Implement Recipe Recommendation</p>
+                        <p>Implement Recipe Recommendation</p>
+                    </div>
+                    <div>
+                        <img src="" alt="Delete">
+                        <p>Delete</p>
+                        <img src="" alt="Edit">
+                        <p>Edit</p>
+                    </div>
                 </div>
             </div>
         
         </div>
         <div id="dialog" class="dialog-bg d_none">
             <div id="add_task_dialog_content" class="add_task_dialog">
-                <button onclick="toggleVisibility('dialog', true)" class="close_dialog_btn">
-                    <img src="./assets/img/close.png" alt="">
+                <button onclick="changeDisplay('dialog', true)" class="close_dialog_btn">
+                    <img src="./assets/img/close.png" alt="Close">
                 </button>
             </div>
         </div>

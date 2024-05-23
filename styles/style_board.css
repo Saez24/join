@@ -32,7 +32,7 @@ body {
     width: 525px !important;
     display: flex;
     max-height: 70vh;
-    overflow-y: scroll;
+    overflow-y: auto;
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
@@ -41,6 +41,18 @@ body {
     padding: 68px 40px 38px 40px;
     border-radius: 30px;
     animation: slide-in 0.8s both;
+    position: relative;
+}
+
+.TaskDetails h1,
+.TaskDetails h5,
+.TaskDetails p {
+    margin: 0 0 10px 0;
+    padding: 0;
+}
+
+.TaskDetails button {
+    margin-bottom: 20px;
 }
 
 .closePopup {
@@ -48,13 +60,15 @@ body {
     top: 20px;
     right: 20px;
     cursor: pointer;
+    background: none;
+    border: none;
+    font-size: 24px;
+    color: #000;
 }
 
 .hidden {
     display: none;
 }
-
-/* Other CSS styles */
 
 h1 {
     margin: 0;
@@ -154,9 +168,9 @@ h5 {
     font-size: 20px;
 }
 
-@media only screen and (min-width: 768px) {
-    .statusTasks {
-        width: calc(25% - 26px); 
+@media screen and (max-width: 768px) {
+    .wrapped_maxWidth {
+        margin-left: 0;
     }
 }
 
@@ -381,5 +395,17 @@ h5 {
 
     .searchTask, .addTaskButton {
         margin-bottom: 20px;
+    }
+}
+
+/* Animation */
+@keyframes slide-in {
+    from {
+        transform: translateY(-50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
     }
 }

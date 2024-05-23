@@ -52,11 +52,11 @@ function loadAddTaskContent() {
 /**
  * Closes the dialog for adding a new task.
  */
-function toggleVisibility(elementId, hide) {
+function changeDisplay(elementId, hide) {
     const element = document.getElementById(elementId);
     if (hide) {
-        element.classList.add('hidden', 'd_none');
+        element.classList.add('hidden');
     } else {
-        element.classList.remove('hidden', 'd_none');
+        element.classList.remove('hidden');
     }
 }
