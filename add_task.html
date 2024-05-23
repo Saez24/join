@@ -73,11 +73,13 @@
                     <span>Subtasks</span>
                     <input onclick="openAddSubtaskField()" id="addsubtask" class="subtask" type="text"
                         placeholder="Add new subtask">
-                    <input onclick="handleSubtaskClick(event), handleSubtaskClickAdd(event)" id="subtask"
-                        class="aktive-subtask" type="text">
+                    <input onclick="handleSubtaskClick(event), addSubtask(event)" id="subtask" class="aktive-subtask"
+                        type="text">
                 </div>
                 <div>
-                    <ul id="addsubtasks"></ul>
+                    <div id="addsubtasks">
+
+                    </div>
                 </div>
             </div>
         </div>

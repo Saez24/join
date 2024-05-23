@@ -320,11 +320,49 @@ label {
     background-position: center right 28px, center right 28px, center right 8px;
 }
 
-li {
-    background-image: url("../assets/img/delete.png");
-    background-repeat: no-repeat;
-    background-position: center right 8px;
+.subtaskblock {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+    height: 32px;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.addedtask {
+    display: flex;
+    justify-content: space-between;
+}
+
+.subtaskblock:hover {
     cursor: pointer;
+    background-color: #EEEEEE;
+    border-radius: 10px;
+    height: 32px;
+}
+
+.subtask-buttons {
+    display: flex;
+    align-items: center;
+    gap: 2px
+}
+
+.subtask-buttons button {
+    background-color: rgba(246, 247, 248, 0);
+    border: 0;
+    height: 24px;
+    width: 24px;
+    padding: 0;
+    cursor: pointer;
+}
+
+.edit-subtask {
+    background: #FFFFFF;
+    background-image: url('../assets/img/check_black.png'), url('../assets/img/separator.png'), url('../assets/img/delete.png');
+    background-repeat: no-repeat;
+    background-position: center right 34px, center right 28px, center right 2px;
+    height: 10px;
+    width: 100%;
 }
 
 .bottom-container {

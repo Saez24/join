@@ -2,6 +2,7 @@ const BASE_URL = "https://remotestorage-b0ea0-default-rtdb.europe-west1.firebase
 let names
 let category
 let id = 0;
+let subtaskCounter = 0;
 let counter = 0;
 let activeButton = null;
 
@@ -125,10 +126,6 @@ function handleSubtaskClick(event) {
     // Check if the click is within the area of the close.png image
     if (clickX >= inputRight - 56 && clickX <= inputRight - 28) {
         closeAddSubtaskField();
-    } else {
-        if (clickX >= inputRight - 8) {
-            handleSubtaskClickAdd(event);
-        }
     }
 }
 
@@ -137,46 +134,88 @@ function handleSubtaskClick(event) {
  * Retrieves the input content from the subtask field, creates a new list item element,
  * sets its content and attributes, appends it to the list of subtasks, and closes the subtask field.
  */
-function handleSubtaskClickAdd() {
+function addSubtask() {
     let input = document.getElementById("subtask");
     let inputContent = input.value.trim();
+
     if (inputContent !== "") {
-        let ul = document.getElementById("addsubtasks");
-        let li = document.createElement("li");
-        li.textContent = inputContent;
-        li.setAttribute("id", "subtask_" + counter);
-        li.onclick = function (event) {
-            handleSubtaskDelete(event);
-        };
-        ul.appendChild(li);
+        let subtasks = document.getElementById("addsubtasks");
+        subtasks.classList.add("subtaskblock");
+        subtaskCounter++;
+        let subtaskId = "subtask" + subtaskCounter;
+        subtasks.innerHTML += /*html*/ `
+        <div class="addedtask" id="${subtaskId}">
+            <li id="${subtaskId}">${inputContent}</li>
+            <div id="subtask-buttons" class="subtask-buttons">
+                <button onclick="editSubtask('${subtaskId}')" ><img src="./assets/img/edit.png" alt=""></button>
+                <img src="./assets/img/separator.png" alt="">
+                <button onclick="deleteSubtask('${subtaskId}')"><img src="./assets/img/delete.png" alt=""></button>
+            </div>
+        </div>`;
         closeAddSubtaskField();
-        input.value = "";
-        counter++;
+    }
+    input.value = "";
+}
+
+/**
+ * Enables editing of the specific subtask.
+ * @param {string} subtaskId - The ID of the subtask to be edited.
+ */
+function editSubtask(subtaskId) {
+    let subtaskElement = document.getElementById(subtaskId);
+    if (subtaskElement) {
+        let currentText = subtaskElement.innerText;
+        subtaskElement.innerHTML = /*html*/`
+        <input onclick = "saveEditedSubtask('${subtaskId}', event)" class="edit-subtask" type="text" id="${subtaskId}-edit" value="${currentText}">
+        `;
     }
 }
 
 /**
- * Deletes all subtasks by clearing the content of the subtask list.
+ * Saves the edited subtask content.
+ * @param {string} subtaskId - The ID of the subtask to be saved.
+ * @param {Event} event - The blur event.
  */
-function deleteSubtask() {
-    let ul = document.getElementById("addsubtasks");
-    ul.innerHTML = '';
-}
+function saveEditedSubtask(subtaskId, event) {
+    let input = document.getElementById(subtaskId + '-edit');
+    let inputRect = input.getBoundingClientRect();
+    let clickX = event.clientX - inputRect.left; // Mouse click position relative to the input field
 
-/**
- * Handles the deletion of a specific subtask when the user clicks on the appropriate area.
- * Retrieves the position of the click event, checks if it's within the area of the close.png image,
- * and if so, triggers the deletion of all subtasks.
- * @param {MouseEvent} event - The click event object.
- */
-function handleSubtaskDelete(event) {
-    let input = document.getElementById("addsubtask");
-    let clickX = event.clientX;
-    let inputRight = input.getBoundingClientRect().right;
-    if (clickX >= inputRight - 8) {
-        deleteSubtask();
+    // Calculate the positions of the icons
+    let deleteIconLeft = inputRect.width - 16; // Left position of the delete icon (assuming width is 16px)
+    let checkIconLeft = deleteIconLeft - 34; // Assuming check icon is 34px to the left of the delete icon
+
+    if (clickX >= deleteIconLeft - 2) {
+        deleteSubtask(subtaskId + '-container');
+    } else if (clickX >= checkIconLeft - 2 && clickX < deleteIconLeft - 18) {
+        let newContent = input.value.trim();
+        if (newContent !== "") {
+            document.getElementById(subtaskId).innerHTML = newContent;
+        } else {
+            deleteSubtask(subtaskId + '-container');
+        }
     }
 }
+
+
+
+/**
+ * Deletes the specific subtask element.
+ * @param {string} subtaskId - The ID of the subtask to be deleted.
+ */
+function deleteSubtask(subtaskId) {
+    let subtaskElement = document.getElementById(subtaskId);
+    if (subtaskElement) {
+        subtaskElement.remove();
+    }
+
+    // Optional: Check if there are no more subtasks and remove subtaskblock class if needed
+    let subtasks = document.getElementById("addsubtasks");
+    if (subtasks.children.length === 0) {
+        subtasks.classList.remove("subtaskblock");
+    }
+}
+
 
 /**
  * Toggles the visibility of the category selection container.
