@@ -144,8 +144,8 @@ function addSubtask() {
         subtaskCounter++;
         let subtaskId = "subtask" + subtaskCounter;
         subtasks.innerHTML += /*html*/ `
-        <div class="addedtask" id="${subtaskId}">
-            <li id="${subtaskId}">${inputContent}</li>
+        <div class="addedtask" id="addedtask${subtaskId}">
+            <span class="${subtaskId}" id="${subtaskId}">${inputContent}</span>
             <div id="subtask-buttons" class="subtask-buttons">
                 <button onclick="editSubtask('${subtaskId}')" ><img src="./assets/img/edit.png" alt=""></button>
                 <img src="./assets/img/separator.png" alt="">
@@ -165,6 +165,8 @@ function editSubtask(subtaskId) {
     let subtaskElement = document.getElementById(subtaskId);
     if (subtaskElement) {
         let currentText = subtaskElement.innerText;
+        document.getElementById('subtask-buttons').style.display = 'none';
+        document.getElementById(`${subtaskId}`).style.paddingLeft = '0';
         subtaskElement.innerHTML = /*html*/`
         <input onclick = "saveEditedSubtask('${subtaskId}', event)" class="edit-subtask" type="text" id="${subtaskId}-edit" value="${currentText}">
         `;
@@ -180,41 +182,47 @@ function saveEditedSubtask(subtaskId, event) {
     let input = document.getElementById(subtaskId + '-edit');
     let inputRect = input.getBoundingClientRect();
     let clickX = event.clientX - inputRect.left; // Mouse click position relative to the input field
-
-    // Calculate the positions of the icons
     let deleteIconLeft = inputRect.width - 16; // Left position of the delete icon (assuming width is 16px)
     let checkIconLeft = deleteIconLeft - 34; // Assuming check icon is 34px to the left of the delete icon
 
     if (clickX >= deleteIconLeft - 2) {
-        deleteSubtask(subtaskId + '-container');
+        deleteSubtask(subtaskId);
     } else if (clickX >= checkIconLeft - 2 && clickX < deleteIconLeft - 18) {
         let newContent = input.value.trim();
         if (newContent !== "") {
             document.getElementById(subtaskId).innerHTML = newContent;
+            document.getElementById('subtask-buttons').style.display = 'flex';
+            document.getElementById(`${subtaskId}`).style.padding = '10px';
         } else {
-            deleteSubtask(subtaskId + '-container');
+            deleteSubtask(subtaskId);
         }
     }
 }
 
 
 
-/**
- * Deletes the specific subtask element.
- * @param {string} subtaskId - The ID of the subtask to be deleted.
- */
 function deleteSubtask(subtaskId) {
     let subtaskElement = document.getElementById(subtaskId);
+    let addedTaskSubtask = document.getElementById(`addedtask${subtaskId}`);
+
     if (subtaskElement) {
         subtaskElement.remove();
     }
 
-    // Optional: Check if there are no more subtasks and remove subtaskblock class if needed
+    if (addedTaskSubtask) {
+        addedTaskSubtask.remove();
+    }
+
     let subtasks = document.getElementById("addsubtasks");
-    if (subtasks.children.length === 0) {
+    if (subtasks && subtasks.children.length === 0) {
         subtasks.classList.remove("subtaskblock");
+        let addedTaskElement = document.getElementById('addedtask');
+        if (addedTaskElement) {
+            addedTaskElement.style.display = 'none';
+        }
     }
 }
+
 
 
 /**
