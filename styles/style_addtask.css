@@ -285,7 +285,6 @@ label {
 }
 
 .selectedAssignTo {
-    background-color: red;
     border-radius: 30px;
     width: 42px;
     height: 42px;

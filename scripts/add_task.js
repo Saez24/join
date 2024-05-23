@@ -123,16 +123,13 @@ function loadSelectedAssignTo() {
     let selectedAssignToDiv = document.getElementById("selectedAssignTo");
     let checkboxes = document.querySelectorAll(".checkbox");
 
-    // Clear the selectedAssignTo div first
     selectedAssignToDiv.innerHTML = '';
-
     checkboxes.forEach(checkbox => {
         if (checkbox.checked) {
             let initials = checkbox.getAttribute("data-initials");
             let color = checkbox.getAttribute("data-color");
             let checkboxId = checkbox.id;
 
-            // Create and append the selected name button
             let button = document.createElement("button");
             button.className = "selectedAssignTo";
             button.id = `selected_${checkboxId}`;
@@ -271,13 +268,69 @@ function renderAddTaskCategorys(categories) {
     for (let categoryKey in categories) {
         if (categories.hasOwnProperty(categoryKey)) {
             let category = categories[categoryKey];
-            let categoryId = id++;
+            let categoryId = categoryKey; // Use a unique key as id
             categoryContainer.innerHTML += /*html*/ `
-            <div class="dropdown_selection" onclick="dropdownSelect(this)">
-                    <label>${category.task}</label>
-                    <input class="checkbox" type="checkbox" id="category_${categoryId}">
-                </div>
-        `;
+            <div class="dropdown_selection" onclick="dropdownSelectCategory(this)">
+                <label>${category.task}</label>
+                <input class="checkbox" type="checkbox" id="category_${categoryId}">
+            </div>
+            `;
+        }
+    }
+};
+
+/**
+ * Toggles the "selected_dropdown" class on the given element and toggles the associated checkbox state.
+ * Ensures that only one checkbox within the "taskcategory" container can be selected at a time.
+ * If the element is within the "taskcategory" container, it updates the checkbox state and loads the selected category into the input field.
+ * 
+ * @param {HTMLElement} element - The dropdown element that was clicked.
+ */
+function dropdownSelectCategory(element) {
+    element.classList.toggle("selected_dropdown");
+    if (element.closest("#taskcategory")) {
+        const categoryContainer = document.getElementById("taskcategory");
+        const checkboxes = categoryContainer.querySelectorAll(".checkbox");
+
+        // Find the clicked checkbox
+        const clickedCheckbox = element.querySelector(".checkbox");
+
+        // Uncheck all checkboxes and remove "selected_dropdown" class from all elements
+        checkboxes.forEach(checkbox => {
+            checkbox.checked = false;
+        });
+
+        // Toggle the clicked checkbox and its class
+        if (clickedCheckbox) {
+            const isChecked = !clickedCheckbox.checked;
+            clickedCheckbox.checked = isChecked;
+            if (isChecked) {
+                element.classList.add("selected_dropdown");
+            } else {
+                element.classList.remove("selected_dropdown");
+            }
+            loadToCategoryInput();
+        }
+    }
+};
+
+/**
+ * Loads the selected category into the category input field.
+ * This function finds the checked checkbox in the taskcategory container and updates
+ * the taskcategory input field with the corresponding category label.
+ */
+function loadToCategoryInput() {
+    const categoryContainer = document.getElementById("taskcategory");
+    const categoryInput = document.getElementById("taskcategoryinput");
+    const checkboxes = categoryContainer.querySelectorAll(".checkbox");
+
+    categoryInput.value = '';
+
+    for (let checkbox of checkboxes) {
+        if (checkbox.checked) {
+            const label = checkbox.previousElementSibling.innerText;
+            categoryInput.value = label;
+            break;
         }
     }
 };
