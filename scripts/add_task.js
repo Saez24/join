@@ -32,7 +32,7 @@ async function addTaskLoadNames() {
         let response = await fetch(BASE_URL + ".json");
         let data = await response.json();
         renderAddTaskNames(data.names);
-        renderAddTaskCategorys(data.category);
+        renderAddTaskCategories(data.category);
         console.log(data);
     } catch (error) {
         console.error("Error fetching data:", error);
@@ -51,7 +51,7 @@ async function addTaskLoadNames() {
 function generateNameHTML(nameKey, name, firstInitial, lastInitial, id) {
     let randomColor = "#" + Math.floor(Math.random() * 16777215).toString(16);
     return /*html*/ `
-        <div class="dropdown_selection" onclick="dropdownSelect(this)">
+        <div class="dropdown_selection" onclick="dropdownSelectAssignTo(this)">
             <button class="shortname" style="background-color: ${randomColor};"><span>${firstInitial}${lastInitial}</span></button><span>${name}</span>
             <input class="checkbox" type="checkbox" id="assignedto_${nameKey}_${id}" data-initials="${firstInitial}${lastInitial}" data-color="${randomColor}" onchange="loadSelectedAssignTo()">
 
@@ -102,7 +102,7 @@ function renderAddTaskNames(names) {
  * Toggles the visibility of the assign-to selection container.
  * If the container is currently visible, hides it; otherwise, shows it.
  */
-function selectAssingTo() {
+function selectAssignTo() {
     let assignToContainer = document.getElementById('assignedto');
     let assignToInput = document.getElementById('assignedtoinput');
     if (assignToContainer.style.display === 'block') {
@@ -115,13 +115,25 @@ function selectAssingTo() {
 };
 
 /**
+ * Closes the assignto dropdown menu if it is currently open.
+ */
+function closeAssignTo() {
+    let assignToContainer = document.getElementById('assignedto');
+    let assignToInput = document.getElementById('assignedtoinput');
+    if (assignToContainer.style.display === 'block') {
+        assignToContainer.style.display = 'none';
+    }
+    assignToInput.style.backgroundImage = 'url(../assets/img/arrow_drop.png)';
+};
+
+/**
  * Updates the selectedAssignTo div with buttons representing the selected names.
  * This function goes through all checkboxes with the class "checkbox" and, if checked,
  * creates a button with the initials and color associated with the checkbox.
  */
 function loadSelectedAssignTo() {
     let selectedAssignToDiv = document.getElementById("selectedAssignTo");
-    let checkboxes = document.querySelectorAll(".checkbox");
+    let checkboxes = document.querySelectorAll("#assignedto .checkbox");
 
     selectedAssignToDiv.innerHTML = '';
     checkboxes.forEach(checkbox => {
@@ -141,24 +153,12 @@ function loadSelectedAssignTo() {
 };
 
 /**
- * Closes the assignto dropdown menu if it is currently open.
- */
-function closeAssingTo() {
-    let assignToContainer = document.getElementById('assignedto');
-    let assignToInput = document.getElementById('assignedtoinput');
-    if (assignToContainer.style.display === 'block') {
-        assignToContainer.style.display = 'none';
-    }
-    assignToInput.style.backgroundImage = 'url(../assets/img/arrow_drop.png)';
-};
-
-/**
  * Toggles the "selected_dropdown" class on the given element and toggles the associated checkbox state.
  * If the element is within the "assignedto" container, it updates the checkbox state and reloads the selected names.
  * 
  * @param {HTMLElement} element - The dropdown element that was clicked.
  */
-function dropdownSelect(element) {
+function dropdownSelectAssignTo(element) {
     element.classList.toggle("selected_dropdown");
     if (element.closest("#assignedto")) {
         let checkbox = element.querySelector(".checkbox");
@@ -169,6 +169,111 @@ function dropdownSelect(element) {
         }
     }
 };
+
+/**
+ * Renders categories for adding a new task to the DOM.
+ * @param {Object} categories - An object containing categories.
+ */
+function renderAddTaskCategories(categories) {
+    let categoryContainer = document.getElementById("taskcategory");
+    categoryContainer.innerHTML = '';
+
+    for (let categoryKey in categories) {
+        if (categories.hasOwnProperty(categoryKey)) {
+            let category = categories[categoryKey];
+            let categoryId = categoryKey; // Use a unique key as id
+            categoryContainer.innerHTML += /*html*/ `
+            <div class="dropdown_selection" onclick="dropdownSelectCategory(this)">
+                <label class="label">${category.task}</label>
+                <input class="checkbox" type="checkbox" id="category_${categoryId}">
+            </div>
+            `;
+        }
+    }
+};
+
+/**
+ * Toggles the "selected_dropdown" class on the given element and toggles the associated checkbox state.
+ * Ensures that only one checkbox within the "taskcategory" container can be selected at a time.
+ * If the element is within the "taskcategory" container, it updates the checkbox state and loads the selected category into the input field.
+ * 
+ * @param {HTMLElement} element - The dropdown element that was clicked.
+ */
+function dropdownSelectCategory(element) {
+    if (element.closest("#taskcategory")) {
+        const categoryContainer = document.getElementById("taskcategory");
+        const checkboxes = categoryContainer.querySelectorAll(".checkbox");
+
+        const clickedCheckbox = element.querySelector(".checkbox");
+        const isChecked = clickedCheckbox.checked;
+
+        checkboxes.forEach(checkbox => {
+            checkbox.checked = false;
+            checkbox.closest(".dropdown_selection").classList.remove("selected_dropdown");
+        });
+
+        clickedCheckbox.checked = !isChecked;
+        if (clickedCheckbox.checked) {
+            element.classList.add("selected_dropdown");
+        } else {
+            element.classList.remove("selected_dropdown");
+        }
+
+        loadToCategoryInput();
+    }
+}
+
+/**
+ * Loads the selected category into the category input field.
+ * This function finds the checked checkbox in the taskcategory container and updates
+ * the taskcategory input field with the corresponding category label.
+ */
+function loadToCategoryInput() {
+    const categoryContainer = document.getElementById("taskcategory");
+    const categoryInput = document.getElementById("taskcategoryinput");
+    const checkboxes = categoryContainer.querySelectorAll(".checkbox");
+
+    categoryInput.value = '';
+
+    for (let checkbox of checkboxes) {
+        if (checkbox.checked) {
+            const labelElement = checkbox.closest(".dropdown_selection").querySelector(".label");
+            if (labelElement) {
+                categoryInput.value = labelElement.innerText;
+            }
+            break;
+        }
+    }
+};
+
+/**
+ * Toggles the visibility of the category selection container.
+ * If the container is currently visible, hides it; otherwise, shows it.
+ */
+function selectCategory() {
+    let categoryContainer = document.getElementById('taskcategory');
+    let taskcategoryInput = document.getElementById('taskcategoryinput');
+    if (categoryContainer.style.display === 'block') {
+        categoryContainer.style.display = 'none';
+        taskcategoryInput.style.backgroundImage = 'url(../assets/img/arrow_drop.png)';
+    } else {
+        categoryContainer.style.display = 'block';
+        taskcategoryInput.style.backgroundImage = 'url(../assets/img/arrow_drop_down.png)';
+    }
+};
+
+/**
+ * Closes the category dropdown menu if it is currently open.
+ */
+function closeSelectCategory() {
+    let categoryContainer = document.getElementById('taskcategory');
+    let taskcategoryInput = document.getElementById('taskcategoryinput');
+    if (categoryContainer.style.display === 'block') {
+        categoryContainer.style.display = 'none';
+    }
+    taskcategoryInput.style.backgroundImage = 'url(../assets/img/arrow_drop.png)';
+};
+
 
 /**
  * Prevents event propagation.
@@ -261,107 +366,6 @@ function lowButton() {
  * Renders categories for adding a new task to the DOM.
  * @param {Object} categories - An object containing categories.
  */
-function renderAddTaskCategorys(categories) {
-    let categoryContainer = document.getElementById("taskcategory");
-    categoryContainer.innerHTML = '';
-
-    for (let categoryKey in categories) {
-        if (categories.hasOwnProperty(categoryKey)) {
-            let category = categories[categoryKey];
-            let categoryId = categoryKey; // Use a unique key as id
-            categoryContainer.innerHTML += /*html*/ `
-            <div class="dropdown_selection" onclick="dropdownSelectCategory(this)">
-                <label>${category.task}</label>
-                <input class="checkbox" type="checkbox" id="category_${categoryId}">
-            </div>
-            `;
-        }
-    }
-};
-
-/**
- * Toggles the "selected_dropdown" class on the given element and toggles the associated checkbox state.
- * Ensures that only one checkbox within the "taskcategory" container can be selected at a time.
- * If the element is within the "taskcategory" container, it updates the checkbox state and loads the selected category into the input field.
- * 
- * @param {HTMLElement} element - The dropdown element that was clicked.
- */
-function dropdownSelectCategory(element) {
-    element.classList.toggle("selected_dropdown");
-    if (element.closest("#taskcategory")) {
-        const categoryContainer = document.getElementById("taskcategory");
-        const checkboxes = categoryContainer.querySelectorAll(".checkbox");
-
-        // Find the clicked checkbox
-        const clickedCheckbox = element.querySelector(".checkbox");
-
-        // Uncheck all checkboxes and remove "selected_dropdown" class from all elements
-        checkboxes.forEach(checkbox => {
-            checkbox.checked = false;
-        });
-
-        // Toggle the clicked checkbox and its class
-        if (clickedCheckbox) {
-            const isChecked = !clickedCheckbox.checked;
-            clickedCheckbox.checked = isChecked;
-            if (isChecked) {
-                element.classList.add("selected_dropdown");
-            } else {
-                element.classList.remove("selected_dropdown");
-            }
-            loadToCategoryInput();
-        }
-    }
-};
-
-/**
- * Loads the selected category into the category input field.
- * This function finds the checked checkbox in the taskcategory container and updates
- * the taskcategory input field with the corresponding category label.
- */
-function loadToCategoryInput() {
-    const categoryContainer = document.getElementById("taskcategory");
-    const categoryInput = document.getElementById("taskcategoryinput");
-    const checkboxes = categoryContainer.querySelectorAll(".checkbox");
-
-    categoryInput.value = '';
-
-    for (let checkbox of checkboxes) {
-        if (checkbox.checked) {
-            const label = checkbox.previousElementSibling.innerText;
-            categoryInput.value = label;
-            break;
-        }
-    }
-};
-
-/**
- * Toggles the visibility of the category selection container.
- * If the container is currently visible, hides it; otherwise, shows it.
- */
-function selectCategory() {
-    let categoryContainer = document.getElementById('taskcategory');
-    let taskcategoryInput = document.getElementById('taskcategoryinput');
-    if (categoryContainer.style.display === 'block') {
-        categoryContainer.style.display = 'none';
-        taskcategoryInput.style.backgroundImage = 'url(../assets/img/arrow_drop.png)';
-    } else {
-        categoryContainer.style.display = 'block';
-        taskcategoryInput.style.backgroundImage = 'url(../assets/img/arrow_drop_down.png)';
-    }
-};
-
-/**
- * Closes the category dropdown menu if it is currently open.
- */
-function closeSelectCategory() {
-    let categoryContainer = document.getElementById('taskcategory');
-    let taskcategoryInput = document.getElementById('taskcategoryinput');
-    if (categoryContainer.style.display === 'block') {
-        categoryContainer.style.display = 'none';
-    }
-    taskcategoryInput.style.backgroundImage = 'url(../assets/img/arrow_drop.png)';
-};
 
 /**
  * Opens the subtask field for adding a new subtask.

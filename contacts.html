@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="./scripts/templates.js"></script>
     <script src="./scripts/contacts.js"></script>
+    <script src="./scripts/add_task.js"></script>
     <link rel="stylesheet" href="./styles/style_contacts.css">
     <link rel="stylesheet" href="./styles/fonts.css">
     <title>Contacts</title>
@@ -21,27 +22,17 @@
                 <img src="assets/img/contacts_add_contact.png" alt="add contact" class="add-contact-icon">
             </div>
         </button>
-        <div id="contactForSchleife">
-        <div class="capital-category">A</div>
-        <div class="dividing-line"></div>
-        <div class="contact-row">
-            <div class="initials" id="initials${i}">AB</div>
-            <div class="name-and-email">
-                <div class="contact-name-row" id="name${i}">Anna Buchhaus</div>
-                <div class="contact-email-row" id="email${i}">a.buchhaus@da.com</div>
-                
-            </div>
-            <!-- Div für Space-between -->
-            <div></div>
-        </div>
-            
+        <div id="contactForString">            
         </div>
     </div>
-<div class="main-contacts" onload="renderContacts()" id="contactSummary">
+<div class="main-contacts">
 <div class="main-contacts-text">
     <h1>Contacts</h1>
     <div class="vertical-line"></div>
     <h2>Better with a team</h2>
+</div>
+<div id="contactSummary">
+
 </div>
 </div>
     
