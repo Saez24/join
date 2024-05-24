@@ -159,7 +159,7 @@ body {
     background-color: rgb(42, 54, 74);
     z-index: 1;
     position: fixed;
-    top: 136px;
+    top: 96px;
     right: 0;
     transform: translateX(171px);
     transition: all 80ms ease-out;
