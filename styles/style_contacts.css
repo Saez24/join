@@ -23,16 +23,14 @@ body {
     width: 374px;
     padding: 15px 24px 15px 24px;
     align-items: center;
-    justify-content: space-around;
-    gap: 10px;
+    
+    gap: 30px;
     border-radius: 10px;
     cursor: pointer;
 }
 
 .contact-row:hover {
-    background-color: #2a3647;
-    .contact-name-row{
-    color: white}
+    background-color: #d7d7ec;
 }
 
 .initials{
@@ -145,10 +143,35 @@ h2{
     left: 256.83px;
 }
 
-#contactForSchleife {
+#contactForString {
     top: 200px;
     position: relative;
+    flex: 1;
+    max-height: calc(100vh - 200px);
+    overflow-y: auto;
 }
+
+/* Scrollbar styles */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 53px;
+    }
+    
+    ::-webkit-scrollbar-track {
+    background: #ffffff;
+    border-radius: 10px;
+    }
+    
+    ::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background: #A8A8A8;
+    border: 8px;
+    }
+    
+    ::-webkit-scrollbar-thumb:hover {
+    background: #999;  
+    }
+
 
 .contact-overlay {
     position: fixed;
