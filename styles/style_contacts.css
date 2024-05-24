@@ -249,6 +249,97 @@ h2{
     margin-bottom: 8px;
 }
 
+#contactSummary{
+    display: flex;
+    position: relative;
+    width: 600px;
+    height: 364px;
+    top: 234px;
+    left: 346px;
+    gap: 21px;
+    flex-direction: column;
+}
+
+
+.contact-summary-headline{
+    width: 100%;
+    height: 120px;
+    display: flex;
+    gap: 54px;
+    align-items: center;
+}
+
+.contact-summary-initials{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 120px;
+    height: 120px;
+    border: 3px white solid;
+    background-color: orange;
+    border-radius: 70px;
+    font-size: 47px;
+    color: white;
+}
+
+
+.contact-summary-headline-rightside{
+    display: flex;
+    flex-direction: column;
+    height: 88px;
+    gap: 8px;
+}
+
+
+.contact-summary-headline-name{
+    position: relative;
+    width: auto;
+    font-size: 47px;
+    font-weight: 500;
+}
+
+.edit-and-delete{
+    display: flex;
+    align-items: center;
+    width: 159px;
+    height: 24px;
+    font-size: 16px;
+    font-weight: 400;
+    color: #2A3647;
+    justify-content: space-between;
+    gap: 16px;
+}
+
+.edit-and-delete img{
+    cursor: pointer;
+    height: 24px;
+    width: 24px;
+}
+
+.edit-and-delete-row{
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+
+.contact-summary-contact-information{
+    width: 207px;
+    height: 74px;
+    display: flex;
+    align-items: center;
+    font-size: 20px;
+}
+
+.contact-summary-mail-and-phone{
+    display: flex;
+    width: 146px;
+    height: 128px;
+    gap: 15px;
+    flex-direction: column;
+    font-size: 16px;
+}
+
 .contact-right {
     width: 700px;
     height: 594px;
@@ -544,3 +635,4 @@ h2{
         background-color: rgba(0, 0, 0, 0.3);
     }
 }
+
