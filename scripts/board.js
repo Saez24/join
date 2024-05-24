@@ -50,13 +50,36 @@ function loadAddTaskContent() {
 }
 
 /**
- * Closes the dialog for adding a new task.
+ * Open the dialog for TaskDetails.
  */
-function changeDisplay(elementId, hide) {
-    const element = document.getElementById(elementId);
-    if (hide) {
-        element.classList.add('hidden');
-    } else {
-        element.classList.remove('hidden');
-    }
+function showPopup(id) {
+    const popup = document.getElementById(id);
+    const taskDetails = popup.querySelector('.TaskDetails');
+
+    popup.classList.remove('hidden');
+    popup.classList.add('fade-in');
+
+    setTimeout(() => {
+        taskDetails.classList.add('slide-in-right');
+    }, 300); 
+}
+
+
+/**
+ * Closes the dialog.
+ */
+function hidePopup(id) {
+    const popup = document.getElementById(id);
+    const taskDetails = popup.querySelector('.TaskDetails');
+
+    taskDetails.classList.remove('slide-in-right');
+    taskDetails.classList.add('slide-out-right');
+    popup.classList.remove('fade-in');
+    popup.classList.add('fade-out');
+
+    setTimeout(() => {
+        popup.classList.add('hidden');
+        popup.classList.remove('fade-out');
+        taskDetails.classList.remove('slide-out-right');
+    }, 800); 
 }

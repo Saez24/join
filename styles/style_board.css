@@ -45,10 +45,15 @@ body {
 }
 
 .TaskDetails h1,
+.TaskDetails h2,
 .TaskDetails h5,
 .TaskDetails p {
     margin: 0 0 10px 0;
     padding: 0;
+}
+
+.TaskDetails h2 {
+    font-size: 42px;
 }
 
 .TaskDetails button {
@@ -70,12 +75,23 @@ body {
     display: none;
 }
 
-h1 {
-    margin: 0;
+.descriptionDetails{
+    color: #000;
+
 }
 
-h5 {
-    margin: 0;
+.TaskDetailsLine {
+    display: flex;
+    align-items: center;
+}
+
+.TaskDetailsLine p {
+    margin-right: 10px; 
+}
+
+.TaskDetailsLine .dueDate {
+    white-space: nowrap; 
+    color: gray; 
 }
 
 .wrapped_maxWidth {
@@ -399,13 +415,48 @@ h5 {
 }
 
 /* Animation */
-@keyframes slide-in {
+@keyframes slide-in-right {
     from {
-        transform: translateY(-50px);
+        transform: translateX(100%);
         opacity: 0;
     }
     to {
-        transform: translateY(0);
+        transform: translateX(0);
         opacity: 1;
     }
+}
+
+@keyframes slide-out-right {
+    from {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+}
+/* CSS-Klassen für die Animationen */
+.slide-in-right {
+    animation: slide-in-right 0.8s both;
+}
+
+.slide-out-right {
+    animation: slide-out-right 0.8s both;
+}
+
+/* Anpassung der TaskDetails */
+.TaskDetails {
+    width: 525px !important;
+    display: flex;
+    max-height: 70vh;
+    overflow-y: auto;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    background-color: white;
+    margin-bottom: 12px;
+    padding: 68px 40px 38px 40px;
+    border-radius: 30px;
+    position: relative;
 }

@@ -28,13 +28,13 @@
                 </button>
             </div>
         </div>
-        
+
         <div class="boardTasks">
             <div class="statusTasks">
                 <div class="headlineStatusTasks">
                     <h5 class="taskStatusTitle">To do</h5>
                     <div class="imageContainer">
-                        <img onclick="changeDisplay('dialog', false)" class="add_task_to_board" src="./assets/img/add.svg" width="24" alt="Add task">
+                        <img onclick="showPopup('dialog')" class="add_task_to_board" src="./assets/img/add.svg" width="24" alt="Add task">
                     </div>
                 </div>
                 <div class="tasks">
@@ -46,10 +46,10 @@
             <div class="statusTasks">
                 <div class="headlineStatusTasks">
                     <h5 class="taskStatusTitle">In progress</h5>
-                    <img onclick="changeDisplay('dialog', false)" class="add_task_to_board" src="./assets/img/add.svg" width="24" height="24" alt="Add task">
+                    <img onclick="showPopup('dialog')" class="add_task_to_board" src="./assets/img/add.svg" width="24" height="24" alt="Add task">
                 </div>
                 <div class="tasks">
-                    <div class="toDoBox" onclick="changeDisplay('popup', false)">
+                    <div class="toDoBox" onclick="showPopup('popup')">
                         <button class="CategoryBox">User Story</button>
                         <p class="HeadlineBox">Headline</p>
                         <p class="descriptionBox">Beschreibung Einfügen</p>
@@ -70,10 +70,10 @@
             <div class="statusTasks">
                 <div class="headlineStatusTasks">
                     <h5 class="taskStatusTitle">Await feedback</h5>
-                    <img onclick="changeDisplay('dialog', false)" class="add_task_to_board" src="./assets/img/add.svg" width="24" height="24" alt="Add task">
+                    <img onclick="showPopup('dialog')" class="add_task_to_board" src="./assets/img/add.svg" width="24" height="24" alt="Add task">
                 </div>
                 <div class="tasks">
-                    <div class="toDoBox" onclick="changeDisplay('popup', false)">
+                    <div class="toDoBox" onclick="showPopup('popup')">
                         <button class="CategoryBox">User Story</button>
                         <p class="HeadlineBox">Headline</p>
                         <p class="descriptionBox">Beschreibung Einfügen</p>
@@ -96,7 +96,7 @@
                     <h5 class="taskStatusTitle">Done</h5>
                 </div>
                 <div class="tasks">
-                    <div class="toDoBox" onclick="changeDisplay('popup', false)">
+                    <div class="toDoBox" onclick="showPopup('popup')">
                         <button class="CategoryBox">User Story</button>
                         <p class="HeadlineBox">Headline</p>
                         <p class="descriptionBox">Beschreibung Einfügen</p>
@@ -114,23 +114,23 @@
                     </div>
                 </div>
             </div>
-        
+
             <div id="popup" class="taskBoxBackground hidden">
-                <div class="TaskDetails">
-                    <span class="closePopup" onclick="changeDisplay('popup', true)">X</span>
+                <div class="TaskDetails slide-in-right">
+                    <span class="closePopup" onclick="hidePopup('popup')">X</span>
                     <button class="CategoryBox">User Story</button>
-                    <p class="HeadlineBox">Headline</p>
-                    <p class="descriptionBox">Beschreibung Einfügen</p>
-                    <div>
-                        <p>Due date:</p>
+                    <h2 class="HeadlineBox">Headline</h2>
+                    <p class="descriptionDetails">Beschreibung Einfügen</p>
+                    <div class="TaskDetailsLine">
+                        <p class="dueDate">Due date:</p>
                         <p>10/05/2023</p>
                     </div>
-                    <div>
-                        <p>Priortiy:</p>
+                    <div class="TaskDetailsLine">
+                        <p class="dueDate">Priority:</p>
                         <p>Medium</p>
                         <img class="prioImg" src="./assets/img/prio_baja.png" alt="Priority">
                     </div>
-                    <div>Assigned To:</div>
+                    <div  class="TaskDetailsLine">Assigned To:</div>
                     <div>
                         <div class="assignedName colorName">AS</div>
                         <p>Anna Schuster</p>
@@ -151,16 +151,16 @@
                     </div>
                 </div>
             </div>
-        
+
         </div>
         <div id="dialog" class="dialog-bg d_none">
             <div id="add_task_dialog_content" class="add_task_dialog">
-                <button onclick="changeDisplay('dialog', true)" class="close_dialog_btn">
+                <button onclick="hidePopup('dialog')" class="close_dialog_btn">
                     <img src="./assets/img/close.png" alt="Close">
                 </button>
             </div>
         </div>
-        
+
     </div>
 </body>
 
