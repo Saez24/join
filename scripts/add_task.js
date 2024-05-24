@@ -52,7 +52,7 @@ function generateNameHTML(nameKey, name, firstInitial, lastInitial, id) {
     let randomColor = "#" + Math.floor(Math.random() * 16777215).toString(16);
     return /*html*/ `
         <div class="dropdown_selection" onclick="dropdownSelectAssignTo(this)">
-            <button class="shortname" style="background-color: ${randomColor};"><span>${firstInitial}${lastInitial}</span></button><span>${name}</span>
+            <button class="shortname" style="background-color: ${randomColor};"><span>${firstInitial}${lastInitial}</span></button><span id="assignname_${nameKey}_${id}">${name}</span>
             <input class="checkbox" type="checkbox" id="assignedto_${nameKey}_${id}" data-initials="${firstInitial}${lastInitial}" data-color="${randomColor}" onchange="loadSelectedAssignTo()">
 
         </div>
@@ -272,6 +272,34 @@ function closeSelectCategory() {
         categoryContainer.style.display = 'none';
     }
     taskcategoryInput.style.backgroundImage = 'url(../assets/img/arrow_drop.png)';
+};
+
+/**
+ * Filtert die Kategorien basierend auf dem eingegebenen Text und aktualisiert die Anzeige.
+ * @param {string} searchText - Der eingegebene Text zur Filterung der Kategorien.
+ */
+function filterCategories(searchText) {
+    const categoryContainer = document.getElementById("taskcategory");
+    const categories = categoryContainer.querySelectorAll(".dropdown_selection");
+
+    categories.forEach(category => {
+        const label = category.querySelector(".label");
+        const categoryName = label.innerText.toLowerCase();
+        if (categoryName.includes(searchText.toLowerCase())) {
+            category.style.display = "flex";
+        } else {
+            category.style.display = "none";
+        }
+    });
+};
+
+/**
+ * Event-Handler für die Eingabe im Kategorie-Inputfeld.
+ */
+function handleCategoryInput() {
+    const searchInput = document.getElementById("taskcategoryinput");
+    const searchText = searchInput.value.trim();
+    filterCategories(searchText);
 };
 
 
