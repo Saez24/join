@@ -21,9 +21,8 @@ body {
     display: flex;
     height: 78px;
     width: 374px;
-    padding: 15px 24px 15px 24px;
+    padding: 0px 24px 0px 24px;
     align-items: center;
-    
     gap: 30px;
     border-radius: 10px;
     cursor: pointer;
@@ -76,7 +75,7 @@ body {
     display: flex;
     position: relative;
     top: 206px;
-    left: 343px;
+    left: 300px;
     gap: 30px;
     height: 73.2px;
     align-items: center;
@@ -252,10 +251,10 @@ h2{
 #contactSummary{
     display: flex;
     position: relative;
-    width: 600px;
+    width: 800px;
     height: 364px;
     top: 234px;
-    left: 346px;
+    left: 300px;
     gap: 21px;
     flex-direction: column;
 }
@@ -311,7 +310,6 @@ h2{
 }
 
 .edit-and-delete img{
-    cursor: pointer;
     height: 24px;
     width: 24px;
 }
@@ -320,6 +318,21 @@ h2{
     display: flex;
     align-items: center;
     gap: 6px;
+    cursor: pointer;
+}
+
+.edit-and-delete-row:hover {
+    img{
+    transition-duration: 0.5s;
+    transform: scale(1.2);
+    };
+}
+
+.edit-and-delete-row:not(:hover) {
+    img{
+    transition-duration: 0.5s;
+    transform: scale(1.0);
+    };
 }
 
 

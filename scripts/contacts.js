@@ -76,7 +76,7 @@ function renderContacts(data) {
             groupedContacts[initial].forEach((contact, index) => {
                 const randomColor = getRandomColor(); // Zufällige Farbe auswählen
                 container.innerHTML += `
-                    <div class="contact-row">
+                    <div class="contact-row" onclick="renderContactInformation('${contact.name}', '${contact.email}', '${randomColor}', '${contact.phonenumber}')">
                         <div class="initials" style="background-color: ${randomColor}" id="initials${index}">${getInitials(contact.name)}</div>
                         <div class="name-and-email">
                             <div class="contact-name-row" id="name${index}">${contact.name}</div>
@@ -112,4 +112,27 @@ function getInitials(name) {
     if (!name) return '';
     let initials = name.split(' ').map(part => part.charAt(0)).join('');
     return initials.toUpperCase();
+}
+
+function renderContactInformation(name, email, color, phone){
+    const contactSummary = document.getElementById('contactSummary');
+    contactSummary.innerHTML = `
+        <div class="contact-summary-headline">
+            <div class="contact-summary-initials" style="background-color: ${color};">${getInitials(name)}</div>
+            <div class="contact-summary-headline-rightside">
+                <div class="contact-summary-headline-name">${name}</div>
+                <div class="edit-and-delete">
+                    <div class="edit-and-delete-row"><img src="assets/img/contacts-edit.png" alt="edit">Edit</div>
+                    <div class="edit-and-delete-row"><img src="assets/img/contacts-delete.png" alt="delete">Delete</div>
+                </div>
+            </div>
+        </div>
+        <div class="contact-summary-contact-information">Contact Information</div>
+        <div class="contact-summary-mail-and-phone">
+            <div><b>Email</b></div>
+            <span>${email}</span>
+            <div><b>Phone</b></div>
+            <span>+49 151 ${phone}</span> <!-- Hier könntest du das Telefonfeld hinzufügen -->
+        </div>
+    `;
 }
