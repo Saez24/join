@@ -23,6 +23,7 @@ async function loadData(path = "") {
     return responseToJson;
 }
 
+
 /** 
  * Updates the global variable "amountTasksInBoard", which will later be required to render the summary html page. 
  * */
@@ -30,6 +31,7 @@ async function determineTasksInBoard() {
     let responseToJson = await loadData('/tasks');
     amountTasksInBoard = responseToJson.length;
 }
+
 
 /** 
  * Counts all urgent tasks and updates the global variable "amountTaskUrgent", 
@@ -98,7 +100,9 @@ function checkGreeting() {
 }
 
 
-/** Removes the key "greet" out of local storage. This function gets called when the user logs out. */
+/** Removes the key "greet" out of local storage. This function gets called when the user logs out.
+ *  This function exists to assure that the welcome message gets triggered once the user logs in again.
+ */
 function removeGreetingKey() {
     localStorage.removeItem('greet');
 }
