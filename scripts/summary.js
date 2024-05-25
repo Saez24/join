@@ -1,15 +1,29 @@
+// TO DO
+// 1. Globale Variabel signedInUser deklarieren mit Alex. Siehe var "user" from scripts/singnedinuser.js let user = auth.currentUser? Anschließend Render-Funktion schreiben mit var "signedInUser".
+// 2. Amount TasksToDo, TasksDone, TasksInProgress, TasksAwaitingFeedback aus einem Array abgreifen (mit Sarah abstimmen) und Zaehler-Funktion schreiben.
+
+
 const BASE_URL = "https://remotestorage-b0ea0-default-rtdb.europe-west1.firebasedatabase.app/"
 
-let amountTaskToDos = 0;
-let amountTaskDone = "";
-let amountTaskUrgent = 0;
+let amountTasksToDos = "?";
+let amountTasksDone = "?"; //Punkt 2
+let amountTasksUrgent = 0;
 let amountTasksInBoard = 0;
-let amountTasksInProgress = "";
-let amountTasksAwaitingFeedback = "";
+let amountTasksInProgress = "?"; //Punkt 2
+let amountTasksAwaitingFeedback = "?"; //Punkt 2
 
 let earliestDeadline = null;
 
-let signedInUser = "";
+let summarySignedInUser = "Guest"; // Siehe Punkt 1.
+
+
+async function initializeSummary() {
+    await determineTasksInBoard();
+    await determineUrgentTasks();
+    await determineDeadline();
+    checkGreeting();
+    renderSummary();
+}
 
 
 /** 
@@ -28,7 +42,7 @@ async function loadData(path = "") {
  * Updates the global variable "amountTasksInBoard", which will later be required to render the summary html page. 
  * */
 async function determineTasksInBoard() {
-    let responseToJson = await loadData('/tasks');
+    let responseToJson = await loadData('tasks');
     amountTasksInBoard = responseToJson.length;
 }
 
@@ -38,10 +52,10 @@ async function determineTasksInBoard() {
  * which will later be required to render the summary html page. 
  * */
 async function determineUrgentTasks() {
-    let responseToJson = await loadData('/tasks');
+    let responseToJson = await loadData('tasks');
     for (let i = 0; i < responseToJson.length; i++) {
         if (responseToJson[i].prio === "urgent") {
-            amountTaskUrgent++;
+            amountTasksUrgent++;
         }
     }
 }
@@ -59,7 +73,7 @@ async function determineUrgentTasks() {
  * */
 async function determineDeadline() {
     earliestDeadline = null;
-    let responseToJson = await loadData('/tasks');
+    let responseToJson = await loadData('tasks');
 
     for (let i = 0; i < responseToJson.length; i++) {
         if (responseToJson[i].prio === "urgent") {
@@ -88,12 +102,9 @@ function checkGreeting() {
         summaryFadeOut();
         localStorage.setItem('greet', 'no');
     } else {
-        // Disable CSS transitions temporarily
-        greeter.style.transition = "none";
-        // Hide the element immediately
-        greeter.classList.add("d-none");
-        // Enable CSS transitions after a short delay
-        setTimeout(function () {
+        greeter.style.transition = "none"; // Disable CSS transitions temporarily
+        greeter.classList.add("d-none"); // Hide the element immediately
+        setTimeout(function () { // Enables CSS transitions again after a short delay
             greeter.style.transition = "";
         }, 100);
     }
@@ -108,7 +119,9 @@ function removeGreetingKey() {
 }
 
 
-/** Adds the class "fade-out" to the Good Morning div-container, which makes the container fade-out after two seconds. */
+/** Adds the class "fade-out" to the Good Morning div-container, which makes the container fade-out after two seconds. 
+ * This function gets called during the "checkGreeting" function. 
+ * */
 function summaryFadeOut() {
     let greeter = document.getElementById("fade-out");
     setTimeout(function () {
@@ -118,3 +131,17 @@ function summaryFadeOut() {
         }, 800);
     }, 2000);
 }
+
+function renderSummary() {
+    document.getElementById('summaryToDos').innerHTML = amountTasksToDos;
+    document.getElementById('summaryDone').innerHTML = amountTasksDone;
+    document.getElementById('summaryUrgent').innerHTML = amountTasksUrgent;
+    document.getElementById('summaryDeadline').innerHTML = earliestDeadline;
+    document.getElementById('summaryTasksInBoard').innerHTML = amountTasksInBoard;
+    document.getElementById('summaryTasksInProgress').innerHTML = amountTasksInProgress;
+    document.getElementById('summaryAwaitingFeedback').innerHTML = amountTasksAwaitingFeedback;
+    document.getElementById('summaryUserName').innerHTML = summarySignedInUser;
+    document.getElementById('summaryUserNameResponsive').innerHTML = summarySignedInUser;
+}
+
+
