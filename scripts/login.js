@@ -41,7 +41,7 @@ guestLogin.addEventListener('click', function (event) {
 
     signInAnonymously(auth)
         .then(() => {
-            window.location.href = "add_task.html"
+            window.location.href = "summary.html"
         })
         .catch((error) => {
             let errorCode = error.code;
