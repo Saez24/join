@@ -18,7 +18,7 @@ let firebaseConfig = {
 let app = initializeApp(firebaseConfig);
 let auth = getAuth();
 let user = auth.currentUser;
-let logout = document.getElementById("logout");
+let logout = document.getElementById('logout');
 
 onAuthStateChanged(auth, (user) => {
     if (user) {

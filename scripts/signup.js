@@ -114,11 +114,12 @@ signup.addEventListener('click', function (event) {
     errorContainer.innerHTML = '';
     errorContainer.style.display = 'none';
     if (!validateName(nameValue, errorContainer)) return;
-    if (validateEmail(email, errorContainer)) return;
+    if (!validateEmail(email, errorContainer)) return;
     if (!validatePasswords(password, confirmPassword, errorContainer)) return;
     if (!validatePrivacyCheckbox(privacyCheckbox, errorContainer)) return;
 
     handleFormSubmission(email, password, errorContainer);
+    handleSubmit();
 });
 
 /**
