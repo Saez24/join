@@ -18,7 +18,6 @@ let firebaseConfig = {
 let app = initializeApp(firebaseConfig);
 let auth = getAuth();
 let user = auth.currentUser;
-let logout = document.getElementById('logout');
 
 onAuthStateChanged(auth, (user) => {
     if (user) {
@@ -33,14 +32,14 @@ onAuthStateChanged(auth, (user) => {
         let uid = user.uid;
     }
 });
-logout.addEventListener('click', function (event) {
-    event.preventDefault()
 
+function handleLogout() {
     signOut(auth).then(() => {
         // Sign-out successful.
-        window.location.href = "index.html"
+        window.location.href = "index.html";
     }).catch((error) => {
         // An error happened.
+        console.error('Error during sign out:', error);
     });
-
-});
+}
+window.handleLogout = handleLogout;
