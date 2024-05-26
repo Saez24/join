@@ -12,7 +12,9 @@
 </head>
 
 <body>
-    <div id="sidebarContainer"></div>
+    <div id="sidebarContainer">
+        <script type="module" src="./scripts/singnedinuser.js"></script>
+    </div>
     <div class="wrapped_maxWidth">
         <div class="boardHeadline">
             <h1>Board</h1>
@@ -34,7 +36,8 @@
                 <div class="headlineStatusTasks">
                     <h5 class="taskStatusTitle">To do</h5>
                     <div class="imageContainer">
-                        <img onclick="showPopup('dialog')" class="add_task_to_board" src="./assets/img/add.svg" width="24" alt="Add task">
+                        <img onclick="showPopup('dialog')" class="add_task_to_board" src="./assets/img/add.svg"
+                            width="24" alt="Add task">
                     </div>
                 </div>
                 <div class="tasks">
@@ -46,7 +49,8 @@
             <div class="statusTasks">
                 <div class="headlineStatusTasks">
                     <h5 class="taskStatusTitle">In progress</h5>
-                    <img onclick="showPopup('dialog')" class="add_task_to_board" src="./assets/img/add.svg" width="24" height="24" alt="Add task">
+                    <img onclick="showPopup('dialog')" class="add_task_to_board" src="./assets/img/add.svg" width="24"
+                        height="24" alt="Add task">
                 </div>
                 <div class="tasks">
                     <div class="toDoBox" onclick="showPopup('popup')">
@@ -70,7 +74,8 @@
             <div class="statusTasks">
                 <div class="headlineStatusTasks">
                     <h5 class="taskStatusTitle">Await feedback</h5>
-                    <img onclick="showPopup('dialog')" class="add_task_to_board" src="./assets/img/add.svg" width="24" height="24" alt="Add task">
+                    <img onclick="showPopup('dialog')" class="add_task_to_board" src="./assets/img/add.svg" width="24"
+                        height="24" alt="Add task">
                 </div>
                 <div class="tasks">
                     <div class="toDoBox" onclick="showPopup('popup')">
@@ -130,7 +135,7 @@
                         <p>Medium</p>
                         <img class="prioImg" src="./assets/img/prio_baja.png" alt="Priority">
                     </div>
-                    <div  class="TaskDetailsLine">Assigned To:</div>
+                    <div class="TaskDetailsLine">Assigned To:</div>
                     <div>
                         <div class="assignedName colorName">AS</div>
                         <p>Anna Schuster</p>

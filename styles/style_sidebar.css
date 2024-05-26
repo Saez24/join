@@ -138,9 +138,18 @@ body {
     align-items: center;
 }
 
-.profile-icon {
+.profile-icon button {
     width: 56px;
     height: 56px;
+    color: #29ABE2;
+    border: 3px solid #2A3647;
+    background-color: #ffffff;
+    border-radius: 30px;
+    cursor: pointer;
+}
+
+.profile-icon button h2 {
+    margin: 0;
 }
 
 .profile-icon:hover {

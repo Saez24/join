@@ -36,10 +36,11 @@
             <div id="login-form">
                 <div class="input-container">
                     <input required id="email" type="text" placeholder="E-Mail" />
-                    <input required id="password" type="password" placeholder="Password" />
-                    <span id="error" style="display: none">Ups! Wrong password. Try again.
-                    </span>
+                    <input onclick="handleShowpasswordClick(event)" onfocus="showPasswordImage()"
+                        onblur="loadPasswordImage()" required id="password" type="password" placeholder="Password" />
                 </div>
+                <span id="error" style="display: none"> Wrong password Ups! Try again.
+                </span>
                 <div class="options">
                     <div class="remember-container">
                         <input class="checkbox-remember" id="remember" type="checkbox" />

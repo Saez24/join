@@ -60,12 +60,13 @@ function generateNameHTML(nameKey, name, firstInitial, lastInitial, id) {
 };
 
 /**
- * Generiert das HTML für die Namen, einschließlich der Initialen.
- * @param {Object} names - Das Objekt, das die Namen enthält.
- * @returns {string} - Das generierte HTML für die Namen.
+ * Generates the HTML for names, including initials.
+ * @param {Object} names - The object containing the names.
+ * @returns {string} The generated HTML for the names.
  */
 function renderNamesHTML(names) {
     let namesHTML = '';
+    let id = 0;
 
     for (let nameKey in names) {
         if (names.hasOwnProperty(nameKey)) {
@@ -221,7 +222,7 @@ function dropdownSelectCategory(element) {
 
         loadToCategoryInput();
     }
-}
+};
 
 /**
  * Loads the selected category into the category input field.
@@ -275,8 +276,8 @@ function closeSelectCategory() {
 };
 
 /**
- * Filtert die Kategorien basierend auf dem eingegebenen Text und aktualisiert die Anzeige.
- * @param {string} searchText - Der eingegebene Text zur Filterung der Kategorien.
+ * Filters categories based on the entered text and updates the display.
+ * @param {string} searchText - The entered text for filtering the categories.
  */
 function filterCategories(searchText) {
     const categoryContainer = document.getElementById("taskcategory");
@@ -294,14 +295,13 @@ function filterCategories(searchText) {
 };
 
 /**
- * Event-Handler für die Eingabe im Kategorie-Inputfeld.
+ * Event handler for input in the category input field.
  */
 function handleCategoryInput() {
     const searchInput = document.getElementById("taskcategoryinput");
     const searchText = searchInput.value.trim();
     filterCategories(searchText);
 };
-
 
 /**
  * Prevents event propagation.

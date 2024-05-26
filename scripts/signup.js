@@ -120,7 +120,6 @@ signup.addEventListener('click', function (event) {
 
     handleFormSubmission(email, password, errorContainer);
     handleSubmit();
-    debugger
 });
 
 /**
