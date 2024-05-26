@@ -60,6 +60,8 @@ body {
     margin-bottom: 20px;
 }
 
+
+
 .closePopup {
     position: absolute;
     top: 20px;
@@ -92,6 +94,74 @@ body {
 .TaskDetailsLine .dueDate {
     white-space: nowrap; 
     color: gray; 
+}
+
+.assignedContainer {
+    display: flex;
+    align-items: center;
+    margin-top: 10px; 
+}
+
+.assignedContainer .assignedName {
+    margin-right: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center; 
+    width: 40px; 
+    height: 40px;
+    border-radius: 50%; 
+    background-color: #584c7c; 
+    color: white; 
+    font-size: 18px; 
+    line-height: 40px; 
+}
+
+.subtasksTitle {
+    color: gray; 
+}
+
+.subtaskItem {
+    display: flex;
+    align-items: center;
+    margin-top: 5px;
+}
+
+.subtaskItem input[type="checkbox"] {
+    appearance: none; 
+    width: 14px; 
+    height: 14px; 
+    border: 2px solid black; 
+    border-radius: 4px;
+    background-color: white; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 10px; 
+}
+
+.subtaskItem input[type="checkbox"]:checked {
+    background-color: black; 
+}
+
+.subtaskItem input[type="checkbox"]:checked::before {
+    content: '✓'; 
+    color: white; 
+    font-size: 10px; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.editDeleteContainer {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end; 
+    margin-top: 20px;
+}
+
+.editDeleteContainer p,
+.editDeleteContainer img {
+    margin-left: 10px; 
 }
 
 .wrapped_maxWidth {
@@ -267,8 +337,19 @@ body {
     background-color: #584c7c;
 }
 
-.prioImgContainer {
-    margin-left: auto;
+.priorityContainer {
+    display: flex;
+    align-items: center;
+}
+
+.priorityContainer p {
+    margin: 0 10px 0 0; 
+    display: flex;
+    align-items: center; 
+}
+
+.priorityContainer .prioImg {
+    vertical-align: middle; 
 }
 
 .add_task_to_board {
@@ -445,18 +526,4 @@ body {
     animation: slide-out-right 0.8s both;
 }
 
-/* Anpassung der TaskDetails */
-.TaskDetails {
-    width: 525px !important;
-    display: flex;
-    max-height: 70vh;
-    overflow-y: auto;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
-    background-color: white;
-    margin-bottom: 12px;
-    padding: 68px 40px 38px 40px;
-    border-radius: 30px;
-    position: relative;
-}
+

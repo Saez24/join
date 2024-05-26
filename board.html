@@ -117,37 +117,45 @@
 
             <div id="popup" class="taskBoxBackground hidden">
                 <div class="TaskDetails slide-in-right">
-                    <span class="closePopup" onclick="hidePopup('popup')">X</span>
+        
+                    <img  class="closePopup"src="./assets/img/close.png" onclick="hidePopup('popup')"alt="Close">
                     <button class="CategoryBox">User Story</button>
                     <h2 class="HeadlineBox">Headline</h2>
                     <p class="descriptionDetails">Beschreibung Einfügen</p>
                     <div class="TaskDetailsLine">
-                        <p class="dueDate">Due date:</p>
-                        <p>10/05/2023</p>
+                        <p>Due date:</p>
+                        <p class="dueDate">10/05/2023</p>
                     </div>
-                    <div class="TaskDetailsLine">
-                        <p class="dueDate">Priority:</p>
+                    <div class="priorityContainer">
+                        <p>Priority:</p>
                         <p>Medium</p>
                         <img class="prioImg" src="./assets/img/prio_baja.png" alt="Priority">
                     </div>
-                    <div  class="TaskDetailsLine">Assigned To:</div>
-                    <div>
+                    <div class="TaskDetailsLine">
+                        <p>Assigned To:</p>
+                    </div>
+                    <div class="assignedContainer">
                         <div class="assignedName colorName">AS</div>
                         <p>Anna Schuster</p>
                     </div>
-                    <div>
+                    <div class="assignedContainer">
                         <div class="assignedName colorName">AS</div>
                         <p>Anna Schuster</p>
                     </div>
-                    <div>Subtasks
-                        <p>Implement Recipe Recommendation</p>
+                    <div class="subtasksTitle">Subtasks</div>
+                    <div class="subtaskItem">
+                        <input type="checkbox">
                         <p>Implement Recipe Recommendation</p>
                     </div>
-                    <div>
-                        <img src="" alt="Delete">
-                        <p>Delete</p>
-                        <img src="" alt="Edit">
+                    <div class="subtaskItem">
+                        <input type="checkbox">
+                        <p>Start Page Layout</p>
+                    </div>
+                    <div class="editDeleteContainer">
                         <p>Edit</p>
+                        <img src="./assets/img/edit.png" alt="Edit">
+                        <p>Delete</p>
+                        <img src="./assets/img/delete.png" alt="Delete">
                     </div>
                 </div>
             </div>
