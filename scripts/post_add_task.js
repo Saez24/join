@@ -7,6 +7,7 @@ async function createTask() {
     let duedate = document.getElementById('duedate').value;
     let category = document.getElementById('taskcategoryinput').value;
     let prio = activeButton ? activeButton.id : null;
+    let status = 'todo';
 
     if (!title || !duedate || !category) {
         alert("Bitte füllen Sie alle erforderlichen Felder aus und wählen Sie eine Priorität.");
@@ -39,11 +40,13 @@ async function createTask() {
         duedate: duedate,
         prio: prio,
         category: category,
-        subtask: subtasks
+        subtask: subtasks,
+        status: status
     };
 
     // Rufe die postData-Funktion auf, um die Aufgabendaten zu übergeben
     await postData("tasks", taskData);
+    clearContent();
 }
 
 async function postData(path = "tasks", data = {}) {
@@ -57,13 +60,3 @@ async function postData(path = "tasks", data = {}) {
     return await response.json();
 }
 
-async function postData(path = "tasks", data = {}) {
-    let response = await fetch(BASE_URL + path + ".json", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(data)
-    });
-    return await response.json();
-}

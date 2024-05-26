@@ -554,4 +554,5 @@ function clearContent() {
     for (let k = 0; k < dropdownSelections.length; k++) {
         dropdownSelections[k].classList.remove("selected_dropdown");
     }
+    mediumButton();
 };
