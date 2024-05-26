@@ -4,15 +4,16 @@
 function openDialog() {
     let dialog = document.getElementById('dialog');
     let dialogslide = document.getElementById('add_task_dialog_content');
+    let content = document.getElementById('addtask-content');
     setTimeout(() => {
         dialogslide.classList.add('add_task_dialog_slide_in')
         dialog.classList.add('add_task_dialog_slide_in')
         dialog.classList.remove('d_none');
     }, 300);
     ensureCssLoaded();
-    loadAddTaskContent();
-    addTaskOnLoad();
-    mediumButton();
+    addTaskLoadNames();
+    content.classList.remove('addtask-content');
+    content.classList.add('addtask-content-dialog');
 }
 
 /**
@@ -47,7 +48,7 @@ function loadAddTaskContent() {
             })
             .catch(error => console.error('Error fetching add_task.html:', error));
     }
-}
+};
 
 /**
  * Open the dialog for TaskDetails.
@@ -61,7 +62,7 @@ function showPopup(id) {
 
     setTimeout(() => {
         taskDetails.classList.add('slide-in-right');
-    }, 300); 
+    }, 300);
 }
 
 
@@ -81,5 +82,5 @@ function hidePopup(id) {
         popup.classList.add('hidden');
         popup.classList.remove('fade-out');
         taskDetails.classList.remove('slide-out-right');
-    }, 800); 
+    }, 800);
 }

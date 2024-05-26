@@ -22,6 +22,13 @@
     margin: 170px 0 0 240px;
 }
 
+.addtask-content-dialog {
+    top: 136px;
+    max-width: 100%;
+    max-height: 100%;
+    margin: 70px 0 0 20px;
+}
+
 h1 {
     font-weight: 700;
     font-size: 61px;

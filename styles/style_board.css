@@ -75,7 +75,7 @@ body {
     display: none;
 }
 
-.descriptionDetails{
+.descriptionDetails {
     color: #000;
 
 }
@@ -86,12 +86,12 @@ body {
 }
 
 .TaskDetailsLine p {
-    margin-right: 10px; 
+    margin-right: 10px;
 }
 
 .TaskDetailsLine .dueDate {
-    white-space: nowrap; 
-    color: gray; 
+    white-space: nowrap;
+    color: gray;
 }
 
 .wrapped_maxWidth {
@@ -112,7 +112,7 @@ body {
     display: flex;
     gap: 32px;
     align-items: center;
-    justify-content: space-between; 
+    justify-content: space-between;
 }
 
 .searchTask {
@@ -144,8 +144,8 @@ body {
 }
 
 .addTaskButton {
-    border: none; 
-    outline: none; 
+    border: none;
+    outline: none;
     border-radius: 10px;
     font-size: 21px;
     font-weight: 700;
@@ -167,8 +167,8 @@ body {
 }
 
 .addTaskButton:hover {
-    background-color: #29ABE2; 
-    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3); 
+    background-color: #29ABE2;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
 }
 
 .boardTasks {
@@ -304,8 +304,8 @@ body {
     background-color: rgb(255, 255, 255);
     display: flex;
     flex-direction: column;
-    left: 70px;
     right: 0;
+    top: 70px;
     height: 700px;
     line-height: 20px;
     opacity: 1;
@@ -313,6 +313,7 @@ body {
     text-rendering: optimizelegibility;
     width: 900px;
     z-index: 4006;
+    margin: auto;
 }
 
 .close_dialog_btn {
@@ -362,7 +363,7 @@ body {
 
 @media screen and (max-width: 1200px) {
     .boardHeadline {
-        justify-content: space-between; 
+        justify-content: space-between;
     }
 
     .searchTask {
@@ -409,7 +410,8 @@ body {
         width: 100%;
     }
 
-    .searchTask, .addTaskButton {
+    .searchTask,
+    .addTaskButton {
         margin-bottom: 20px;
     }
 }
@@ -420,6 +422,7 @@ body {
         transform: translateX(100%);
         opacity: 0;
     }
+
     to {
         transform: translateX(0);
         opacity: 1;
@@ -431,11 +434,13 @@ body {
         transform: translateX(0);
         opacity: 1;
     }
+
     to {
         transform: translateX(100%);
         opacity: 0;
     }
 }
+
 /* CSS-Klassen für die Animationen */
 .slide-in-right {
     animation: slide-in-right 0.8s both;
