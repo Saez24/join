@@ -17,7 +17,7 @@ Code kopieren
     <link rel="icon" href="./assets/img/favicon.png" type="image/x-icon">
 </head>
 
-<body onload="loadAddTaskContent()">
+<body onload="loadAddTaskContent()" onclick="closeDialog()">
     <div id="sidebarContainer">
         <script type="module" src="./scripts/singnedinuser.js"></script>
     </div>
@@ -30,7 +30,7 @@ Code kopieren
                     <div class="verticalLineSearchTask"></div>
                     <img class="magnifyingGlass" src="./assets/img/search.svg" width="32" height="32" alt="Lupe">
                 </div>
-                <button class="addTaskButton">
+                <button onclick="openDialog(), closeOnBackground(event)" class="addTaskButton">
                     Add task
                     <img src="./assets/img/addWhite.png" alt="Plus-Symbol">
                 </button>
@@ -42,8 +42,8 @@ Code kopieren
                 <div class="headlineStatusTasks">
                     <h5 class="taskStatusTitle">To do</h5>
                     <div class="imageContainer">
-                        <img onclick="openDialog()" class="add_task_to_board" src="./assets/img/add.svg" width="24"
-                            alt="Add task">
+                        <img onclick="openDialog(), closeOnBackground(event)" class="add_task_to_board"
+                            src="./assets/img/add.svg" width="24" alt="Add task">
                     </div>
                 </div>
                 <div class="tasks">
@@ -74,8 +74,8 @@ Code kopieren
             <div class="statusTasks">
                 <div class="headlineStatusTasks">
                     <h5 class="taskStatusTitle">In progress</h5>
-                    <img onclick="showPopup('dialog')" class="add_task_to_board" src="./assets/img/add.svg" width="24"
-                        height="24" alt="Add task">
+                    <img onclick="openDialog(), closeOnBackground(event)" class="add_task_to_board"
+                        src="./assets/img/add.svg" width="24" height="24" alt="Add task">
                 </div>
                 <div class="tasks">
                     <div class="toDoBox" onclick="showPopup('popup')">
@@ -99,8 +99,8 @@ Code kopieren
             <div class="statusTasks">
                 <div class="headlineStatusTasks">
                     <h5 class="taskStatusTitle">Await feedback</h5>
-                    <img onclick="showPopup('dialog')" class="add_task_to_board" src="./assets/img/add.svg" width="24"
-                        height="24" alt="Add task">
+                    <img onclick="openDialog(), closeOnBackground(event)" class="add_task_to_board"
+                        src="./assets/img/add.svg" width="24" height="24" alt="Add task">
                 </div>
                 <div class="tasks">
                     <div class="toDoBox" onclick="showPopup('popup')">
@@ -147,8 +147,8 @@ Code kopieren
 
             <div id="popup" class="taskBoxBackground hidden">
                 <div class="TaskDetails slide-in-right">
-        
-                    <img  class="closePopup"src="./assets/img/close.png" onclick="hidePopup('popup')"alt="Close">
+
+                    <img class="closePopup" src="./assets/img/close.png" onclick="hidePopup('popup')" alt="Close">
                     <button class="CategoryBox">User Story</button>
                     <h2 class="HeadlineBox">Headline</h2>
                     <p class="descriptionDetails">Beschreibung Einfügen</p>
@@ -192,8 +192,8 @@ Code kopieren
 
         </div>
         <div id="dialog" class="dialog-bg d_none">
-            <div id="add_task_dialog_content" class="add_task_dialog">
-                <button onclick="hidePopup('dialog')" class="close_dialog_btn">
+            <div onclick="closeOnBackground(event)" id="add_task_dialog_content" class="add_task_dialog">
+                <button onclick="closeDialog()" class="close_dialog_btn">
                     <img src="./assets/img/close.png" alt="Close">
                 </button>
             </div>

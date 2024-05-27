@@ -127,6 +127,8 @@ body {
     align-items: center;
     justify-content: center;
     width: 40px;
+    justify-content: center;
+    width: 40px;
     height: 40px;
     border-radius: 50%;
     background-color: #584c7c;
@@ -138,6 +140,7 @@ body {
 
 /* Subtasks */
 .subtasksTitle {
+    color: gray;
     color: gray;
 }
 
@@ -153,6 +156,7 @@ body {
     height: 18px; 
     border: 1px solid black;
     border-radius: 4px;
+    background-color: white;
     background-color: white;
     display: flex;
     align-items: center;
@@ -181,6 +185,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: flex-end;
+    justify-content: flex-end;
     margin-top: 20px;
     position: absolute;
     bottom: 10px;
@@ -189,6 +194,7 @@ body {
 
 .editDeleteContainer p,
 .editDeleteContainer img {
+    margin-left: 10px;
     margin-left: 10px;
 }
 
@@ -392,11 +398,14 @@ body {
 
 .priorityContainer p {
     margin: 0 10px 0 0;
+    margin: 0 10px 0 0;
     display: flex;
+    align-items: center;
     align-items: center;
 }
 
 .priorityContainer .prioImg {
+    vertical-align: middle;
     vertical-align: middle;
 }
 
@@ -440,7 +449,7 @@ body {
     opacity: 1;
     position: relative;
     text-rendering: optimizelegibility;
-    width: 900px;
+    max-width: 900px;
     z-index: 4006;
     margin: auto;
 }
@@ -508,6 +517,13 @@ body {
     }
 }
 
+@media screen and (max-width: 1050px) {
+    .add_task_dialog {
+        margin-left: 40px;
+        margin-right: 40px;
+    }
+}
+
 @media screen and (max-width: 750px) {
     .wrapped_maxWidth {
         width: 100%;
@@ -516,6 +532,10 @@ body {
     }
     .boardHeadline {
         flex-direction: column;
+    }
+
+    .dialog-bg {
+        display: none;
     }
 
     .searchTask {

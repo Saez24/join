@@ -257,11 +257,11 @@ footer a:hover {
 
 .error-message {
     display: none;
-    color: red;
-}
-
-.error-message-placeholder {
-    height: 10px;
+    font-size: 14px;
+    color: #ff8190;
+    position: absolute;
+    bottom: 180px;
+    left: 90px;
 }
 
 @media (max-width: 730px) {
@@ -290,6 +290,8 @@ footer a:hover {
         width: 88%;
         padding: 0px 16px 0px 16px;
     }
+
+
 
     .remember-container {
         display: flex;
@@ -320,6 +322,11 @@ footer a:hover {
 
     .signup-container {
         top: 165px;
+    }
+
+    .error-message {
+        bottom: 198px;
+        left: 64px;
     }
 
     footer {
