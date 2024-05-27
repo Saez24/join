@@ -73,7 +73,6 @@ function validateEmail(email, errorContainer) {
 function handleFormSubmission(email, password, errorContainer) {
     createUserWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
-            handleSubmit();
             window.location.href = "add_task.html";
         })
         .catch((error) => {
