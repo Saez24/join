@@ -12,8 +12,7 @@ function openDialog() {
     let dialogslide = document.getElementById('add_task_dialog_content');
     let content = document.getElementById('addtask-content');
     setTimeout(() => {
-        dialogslide.classList.add('add_task_dialog_slide_in');
-        dialog.classList.add('add_task_dialog_slide_in');
+        dialogslide.classList.add('slide-in-right');
         dialog.classList.remove('d_none');
     }, 300);
     ensureCssLoaded();
@@ -27,9 +26,13 @@ function openDialog() {
  */
 function closeDialog() {
     let dialog = document.getElementById('dialog');
+    let dialogslide = document.getElementById('add_task_dialog_content');
+    dialogslide.classList.add('slide-out-right');
     setTimeout(() => {
+        dialogslide.classList.remove('slide-in-right')
+        dialogslide.classList.remove('slide-out-right');
         dialog.classList.add('d_none');
-    }, 100);
+    }, 300);
 }
 
 /**

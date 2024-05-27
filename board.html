@@ -26,7 +26,7 @@
                     <div class="verticalLineSearchTask"></div>
                     <img class="magnifyingGlass" src="./assets/img/search.svg" width="32" height="32" alt="Lupe">
                 </div>
-                <button onclick="openDialog()" class="addTaskButton">
+                <button onclick="openDialog(), closeOnBackground(event)" class="addTaskButton">
                     Add task
                     <img src="./assets/img/addWhite.png" alt="Plus-Symbol">
                 </button>
@@ -38,8 +38,8 @@
                 <div class="headlineStatusTasks">
                     <h5 class="taskStatusTitle">To do</h5>
                     <div class="imageContainer">
-                        <img onclick="showPopup('dialog')" class="add_task_to_board" src="./assets/img/add.svg"
-                            width="24" alt="Add task">
+                        <img onclick="openDialog(), closeOnBackground(event)" class="add_task_to_board"
+                            src="./assets/img/add.svg" width="24" alt="Add task">
                     </div>
                 </div>
                 <div class="tasks">
@@ -51,8 +51,8 @@
             <div class="statusTasks">
                 <div class="headlineStatusTasks">
                     <h5 class="taskStatusTitle">In progress</h5>
-                    <img onclick="showPopup('dialog')" class="add_task_to_board" src="./assets/img/add.svg" width="24"
-                        height="24" alt="Add task">
+                    <img onclick="openDialog(), closeOnBackground(event)" class="add_task_to_board"
+                        src="./assets/img/add.svg" width="24" height="24" alt="Add task">
                 </div>
                 <div class="tasks">
                     <div class="toDoBox" onclick="showPopup('popup')">
@@ -76,8 +76,8 @@
             <div class="statusTasks">
                 <div class="headlineStatusTasks">
                     <h5 class="taskStatusTitle">Await feedback</h5>
-                    <img onclick="showPopup('dialog')" class="add_task_to_board" src="./assets/img/add.svg" width="24"
-                        height="24" alt="Add task">
+                    <img onclick="openDialog(), closeOnBackground(event)" class="add_task_to_board"
+                        src="./assets/img/add.svg" width="24" height="24" alt="Add task">
                 </div>
                 <div class="tasks">
                     <div class="toDoBox" onclick="showPopup('popup')">
