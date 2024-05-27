@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="./scripts/templates.js"></script>
     <script src="./scripts/summary.js"></script>
-    <!-- <script src="./scripts/singnedinuser.js"></script> -->
+    <script type="module" src="./scripts/singnedinuser.js"></script>
     <link rel="stylesheet" href="./styles/style_summary.css">
     <link rel="stylesheet" href="./styles/fonts.css">
     <title>Summary</title>
@@ -90,12 +90,12 @@
                 </div>
                 <div class="greeter-cont d-flex f-column j-center">
                     <p class="f-size-47" id="summaryGreeter">Good morning,</p>
-                    <span id="summaryUserName">Firstname Lastname</span>
+                    <span id="summaryUserName"></span>
                 </div>
             </div>
             <div class="d-flex f-column j-center a-center good-morning-cont" id="fade-out">
                 <p class="f-size-36" id="summaryGreeterResponsive">Good morning,</p>
-                <span class="span-responsive" id="summaryUserNameResponsive">Firstname Lastname</span>
+                <span class="span-responsive" id="summaryUserNameResponsive"></span>
             </div>
 
         </div>

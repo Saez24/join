@@ -36,7 +36,6 @@ async function fetchUserData(email) {
             renderUserName(userNameData.name);
         } else {
             console.log('User name not found for email:', email);
-            renderUserName(null); // Pass null if no user is found
         }
     } catch (error) {
         console.error("Error fetching data:", error);
