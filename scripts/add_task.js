@@ -109,10 +109,10 @@ function selectAssignTo() {
     let assignToInput = document.getElementById('assignedtoinput');
     if (assignToContainer.style.display === 'block') {
         assignToContainer.style.display = 'none';
-        assignToInput.style.backgroundImage = 'url(../assets/img/arrow_drop.png)';
+        assignToInput.style.backgroundImage = 'url(./assets/img/arrow_drop.png)';
     } else {
         assignToContainer.style.display = 'block';
-        assignToInput.style.backgroundImage = 'url(../assets/img/arrow_drop_down.png)';
+        assignToInput.style.backgroundImage = 'url(./assets/img/arrow_drop_down.png)';
     }
 };
 
@@ -125,7 +125,7 @@ function closeAssignTo() {
     if (assignToContainer.style.display === 'block') {
         assignToContainer.style.display = 'none';
     }
-    assignToInput.style.backgroundImage = 'url(../assets/img/arrow_drop.png)';
+    assignToInput.style.backgroundImage = 'url(./assets/img/arrow_drop.png)';
 };
 
 /**
@@ -257,10 +257,10 @@ function selectCategory() {
     let taskcategoryInput = document.getElementById('taskcategoryinput');
     if (categoryContainer.style.display === 'block') {
         categoryContainer.style.display = 'none';
-        taskcategoryInput.style.backgroundImage = 'url(../assets/img/arrow_drop.png)';
+        taskcategoryInput.style.backgroundImage = 'url(./assets/img/arrow_drop.png)';
     } else {
         categoryContainer.style.display = 'block';
-        taskcategoryInput.style.backgroundImage = 'url(../assets/img/arrow_drop_down.png)';
+        taskcategoryInput.style.backgroundImage = 'url(./assets/img/arrow_drop_down.png)';
     }
 };
 
@@ -273,7 +273,7 @@ function closeSelectCategory() {
     if (categoryContainer.style.display === 'block') {
         categoryContainer.style.display = 'none';
     }
-    taskcategoryInput.style.backgroundImage = 'url(../assets/img/arrow_drop.png)';
+    taskcategoryInput.style.backgroundImage = 'url(./assets/img/arrow_drop.png)';
 };
 
 /**
