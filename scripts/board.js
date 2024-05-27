@@ -1,3 +1,18 @@
+const BASE_URL = "https://remotestorage-b0ea0-default-rtdb.europe-west1.firebasedatabase.app";  
+
+const firebaseConfig = {
+    apiKey: "YOUR_API_KEY",
+    authDomain: "YOUR_AUTH_DOMAIN",
+    databaseURL: "https://remotestorage-b0ea0-default-rtdb.europe-west1.firebasedatabase.app",
+    projectId: "YOUR_PROJECT_ID",
+    storageBucket: "YOUR_STORAGE_BUCKET",
+    messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+    appId: "YOUR_APP_ID"
+};
+
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+
 /**
  * Opens the dialog by removing the 'd_none' class and ensures CSS and content are loaded.
  */
@@ -84,3 +99,53 @@ function hidePopup(id) {
         taskDetails.classList.remove('slide-out-right');
     }, 800);
 }
+
+
+async function fetchData() {
+    const response = await fetch(`${BASE_URL}/tasks.json`);
+    if (!response.ok) {
+        throw new Error('Network response was not ok ' + response.statusText);
+    }
+    const data = await response.json();
+    return data;
+}
+
+
+function createTaskElement(task) {
+    return `
+        <div class="toDoBox" onclick="showPopup('popup')">
+            <button class="CategoryBox">${task.category}</button>
+            <p class="HeadlineBox">${task.title}</p>
+            <p class="descriptionBox">${task.description}</p>
+            <div class="subtaskProgress">
+                <progress value="0" max="100"></progress>
+                <p class="subtaskCount">0/1 Subtask</p>
+            </div>
+            <div class="nameSection">
+                <div class="assignedName colorName">${task.assignto.split(' ').map(name => name[0]).join('')}</div>
+                <div class="prioImgContainer">
+                    <img class="prioImg" src="./assets/img/prio_media.png" alt="Priority">
+                </div>
+            </div>
+        </div>
+    `;
+}
+
+
+async function displayTasks() {
+    try {
+        const tasks = await fetchData();
+        const taskContainer = document.getElementById('taskContainer');
+        let tasksHTML = '';
+
+        tasks.forEach(task => {
+            tasksHTML += createTaskElement(task);
+        });
+
+        taskContainer.innerHTML = tasksHTML;
+    } catch (error) {
+        console.error('Error fetching and displaying tasks:', error);
+    }
+}
+
+displayTasks();

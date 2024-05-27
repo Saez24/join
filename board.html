@@ -1,3 +1,5 @@
+html
+Code kopieren
 <!DOCTYPE html>
 <html lang="en">
 
@@ -6,6 +8,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./styles/style_board.css">
     <link rel="stylesheet" href="./styles/style_addtask.css">
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-database.js"></script>
     <script src="./scripts/templates.js"></script>
     <script src="./scripts/board.js"></script>
     <script src="./scripts/add_task.js"></script>
@@ -46,6 +50,25 @@
                     <div class="toDoBox_noTask">
                         <p class="noTaskMessage">no task to do</p>
                     </div>
+
+
+                    <div  id="taskContainer" class="toDoBox" onclick="showPopup('popup')">
+                        <button class="CategoryBox">User Story</button>
+                        <p class="HeadlineBox">Headline</p>
+                        <p class="descriptionBox">Beschreibung Einfügen</p>
+                        <div class="subtaskProgress">
+                            <progress value="0" max="100"></progress>
+                            <p class="subtaskCount">0/2 Subtask</p>
+                        </div>
+                        <div class="nameSection">
+                            <div class="assignedName colorName">AS</div>
+                            <div class="assignedName colorName">MB</div>
+                            <div class="prioImgContainer">
+                                <img class="prioImg" src="./assets/img/prio_media.png" alt="Priority">
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
             <div class="statusTasks">
@@ -130,16 +153,16 @@
                     <h2 class="HeadlineBox">Headline</h2>
                     <p class="descriptionDetails">Beschreibung Einfügen</p>
                     <div class="TaskDetailsLine">
-                        <p>Due date:</p>
-                        <p class="dueDate">10/05/2023</p>
+                        <p class="dueDate">Due date:</p>
+                        <p>10/05/2023</p>
                     </div>
                     <div class="priorityContainer">
-                        <p>Priority:</p>
+                        <p class="dueDate">Priority:</p>
                         <p>Medium</p>
                         <img class="prioImg" src="./assets/img/prio_baja.png" alt="Priority">
                     </div>
                     <div class="TaskDetailsLine">
-                        <p>Assigned To:</p>
+                        <p  class="dueDate">Assigned To:</p>
                     </div>
                     <div class="assignedContainer">
                         <div class="assignedName colorName">AS</div>
@@ -158,11 +181,11 @@
                         <input type="checkbox">
                         <p>Start Page Layout</p>
                     </div>
-                    <div class="editDeleteContainer">
-                        <p>Edit</p>
-                        <img src="./assets/img/edit.png" alt="Edit">
+                    <div class="editDeleteContainer">  
+                        <img src="./assets/img/delete.png" alt="Delete">                      
                         <p>Delete</p>
-                        <img src="./assets/img/delete.png" alt="Delete">
+                        <img src="./assets/img/edit.png" alt="Edit">
+                        <p>Edit</p>
                     </div>
                 </div>
             </div>
