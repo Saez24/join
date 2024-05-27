@@ -2,18 +2,43 @@
  * Opens the dialog by removing the 'd_none' class and ensures CSS and content are loaded.
  */
 function openDialog() {
+    if (window.innerWidth <= 750) {
+        closeDialog();
+        window.location.href = './add_task.html';
+        return;
+    }
+
     let dialog = document.getElementById('dialog');
     let dialogslide = document.getElementById('add_task_dialog_content');
     let content = document.getElementById('addtask-content');
     setTimeout(() => {
-        dialogslide.classList.add('add_task_dialog_slide_in')
-        dialog.classList.add('add_task_dialog_slide_in')
+        dialogslide.classList.add('add_task_dialog_slide_in');
+        dialog.classList.add('add_task_dialog_slide_in');
         dialog.classList.remove('d_none');
     }, 300);
     ensureCssLoaded();
     addTaskLoadNames();
     content.classList.remove('addtask-content');
     content.classList.add('addtask-content-dialog');
+}
+
+/**
+ * Closes the dialog by adding the 'd_none' class.
+ */
+function closeDialog() {
+    let dialog = document.getElementById('dialog');
+    setTimeout(() => {
+        dialog.classList.add('d_none');
+    }, 100);
+}
+
+/**
+ * Prevents event propagation when clicking on the background.
+ * 
+ * @param {Event} event - The event object.
+ */
+function closeOnBackground(event) {
+    event.stopPropagation();
 }
 
 /**

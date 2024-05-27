@@ -60,8 +60,6 @@ body {
     margin-bottom: 20px;
 }
 
-
-
 .closePopup {
     position: absolute;
     top: 20px;
@@ -99,25 +97,25 @@ body {
 .assignedContainer {
     display: flex;
     align-items: center;
-    margin-top: 10px; 
+    margin-top: 10px;
 }
 
 .assignedContainer .assignedName {
     margin-right: 10px;
     display: flex;
     align-items: center;
-    justify-content: center; 
-    width: 40px; 
+    justify-content: center;
+    width: 40px;
     height: 40px;
-    border-radius: 50%; 
-    background-color: #584c7c; 
-    color: white; 
-    font-size: 18px; 
-    line-height: 40px; 
+    border-radius: 50%;
+    background-color: #584c7c;
+    color: white;
+    font-size: 18px;
+    line-height: 40px;
 }
 
 .subtasksTitle {
-    color: gray; 
+    color: gray;
 }
 
 .subtaskItem {
@@ -127,26 +125,26 @@ body {
 }
 
 .subtaskItem input[type="checkbox"] {
-    appearance: none; 
-    width: 14px; 
-    height: 14px; 
-    border: 2px solid black; 
+    appearance: none;
+    width: 14px;
+    height: 14px;
+    border: 2px solid black;
     border-radius: 4px;
-    background-color: white; 
+    background-color: white;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-right: 10px; 
+    margin-right: 10px;
 }
 
 .subtaskItem input[type="checkbox"]:checked {
-    background-color: black; 
+    background-color: black;
 }
 
 .subtaskItem input[type="checkbox"]:checked::before {
-    content: '✓'; 
-    color: white; 
-    font-size: 10px; 
+    content: '✓';
+    color: white;
+    font-size: 10px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -155,13 +153,13 @@ body {
 .editDeleteContainer {
     display: flex;
     align-items: center;
-    justify-content: flex-end; 
+    justify-content: flex-end;
     margin-top: 20px;
 }
 
 .editDeleteContainer p,
 .editDeleteContainer img {
-    margin-left: 10px; 
+    margin-left: 10px;
 }
 
 .wrapped_maxWidth {
@@ -343,13 +341,13 @@ body {
 }
 
 .priorityContainer p {
-    margin: 0 10px 0 0; 
+    margin: 0 10px 0 0;
     display: flex;
-    align-items: center; 
+    align-items: center;
 }
 
 .priorityContainer .prioImg {
-    vertical-align: middle; 
+    vertical-align: middle;
 }
 
 .add_task_to_board {
@@ -392,7 +390,7 @@ body {
     opacity: 1;
     position: relative;
     text-rendering: optimizelegibility;
-    width: 900px;
+    max-width: 900px;
     z-index: 4006;
     margin: auto;
 }
@@ -472,9 +470,20 @@ body {
     }
 }
 
+@media screen and (max-width: 1050px) {
+    .add_task_dialog {
+        margin-left: 40px;
+        margin-right: 40px;
+    }
+}
+
 @media screen and (max-width: 750px) {
     .boardHeadline {
         flex-direction: column;
+    }
+
+    .dialog-bg {
+        display: none;
     }
 
     .searchTask {
@@ -530,5 +539,3 @@ body {
 .slide-out-right {
     animation: slide-out-right 0.8s both;
 }
-
-

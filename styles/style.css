@@ -461,6 +461,14 @@ footer a:hover {
         gap: 32px;
     }
 
+    #error {
+        font-size: 14px;
+        color: #ff8190;
+        position: absolute;
+        bottom: 230px;
+        left: 48px;
+    }
+
     .login-buttons {
         display: flex;
         flex-direction: column;
