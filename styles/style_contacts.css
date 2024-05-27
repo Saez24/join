@@ -543,12 +543,12 @@ h2 {
     
     .arrow-icon {
         display: flex;
-        position: fixed; /* statt absolute */
+        position: fixed;
         width: 32px;
         height: 32px;
-        right: 6px; /* wie bisher */
-        top: 25%; /* Beispiel: vertikal mittig ausrichten */
-        transform: translateY(-50%); /* Beispiel: vertikal mittig ausrichten */
+        right: 6px;
+        top: 25%; 
+        transform: translateY(-50%);
         cursor: pointer;
       }
       
