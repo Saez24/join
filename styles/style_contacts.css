@@ -525,6 +525,28 @@ h2 {
     background-color: rgba(0, 0, 0, 0.3);
 }
 
+.arrow-icon{
+    display: none
+}
+
+@media (max-width: 1400px){
+    .contacts-left{
+        display: none;
+    }
+    
+    .arrow-icon {
+        display: flex;
+        position: fixed; /* statt absolute */
+        width: 32px;
+        height: 32px;
+        right: 6px; /* wie bisher */
+        top: 25%; /* Beispiel: vertikal mittig ausrichten */
+        transform: translateY(-50%); /* Beispiel: vertikal mittig ausrichten */
+        cursor: pointer;
+      }
+      
+}
+
 @media (max-width: 1200px) {
     .contact-person {
         display: none;
@@ -558,6 +580,44 @@ h2 {
 
     .f-size-27 {
         font-size: 16px;
+    }
+}
+
+@media (max-width: 1000px){
+    #contactSummary {
+        left: 240px;
+    }
+
+    .main-contacts-text{
+        left: 240px;
+    }
+}
+
+
+@media (max-width: 900px){
+    .main-contacts-text{
+        flex-direction: column;
+        top: 128px;
+        gap: 0;
+        position: absolute;
+        justify-content: flex-start;
+        align-items: baseline;
+    }
+    h1{
+        margin: 0;
+    }
+
+    h2{
+        margin: 0;
+    }
+
+    .vertical-line{
+        display: none;
+    }
+
+    #contactSummary {
+        top: 300px;
+        left: 240px;
     }
 }
 
