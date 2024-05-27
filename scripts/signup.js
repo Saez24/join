@@ -22,21 +22,27 @@ let signup = document.getElementById("signup");
 let errorContainer = document.getElementById('error-message');
 
 /**
- * Validates that the password and confirm password fields match.
+ * Validates that the password and confirm password fields match and checks the password length.
  * 
  * @param {string} password - The password entered by the user.
  * @param {string} confirmPassword - The confirmation password entered by the user.
  * @param {HTMLElement} errorContainer - The container to display error messages.
- * @returns {boolean} - Returns true if passwords match, otherwise false.
+ * @returns {boolean} - Returns true if passwords match and the password length is sufficient, otherwise false.
  */
 function validatePasswords(password, confirmPassword, errorContainer) {
+    if (password.length < 5) {
+        errorContainer.innerHTML = 'The password must be at least 5 characters long.';
+        errorContainer.style.display = 'block';
+        return false;
+    }
     if (password !== confirmPassword) {
         errorContainer.innerHTML = 'The passwords do not match.';
         errorContainer.style.display = 'block';
         return false;
     }
     return true;
-};
+}
+
 
 /**
  * Validates that the name field contains both first and last name.
