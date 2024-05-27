@@ -30,6 +30,13 @@ body {
     background-color: #d7d7ec;
 }
 
+.selected-contact{
+    background-color: #2A3647 !important;
+    .contact-name-row {
+        color: white !important;
+    }
+}
+
 .initials {
     display: flex;
     height: 42px;

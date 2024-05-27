@@ -17,9 +17,7 @@ function slideInFromRight() {
     }, 300);
 }
 
-
 function slideOutToRight() {
-    debugger;
     let contactOverlay = document.getElementById('contact-overlay');
     let contactCont = document.getElementById('contact-cont');
 
@@ -31,16 +29,13 @@ function slideOutToRight() {
     }, 100);
 }
 
-
-function closeOverlayWhenGreyAreaWasClicked() { //https://www.tutorialspoint.com/online_html_editor.php
-
+function closeOverlayWhenGreyAreaWasClicked() {
     document.onclick = function (e) {
         if (e.target.id === 'contact-overlay') {
             slideOutToRight();
         }
     };
 }
-
 
 async function getNames() {
     try {
@@ -51,9 +46,13 @@ async function getNames() {
         let data = await response.json();
         console.log("Fetched data:", data); // Debugging Ausgabe
 
-        // Extrahiere die Namen aus den empfangenen Daten
-        let names = data.names || [];
-        renderContacts(names);
+        // Validierung der empfangenen Daten
+        if (data && data.names && typeof data.names === 'object') {
+            let namesArray = Object.values(data.names);
+            renderContacts(namesArray);
+        } else {
+            throw new Error("Invalid data format");
+        }
     } catch (error) {
         console.error("Error fetching data:", error);
     }
@@ -75,12 +74,13 @@ function renderContacts(data) {
             
             groupedContacts[initial].forEach((contact, index) => {
                 const randomColor = getRandomColor(); // Zufällige Farbe auswählen
+                const uniqueId = `contact-${initial}-${index}`; // Eindeutige ID erstellen
                 container.innerHTML += `
-                    <div class="contact-row" onclick="renderContactInformation('${contact.name}', '${contact.email}', '${randomColor}', '${contact.phonenumber}')">
+                    <div class="contact-row" id="${uniqueId}" onclick="renderContactInformation('${contact.name}', '${contact.email}', '${randomColor}', '${contact.phonenumber}', '${uniqueId}')">
                         <div class="initials" style="background-color: ${randomColor}" id="initials${index}">${getInitials(contact.name)}</div>
                         <div class="name-and-email">
-                            <div class="contact-name-row" id="name${index}">${contact.name}</div>
-                            <div class="contact-email-row" id="email${index}">${contact.email}</div>
+                            <div class="contact-name-row">${contact.name}</div>
+                            <div class="contact-email-row">${contact.email}</div>
                         </div>
                     </div>
                 `;
@@ -88,7 +88,6 @@ function renderContacts(data) {
         }
     }
 }
-
 
 function getRandomColor() {
     return initialsBackgroundColors[Math.floor(Math.random() * initialsBackgroundColors.length)];
@@ -114,8 +113,19 @@ function getInitials(name) {
     return initials.toUpperCase();
 }
 
-function renderContactInformation(name, email, color, phone){
+function renderContactInformation(name, email, color, phone, uniqueId){
     const contactSummary = document.getElementById('contactSummary');
+    
+    // Entferne die Klasse 'selected-contact' von allen Kontaktzeilen
+    const contactRows = document.getElementsByClassName('contact-row');
+    for (let row of contactRows) {
+        row.classList.remove('selected-contact');
+    }
+    
+    // Füge die Klasse 'selected-contact' zur angeklickten Zeile hinzu
+    let contactName = document.getElementById(uniqueId);
+    contactName.classList.add('selected-contact');
+    
     contactSummary.innerHTML = `
         <div class="contact-summary-headline">
             <div class="contact-summary-initials" style="background-color: ${color};">${getInitials(name)}</div>
@@ -132,7 +142,7 @@ function renderContactInformation(name, email, color, phone){
             <div><b>Email</b></div>
             <span>${email}</span>
             <div><b>Phone</b></div>
-            <span>+49 151 ${phone}</span> <!-- Hier könntest du das Telefonfeld hinzufügen -->
+            <span>+49 151 ${phone}</span>
         </div>
     `;
 }
