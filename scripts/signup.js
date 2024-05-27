@@ -104,7 +104,7 @@ function validatePrivacyCheckbox(privacyCheckbox, errorContainer) {
  */
 signup.addEventListener('click', function (event) {
     event.preventDefault();
- 
+
     let email = document.getElementById("email").value;
     let password = document.getElementById("password").value;
     let confirmPassword = document.getElementById("confirmpassword").value;
@@ -173,6 +173,5 @@ function handleSubmit() {
         name: name,
         email: email,
     };
-
-    addName(newName);
+    addName(newName)
 };

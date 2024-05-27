@@ -38,10 +38,10 @@
     <div class="main">
         <div class="header">
             <p id="headline">Kanban Project Management Tool</p>
-            <img src="assets/img/logo.png" alt="" id="joinHeader" onclick="selectSummary()" style="cursor: pointer;">
+            <img src="./assets/img/logo.png" alt="" id="joinHeader" onclick="selectSummary()" style="cursor: pointer;">
             <div class="top-right">
-                <div class="bounding-box"><img class="help-icon" src="assets/img/help.png" alt="Help"></div>
-                <div onclick="showSubmenu()"><img class="profile-icon" src="assets/img/profile.png" alt="Help"></div>
+                <div class="bounding-box"><img class="help-icon" src="./assets/img/help.png" alt="Help"></div>
+                <div class="profile-icon" id="userblock" onclick="showSubmenu()"></div>
             </div>
         </div>
         <div class="submenu d-none" id="submenu">
@@ -51,7 +51,7 @@
             <div class="submenu-link" onclick="selectPrivacyPolicy()">
                 <p class="submenu-link-text">Privacy Policy</p>
             </div>
-            <div id="logout" class="submenu-link">
+            <div onclick="handleLogout()" id="logout" class="submenu-link">
                 <p class="submenu-link-text">Logout</p>
             </div>
         </div>

@@ -33,6 +33,7 @@ async function addTaskLoadNames() {
         let data = await response.json();
         renderAddTaskNames(data.names);
         renderAddTaskCategories(data.category);
+        mediumButton();
         console.log(data);
     } catch (error) {
         console.error("Error fetching data:", error);
@@ -60,12 +61,13 @@ function generateNameHTML(nameKey, name, firstInitial, lastInitial, id) {
 };
 
 /**
- * Generiert das HTML für die Namen, einschließlich der Initialen.
- * @param {Object} names - Das Objekt, das die Namen enthält.
- * @returns {string} - Das generierte HTML für die Namen.
+ * Generates the HTML for names, including initials.
+ * @param {Object} names - The object containing the names.
+ * @returns {string} The generated HTML for the names.
  */
 function renderNamesHTML(names) {
     let namesHTML = '';
+    let id = 0;
 
     for (let nameKey in names) {
         if (names.hasOwnProperty(nameKey)) {
@@ -201,11 +203,11 @@ function renderAddTaskCategories(categories) {
  */
 function dropdownSelectCategory(element) {
     if (element.closest("#taskcategory")) {
-        const categoryContainer = document.getElementById("taskcategory");
-        const checkboxes = categoryContainer.querySelectorAll(".checkbox");
+        let categoryContainer = document.getElementById("taskcategory");
+        let checkboxes = categoryContainer.querySelectorAll(".checkbox");
 
-        const clickedCheckbox = element.querySelector(".checkbox");
-        const isChecked = clickedCheckbox.checked;
+        let clickedCheckbox = element.querySelector(".checkbox");
+        let isChecked = clickedCheckbox.checked;
 
         checkboxes.forEach(checkbox => {
             checkbox.checked = false;
@@ -221,7 +223,7 @@ function dropdownSelectCategory(element) {
 
         loadToCategoryInput();
     }
-}
+};
 
 /**
  * Loads the selected category into the category input field.
@@ -229,15 +231,15 @@ function dropdownSelectCategory(element) {
  * the taskcategory input field with the corresponding category label.
  */
 function loadToCategoryInput() {
-    const categoryContainer = document.getElementById("taskcategory");
-    const categoryInput = document.getElementById("taskcategoryinput");
-    const checkboxes = categoryContainer.querySelectorAll(".checkbox");
+    let categoryContainer = document.getElementById("taskcategory");
+    let categoryInput = document.getElementById("taskcategoryinput");
+    let checkboxes = categoryContainer.querySelectorAll(".checkbox");
 
     categoryInput.value = '';
 
     for (let checkbox of checkboxes) {
         if (checkbox.checked) {
-            const labelElement = checkbox.closest(".dropdown_selection").querySelector(".label");
+            let labelElement = checkbox.closest(".dropdown_selection").querySelector(".label");
             if (labelElement) {
                 categoryInput.value = labelElement.innerText;
             }
@@ -275,16 +277,16 @@ function closeSelectCategory() {
 };
 
 /**
- * Filtert die Kategorien basierend auf dem eingegebenen Text und aktualisiert die Anzeige.
- * @param {string} searchText - Der eingegebene Text zur Filterung der Kategorien.
+ * Filters categories based on the entered text and updates the display.
+ * @param {string} searchText - The entered text for filtering the categories.
  */
 function filterCategories(searchText) {
-    const categoryContainer = document.getElementById("taskcategory");
-    const categories = categoryContainer.querySelectorAll(".dropdown_selection");
+    let categoryContainer = document.getElementById("taskcategory");
+    let categories = categoryContainer.querySelectorAll(".dropdown_selection");
 
     categories.forEach(category => {
-        const label = category.querySelector(".label");
-        const categoryName = label.innerText.toLowerCase();
+        let label = category.querySelector(".label");
+        let categoryName = label.innerText.toLowerCase();
         if (categoryName.includes(searchText.toLowerCase())) {
             category.style.display = "flex";
         } else {
@@ -294,14 +296,13 @@ function filterCategories(searchText) {
 };
 
 /**
- * Event-Handler für die Eingabe im Kategorie-Inputfeld.
+ * Event handler for input in the category input field.
  */
 function handleCategoryInput() {
-    const searchInput = document.getElementById("taskcategoryinput");
-    const searchText = searchInput.value.trim();
+    let searchInput = document.getElementById("taskcategoryinput");
+    let searchText = searchInput.value.trim();
     filterCategories(searchText);
 };
-
 
 /**
  * Prevents event propagation.
@@ -554,4 +555,5 @@ function clearContent() {
     for (let k = 0; k < dropdownSelections.length; k++) {
         dropdownSelections[k].classList.remove("selected_dropdown");
     }
+    mediumButton();
 };
