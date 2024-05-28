@@ -36,7 +36,8 @@
                 <div class="input-container">
                     <input required id="email" type="text" placeholder="E-Mail" />
                     <input onclick="handleShowpasswordClick(event)" onfocus="showPasswordImage()"
-                        onblur="loadPasswordImage()" required id="password" type="password" placeholder="Password" />
+                        onblur="loadPasswordImage(), hidePassword()" required id="password" type="password"
+                        placeholder="Password" />
                 </div>
                 <span id="error" style="display: none"> Wrong password Ups! Try again.
                 </span>
