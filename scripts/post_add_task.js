@@ -1,20 +1,56 @@
-
-
+/**
+ * Creates a new task based on user input and sends it to the server.
+ */
 async function createTask() {
-    // Prüfen, ob die erforderlichen Felder ausgefüllt sind
-    let title = document.getElementById('tasktitle').value;
-    let description = document.getElementById('description').value;
-    let duedate = document.getElementById('duedate').value;
-    let category = document.getElementById('taskcategoryinput').value;
-    let prio = activeButton ? activeButton.id : null;
-    let status = 'todo';
+    let taskDetails = getTaskDetails();
 
-    if (!title || !duedate || !category) {
-        alert("Bitte füllen Sie alle erforderlichen Felder aus und wählen Sie eine Priorität.");
-        return;
+    if (!validateTaskDetails(taskDetails)) return;
+    let assignedTo = getAssignedTo();
+    let subtasks = getSubtasks();
+    let taskData = {
+        ...taskDetails,
+        assignto: assignedTo,
+        subtask: subtasks,
+        status: 'todo'
+    };
+
+    await postData("tasks", taskData);
+    clearContent();
+    window.location.href = "board.html";
+};
+
+/**
+ * Retrieves task details from user input fields.
+ * @returns {Object} An object containing task details.
+ */
+function getTaskDetails() {
+    return {
+        title: document.getElementById('tasktitle').value,
+        description: document.getElementById('description').value,
+        duedate: document.getElementById('duedate').value,
+        category: document.getElementById('taskcategoryinput').value,
+        prio: activeButton ? activeButton.id : null
+    };
+};
+
+/**
+ * Validates task details.
+ * @param {Object} taskDetails - An object containing task details.
+ * @returns {boolean} Returns true if task details are valid, otherwise false.
+ */
+function validateTaskDetails(taskDetails) {
+    if (!taskDetails.title || !taskDetails.duedate || !taskDetails.category) {
+        alert("Please fill out all required fields and select a priority.");
+        return false;
     }
+    return true;
+};
 
-    // Namen der zugewiesenen Personen erfassen
+/**
+ * Retrieves assigned users based on checkbox selection.
+ * @returns {string[]} An array of assigned users.
+ */
+function getAssignedTo() {
     let assignedToCheckboxes = document.querySelectorAll('input[type="checkbox"][id^="assignedto_"]:checked');
     let assignedTo = [];
     assignedToCheckboxes.forEach((checkbox) => {
@@ -24,31 +60,28 @@ async function createTask() {
             assignedTo.push(nameSpan.innerText.trim());
         }
     });
+    return assignedTo;
+};
 
-    // Subtasks erfassen
+/**
+ * Retrieves subtasks from the user interface.
+ * @returns {string[]} An array of subtasks.
+ */
+function getSubtasks() {
     let subtasksElements = document.querySelectorAll('.addedtask span');
     let subtasks = [];
     subtasksElements.forEach((subtask) => {
         subtasks.push(subtask.innerText);
     });
+    return subtasks;
+};
 
-    // Erstelle ein Objekt mit den erfassten Daten
-    let taskData = {
-        title: title,
-        description: description,
-        assignto: assignedTo,
-        duedate: duedate,
-        prio: prio,
-        category: category,
-        subtask: subtasks,
-        status: status
-    };
-
-    // Rufe die postData-Funktion auf, um die Aufgabendaten zu übergeben
-    await postData("tasks", taskData);
-    clearContent();
-}
-
+/**
+ * Sends task data to the server.
+ * @param {string} path - The path to send the task data to.
+ * @param {Object} data - The task data to be sent.
+ * @returns {Promise<void>} A promise that resolves once the data is sent.
+ */
 async function postData(path = "tasks", data = {}) {
     let response = await fetch(BASE_URL + path + ".json", {
         method: "POST",
@@ -58,5 +91,4 @@ async function postData(path = "tasks", data = {}) {
         body: JSON.stringify(data)
     });
     return await response.json();
-}
-
+};

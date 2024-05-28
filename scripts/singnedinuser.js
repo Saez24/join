@@ -34,8 +34,6 @@ async function fetchUserData(email) {
         if (userNameData) {
             console.log('User name:', userNameData.name);
             renderUserName(userNameData.name);
-        } else {
-            console.log('User name not found for email:', email);
         }
     } catch (error) {
         console.error("Error fetching data:", error);
@@ -88,10 +86,10 @@ function generateNameUserblock(name) {
         lastInitial = nameParts.length > 1 ? nameParts[1].charAt(0).toUpperCase() : '';
     } else {
         firstInitial = 'G';
-        lastInitial = 'S';
+        lastInitial = '';
     }
     return /*html*/ `
-        <button class="shortname"><h2>${firstInitial}${lastInitial}</h2></button>
+        <button class="shortname"><h4 id="fullname" style="display: none;">${name}</h4><h2>${firstInitial}${lastInitial}</h2></button>
     `;
 };
 

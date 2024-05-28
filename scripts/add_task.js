@@ -31,14 +31,20 @@ async function addTaskLoadNames() {
     try {
         let response = await fetch(BASE_URL + ".json");
         let data = await response.json();
-        renderAddTaskNames(data.names);
+        let sortedKeys = Object.keys(data.names).sort((a, b) => {
+            let firstNameA = data.names[a].name.split(' ')[0].toUpperCase();
+            let firstNameB = data.names[b].name.split(' ')[0].toUpperCase();
+            return firstNameA.localeCompare(firstNameB);
+        });
+
+        renderAddTaskNames(sortedKeys, data.names);
         renderAddTaskCategories(data.category);
         mediumButton();
         console.log(data);
     } catch (error) {
         console.error("Error fetching data:", error);
     }
-};
+}
 
 /**
  * Generates HTML for displaying a name with a color-coded short name and a checkbox.
@@ -55,32 +61,32 @@ function generateNameHTML(nameKey, name, firstInitial, lastInitial, id) {
         <div class="dropdown_selection" onclick="dropdownSelectAssignTo(this)">
             <button class="shortname" style="background-color: ${randomColor};"><span>${firstInitial}${lastInitial}</span></button><span id="assignname_${nameKey}_${id}">${name}</span>
             <input class="checkbox" type="checkbox" id="assignedto_${nameKey}_${id}" data-initials="${firstInitial}${lastInitial}" data-color="${randomColor}" onchange="loadSelectedAssignTo()">
-
         </div>
     `;
-};
+}
 
 /**
  * Generates the HTML for names, including initials.
+ * @param {Array} sortedKeys - The sorted array of name keys.
  * @param {Object} names - The object containing the names.
  * @returns {string} The generated HTML for the names.
  */
-function renderNamesHTML(names) {
+function renderNamesHTML(sortedKeys, names) {
     let namesHTML = '';
     let id = 0;
 
-    for (let nameKey in names) {
-        if (names.hasOwnProperty(nameKey)) {
-            let nameObj = names[nameKey];
+    for (let key of sortedKeys) {
+        if (names.hasOwnProperty(key)) {
+            let nameObj = names[key];
             let name = nameObj.name;
             let nameParts = name.split(' ');
             let firstInitial = nameParts[0].charAt(0).toUpperCase();
             let lastInitial = nameParts.length > 1 ? nameParts[1].charAt(0).toUpperCase() : '';
-            namesHTML += generateNameHTML(nameKey, name, firstInitial, lastInitial, id++);
+            namesHTML += generateNameHTML(key, name, firstInitial, lastInitial, id++);
         }
     }
     return namesHTML;
-};
+}
 
 /**
  * Renders names HTML to the DOM.
@@ -89,16 +95,17 @@ function renderNamesHTML(names) {
 function renderNamesToDOM(namesHTML) {
     let namesContainer = document.getElementById("assignedto");
     namesContainer.innerHTML = namesHTML;
-};
+}
 
 /**
  * Renders names for adding a new task to the DOM.
+ * @param {Array} sortedKeys - The sorted array of name keys.
  * @param {Object} names - An object containing names.
  */
-function renderAddTaskNames(names) {
-    let namesHTML = renderNamesHTML(names);
+function renderAddTaskNames(sortedKeys, names) {
+    let namesHTML = renderNamesHTML(sortedKeys, names);
     renderNamesToDOM(namesHTML);
-};
+}
 
 /**
  * Toggles the visibility of the assign-to selection container.
@@ -114,7 +121,7 @@ function selectAssignTo() {
         assignToContainer.style.display = 'block';
         assignToInput.style.backgroundImage = 'url(./assets/img/arrow_drop_down.png)';
     }
-};
+}
 
 /**
  * Closes the assignto dropdown menu if it is currently open.
@@ -126,7 +133,7 @@ function closeAssignTo() {
         assignToContainer.style.display = 'none';
     }
     assignToInput.style.backgroundImage = 'url(./assets/img/arrow_drop.png)';
-};
+}
 
 /**
  * Updates the selectedAssignTo div with buttons representing the selected names.
@@ -152,7 +159,7 @@ function loadSelectedAssignTo() {
             selectedAssignToDiv.appendChild(button);
         }
     });
-};
+}
 
 /**
  * Toggles the "selected_dropdown" class on the given element and toggles the associated checkbox state.
@@ -170,7 +177,7 @@ function dropdownSelectAssignTo(element) {
             loadSelectedAssignTo();
         }
     }
-};
+}
 
 /**
  * Renders categories for adding a new task to the DOM.
@@ -183,7 +190,7 @@ function renderAddTaskCategories(categories) {
     for (let categoryKey in categories) {
         if (categories.hasOwnProperty(categoryKey)) {
             let category = categories[categoryKey];
-            let categoryId = categoryKey; // Use a unique key as id
+            let categoryId = categoryKey;
             categoryContainer.innerHTML += /*html*/ `
             <div class="dropdown_selection" onclick="dropdownSelectCategory(this)">
                 <label class="label">${category.task}</label>
@@ -192,7 +199,8 @@ function renderAddTaskCategories(categories) {
             `;
         }
     }
-};
+}
+
 
 /**
  * Toggles the "selected_dropdown" class on the given element and toggles the associated checkbox state.
@@ -212,6 +220,7 @@ function dropdownSelectCategory(element) {
         checkboxes.forEach(checkbox => {
             checkbox.checked = false;
             checkbox.closest(".dropdown_selection").classList.remove("selected_dropdown");
+            closeSelectCategory();
         });
 
         clickedCheckbox.checked = !isChecked;
@@ -340,7 +349,6 @@ function resetButtonStyles(button) {
  */
 function setActiveButton(button) {
     if (activeButton === button) {
-        // When clicking on the same button
         resetButtonStyles(button);
         activeButton = null; // Reset the active button
     } else {
@@ -530,30 +538,51 @@ function deleteSubtask(subtaskId) {
 };
 
 /**
- * Clears the content.
+ * Reset inputs such as text fields and checkboxes.
  */
-function clearContent() {
+function resetInputs() {
     let inputs = document.getElementsByTagName("input");
     let textareas = document.getElementsByTagName("textarea");
-    let assignedto = document.getElementById("selectedAssignTo");
 
     for (let i = 0; i < inputs.length; i++) {
         if (inputs[i].type === "text" || inputs[i].type === "date") {
             inputs[i].value = "";
         } else if (inputs[i].type === "checkbox") {
-            inputs[i].checked = false; // Setze Checkboxen zurück
+            inputs[i].checked = false;
         }
     }
 
     for (let j = 0; j < textareas.length; j++) {
         textareas[j].value = "";
     }
+};
 
+/**
+ * Clear the content of assignedto and subtasks elements.
+ */
+function clearAssignedToAndSubtasks() {
+    let assignedto = document.getElementById("selectedAssignTo");
+    let subtasks = document.getElementById("addsubtasks");
     assignedto.innerHTML = "";
+    subtasks.innerHTML = "";
+};
 
+/**
+ * Remove the "selected_dropdown" class from dropdown selection elements.
+ */
+function removeSelectedDropdownClass() {
     let dropdownSelections = document.getElementsByClassName("dropdown_selection");
-    for (let k = 0; k < dropdownSelections.length; k++) {
-        dropdownSelections[k].classList.remove("selected_dropdown");
+    for (let i = 0; i < dropdownSelections.length; i++) {
+        dropdownSelections[i].classList.remove("selected_dropdown");
     }
-    mediumButton();
+};
+
+/**
+ * Clears the content by invoking the above functions and calls mediumButton if necessary.
+ */
+function clearContent() {
+    resetInputs();
+    clearAssignedToAndSubtasks();
+    removeSelectedDropdownClass();
+    mediumButton(); // Call mediumButton if necessary
 };

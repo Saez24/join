@@ -11,11 +11,7 @@ let amountTasksUrgent = 0;
 let amountTasksInBoard = 0;
 let amountTasksInProgress = "?"; //Punkt 2
 let amountTasksAwaitingFeedback = "?"; //Punkt 2
-
 let earliestDeadline = null;
-
-let summarySignedInUser = "Guest"; // Siehe Punkt 1.
-
 
 async function initializeSummary() {
     await determineTasksInBoard();
@@ -23,6 +19,7 @@ async function initializeSummary() {
     await determineDeadline();
     checkGreeting();
     renderSummary();
+    loadName();
 }
 
 
@@ -110,6 +107,29 @@ function checkGreeting() {
     }
 }
 
+/**
+ * Loads the user's name from the "fullname" element and updates the "summaryUserName" 
+ * and "summaryUserNameResponsive" elements with the user's name.
+ * If no name is available or the name is null, it defaults to "Guest".
+ */
+function loadName() {
+    let userNameElement = document.getElementById("fullname");
+    let userName = userNameElement ? userNameElement.textContent.trim() : null;
+    if (!userName || userName === "null") {
+        userName = "Guest";
+    }
+
+    let summaryUserName = document.getElementById("summaryUserName");
+    let summarySignedInUserResponsive = document.getElementById('summaryUserNameResponsive');
+    if (summaryUserName) {
+        summaryUserName.innerHTML = userName;
+    }
+
+    if (summarySignedInUserResponsive) {
+        summarySignedInUserResponsive.innerHTML = userName;
+    }
+}
+
 
 /** Removes the key "greet" out of local storage. This function gets called when the user logs out.
  *  This function exists to assure that the welcome message gets triggered once the user logs in again.
@@ -140,8 +160,7 @@ function renderSummary() {
     document.getElementById('summaryTasksInBoard').innerHTML = amountTasksInBoard;
     document.getElementById('summaryTasksInProgress').innerHTML = amountTasksInProgress;
     document.getElementById('summaryAwaitingFeedback').innerHTML = amountTasksAwaitingFeedback;
-    document.getElementById('summaryUserName').innerHTML = summarySignedInUser;
-    document.getElementById('summaryUserNameResponsive').innerHTML = summarySignedInUser;
+
 }
 
 
