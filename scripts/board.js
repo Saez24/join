@@ -31,7 +31,7 @@ function openDialog() {
         dialog.classList.remove('d_none');
     }, 300);
     ensureCssLoaded();
-    addTaskLoadNames();
+    // addTaskLoadNames();
     content.classList.remove('addtask-content');
     content.classList.add('addtask-content-dialog');
 }
