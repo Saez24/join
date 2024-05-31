@@ -5,18 +5,22 @@
 
 const BASE_URL = "https://remotestorage-b0ea0-default-rtdb.europe-west1.firebasedatabase.app/"
 
-let amountTasksToDos = "?";
-let amountTasksDone = "?"; //Punkt 2
+let amountTasksToDos = 0;
+let amountTasksDone = 0;
 let amountTasksUrgent = 0;
 let amountTasksInBoard = 0;
-let amountTasksInProgress = "?"; //Punkt 2
-let amountTasksAwaitingFeedback = "?"; //Punkt 2
+let amountTasksInProgress = 0; 
+let amountTasksAwaitingFeedback = 0; 
 let earliestDeadline = null;
 
 async function initializeSummary() {
     await determineTasksInBoard();
     await determineUrgentTasks();
     await determineDeadline();
+    await determineTasksToDos();
+    await determineTasksDone();
+    await determineTasksInProgress();
+    await determineTasksAwaitingFeedback();
     checkGreeting();
     renderSummary();
     loadName();
@@ -31,7 +35,8 @@ async function initializeSummary() {
 async function loadData(path = "") {
     let response = await fetch(BASE_URL + path + ".json");
     responseToJson = await response.json();
-    return responseToJson;
+    responseToObject = Object.values(responseToJson);
+    return responseToObject; //alternativ:  return Object.values(await response.json()); um Zeilen zu sparen.
 }
 
 
@@ -39,8 +44,8 @@ async function loadData(path = "") {
  * Updates the global variable "amountTasksInBoard", which will later be required to render the summary html page. 
  * */
 async function determineTasksInBoard() {
-    let responseToJson = await loadData('tasks');
-    amountTasksInBoard = responseToJson.length;
+    let responseToObject = await loadData('tasks');
+    amountTasksInBoard = responseToObject.length;
 }
 
 
@@ -49,10 +54,50 @@ async function determineTasksInBoard() {
  * which will later be required to render the summary html page. 
  * */
 async function determineUrgentTasks() {
-    let responseToJson = await loadData('tasks');
-    for (let i = 0; i < responseToJson.length; i++) {
-        if (responseToJson[i].prio === "urgent") {
+    let responseToObject = await loadData('tasks');
+    for (let i = 0; i < responseToObject.length; i++) {
+        if (responseToObject[i].prio === "urgent") {
             amountTasksUrgent++;
+        }
+    }
+}
+
+
+async function determineTasksToDos() {
+    let responseToObject = await loadData('tasks');
+    for (let i = 0; i < responseToObject.length; i++) {
+        if (responseToObject[i].status === "todo") {
+            amountTasksToDos++;
+        }
+    }
+}
+
+
+async function determineTasksDone() {
+    let responseToObject = await loadData('tasks');
+    for (let i = 0; i < responseToObject.length; i++) {
+        if (responseToObject[i].status === "done") {
+            amountTasksDone++;
+        }
+    }
+}
+
+
+async function determineTasksInProgress() {
+    let responseToObject = await loadData('tasks');
+    for (let i = 0; i < responseToObject.length; i++) {
+        if (responseToObject[i].status === "inprogress") {
+            amountTasksInProgress++;
+        }
+    }
+}
+
+
+async function determineTasksAwaitingFeedback() {
+    let responseToObject = await loadData('tasks');
+    for (let i = 0; i < responseToObject.length; i++) {
+        if (responseToObject[i].status === "inprogress") {
+            amountTasksAwaitingFeedback++;
         }
     }
 }
@@ -70,11 +115,11 @@ async function determineUrgentTasks() {
  * */
 async function determineDeadline() {
     earliestDeadline = null;
-    let responseToJson = await loadData('tasks');
+    let responseToObject = await loadData('tasks');
 
-    for (let i = 0; i < responseToJson.length; i++) {
-        if (responseToJson[i].prio === "urgent") {
-            let taskDueDate = new Date(responseToJson[i].duedate);
+    for (let i = 0; i < responseToObject.length; i++) {
+        if (responseToObject[i].prio === "urgent") {
+            let taskDueDate = new Date(responseToObject[i].duedate);
 
             if (earliestDeadline === null || taskDueDate < earliestDeadline) {
                 earliestDeadline = taskDueDate;
@@ -92,7 +137,8 @@ async function determineDeadline() {
 
 /** Checks if the user has been visited the summary page during log-in. 
  *  If so, the local storage key "greet" will be set to "no" and the good morning message will not be 
- *  displayed again when the user re-visits the summary page. */
+ *  displayed again when the user re-visits the summary page. 
+ * */
 function checkGreeting() {
     let greeter = document.getElementById("fade-out");
     if (localStorage.getItem('greet') === null) {
