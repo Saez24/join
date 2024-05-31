@@ -1,8 +1,3 @@
-// TO DO
-// 1. Globale Variabel signedInUser deklarieren mit Alex. Siehe var "user" from scripts/singnedinuser.js let user = auth.currentUser? Anschließend Render-Funktion schreiben mit var "signedInUser".
-// 2. Amount TasksToDo, TasksDone, TasksInProgress, TasksAwaitingFeedback aus einem Array abgreifen (mit Sarah abstimmen) und Zaehler-Funktion schreiben.
-
-
 const BASE_URL = "https://remotestorage-b0ea0-default-rtdb.europe-west1.firebasedatabase.app/"
 
 let amountTasksToDos = 0;
