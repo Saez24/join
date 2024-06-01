@@ -5,6 +5,7 @@ let initialsBackgroundColors = [
     '#0038FF', '#00FFFF', '#FF00000', '#FF4646', '#FFBB2B'
 ];
 
+
 function slideInFromRight() {
     let contactOverlay = document.getElementById('contact-overlay');
     let contactCont = document.getElementById('contact-cont');
@@ -16,6 +17,7 @@ function slideInFromRight() {
         contactOverlay.classList.add('fade-to-grey-overlay');
     }, 300);
 }
+
 
 function slideOutToRight() {
     let contactOverlay = document.getElementById('contact-overlay');
@@ -29,6 +31,7 @@ function slideOutToRight() {
     }, 100);
 }
 
+
 function closeOverlayWhenGreyAreaWasClicked() {
     document.onclick = function (e) {
         if (e.target.id === 'contact-overlay') {
@@ -36,6 +39,73 @@ function closeOverlayWhenGreyAreaWasClicked() {
         }
     };
 }
+
+/**
+ * 
+ * @param {*} path 
+ * @param {*} data 
+ * @returns 
+ */
+async function addContactData(path = "", data = {}) {
+    let response = await fetch(BASE_URL + path + ".json", {
+        method: "POST",
+        header: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data)
+    });
+    return responseToJson = await response.json();
+}
+
+
+function createContact() {
+
+    if (validateContactInputs()) {
+        return; 
+    }
+    let email = document.getElementById('contact-email').value;
+    let name = document.getElementById('contact-name').value;
+    let phonenumber = document.getElementById('contact-phone').value;
+    addContactData('names', { 'email': email, 'name': name, 'phonenumber': phonenumber })
+}
+
+
+function validateContactInputs() {
+    let emailValid = document.getElementById('contact-email').checkValidity();
+    let nameValid = document.getElementById('contact-name').checkValidity();
+    let phonenumberValid = document.getElementById('contact-phone').checkValidity();
+
+    if (!emailValid || !nameValid || !phonenumberValid) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+
+// document.addEventListener('DOMContentLoaded', function() {
+//     const email = document.getElementById('contact-email');
+//     const name = document.getElementById('contact-name');
+//     const phonenumber = document.getElementById('contact-phone');
+//     const submitButton = document.getElementById('contact-create-contact');
+
+// function validateContactInputs(email, name, phonenumber) {
+//     let emailValid = email.checkValidity();
+//     let nameValid = name.checkValidity();
+//     let phonenumberValid = phonenumber.checkValidity();
+
+//     if (emailValid && nameValid && phonenumberValid) {
+//         submitButton.disabled = false;
+//     } else {
+//         submitButton.disabled = true;
+//     }
+// }
+
+// emailInput.addEventListener('input', validateContactInputs);
+// nameInput.addEventListener('input', validateContactInputs);
+// phoneInput.addEventListener('input', validateContactInputs);
+// });
+
 
 async function getNames() {
     try {
@@ -112,7 +182,7 @@ function getInitials(name) {
     return initials.toUpperCase();
 }
 
-function renderContactInformation(name, email, color, phone, uniqueId){
+function renderContactInformation(name, email, color, phone, uniqueId) {
     const contactSummary = document.getElementById('mainContacts');
     contactSummary.classList.add('zindex200', 'bgcolorgrey');
     // Entferne die Klasse 'selected-contact' von allen Kontaktzeilen
@@ -159,8 +229,8 @@ function renderContactSummary(color, name, email, phone) {
 `;
 }
 
-function closeContactInformation(){
+function closeContactInformation() {
     let summary = document.getElementById('contactSummary');
-    summary.innerHTML ='';
+    summary.innerHTML = '';
     getNames();
 }
