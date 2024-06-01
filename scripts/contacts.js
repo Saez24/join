@@ -113,7 +113,8 @@ function getInitials(name) {
 }
 
 function renderContactInformation(name, email, color, phone, uniqueId){
-    const contactSummary = document.getElementById('contactSummary');
+    const contactSummary = document.getElementById('mainContacts');
+    contactSummary.classList.add('zindex200', 'bgcolorgrey');
     // Entferne die Klasse 'selected-contact' von allen Kontaktzeilen
     const contactRows = document.getElementsByClassName('contact-row');
     for (let row of contactRows) {
@@ -128,7 +129,14 @@ function renderContactInformation(name, email, color, phone, uniqueId){
 
 function renderContactSummary(color, name, email, phone) {
     return `
-    <div id="backArrow" class="arrow-icon" onclick="closeContactInformation()"><img src="assets/img/arrow_left.png"></div>
+    <div class="main-contacts-text">
+        <h1>Contacts</h1>
+        <div class="vertical-line"></div>
+        <h2>Better with a team</h2>
+        <div class="horizontal-line"></div>
+    </div>
+    <div id="contactSummary">
+        <div id="backArrow" class="arrow-icon" onclick="closeContactInformation()"><img src="assets/img/arrow_left.png"></div>
     <div class="contact-summary-headline">
         <div class="contact-summary-initials" style="background-color: ${color};">${getInitials(name)}</div>
         <div class="contact-summary-headline-rightside">
@@ -140,11 +148,13 @@ function renderContactSummary(color, name, email, phone) {
         </div>
     </div>
     <div class="contact-summary-contact-information">Contact Information</div>
-    <div class="contact-summary-mail-and-phone">
-        <div><b>Email</b></div>
-        <span>${email}</span>
-        <div><b>Phone</b></div>
-        <span>+49 151 ${phone}</span>
+        <div class="contact-summary-mail-and-phone">
+            <div><b>Email</b></div>
+            <span>${email}</span>
+            <div><b>Phone</b></div>
+            <span>+49 151 ${phone}</span>
+        </div>
+    </div>
     </div>
 `;
 }

@@ -533,11 +533,32 @@ h2 {
     display: none
 }
 
+.zindex200{
+    z-index: 200;
+}
+
+.bgcolorgrey{
+    background-color: rgb(255, 0, 255);
+}
+
 @media (max-width: 1400px){
 
     .main-contacts{
-        width: 100%;
+        width: 80%;
+        left: 0;
+    }
+
+    .add-contact-btn{
+        position: sticky;
+        left: auto;
+    }
+
+    .contacts-left{
+        left: 232px;
         right: 0;
+    }
+
+    .main-contacts{
 
     }
     
@@ -641,14 +662,12 @@ h2 {
 
 @media (max-width: 750px) {
     .main-contacts {
-        align-items: center;
-        left: 0;
+        align-items: flex-start;
         width: 100%;
-        z-index: 1;
     }
 
     .main-contacts-text{
-
+        left: 150px;
     }
     .contact-cont {
         flex-direction: column;
