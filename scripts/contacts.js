@@ -59,10 +59,10 @@ async function addContactData(path = "", data = {}) {
 
 
 function createContact() {
-
     if (validateContactInputs()) {
         return; 
     }
+
     let email = document.getElementById('contact-email').value;
     let name = document.getElementById('contact-name').value;
     let phonenumber = document.getElementById('contact-phone').value;
