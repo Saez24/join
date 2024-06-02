@@ -179,11 +179,11 @@ function renderContactInformation(name, email, color, phone, uniqueId) {
     }
     let contactName = document.getElementById(uniqueId);
     contactName.classList.add('selected-contact');
-    contactSummary.innerHTML = renderContactSummary(color, name, email, phone);
+    contactSummary.innerHTML = renderContactSummary(color, name, email, phone, uniqueId);
 }
 
 
-function renderContactSummary(color, name, email, phone) {
+function renderContactSummary(color, name, email, phone, uniqueId) {
     return `
     <div class="main-contacts-text">
         <h1>Contacts</h1>
@@ -198,8 +198,8 @@ function renderContactSummary(color, name, email, phone) {
         <div class="contact-summary-headline-rightside">
             <div class="contact-summary-headline-name">${name}</div>
             <div class="edit-and-delete">
-                <div id="edit${i}"class="edit-and-delete-row"><img src="assets/img/contacts-edit.png" alt="edit">Edit</div>
-                <div id="delete${i}" class="edit-and-delete-row"><img src="assets/img/contacts-delete.png" alt="delete">Delete</div>
+                <div id="edit${uniqueId}"class="edit-and-delete-row"><img src="assets/img/contacts-edit.png" alt="edit">Edit</div>
+                <div id="delete${uniqueId}" class="edit-and-delete-row"><img src="assets/img/contacts-delete.png" alt="delete">Delete</div>
             </div>
         </div>
     </div>
@@ -217,8 +217,8 @@ function renderContactSummary(color, name, email, phone) {
 
 function closeContactInformation() {
     if (window.innerWidth < 1401) {
-        document.getElementById('mainContacts').style.display='none';
-        document.getElementById('contactsLeft').style.display='flex';
+        document.getElementById('mainContacts').style.display = 'none';
+        document.getElementById('contactsLeft').style.display = 'flex';
     }
     let summary = document.getElementById('contactSummary');
     summary.innerHTML = '';
@@ -226,10 +226,10 @@ function closeContactInformation() {
 }
 
 
-function checkResponsive(){
+function checkResponsive() {
     if (window.innerWidth < 1401) {
-        document.getElementById('contactsLeft').style.display='none';
-        document.getElementById('mainContacts').style.display='flex';
+        document.getElementById('contactsLeft').style.display = 'none';
+        document.getElementById('mainContacts').style.display = 'flex';
     }
 
 }
