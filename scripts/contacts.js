@@ -61,9 +61,10 @@ function createContact() {
     let email = document.getElementById('contact-email').value;
     let name = document.getElementById('contact-name').value;
     let phonenumber = document.getElementById('contact-phone').value;
+
+    slideOutToRight();
     showSuccessfullContactCreation();
-    setTimeout(addContactData, 3000);
-    addContactData('names', { 'email': email, 'name': name, 'phonenumber': phonenumber });
+    addContactData('names', { 'email': email, 'name': name, 'phonenumber': phonenumber }); 
 }
 
 
