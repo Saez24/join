@@ -46,6 +46,8 @@ body {
     gap: 8px;
     align-items: center;
     background-color: #2a3647;
+    text-decoration: none;
+    color: #CDCDCD;
 }
 
 .selected {
@@ -80,6 +82,7 @@ body {
     padding: 0 56px 0 56px;
     height: 46px;
     align-items: center;
+    text-decoration: none;
 }
 
 .bottom-row:hover {
@@ -147,11 +150,19 @@ body {
     cursor: pointer;
 }
 
+.profile-icon button:hover {
+    background-color: #29ABE2;
+}
+
 .profile-icon button h2 {
     margin: 0;
     color: #29ABE2;
     font-size: 16px;
     font-weight: bold;
+}
+
+.profile-icon button h2:hover {
+    color: white;
 }
 
 .profile-icon:hover {
