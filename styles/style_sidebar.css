@@ -152,6 +152,9 @@ body {
 
 .profile-icon button:hover {
     background-color: #29ABE2;
+    h2 {
+        color: white;
+}
 }
 
 .profile-icon button h2 {

@@ -604,11 +604,14 @@ h2 {
     #contactForString {
         top: 152px;
         max-height: 100vh;
+        width: 85%;
     }
 
     .contacts-left {
         top: -56px;
         width: 100%;
+        left: 145px;
+        padding-right: 100px;
     }
 
     .arrow-icon {
@@ -668,6 +671,10 @@ h2 {
     .main-contacts-text {
         left: 240px;
     }
+
+    #contactForString {
+        width: 80%;
+    }
 }
 
 
@@ -714,6 +721,18 @@ h2 {
     .main-contacts {
         align-items: flex-start;
         width: 100%;
+    }
+
+    #contactForString{
+        left: 0;
+        width: 100%;
+        right: 0;
+    }
+
+    .contacts-left{
+        left: 0;
+        width: 100%;
+        padding: 0;
     }
 
     .main-contacts-text {
@@ -814,5 +833,27 @@ h2 {
 
     .fade-to-grey-overlay {
         background-color: rgba(0, 0, 0, 0.3);
+    }
+}
+
+@media (max-width: 400px){
+
+    .capital-category {
+        padding-left: 4px;
+    }
+
+    .contact-row{
+        gap: 12px;
+        padding-left: 4px;
+    }
+
+    .contact-name-row{
+        font-size: 20px;
+        font-weight: 400;
+    }
+
+    .contact-email-row{
+        font-size: 14px;
+        overflow: hidden;
     }
 }
