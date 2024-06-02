@@ -117,17 +117,26 @@ function hidePopup(id) {
 }
 
 
-async function fetchData() {
-    const response = await fetch(`${BASE_URL}/tasks.json`);
-    if (!response.ok) {
-        throw new Error('Network response was not ok ' + response.statusText);
-    }
-    const data = await response.json();
-    return data;
+async function fetchData(path = "tasks") {
+    let response = await fetch(BASE_URL + path + ".json");
+    responseToJson = await response.json();
+    responseToObject = Object.values(responseToJson);
+    console.log(responseToJson);
+    return responseToObject; //alternativ:  return Object.values(await response.json()); um Zeilen zu sparen.
 }
 
-
 function createTaskElement(task) {
+    const assignedNames = task.assignto ? task.assignto.map(name => name.split(' ').map(n => n[0]).join('')).join('') : '';
+    const subtaskCount = task.subtask ? `${task.subtask.length}/${task.subtask.length} Subtask${task.subtask.length > 1 ? 's' : ''}` : '0/0 Subtasks';
+
+    const priorityImages = {
+        urgent: './assets/img/prio_alta.png',
+        medium: './assets/img/prio_media.png',
+        low: './assets/img/prio_baja.png'
+    };
+
+    const priorityImage = priorityImages[task.prio] || './assets/img/prio_media.png';
+
     return `
         <div class="toDoBox" onclick="showPopup('popup')">
             <button class="CategoryBox">${task.category}</button>
@@ -135,33 +144,60 @@ function createTaskElement(task) {
             <p class="descriptionBox">${task.description}</p>
             <div class="subtaskProgress">
                 <progress value="0" max="100"></progress>
-                <p class="subtaskCount">0/1 Subtask</p>
+                <p class="subtaskCount">${subtaskCount}</p>
             </div>
             <div class="nameSection">
-                <div class="assignedName colorName">${task.assignto.split(' ').map(name => name[0]).join('')}</div>
+                <div class="assignedName colorName">${assignedNames}</div>
                 <div class="prioImgContainer">
-                    <img class="prioImg" src="./assets/img/prio_media.png" alt="Priority">
+                    <img class="prioImg" src="${priorityImage}" alt="Priority">
                 </div>
             </div>
         </div>
     `;
 }
 
-
 async function displayTasks() {
     try {
         const tasks = await fetchData();
-        const taskContainer = document.getElementById('taskContainer');
-        let tasksHTML = '';
+        const todoContainer = document.querySelector('#todoTasks .tasks');
+        const inProgressContainer = document.querySelector('#inProgressTasks .tasks');
+        const awaitFeedbackContainer = document.querySelector('#awaitFeedbackTasks .tasks');
+        const doneContainer = document.querySelector('#doneTasks .tasks');
+
+        let todoTasksHTML = '';
+        let inProgressTasksHTML = '';
+        let awaitFeedbackTasksHTML = '';
+        let doneTasksHTML = '';
 
         tasks.forEach(task => {
-            tasksHTML += createTaskElement(task);
+            const taskHTML = createTaskElement(task);
+
+            switch (task.status) {
+                case 'todo':
+                    todoTasksHTML += taskHTML;
+                    break;
+                case 'inprogress':
+                    inProgressTasksHTML += taskHTML;
+                    break;
+                case 'awaitfeedback':
+                    awaitFeedbackTasksHTML += taskHTML;
+                    break;
+                case 'done':
+                    doneTasksHTML += taskHTML;
+                    break;
+                default:
+                    console.warn(`Unknown task status: ${task.status}`);
+            }
         });
 
-        taskContainer.innerHTML = tasksHTML;
+        todoContainer.innerHTML = todoTasksHTML;
+        inProgressContainer.innerHTML = inProgressTasksHTML;
+        awaitFeedbackContainer.innerHTML = awaitFeedbackTasksHTML;
+        doneContainer.innerHTML = doneTasksHTML;
     } catch (error) {
         console.error('Error fetching and displaying tasks:', error);
     }
 }
 
+// Ruf die displayTasks Funktion direkt auf
 displayTasks();
