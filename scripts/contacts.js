@@ -196,8 +196,8 @@ function renderContactSummary(color, name, email, phone) {
         <div class="contact-summary-headline-rightside">
             <div class="contact-summary-headline-name">${name}</div>
             <div class="edit-and-delete">
-                <div class="edit-and-delete-row"><img src="assets/img/contacts-edit.png" alt="edit">Edit</div>
-                <div class="edit-and-delete-row"><img src="assets/img/contacts-delete.png" alt="delete">Delete</div>
+                <div id="edit${i}"class="edit-and-delete-row"><img src="assets/img/contacts-edit.png" alt="edit">Edit</div>
+                <div id="delete${i}" class="edit-and-delete-row"><img src="assets/img/contacts-delete.png" alt="delete">Delete</div>
             </div>
         </div>
     </div>
