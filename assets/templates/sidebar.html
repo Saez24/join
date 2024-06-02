@@ -15,24 +15,22 @@
     <div class="sidebar">
         <img class="logo-sidebar" src="./assets/img/logo_white.svg" onclick="selectSummary()" style="cursor: pointer;">
         <div id="sidebarMenu">
-            <div class="sidebar-menu-row" id="summaryBtn" onclick="selectSummary()"><img class="icon"
-                    src="./assets/img/summary.png" alt="">Summary</div>
-            <div class="sidebar-menu-row" id="add_taskBtn" onclick="selectAddTask()"><img class="icon"
-                    src="./assets/img/addtask.png" alt="">Add
-                Task</div>
-            <div class="sidebar-menu-row" id="boardBtn" onclick="selectBoard()"><img class="icon"
-                    src="./assets/img/board.png" alt="">Board
-            </div>
-            <div class="sidebar-menu-row" id="contactsBtn" onclick="selectContacts()"><img class="icon"
-                    src="./assets/img/contacts.png" alt="">Contacts</div>
+            <a class="sidebar-menu-row" id="summaryBtn" href="summary.html"><img class="icon"
+                    src="./assets/img/summary.png" alt="">Summary</a>
+            <a class="sidebar-menu-row" id="add_taskBtn" href="add_task.html"><img class="icon"
+                    src="./assets/img/addtask.png" alt="">Add Task</a>
+            <a class="sidebar-menu-row" id="boardBtn" href="board.html"><img class="icon"
+                    src="./assets/img/board.png" alt="">Board</a>
+            <a class="sidebar-menu-row" id="contactsBtn" href="contacts.html"><img class="icon"
+                    src="./assets/img/contacts.png" alt="">Contacts</a>
         </div>
         <div class="sidebar-bottom">
-            <div class="bottom-row" id="privacy_policyBtn" onclick="selectPrivacyPolicy()">
+            <a class="bottom-row" id="privacy_policyBtn" href="privacy_policy.html">
                 <div class="direction-left">Privacy Policy</div>
-            </div>
-            <div class="bottom-row" id="legal_noticeBtn" onclick="selectLegalNotice()">
+            </a>
+            <a class="bottom-row" id="legal_noticeBtn" href="legal_notice.html">
                 <div class="direction-left">Legal Notice</div>
-            </div>
+            </a>
         </div>
     </div>
     <div class="main">

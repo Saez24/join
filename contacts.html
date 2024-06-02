@@ -18,12 +18,15 @@
     <div id="sidebarContainer" onload="manageStyles()">
         <script type="module" src="./scripts/singnedinuser.js"></script>
     </div>
-    <div class="contacts-left">
+    <div class="contacts-left" id="contactsLeft">
         <button onclick="slideInFromRight()" class="add-contact-btn">
             <div class="button-row">
                 <div class="add-new-contact-text">Add new contact</div>
                 <img src="assets/img/contacts_add_contact.png" alt="add contact" class="add-contact-icon">
             </div>
+        </button>
+        <button onclick="slideInFromRight()" class="add-contact-mobile">
+                <img src="assets/img/contacts_add_contact.png" alt="add contact" class="add-contact-icon">
         </button>
         <div id="contactForString">
         </div>

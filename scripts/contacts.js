@@ -183,14 +183,13 @@ function getInitials(name) {
 }
 
 function renderContactInformation(name, email, color, phone, uniqueId) {
+    checkResponsive();
     const contactSummary = document.getElementById('mainContacts');
     contactSummary.classList.add('zindex200', 'bgcolorgrey');
-    // Entferne die Klasse 'selected-contact' von allen Kontaktzeilen
     const contactRows = document.getElementsByClassName('contact-row');
     for (let row of contactRows) {
         row.classList.remove('selected-contact');
     }
-    // Füge die Klasse 'selected-contact' zur angeklickten Zeile hinzu
     let contactName = document.getElementById(uniqueId);
     contactName.classList.add('selected-contact');
     contactSummary.innerHTML = renderContactSummary(color, name, email, phone);
@@ -230,7 +229,20 @@ function renderContactSummary(color, name, email, phone) {
 }
 
 function closeContactInformation() {
+    if (window.innerWidth < 1401) {
+        document.getElementById('mainContacts').style.display='none';
+        document.getElementById('contactsLeft').style.display='flex';
+    }
     let summary = document.getElementById('contactSummary');
     summary.innerHTML = '';
     getNames();
+}
+
+
+function checkResponsive(){
+    if (window.innerWidth < 1401) {
+        document.getElementById('contactsLeft').style.display='none';
+        document.getElementById('mainContacts').style.display='flex';
+    }
+
 }
