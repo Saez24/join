@@ -64,7 +64,7 @@ function createContact() {
 
     slideOutToRight();
     showSuccessfullContactCreation();
-    addContactData('names', { 'email': email, 'name': name, 'phonenumber': phonenumber }); 
+    addContactData('names', { 'email': email, 'name': name, 'phonenumber': phonenumber });
 }
 
 
@@ -215,8 +215,8 @@ function renderContactSummary(color, name, email, phone) {
 
 function closeContactInformation() {
     if (window.innerWidth < 1401) {
-        document.getElementById('mainContacts').style.display='none';
-        document.getElementById('contactsLeft').style.display='flex';
+        document.getElementById('mainContacts').style.display = 'none';
+        document.getElementById('contactsLeft').style.display = 'flex';
     }
     let summary = document.getElementById('contactSummary');
     summary.innerHTML = '';
@@ -224,10 +224,10 @@ function closeContactInformation() {
 }
 
 
-function checkResponsive(){
+function checkResponsive() {
     if (window.innerWidth < 1401) {
-        document.getElementById('contactsLeft').style.display='none';
-        document.getElementById('mainContacts').style.display='flex';
+        document.getElementById('contactsLeft').style.display = 'none';
+        document.getElementById('mainContacts').style.display = 'flex';
     }
 
 }
