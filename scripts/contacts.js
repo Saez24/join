@@ -40,12 +40,7 @@ function closeOverlayWhenGreyAreaWasClicked() {
     };
 }
 
-/**
- * 
- * @param {*} path 
- * @param {*} data 
- * @returns 
- */
+
 async function addContactData(path = "", data = {}) {
     let response = await fetch(BASE_URL + path + ".json", {
         method: "POST",
@@ -60,13 +55,14 @@ async function addContactData(path = "", data = {}) {
 
 function createContact() {
     if (validateContactInputs()) {
-        return; 
+        return;
     }
 
     let email = document.getElementById('contact-email').value;
     let name = document.getElementById('contact-name').value;
     let phonenumber = document.getElementById('contact-phone').value;
     showSuccessfullContactCreation();
+    setTimeout(addContactData, 3000);
     addContactData('names', { 'email': email, 'name': name, 'phonenumber': phonenumber });
 }
 
