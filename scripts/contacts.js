@@ -40,12 +40,7 @@ function closeOverlayWhenGreyAreaWasClicked() {
     };
 }
 
-/**
- * 
- * @param {*} path 
- * @param {*} data 
- * @returns 
- */
+
 async function addContactData(path = "", data = {}) {
     let response = await fetch(BASE_URL + path + ".json", {
         method: "POST",
@@ -60,13 +55,16 @@ async function addContactData(path = "", data = {}) {
 
 function createContact() {
     if (validateContactInputs()) {
-        return; 
+        return;
     }
 
     let email = document.getElementById('contact-email').value;
     let name = document.getElementById('contact-name').value;
     let phonenumber = document.getElementById('contact-phone').value;
-    addContactData('names', { 'email': email, 'name': name, 'phonenumber': phonenumber })
+
+    slideOutToRight();
+    showSuccessfullContactCreation();
+    addContactData('names', { 'email': email, 'name': name, 'phonenumber': phonenumber }); 
 }
 
 
@@ -83,28 +81,15 @@ function validateContactInputs() {
 }
 
 
-// document.addEventListener('DOMContentLoaded', function() {
-//     const email = document.getElementById('contact-email');
-//     const name = document.getElementById('contact-name');
-//     const phonenumber = document.getElementById('contact-phone');
-//     const submitButton = document.getElementById('contact-create-contact');
+function showSuccessfullContactCreation() {
+    let contactCreated = document.getElementById('contact-created');
 
-// function validateContactInputs(email, name, phonenumber) {
-//     let emailValid = email.checkValidity();
-//     let nameValid = name.checkValidity();
-//     let phonenumberValid = phonenumber.checkValidity();
+    contactCreated.classList.add('slide-in-from-right');
 
-//     if (emailValid && nameValid && phonenumberValid) {
-//         submitButton.disabled = false;
-//     } else {
-//         submitButton.disabled = true;
-//     }
-// }
-
-// emailInput.addEventListener('input', validateContactInputs);
-// nameInput.addEventListener('input', validateContactInputs);
-// phoneInput.addEventListener('input', validateContactInputs);
-// });
+    setTimeout(() => {
+        contactCreated.classList.remove('slide-in-from-right');
+    }, 1500);
+}
 
 
 async function getNames() {
