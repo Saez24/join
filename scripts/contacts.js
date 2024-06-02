@@ -53,7 +53,8 @@ async function addContactData(path = "", data = {}) {
 }
 
 
-function createContact() {
+async function createContact() {
+   
     if (validateContactInputs()) {
         return;
     }
@@ -64,7 +65,8 @@ function createContact() {
 
     slideOutToRight();
     showSuccessfullContactCreation();
-    addContactData('names', { 'email': email, 'name': name, 'phonenumber': phonenumber }); 
+    setTimeout(addContactData, 3000);
+    await addContactData('names', { 'email': email, 'name': name, 'phonenumber': phonenumber }); 
 }
 
 
