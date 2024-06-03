@@ -170,7 +170,7 @@ function getInitials(name) {
 function renderContactInformation(name, email, color, phone, uniqueId) {
     checkResponsive();
     const contactSummary = document.getElementById('mainContacts');
-    contactSummary.classList.add('zindex200', 'bgcolorgrey');
+    contactSummary.classList.add('bgcolorgrey');
     const contactRows = document.getElementsByClassName('contact-row');
     for (let row of contactRows) {
         row.classList.remove('selected-contact');
@@ -209,7 +209,7 @@ function renderContactSummary(color, name, email, phone, uniqueId) {
             <div><b>Email</b></div>
             <span>${email}</span>
             <div><b>Phone</b></div>
-            <span>+49 151 ${phone}</span>
+            <span>${phone}</span>
         </div>
     </div>
     </div>

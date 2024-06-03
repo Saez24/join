@@ -620,12 +620,16 @@ h2 {
         /* Position off-screen initially */
         width: 120px;
         padding: 16px;
-        border-radius: 8px;
+        border-radius: 12px 12px 0 12px;
         background-color: white;
         box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
         z-index: 2;
         transition: right 0.3s ease-in-out;
         /* Smooth sliding effect */
+    }
+
+    .edit-and-delete {
+        display: none;
     }
 
     .burger-menu-overlay.active {
@@ -703,7 +707,7 @@ h2 {
         width: 32px;
         height: 32px;
         right: 6px;
-        top: 25%;
+        top: 242px;
         transform: translateY(-50%);
         cursor: pointer;
     }
@@ -781,7 +785,7 @@ h2 {
 
     .contact-summary-headline-name{
         text-wrap: wrap;
-        max-width: 200px;
+        /* max-width: 200px; */
     }
 
     #contactSummary {
@@ -816,7 +820,7 @@ h2 {
 
 
     .arrow-icon {
-        top: 155px;
+        top: 160px;
     }
 }
 
@@ -947,7 +951,7 @@ h2 {
 @media (max-width: 400px) {
 
     .capital-category {
-        padding-left: 4px;
+        padding-left: 10px;
     }
 
     .contact-summary-initials {
@@ -974,7 +978,7 @@ h2 {
     .contact-summary-headline-name{
         font-size: 24px;
         text-wrap: wrap;
-        width: min-content;
+        width: 184px;
     }
 
     #contactSummary {
