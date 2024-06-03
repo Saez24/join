@@ -189,7 +189,7 @@ function createTaskElement(task) {
 
     return /*html*/`
         <div id="${taskid}" draggable="true" class="toDoBox" onclick="showPopup('popup')">
-            <button class="CategoryBox">${task.category}</button>
+            <button class="CategoryBox" >${task.category}</button>
             <p class="HeadlineBox">${task.title}</p>
             <p class="descriptionBox">${task.description}</p>
             <div class="subtaskProgress">
