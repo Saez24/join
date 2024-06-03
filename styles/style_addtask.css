@@ -292,15 +292,38 @@ label {
 }
 
 .selectedAssignTo {
-    border-radius: 30px;
+    position: absolute;
     width: 42px;
     height: 42px;
+    border-radius: 50%;
+    border: 2px solid #FFFFFF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.moreButton {
+    position: absolute;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: gray;
+    color: white;
+    font-weight: bold;
     border: 2px solid #FFFFFF;
     cursor: pointer;
-    color: #FFFFFF;
-    text-align: center;
-    padding: 0;
-    margin-right: 10px;
+}
+
+.button-container {
+    position: relative;
+    display: inline-block;
+    /* Or use width: max-content; */
 }
 
 .dropdown_box {
