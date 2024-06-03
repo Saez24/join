@@ -253,9 +253,10 @@ function burgerMenuSlideOutToRight() {
     let burgerMenu = document.getElementById('burgerMenu');
     let burgerIcon = document.getElementById('contactBurgerMenuIcon');
     burgerMenu.classList.remove('active');
-    burgerIcon.classList.remove('d-none');
+
 
     document.removeEventListener('click', closeBurgerMenuWhenGreyAreaWasClicked);
+    burgerIcon.classList.remove('d-none');
 }
 
 function closeBurgerMenuWhenGreyAreaWasClicked(event) {
