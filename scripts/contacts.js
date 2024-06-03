@@ -199,6 +199,9 @@ function renderContactSummary(color, name, email, phone, uniqueId) {
                 <div id="edit${uniqueId}"class="edit-and-delete-row"><img src="assets/img/contacts-edit.png" alt="edit">Edit</div>
                 <div id="delete${uniqueId}" class="edit-and-delete-row"><img src="assets/img/contacts-delete.png" alt="delete">Delete</div>
             </div>
+            <button onclick="burgerSlideInFromRight()" class="contact-burger-menu">
+                <img src="assets/img/contacts-burger-menu.png" alt="add contact" class="burger-menu-icon">
+            </button>
         </div>
     </div>
     <div class="contact-summary-contact-information">Contact Information</div>
@@ -230,4 +233,37 @@ function checkResponsive() {
         document.getElementById('mainContacts').style.display = 'flex';
     }
 
+}
+
+
+function burgerSlideInFromRight() {
+    let burgerMenu = document.getElementById('burgerMenu');
+
+    burgerMenu.classList.add('slide-in-from-right');
+
+    setTimeout(() => {
+        burgerMenu.classList.add('fade-to-grey-overlay');
+    }, 300);
+}
+
+
+function burgerMenuSlideOutToRight() {
+    let contactOverlay = document.getElementById('contact-overlay');
+    let contactCont = document.getElementById('contact-cont');
+
+    contactOverlay.classList.remove('fade-to-grey-overlay');
+
+    setTimeout(() => {
+        contactOverlay.classList.remove('slide-in-from-right');
+        contactCont.classList.remove('slide-in-from-right');
+    }, 100);
+}
+
+
+function closeBurgerMenuWhenGreyAreaWasClicked() {
+    document.onclick = function (e) {
+        if (e.target.id === 'burgerMenu') {
+            burgerMenuSlideOutToRight();
+        }
+    };
 }
