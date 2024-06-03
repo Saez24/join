@@ -199,7 +199,7 @@ function renderContactSummary(color, name, email, phone, uniqueId) {
                 <div id="edit${uniqueId}"class="edit-and-delete-row"><img src="assets/img/contacts-edit.png" alt="edit">Edit</div>
                 <div id="delete${uniqueId}" class="edit-and-delete-row"><img src="assets/img/contacts-delete.png" alt="delete">Delete</div>
             </div>
-            <button onclick="burgerSlideInFromRight()" class="contact-burger-menu">
+            <button onclick="burgerSlideInFromRight()" class="contact-burger-menu" id="contactBurgerMenuIcon">
                 <img src="assets/img/contacts-burger-menu.png" alt="add contact" class="burger-menu-icon">
             </button>
         </div>
@@ -238,32 +238,29 @@ function checkResponsive() {
 
 function burgerSlideInFromRight() {
     let burgerMenu = document.getElementById('burgerMenu');
+    let burgerIcon = document.getElementById('contactBurgerMenuIcon');
+    burgerMenu.classList.toggle('active');
+    burgerIcon.classList.add('d-none');
 
-    burgerMenu.classList.add('slide-in-from-right');
-
-    setTimeout(() => {
-        burgerMenu.classList.add('fade-to-grey-overlay');
-    }, 300);
+    if (burgerMenu.classList.contains('active')) {
+        document.addEventListener('click', closeBurgerMenuWhenGreyAreaWasClicked);
+    } else {
+        document.removeEventListener('click', closeBurgerMenuWhenGreyAreaWasClicked);
+    }
 }
-
 
 function burgerMenuSlideOutToRight() {
-    let contactOverlay = document.getElementById('contact-overlay');
-    let contactCont = document.getElementById('contact-cont');
+    let burgerMenu = document.getElementById('burgerMenu');
+    let burgerIcon = document.getElementById('contactBurgerMenuIcon');
+    burgerMenu.classList.remove('active');
+    burgerIcon.classList.remove('d-none');
 
-    contactOverlay.classList.remove('fade-to-grey-overlay');
-
-    setTimeout(() => {
-        contactOverlay.classList.remove('slide-in-from-right');
-        contactCont.classList.remove('slide-in-from-right');
-    }, 100);
+    document.removeEventListener('click', closeBurgerMenuWhenGreyAreaWasClicked);
 }
 
-
-function closeBurgerMenuWhenGreyAreaWasClicked() {
-    document.onclick = function (e) {
-        if (e.target.id === 'burgerMenu') {
-            burgerMenuSlideOutToRight();
-        }
-    };
+function closeBurgerMenuWhenGreyAreaWasClicked(event) {
+    let burgerMenu = document.getElementById('burgerMenu');
+    if (!burgerMenu.contains(event.target) && !event.target.closest('.contact-burger-menu')) {
+        burgerMenuSlideOutToRight();
+    }
 }

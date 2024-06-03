@@ -155,6 +155,11 @@ h2 {
     left: 256.83px;
 }
 
+.burgermenu-menu-icon{
+    width: 20px;
+    height: 20px;
+}
+
 #contactForString {
     top: 200px;
     position: relative;
@@ -558,18 +563,18 @@ h2 {
     border: none;
     padding: 16px;
     background-color: rgb(42, 54, 71);
-    color: white; 
-    font-size: 16px;   
+    color: white;
+    font-size: 16px;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.contact-burger-menu{
+.contact-burger-menu {
     display: none;
 }
 
-.burger-menu-overlay{
+.burger-menu-overlay {
     display: none;
 }
 
@@ -582,7 +587,6 @@ h2 {
     .add-contact-btn {
         display: none;
     }
-
 
 
     .contact-burger-menu {
@@ -607,12 +611,23 @@ h2 {
         background-color: #29ABE2;
     }
 
-    .burger-menu-overlay{
+    .burger-menu-overlay {
         display: flex;
-        position: relative;
-        width: 300px;
-        height: 300px;
-        background-color: #007CEE;
+        flex-direction: column;
+        position: fixed;
+        bottom: 120px;
+        right: -200px; /* Position off-screen initially */
+        width: 120px;
+        padding: 16px;
+        border-radius: 8px;
+        background-color: white;
+        box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+        z-index: 2;
+        transition: right 0.3s ease-in-out; /* Smooth sliding effect */
+    }
+
+    .burger-menu-overlay.active {
+        right: 20px; /* Position when visible */
     }
 
     .burger-menu-icon {
@@ -622,7 +637,22 @@ h2 {
         left: 25.33px;
     }
 
-    .edit-and-delete-row{
+    .burgermenu-row{
+        display: flex;
+        gap: 16px;
+        cursor: pointer;
+        width: 100%;
+        padding: 8px 0 8px 8px;
+        border-radius: 8px;
+        height: 20px;
+
+    }
+
+    .burgermenu-row:hover{
+        background-color: #e2e2e2;
+    }
+
+    .edit-and-delete-row {
         display: none;
     }
 
@@ -676,12 +706,12 @@ h2 {
         cursor: pointer;
     }
 
-    .contact-summary-headline-rightside{
+    .contact-summary-headline-rightside {
         flex-direction: row;
         align-items: center;
     }
 
-    .contact-summary-initials{
+    .contact-summary-initials {
         width: 80px;
         height: 80px;
         font-size: 27px;
@@ -785,13 +815,13 @@ h2 {
         width: 100%;
     }
 
-    #contactForString{
+    #contactForString {
         left: 0;
         width: 100%;
         right: 0;
     }
 
-    .contacts-left{
+    .contacts-left {
         left: 0;
         width: 100%;
         padding: 0;
@@ -898,23 +928,23 @@ h2 {
     }
 }
 
-@media (max-width: 400px){
+@media (max-width: 400px) {
 
     .capital-category {
         padding-left: 4px;
     }
 
-    .contact-row{
+    .contact-row {
         gap: 12px;
         padding-left: 4px;
     }
 
-    .contact-name-row{
+    .contact-name-row {
         font-size: 20px;
         font-weight: 400;
     }
 
-    .contact-email-row{
+    .contact-email-row {
         font-size: 14px;
         overflow: hidden;
     }
