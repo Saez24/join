@@ -67,9 +67,37 @@ async function createContact() {
     showSuccessfullContactCreation();
 
     await addContactData('names', { 'email': email, 'name': name, 'phonenumber': phonenumber });
-
-
+    await getNames();
+    searchAndRenderLastAddedContact(name);
 }
+
+
+function searchAndRenderLastAddedContact(name) {
+    let lastAddedName = name;
+
+    // Select all elements that could contain the contact name
+    const contactElements = document.querySelectorAll(".contact-row");
+
+    // Iterate through the elements to find the one containing the target name
+    contactElements.forEach(element => {
+        if (element.textContent.includes(lastAddedName)) {
+            // Extract parameters from the onclick attribute
+            const onclickAttr = element.getAttribute("onclick");
+            const paramsRegex = /renderContactInformation\(([^)]+)\)/;
+            const match = paramsRegex.exec(onclickAttr);
+
+            if (match) {
+                // Get the parameters string and split it into an array
+                const paramsString = match[1];
+                const paramsArray = paramsString.split(',').map(param => param.trim().replace(/['"]/g, ''));
+
+                // Call the function with the parameters
+                renderContactInformation(...paramsArray);
+                element.scrollIntoView({ behavior: "smooth", block: "end" });
+            }
+        }
+    });
+};
 
 
 function validateContactInputs() {
