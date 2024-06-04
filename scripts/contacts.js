@@ -54,19 +54,24 @@ async function addContactData(path = "", data = {}) {
 
 
 async function createContact() {
-   
-    if (validateContactInputs()) {
-        return;
-    }
 
-    let email = document.getElementById('contact-email').value;
-    let name = document.getElementById('contact-name').value;
-    let phonenumber = document.getElementById('contact-phone').value;
+    // if (validateContactInputs()) {
+    //     return;
+    // }
+
+    // let email = document.getElementById('contact-email').value;
+    // let name = document.getElementById('contact-name').value;
+    // let phonenumber = document.getElementById('contact-phone').value;
 
     slideOutToRight();
     showSuccessfullContactCreation();
-    setTimeout(addContactData, 3000);
-    await addContactData('names', { 'email': email, 'name': name, 'phonenumber': phonenumber }); 
+
+    // setTimeout(async () => {
+    //     await addContactData('names', { 'email': email, 'name': name, 'phonenumber': phonenumber });
+    //   }, 4000);
+    // await addContactData('names', { 'email': email, 'name': name, 'phonenumber': phonenumber });
+
+
 }
 
 
