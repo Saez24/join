@@ -71,7 +71,7 @@
                             <img src="./assets/img/contacs_close.png">
                         </div>
                     </div>
-                    <form onsubmit="createContact()" class="contact-form d-flex f-column j-between">
+                    <form onsubmit="createContact(); return false" class="contact-form d-flex f-column j-between">
                         <input required="" id="contact-name" type="text" placeholder="Name"
                             class="contact-input-fields">
                         <input required="" id="contact-email" type="email" placeholder="Email"
