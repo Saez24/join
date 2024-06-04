@@ -68,6 +68,39 @@ function createContact() {
 }
 
 
+function openEditContactOverlay(i) {
+    console.log('openEditContactOverlay called with uniqueId:', i); // Debugging-Statement
+
+    // Hier den Kontakt anhand der uniqueId finden und die entsprechenden Felder setzen
+    let contact = getElementById(i); // Implementieren Sie diese Funktion basierend auf Ihrem Datenmodell
+
+    document.getElementById('edit-contact-name').value = contact.name;
+    document.getElementById('edit-contact-email').value = contact.email;
+    document.getElementById('edit-contact-phone').value = contact.phone;
+
+    document.getElementById('edit-contact-overlay').classList.add('active'); // Zeigt das Overlay an
+}
+
+
+function editContact(event) {
+    event.preventDefault(); // Verhindert das Standardverhalten des Formulars
+
+    if (validateContactInputs()) {
+        return;
+    }
+
+    let email = document.getElementById('edit-contact-email').value;
+    let name = document.getElementById('edit-contact-name').value;
+    let phonenumber = document.getElementById('edit-contact-phone').value;
+
+    // Hier die Kontaktinformationen aktualisieren
+    updateContactData(uniqueId, { 'email': email, 'name': name, 'phonenumber': phonenumber }); // Implementieren Sie diese Funktion basierend auf Ihrem Datenmodell
+
+    slideOutToRight();
+    showSuccessfulEdit();
+}
+
+
 function validateContactInputs() {
     let emailValid = document.getElementById('contact-email').checkValidity();
     let nameValid = document.getElementById('contact-name').checkValidity();
@@ -80,6 +113,21 @@ function validateContactInputs() {
     }
 }
 
+function showSuccessfulEdit() {
+    let contactCreated = document.getElementById('contact-created');
+
+    contactCreated.classList.add('slide-in-from-right');
+
+    setTimeout(() => {
+        contactCreated.classList.remove('slide-in-from-right');
+    }, 1500);
+}
+
+
+function updateContactData(uniqueId, updatedData) {
+    console.log("Kontakt aktualisiert:", uniqueId, updatedData);
+}
+
 
 function showSuccessfullContactCreation() {
     let contactCreated = document.getElementById('contact-created');
@@ -90,6 +138,9 @@ function showSuccessfullContactCreation() {
         contactCreated.classList.remove('slide-in-from-right');
     }, 1500);
 }
+
+
+
 
 
 async function getNames() {
@@ -196,7 +247,7 @@ function renderContactSummary(color, name, email, phone, uniqueId) {
         <div class="contact-summary-headline-rightside">
             <div class="contact-summary-headline-name">${name}</div>
             <div class="edit-and-delete">
-                <div id="edit${uniqueId}"class="edit-and-delete-row"><img src="assets/img/contacts-edit.png" alt="edit">Edit</div>
+                <div id="edit${uniqueId}"class="edit-and-delete-row" onclick="openEditContactOverlay('${uniqueId}')"><img src="assets/img/contacts-edit.png" alt="edit">Edit</div>
                 <div id="delete${uniqueId}" class="edit-and-delete-row"><img src="assets/img/contacts-delete.png" alt="delete">Delete</div>
             </div>
             <button onclick="burgerSlideInFromRight()" class="contact-burger-menu" id="contactBurgerMenuIcon">

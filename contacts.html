@@ -26,7 +26,7 @@
             </div>
         </button>
         <button onclick="slideInFromRight()" class="add-contact-mobile">
-                <img src="assets/img/contacts_add_contact.png" alt="add contact" class="add-contact-icon">
+            <img src="assets/img/contacts_add_contact.png" alt="add contact" class="add-contact-icon">
         </button>
 
         <div id="contactForString">
@@ -102,10 +102,65 @@
         <p class="#">Contact successfully created</p>
     </div>
 
+    <!-- EDIT CONTACT OVERLAY -->
+    <div class="contact-overlay d-flex j-center a-center" id="edit-contact-overlay"
+        onclick="closeOverlayWhenGreyAreaWasClicked()">
+        <div class="contact-cont d-flex" id="contact-cont">
+            <div class="contact-left d-flex f-column j-center">
+                <div class="contact-close-white j-end a-center">
+                    <div class="contact-close-btn-white d-flex j-center a-center" onclick="slideOutToRight()">
+                        <img src="./assets/img/contacts_close_white.png">
+                    </div>
+                </div>
+                <img class="contacts-logo" src="./assets/img/contacts_logo.png">
+                <span class="f-size-61">Edit contact</span>
+                <img class="contacts-underline" src="./assets/img/contacts_underline_blue.png">
+
+            </div>
+            <div class="contact-right d-flex j-evenly a-center">
+                <div class="contact-person d-flex j-center a-center">
+                    <img src="./assets/img/contacts_person_big.png">
+                </div>
+                <div class="contact-form-cont d-flex f-column">
+                    <div class="contact-close d-flex j-end a-center">
+                        <div class="contact-close-btn d-flex j-center a-center" onclick="slideOutToRight()">
+                            <img src="./assets/img/contacs_close.png">
+                        </div>
+                    </div>
+                    <form onsubmit="editContact()" class="contact-form d-flex f-column j-between">
+                        <input required="" id="edit-contact-name" type="text" value="">
+                            class="contact-input-fields">
+                        <input required="" id="edit-contact-email" type="email" value=""
+                            class="contact-input-fields">
+                        <input required="" id="edit-contact-phone" type="tel" value=""
+                            class="contact-input-fields">
+                        <div class="contact-form-btn d-flex">
+                            <button type="button" id="contact-cancel-contact" onclick="slideOutToRight()"
+                                class="contact-cancel-btn d-flex a-center j-center">Delete
+                                <img src="./assets/img/contacts_iconoir_cancel.png">
+                                <img src="./assets/img/contacts_iconoir_cancel_blue.png" id="contact-cancel-blue"
+                                    class="d-none">
+                            </button>
+                            <button type="submit" id="contact-create-contact"
+                                class="contact-create-btn d-flex a-center j-center">Save
+                                <img src="./assets/img/contacts_check.png">
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- CONTACT SUCCESSFULLY EDITED-->
+    <div class="contact-created contact-cont" id="contact-created">
+        <p class="#">Contact successfully edited</p>
+    </div>
+
     <!-- BURGER MENU EDIT AND DELETE -->
-    <div class="burger-menu-overlay" id="burgerMenu"
-        onclick="closeBurgerMenuWhenGreyAreaWasClicked()">
-        <div class="burgermenu-row">
+    <div class="burger-menu-overlay" id="burgerMenu" onclick="closeBurgerMenuWhenGreyAreaWasClicked()">
+        <div class="burgermenu-row" onclick="openEditContactOverlay('${uniqueId}')">
             <img class="burgermenu-menu-icon" src="assets/img/contacts-edit.png">
             Edit
         </div>
