@@ -11,6 +11,7 @@ Code kopieren
     <script src="./scripts/add_task.js"></script>
     <script src="./scripts/templates.js"></script>
     <script src="./scripts/board.js"></script>
+    <script src="./scripts/post_add_task.js"></script>
 
     <title>Board</title>
     <link rel="icon" href="./assets/img/favicon.png" type="image/x-icon">
@@ -37,7 +38,7 @@ Code kopieren
         </div>
 
         <div class="boardTasks">
-            <div class="statusTasks">
+            <div id="todoTasks" class="statusTasks">
                 <div class="headlineStatusTasks">
                     <h5 class="taskStatusTitle">To do</h5>
                     <div class="imageContainer">
@@ -45,104 +46,34 @@ Code kopieren
                             src="./assets/img/add.svg" width="24" alt="Add task">
                     </div>
                 </div>
-                <div class="tasks">
-                    <div class="toDoBox_noTask">
-                        <p class="noTaskMessage">no task to do</p>
-                    </div>
-
-
-                    <div id="taskContainer" class="toDoBox" onclick="showPopup('popup')">
-                        <button class="CategoryBox">User Story</button>
-                        <p class="HeadlineBox">Headline</p>
-                        <p class="descriptionBox">Beschreibung Einfügen</p>
-                        <div class="subtaskProgress">
-                            <progress value="0" max="100"></progress>
-                            <p class="subtaskCount">0/2 Subtask</p>
-                        </div>
-                        <div class="nameSection">
-                            <div class="assignedName colorName">AS</div>
-                            <div class="assignedName colorName">MB</div>
-                            <div class="prioImgContainer">
-                                <img class="prioImg" src="./assets/img/prio_media.png" alt="Priority">
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
+                <div class="tasks"></div>
             </div>
-            <div class="statusTasks">
+
+            <div id="inProgressTasks" class="statusTasks">
                 <div class="headlineStatusTasks">
                     <h5 class="taskStatusTitle">In progress</h5>
                     <img onclick="openDialog(), closeOnBackground(event)" class="add_task_to_board"
                         src="./assets/img/add.svg" width="24" height="24" alt="Add task">
                 </div>
-                <div class="tasks">
-                    <div class="toDoBox" onclick="showPopup('popup')">
-                        <button class="CategoryBox">User Story</button>
-                        <p class="HeadlineBox">Headline</p>
-                        <p class="descriptionBox">Beschreibung Einfügen</p>
-                        <div class="subtaskProgress">
-                            <progress value="0" max="100"></progress>
-                            <p class="subtaskCount">0/2 Subtask</p>
-                        </div>
-                        <div class="nameSection">
-                            <div class="assignedName colorName">AS</div>
-                            <div class="assignedName colorName">MB</div>
-                            <div class="prioImgContainer">
-                                <img class="prioImg" src="./assets/img/prio_media.png" alt="Priority">
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <div class="tasks"></div>
             </div>
-            <div class="statusTasks">
+
+            <div id="awaitFeedbackTasks" class="statusTasks">
                 <div class="headlineStatusTasks">
                     <h5 class="taskStatusTitle">Await feedback</h5>
                     <img onclick="openDialog(), closeOnBackground(event)" class="add_task_to_board"
                         src="./assets/img/add.svg" width="24" height="24" alt="Add task">
                 </div>
-                <div class="tasks">
-                    <div class="toDoBox" onclick="showPopup('popup')">
-                        <button class="CategoryBox">User Story</button>
-                        <p class="HeadlineBox">Headline</p>
-                        <p class="descriptionBox">Beschreibung Einfügen</p>
-                        <div class="subtaskProgress">
-                            <progress value="50" max="100"></progress>
-                            <p class="subtaskCount">0/2 Subtask</p>
-                        </div>
-                        <div class="nameSection">
-                            <div class="assignedName colorName">AS</div>
-                            <div class="assignedName colorName">MB</div>
-                            <div class="prioImgContainer">
-                                <img class="prioImg" src="./assets/img/prio_alta.png" alt="Priority">
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <div class="tasks"></div>
             </div>
-            <div class="statusTasks">
+
+            <div id="doneTasks" class="statusTasks">
                 <div class="headlineStatusTasks">
                     <h5 class="taskStatusTitle">Done</h5>
                 </div>
-                <div class="tasks">
-                    <div class="toDoBox" onclick="showPopup('popup')">
-                        <button class="CategoryBox">User Story</button>
-                        <p class="HeadlineBox">Headline</p>
-                        <p class="descriptionBox">Beschreibung Einfügen</p>
-                        <div class="subtaskProgress">
-                            <progress value="0" max="100"></progress>
-                            <p class="subtaskCount">0/2 Subtask</p>
-                        </div>
-                        <div class="nameSection">
-                            <div class="assignedName colorName">AS</div>
-                            <div class="assignedName colorName">MB</div>
-                            <div class="prioImgContainer">
-                                <img class="prioImg" src="./assets/img/prio_baja.png" alt="Priority">
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <div class="tasks"></div>
             </div>
+
 
             <div id="popup" class="taskBoxBackground hidden">
                 <div class="TaskDetails slide-in-right">

@@ -18,7 +18,7 @@ body {
 .contact-row {
     display: flex;
     height: 78px;
-    width: 374px;
+    /* width: 374px; */
     padding: 0px 24px 0px 24px;
     align-items: center;
     gap: 30px;
@@ -128,7 +128,7 @@ h2 {
 }
 
 .add-contact-btn:hover {
-    filter: brightness(1.5);
+    background-color: #29ABE2;
 }
 
 .add-contact-mobile {
@@ -155,6 +155,11 @@ h2 {
     left: 256.83px;
 }
 
+.burgermenu-menu-icon {
+    width: 20px;
+    height: 20px;
+}
+
 #contactForString {
     top: 200px;
     position: relative;
@@ -162,7 +167,7 @@ h2 {
     max-height: calc(100vh - 200px);
     overflow-y: auto;
     width: 100%;
-    left: 16px;
+    left: 4px;
 }
 
 /* Scrollbar styles */
@@ -558,11 +563,19 @@ h2 {
     border: none;
     padding: 16px;
     background-color: rgb(42, 54, 71);
-    color: white; 
-    font-size: 16px;   
+    color: white;
+    font-size: 16px;
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.contact-burger-menu {
+    display: none;
+}
+
+.burger-menu-overlay {
+    display: none;
 }
 
 @media (max-width: 1400px) {
@@ -572,6 +585,80 @@ h2 {
     }
 
     .add-contact-btn {
+        display: none;
+    }
+
+
+    .contact-burger-menu {
+        display: flex;
+        position: fixed;
+        bottom: 100px;
+        right: 20px;
+        justify-content: center;
+        align-items: center;
+        width: 56px;
+        height: 56px;
+        border: none;
+        border-radius: 46px;
+        gap: 10px;
+        background-color: #2A3647;
+        box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+        cursor: pointer;
+        z-index: 3;
+    }
+
+    .contact-burger-menu:hover {
+        background-color: #29ABE2;
+    }
+
+    .burger-menu-overlay {
+        display: flex;
+        flex-direction: column;
+        position: fixed;
+        bottom: 120px;
+        right: -200px;
+        /* Position off-screen initially */
+        width: 120px;
+        padding: 16px;
+        border-radius: 12px 12px 0 12px;
+        background-color: white;
+        box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+        z-index: 2;
+        transition: right 0.3s ease-in-out;
+        /* Smooth sliding effect */
+    }
+
+    .edit-and-delete {
+        display: none;
+    }
+
+    .burger-menu-overlay.active {
+        right: 20px;
+        /* Position when visible */
+    }
+
+    .burger-menu-icon {
+        width: 5.33px;
+        height: 21.33px;
+        top: 17.33px;
+        left: 25.33px;
+    }
+
+    .burgermenu-row {
+        display: flex;
+        gap: 16px;
+        cursor: pointer;
+        padding: 8px 0 8px 8px;
+        border-radius: 8px;
+        height: 20px;
+
+    }
+
+    .burgermenu-row:hover {
+        background-color: #e2e2e2;
+    }
+
+    .edit-and-delete-row {
         display: none;
     }
 
@@ -604,11 +691,14 @@ h2 {
     #contactForString {
         top: 152px;
         max-height: 100vh;
+        width: 85%;
     }
 
     .contacts-left {
         top: -56px;
         width: 100%;
+        left: 145px;
+        padding-right: 100px;
     }
 
     .arrow-icon {
@@ -617,10 +707,17 @@ h2 {
         width: 32px;
         height: 32px;
         right: 6px;
-        top: 25%;
+        top: 242px;
         transform: translateY(-50%);
         cursor: pointer;
     }
+
+    .contact-summary-headline-rightside {
+        flex-direction: row;
+        align-items: center;
+    }
+
+
 
 }
 
@@ -668,6 +765,10 @@ h2 {
     .main-contacts-text {
         left: 240px;
     }
+
+    #contactForString {
+        width: 80%;
+    }
 }
 
 
@@ -676,9 +777,22 @@ h2 {
         flex-direction: column;
         top: 128px;
         gap: 16px;
+        left: 250px;
         position: absolute;
         justify-content: flex-start;
         align-items: baseline;
+    }
+
+    .contact-summary-headline-name{
+        text-wrap: wrap;
+        /* max-width: 200px; */
+    }
+
+    #contactSummary {
+        top: 266px;
+        left: 262px;
+        gap: 12px;
+        width: auto;
     }
 
     h1 {
@@ -704,9 +818,9 @@ h2 {
         position: relative;
     }
 
-    #contactSummary {
-        top: 300px;
-        left: 150px;
+
+    .arrow-icon {
+        top: 160px;
     }
 }
 
@@ -717,7 +831,24 @@ h2 {
     }
 
     .main-contacts-text {
-        left: 150px;
+        left: 16px;
+    }
+
+    #contactSummary {
+        top: 300px;
+        left: 16px;
+    }
+
+    #contactForString {
+        left: 0;
+        width: 100%;
+        right: 0;
+    }
+
+    .contacts-left {
+        left: 0;
+        width: 100%;
+        padding: 0;
     }
 
     .contact-cont {
@@ -730,7 +861,7 @@ h2 {
 
     .contact-summary-headline-name {
         font-size: 36px;
-        font-weight: 700;
+        font-weight: 1000;
     }
 
     .contact-left {
@@ -814,5 +945,45 @@ h2 {
 
     .fade-to-grey-overlay {
         background-color: rgba(0, 0, 0, 0.3);
+    }
+}
+
+@media (max-width: 400px) {
+
+    .capital-category {
+        padding-left: 10px;
+    }
+
+    .contact-summary-initials {
+        width: 80px;
+        height: 80px;
+        font-size: 27px;
+    }
+
+    .contact-row {
+        gap: 12px;
+        padding-left: 4px;
+    }
+
+    .contact-name-row {
+        font-size: 20px;
+        font-weight: 400;
+    }
+
+    .contact-email-row {
+        font-size: 14px;
+        overflow: hidden;
+    }
+
+    .contact-summary-headline-name{
+        font-size: 24px;
+        text-wrap: wrap;
+        width: 184px;
+    }
+
+    #contactSummary {
+        top: 266px;
+        left: 16px;
+        gap: 12px;
     }
 }

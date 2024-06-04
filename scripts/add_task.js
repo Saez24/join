@@ -136,6 +136,38 @@ function closeAssignTo() {
 }
 
 /**
+         * Creates a button for a selected checkbox.
+         * @param {Element} checkbox - The checkbox element.
+         * @param {number} position - The left position of the button.
+         */
+function createButton(checkbox, position) {
+    let initials = checkbox.getAttribute("data-initials");
+    let color = checkbox.getAttribute("data-color");
+    let checkboxId = checkbox.id;
+
+    let button = document.createElement("button");
+    button.className = "selectedAssignTo";
+    button.id = `selected_${checkboxId}`;
+    button.style.backgroundColor = color;
+    button.style.left = `${position}px`;
+    button.innerText = initials;
+    return button;
+}
+
+/**
+ * Adds a "more" button indicating the number of additional selected checkboxes.
+ * @param {number} count - The total number of selected checkboxes.
+ * @param {number} position - The left position of the "more" button.
+ */
+function addMoreButton(count, position) {
+    let moreButton = document.createElement("button");
+    moreButton.className = "moreButton";
+    moreButton.style.left = `${position}px`;
+    moreButton.innerText = `+${count}`;
+    return moreButton;
+}
+
+/**
  * Updates the selectedAssignTo div with buttons representing the selected names.
  * This function goes through all checkboxes with the class "checkbox" and, if checked,
  * creates a button with the initials and color associated with the checkbox.
@@ -145,20 +177,24 @@ function loadSelectedAssignTo() {
     let checkboxes = document.querySelectorAll("#assignedto .checkbox");
 
     selectedAssignToDiv.innerHTML = '';
-    checkboxes.forEach(checkbox => {
-        if (checkbox.checked) {
-            let initials = checkbox.getAttribute("data-initials");
-            let color = checkbox.getAttribute("data-color");
-            let checkboxId = checkbox.id;
+    let position = 0;
+    let count = 0;
 
-            let button = document.createElement("button");
-            button.className = "selectedAssignTo";
-            button.id = `selected_${checkboxId}`;
-            button.style.backgroundColor = color;
-            button.innerText = initials;
-            selectedAssignToDiv.appendChild(button);
+    checkboxes.forEach((checkbox, index) => {
+        if (checkbox.checked) {
+            count++;
+            if (count <= 3) {
+                let button = createButton(checkbox, position);
+                selectedAssignToDiv.appendChild(button);
+                position += 32; // Adjust this value to control the overlap
+            }
         }
     });
+
+    if (count > 3) {
+        let moreButton = addMoreButton(count - 3, position);
+        selectedAssignToDiv.appendChild(moreButton);
+    }
 }
 
 /**

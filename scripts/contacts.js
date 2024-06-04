@@ -99,6 +99,9 @@ function showSuccessfullContactCreation() {
 }
 
 
+
+
+
 async function getNames() {
     try {
         let response = await fetch(BASE_URL + ".json");
@@ -177,7 +180,7 @@ function getInitials(name) {
 function renderContactInformation(name, email, color, phone, uniqueId) {
     checkResponsive();
     const contactSummary = document.getElementById('mainContacts');
-    contactSummary.classList.add('zindex200', 'bgcolorgrey');
+    contactSummary.classList.add('bgcolorgrey');
     const contactRows = document.getElementsByClassName('contact-row');
     for (let row of contactRows) {
         row.classList.remove('selected-contact');
@@ -203,9 +206,12 @@ function renderContactSummary(color, name, email, phone, uniqueId) {
         <div class="contact-summary-headline-rightside">
             <div class="contact-summary-headline-name">${name}</div>
             <div class="edit-and-delete">
-                <div id="edit${uniqueId}"class="edit-and-delete-row"><img src="assets/img/contacts-edit.png" alt="edit">Edit</div>
+                <div id="edit${uniqueId}"class="edit-and-delete-row" onclick="openEditContactOverlay('${uniqueId}')"><img src="assets/img/contacts-edit.png" alt="edit">Edit</div>
                 <div id="delete${uniqueId}" class="edit-and-delete-row"><img src="assets/img/contacts-delete.png" alt="delete">Delete</div>
             </div>
+            <button onclick="burgerSlideInFromRight()" class="contact-burger-menu" id="contactBurgerMenuIcon">
+                <img src="assets/img/contacts-burger-menu.png" alt="add contact" class="burger-menu-icon">
+            </button>
         </div>
     </div>
     <div class="contact-summary-contact-information">Contact Information</div>
@@ -213,7 +219,7 @@ function renderContactSummary(color, name, email, phone, uniqueId) {
             <div><b>Email</b></div>
             <span>${email}</span>
             <div><b>Phone</b></div>
-            <span>+49 151 ${phone}</span>
+            <span>${phone}</span>
         </div>
     </div>
     </div>
@@ -237,4 +243,35 @@ function checkResponsive() {
         document.getElementById('mainContacts').style.display = 'flex';
     }
 
+}
+
+
+function burgerSlideInFromRight() {
+    let burgerMenu = document.getElementById('burgerMenu');
+    let burgerIcon = document.getElementById('contactBurgerMenuIcon');
+    burgerMenu.classList.toggle('active');
+    burgerIcon.classList.add('d-none');
+
+    if (burgerMenu.classList.contains('active')) {
+        document.addEventListener('click', closeBurgerMenuWhenGreyAreaWasClicked);
+    } else {
+        document.removeEventListener('click', closeBurgerMenuWhenGreyAreaWasClicked);
+    }
+}
+
+function burgerMenuSlideOutToRight() {
+    let burgerMenu = document.getElementById('burgerMenu');
+    let burgerIcon = document.getElementById('contactBurgerMenuIcon');
+    burgerMenu.classList.remove('active');
+
+
+    document.removeEventListener('click', closeBurgerMenuWhenGreyAreaWasClicked);
+    burgerIcon.classList.remove('d-none');
+}
+
+function closeBurgerMenuWhenGreyAreaWasClicked(event) {
+    let burgerMenu = document.getElementById('burgerMenu');
+    if (!burgerMenu.contains(event.target) && !event.target.closest('.contact-burger-menu')) {
+        burgerMenuSlideOutToRight();
+    }
 }
