@@ -127,7 +127,7 @@
                             <img src="./assets/img/contacs_close.png">
                         </div>
                     </div>
-                    <form onsubmit="editContact()" class="contact-form d-flex f-column j-between">
+                    <!-- <form onsubmit="editContact(event)" class="contact-form d-flex f-column j-between">
                         <input required="" id="edit-contact-name" type="text" value=""
                             class="contact-input-fields">
                         <input required="" id="edit-contact-email" type="email" value=""
@@ -146,7 +146,24 @@
                                 <img src="./assets/img/contacts_check.png">
                             </button>
                         </div>
+                    </form> -->
+                    <form onsubmit="editContact(event)" class="contact-form d-flex f-column j-between">
+                        <input required="" id="edit-contact-name" type="text" value="" class="contact-input-fields">
+                        <input required="" id="edit-contact-email" type="email" value="" class="contact-input-fields">
+                        <input required="" id="edit-contact-phone" type="tel" value="" class="contact-input-fields">
+                        <div class="contact-form-btn d-flex">
+                            <button type="button" onclick="editSlideOutToRight()" class="contact-cancel-btn d-flex a-center j-center">
+                                Delete
+                                <img src="./assets/img/contacts_iconoir_cancel.png">
+                                <img src="./assets/img/contacts_iconoir_cancel_blue.png" id="contact-cancel-blue" class="d-none">
+                            </button>
+                            <button type="submit" id="contact-create-contact" class="contact-create-btn d-flex a-center j-center">
+                                Save
+                                <img src="./assets/img/contacts_check.png">
+                            </button>
+                        </div>
                     </form>
+                    
                 </div>
 
             </div>
@@ -158,17 +175,7 @@
         <p class="#">Contact successfully edited</p>
     </div>
 
-    <!-- BURGER MENU EDIT AND DELETE -->
-    <div class="burger-menu-overlay" id="burgerMenu" onclick="closeBurgerMenuWhenGreyAreaWasClicked()">
-        <div class="burgermenu-row" onclick="openEditContactOverlay('${name}','${email}','${phone}')">
-            <img class="burgermenu-menu-icon" src="assets/img/contacts-edit.png">
-            Edit
-        </div>
-        <div class="burgermenu-row">
-            <img class="burgermenu-menu-icon" src="assets/img/contacts-delete.png">
-            Delete
-        </div>
-    </div>
+
 </body>
 
 </html>
