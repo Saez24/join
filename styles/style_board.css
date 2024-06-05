@@ -329,6 +329,7 @@ body {
     max-width: 200px;
     margin-bottom: 24px;
     transition: transform 0.3s ease; /* Fügt eine Übergangsanimation hinzu */
+    cursor: grab;
 }
 
 .toDoBox:hover {
