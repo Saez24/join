@@ -4,7 +4,11 @@
 async function createTask() {
     let taskDetails = getTaskDetails();
 
-    if (!validateTaskDetails(taskDetails)) return;
+    if (!validateTaskDetails(taskDetails),
+        !validateTaskInputField(taskDetails)
+    ) return;
+
+
     let assignedTo = getAssignedTo();
     let subtasks = getSubtasks();
     let taskData = {
@@ -26,7 +30,6 @@ async function createTask() {
 function getTaskDetails() {
     return {
         title: document.getElementById('tasktitle').value,
-        description: document.getElementById('description').value,
         duedate: document.getElementById('duedate').value,
         category: document.getElementById('taskcategoryinput').value,
         prio: activeButton ? activeButton.id : null
@@ -39,8 +42,31 @@ function getTaskDetails() {
  * @returns {boolean} Returns true if task details are valid, otherwise false.
  */
 function validateTaskDetails(taskDetails) {
+    let errorContainerTitle = document.getElementById('error-message-title');
+    let errorContainerDate = document.getElementById('error-message-date');
+    let errorContainerCategory = document.getElementById('error-message-category');
     if (!taskDetails.title || !taskDetails.duedate || !taskDetails.category) {
-        alert("Please fill out all required fields and select a priority.");
+        errorContainerTitle.style.display = 'block';
+        errorContainerDate.style.display = 'block';
+        errorContainerCategory.style.display = 'block';
+        return false;
+    }
+    return true;
+};
+
+/**
+ * Validates task details.
+ * @param {Object} taskDetails - An object containing task details.
+ * @returns {boolean} Returns true if task details are valid, otherwise false.
+ */
+function validateTaskInputField(taskDetails) {
+    let errorContainerTitle = document.getElementById('tasktitle');
+    let errorContainerDate = document.getElementById('duedate');
+    let errorContainerCategory = document.getElementById('taskcategoryinput');
+    if (!taskDetails.title || !taskDetails.duedate || !taskDetails.category) {
+        errorContainerTitle.style.border = '1px solid #ff8190';
+        errorContainerDate.style.border = '1px solid #ff8190';
+        errorContainerCategory.style.border = '1px solid #ff8190';
         return false;
     }
     return true;

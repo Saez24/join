@@ -26,6 +26,10 @@
                 <div class="inputfields">
                     <span class="required">Title</span>
                     <input id="tasktitle" required type="text" placeholder="Enter a title">
+                    <div id="error-message-placeholder"><span id="error-message-title" class="error-message">Please
+                            enter
+                            a Title</span>
+                    </div>
                 </div>
                 <div class="description">
                     <span>Description</span>
@@ -51,6 +55,9 @@
                     <span class="required">Due Date</span>
                     <input onfocus="setDateRestriction()" id="duedate" name="duedate" class="datefield" required
                         type="date" placeholder="dd/mm/yyyy">
+                    <div id="error-message-placeholder"><span id="error-message-date" class="error-message">Please enter
+                            a Date</span>
+                    </div>
                 </div>
                 <div class="prio">
                     <span>Prio</span>
@@ -72,6 +79,10 @@
                         <div onclick="closeOnBackground(event)" id="taskcategory" class="category_dropdown_box">
 
                         </div>
+                    </div>
+                    <div id="error-message-placeholder"><span id="error-message-category" class="error-message">Please
+                            select
+                            category</span>
                     </div>
                 </div>
                 <div class="inputfields">
