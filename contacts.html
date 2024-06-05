@@ -105,7 +105,7 @@
     <!-- EDIT CONTACT OVERLAY -->
     <div class="contact-overlay d-flex j-center a-center" id="edit-contact-overlay"
         onclick="closeOverlayWhenGreyAreaWasClicked()">
-        <div class="contact-cont d-flex" id="contact-cont">
+        <div class="contact-cont d-flex" id="edit-contact-cont">
             <div class="contact-left d-flex f-column j-center">
                 <div class="contact-close-white j-end a-center">
                     <div class="contact-close-btn-white d-flex j-center a-center" onclick="slideOutToRight()">
@@ -123,19 +123,19 @@
                 </div>
                 <div class="contact-form-cont d-flex f-column">
                     <div class="contact-close d-flex j-end a-center">
-                        <div class="contact-close-btn d-flex j-center a-center" onclick="slideOutToRight()">
+                        <div class="contact-close-btn d-flex j-center a-center" onclick="editSlideOutToRight()">
                             <img src="./assets/img/contacs_close.png">
                         </div>
                     </div>
                     <form onsubmit="editContact()" class="contact-form d-flex f-column j-between">
-                        <input required="" id="edit-contact-name" type="text" value="">
+                        <input required="" id="edit-contact-name" type="text" value=""
                             class="contact-input-fields">
                         <input required="" id="edit-contact-email" type="email" value=""
                             class="contact-input-fields">
                         <input required="" id="edit-contact-phone" type="tel" value=""
                             class="contact-input-fields">
                         <div class="contact-form-btn d-flex">
-                            <button type="button" id="contact-cancel-contact" onclick="slideOutToRight()"
+                            <button type="button" onclick="editSlideOutToRight()"
                                 class="contact-cancel-btn d-flex a-center j-center">Delete
                                 <img src="./assets/img/contacts_iconoir_cancel.png">
                                 <img src="./assets/img/contacts_iconoir_cancel_blue.png" id="contact-cancel-blue"
@@ -160,7 +160,7 @@
 
     <!-- BURGER MENU EDIT AND DELETE -->
     <div class="burger-menu-overlay" id="burgerMenu" onclick="closeBurgerMenuWhenGreyAreaWasClicked()">
-        <div class="burgermenu-row" onclick="openEditContactOverlay('${uniqueId}')">
+        <div class="burgermenu-row" onclick="openEditContactOverlay('${name}','${email}','${phone}')">
             <img class="burgermenu-menu-icon" src="assets/img/contacts-edit.png">
             Edit
         </div>

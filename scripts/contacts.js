@@ -123,7 +123,38 @@ function showSuccessfullContactCreation() {
     }, 1500);
 }
 
+function openEditContactOverlay(name, email, phone, color){
+console.log('folgendes wird übergeben: ', name, email, phone)
+document.getElementById('edit-contact-name').value=name;
+document.getElementById('edit-contact-email').value=email;
+document.getElementById('edit-contact-phone').value=phone;
+editSlideInFromRight();
+}
 
+function editSlideInFromRight() {
+    let editContactOverlay = document.getElementById('edit-contact-overlay');
+    let editContactCont = document.getElementById('edit-contact-cont');
+
+    editContactOverlay.classList.add('slide-in-from-right');
+    editContactCont.classList.add('slide-in-from-right');
+
+    setTimeout(() => {
+        editContactOverlay.classList.add('fade-to-grey-overlay');
+    }, 300);
+}
+
+
+function editSlideOutToRight() {
+    let contactOverlay = document.getElementById('edit-contact-overlay');
+    let contactCont = document.getElementById('edit-contact-cont');
+
+    contactOverlay.classList.remove('fade-to-grey-overlay');
+
+    setTimeout(() => {
+        contactOverlay.classList.remove('slide-in-from-right');
+        contactCont.classList.remove('slide-in-from-right');
+    }, 100);
+}
 
 
 
@@ -231,7 +262,7 @@ function renderContactSummary(color, name, email, phone, uniqueId) {
         <div class="contact-summary-headline-rightside">
             <div class="contact-summary-headline-name">${name}</div>
             <div class="edit-and-delete">
-                <div id="edit${uniqueId}"class="edit-and-delete-row" onclick="openEditContactOverlay('${uniqueId}')"><img src="assets/img/contacts-edit.png" alt="edit">Edit</div>
+                <div id="edit${uniqueId}"class="edit-and-delete-row" onclick="openEditContactOverlay('${name}','${email}','${phone}')"><img src="assets/img/contacts-edit.png" alt="edit">Edit</div>
                 <div id="delete${uniqueId}" class="edit-and-delete-row"><img src="assets/img/contacts-delete.png" alt="delete">Delete</div>
             </div>
             <button onclick="burgerSlideInFromRight()" class="contact-burger-menu" id="contactBurgerMenuIcon">
