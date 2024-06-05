@@ -123,39 +123,6 @@ function showSuccessfullContactCreation() {
     }, 1500);
 }
 
-function openEditContactOverlay(name, email, phone, color){
-console.log('folgendes wird übergeben: ', name, email, phone)
-document.getElementById('edit-contact-name').value=name;
-document.getElementById('edit-contact-email').value=email;
-document.getElementById('edit-contact-phone').value=phone;
-editSlideInFromRight();
-}
-
-function editSlideInFromRight() {
-    let editContactOverlay = document.getElementById('edit-contact-overlay');
-    let editContactCont = document.getElementById('edit-contact-cont');
-
-    editContactOverlay.classList.add('slide-in-from-right');
-    editContactCont.classList.add('slide-in-from-right');
-
-    setTimeout(() => {
-        editContactOverlay.classList.add('fade-to-grey-overlay');
-    }, 300);
-}
-
-
-function editSlideOutToRight() {
-    let contactOverlay = document.getElementById('edit-contact-overlay');
-    let contactCont = document.getElementById('edit-contact-cont');
-
-    contactOverlay.classList.remove('fade-to-grey-overlay');
-
-    setTimeout(() => {
-        contactOverlay.classList.remove('slide-in-from-right');
-        contactCont.classList.remove('slide-in-from-right');
-    }, 100);
-}
-
 
 
 async function getNames() {
@@ -247,6 +214,56 @@ function renderContactInformation(name, email, color, phone, uniqueId) {
 }
 
 
+
+// Render Contact Summary HTML
+// function renderContactSummary(color, name, email, phone, uniqueId) {
+//     return `
+//     <div class="main-contacts-text">
+//         <h1>Contacts</h1>
+//         <div class="vertical-line"></div>
+//         <h2>Better with a team</h2>
+//         <div class="horizontal-line"></div>
+//     </div>
+//     <div id="contactSummary">
+//         <div id="backArrow" class="arrow-icon" onclick="closeContactInformation()"><img src="assets/img/arrow_left.png"></div>
+//         <div class="contact-summary-headline">
+//             <div class="contact-summary-initials" style="background-color: ${color};">${getInitials(name)}</div>
+//             <div class="contact-summary-headline-rightside">
+//                 <div class="contact-summary-headline-name">${name}</div>
+//                 <div class="edit-and-delete">
+//                     <div id="edit${uniqueId}" class="edit-and-delete-row" onclick="openEditContactOverlay('${name}', '${email}', '${phone}', '${color}')">
+//                         <img src="assets/img/contacts-edit.png" alt="edit">Edit
+//                     </div>
+//                     <div id="delete${uniqueId}" class="edit-and-delete-row"><img src="assets/img/contacts-delete.png" alt="delete">Delete</div>
+//                 </div>
+//                 <button onclick="burgerSlideInFromRight()" class="contact-burger-menu" id="contactBurgerMenuIcon">
+//                     <img src="assets/img/contacts-burger-menu.png" alt="add contact" class="burger-menu-icon">
+//                 </button>
+//             </div>
+//         </div>
+//         <div class="contact-summary-contact-information">Contact Information</div>
+//         <div class="contact-summary-mail-and-phone">
+//             <div><b>Email</b></div>
+//             <span>${email}</span>
+//             <div><b>Phone</b></div>
+//             <span>${phone}</span>
+//         </div>
+//     </div>
+//     <!-- BURGER MENU EDIT AND DELETE -->
+//     <div class="burger-menu-overlay" id="burgerMenu">
+//         <div class="burgermenu-row" onclick="openEditContactOverlay('${name}', '${email}', '${phone}', '${color}')">
+//             <img class="burgermenu-menu-icon" src="assets/img/contacts-edit.png">
+//             Edit
+//         </div>
+//         <div class="burgermenu-row">
+//             <img class="burgermenu-menu-icon" src="assets/img/contacts-delete.png">
+//             Delete
+//         </div>
+//     </div>
+//     `;
+// }
+
+// <!-- Render Contact Summary HTML -->
 function renderContactSummary(color, name, email, phone, uniqueId) {
     return `
     <div class="main-contacts-text">
@@ -257,20 +274,22 @@ function renderContactSummary(color, name, email, phone, uniqueId) {
     </div>
     <div id="contactSummary">
         <div id="backArrow" class="arrow-icon" onclick="closeContactInformation()"><img src="assets/img/arrow_left.png"></div>
-    <div class="contact-summary-headline">
-        <div class="contact-summary-initials" style="background-color: ${color};">${getInitials(name)}</div>
-        <div class="contact-summary-headline-rightside">
-            <div class="contact-summary-headline-name">${name}</div>
-            <div class="edit-and-delete">
-                <div id="edit${uniqueId}"class="edit-and-delete-row" onclick="openEditContactOverlay('${name}','${email}','${phone}')"><img src="assets/img/contacts-edit.png" alt="edit">Edit</div>
-                <div id="delete${uniqueId}" class="edit-and-delete-row"><img src="assets/img/contacts-delete.png" alt="delete">Delete</div>
+        <div class="contact-summary-headline">
+            <div class="contact-summary-initials" style="background-color: ${color};">${getInitials(name)}</div>
+            <div class="contact-summary-headline-rightside">
+                <div class="contact-summary-headline-name">${name}</div>
+                <div class="edit-and-delete">
+                    <div id="edit${uniqueId}" class="edit-and-delete-row" onclick="openEditContactOverlay('${name}', '${email}', '${phone}', '${color}', '${uniqueId}')">
+                        <img src="assets/img/contacts-edit.png" alt="edit">Edit
+                    </div>
+                    <div id="delete${uniqueId}" class="edit-and-delete-row"><img src="assets/img/contacts-delete.png" alt="delete">Delete</div>
+                </div>
+                <button onclick="burgerSlideInFromRight()" class="contact-burger-menu" id="contactBurgerMenuIcon">
+                    <img src="assets/img/contacts-burger-menu.png" alt="add contact" class="burger-menu-icon">
+                </button>
             </div>
-            <button onclick="burgerSlideInFromRight()" class="contact-burger-menu" id="contactBurgerMenuIcon">
-                <img src="assets/img/contacts-burger-menu.png" alt="add contact" class="burger-menu-icon">
-            </button>
         </div>
-    </div>
-    <div class="contact-summary-contact-information">Contact Information</div>
+        <div class="contact-summary-contact-information">Contact Information</div>
         <div class="contact-summary-mail-and-phone">
             <div><b>Email</b></div>
             <span>${email}</span>
@@ -278,9 +297,20 @@ function renderContactSummary(color, name, email, phone, uniqueId) {
             <span>${phone}</span>
         </div>
     </div>
+    <!-- BURGER MENU EDIT AND DELETE -->
+    <div class="burger-menu-overlay" id="burgerMenu">
+        <div class="burgermenu-row" onclick="openEditContactOverlay('${name}', '${email}', '${phone}', '${color}', '${uniqueId}')">
+            <img class="burgermenu-menu-icon" src="assets/img/contacts-edit.png">
+            Edit
+        </div>
+        <div class="burgermenu-row">
+            <img class="burgermenu-menu-icon" src="assets/img/contacts-delete.png">
+            Delete
+        </div>
     </div>
-`;
+    `;
 }
+
 
 function closeContactInformation() {
     if (window.innerWidth < 1401) {
@@ -308,21 +338,18 @@ function burgerSlideInFromRight() {
     burgerMenu.classList.toggle('active');
     burgerIcon.classList.add('d-none');
 
-    if (burgerMenu.classList.contains('active')) {
-        document.addEventListener('click', closeBurgerMenuWhenGreyAreaWasClicked);
-    } else {
-        document.removeEventListener('click', closeBurgerMenuWhenGreyAreaWasClicked);
-    }
+    // Event-Listener zum Schließen des Menüs hinzufügen
+    document.addEventListener('click', closeBurgerMenuWhenGreyAreaWasClicked);
 }
 
 function burgerMenuSlideOutToRight() {
     let burgerMenu = document.getElementById('burgerMenu');
     let burgerIcon = document.getElementById('contactBurgerMenuIcon');
     burgerMenu.classList.remove('active');
-
-
-    document.removeEventListener('click', closeBurgerMenuWhenGreyAreaWasClicked);
     burgerIcon.classList.remove('d-none');
+
+    // Event-Listener entfernen
+    document.removeEventListener('click', closeBurgerMenuWhenGreyAreaWasClicked);
 }
 
 function closeBurgerMenuWhenGreyAreaWasClicked(event) {
@@ -331,3 +358,89 @@ function closeBurgerMenuWhenGreyAreaWasClicked(event) {
         burgerMenuSlideOutToRight();
     }
 }
+
+
+let editingContactId = null; // Globale Variable zur Speicherung der Kontakt-ID während der Bearbeitung
+
+function openEditContactOverlay(name, email, phone, color, uniqueId) {
+    console.log('folgendes wird übergeben: ', name, email, phone, color, uniqueId);
+    document.getElementById('edit-contact-name').value = name;
+    document.getElementById('edit-contact-email').value = email;
+    document.getElementById('edit-contact-phone').value = phone;
+    editingContactId = uniqueId; // Speichern der ID des zu bearbeitenden Kontakts
+    console.log('Kontakt-ID für Bearbeitung gesetzt:', editingContactId); // Debugging Ausgabe
+    editSlideInFromRight();
+}
+
+
+
+function editSlideInFromRight() {
+    let editContactOverlay = document.getElementById('edit-contact-overlay');
+    let editContactCont = document.getElementById('edit-contact-cont');
+
+    editContactOverlay.classList.add('slide-in-from-right');
+    editContactCont.classList.add('slide-in-from-right');
+
+    setTimeout(() => {
+        editContactOverlay.classList.add('fade-to-grey-overlay');
+    }, 300);
+}
+
+function editSlideOutToRight() {
+    let contactOverlay = document.getElementById('edit-contact-overlay');
+    let contactCont = document.getElementById('edit-contact-cont');
+
+    contactOverlay.classList.remove('fade-to-grey-overlay');
+
+    setTimeout(() => {
+        contactOverlay.classList.remove('slide-in-from-right');
+        contactCont.classList.remove('slide-in-from-right');
+    }, 100);
+}
+
+async function editContact(event) {
+    event.preventDefault(); // Verhindert das Standardverhalten des Formulars
+
+    let name = document.getElementById('edit-contact-name').value;
+    let email = document.getElementById('edit-contact-email').value;
+    let phone = document.getElementById('edit-contact-phone').value;
+
+    if (!editingContactId) {
+        console.error('Keine Kontakt-ID vorhanden für das Update');
+        return;
+    }
+
+    // Hier die Kontaktinformationen aktualisieren
+    console.log('Aktualisierte Kontaktinformationen:', { name, email, phone });
+
+    // Beispiel: Aktualisierte Kontaktinformationen speichern (implementieren Sie Ihre eigene Speicherlogik)
+    await updateContactData(editingContactId, { email: email, name: name, phonenumber: phone });
+
+    editSlideOutToRight();
+    await getNames();
+    searchAndRenderLastAddedContact(name);
+    showSuccessfulEdit();
+}
+
+async function updateContactData(contactId, data = {}) {
+    let response = await fetch(BASE_URL + 'names/' + contactId + ".json", {
+        method: "PUT", // Verwenden von PUT für Updates
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data)
+    });
+    return await response.json();
+}
+
+
+function showSuccessfulEdit() {
+    let contactCreated = document.getElementById('contact-created');
+    contactCreated.innerHTML = "Contact successfully edited"; // Änderung der Nachricht
+    contactCreated.classList.add('slide-in-from-right');
+
+    setTimeout(() => {
+        contactCreated.classList.remove('slide-in-from-right');
+    }, 1500);
+}
+
