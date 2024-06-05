@@ -235,8 +235,7 @@ function renderAddTaskCategories(categories) {
             `;
         }
     }
-}
-
+};
 
 /**
  * Toggles the "selected_dropdown" class on the given element and toggles the associated checkbox state.
@@ -613,6 +612,24 @@ function removeSelectedDropdownClass() {
     }
 };
 
+function removeValidateTaskInputField() {
+    let errorContainerTitle = document.getElementById('tasktitle');
+    let errorContainerDate = document.getElementById('duedate');
+    let errorContainerCategory = document.getElementById('taskcategoryinput');
+    errorContainerTitle.style.border = '1px solid #D1D1D1';
+    errorContainerDate.style.border = '1px solid #D1D1D1';
+    errorContainerCategory.style.border = '1px solid #D1D1D1';
+};
+
+function removeValidateTaskDetails() {
+    let errorContainerTitle = document.getElementById('error-message-title');
+    let errorContainerDate = document.getElementById('error-message-date');
+    let errorContainerCategory = document.getElementById('error-message-category');
+    errorContainerTitle.style.display = 'none';
+    errorContainerDate.style.display = 'none';
+    errorContainerCategory.style.display = 'none';
+};
+
 /**
  * Clears the content by invoking the above functions and calls mediumButton if necessary.
  */
@@ -620,5 +637,13 @@ function clearContent() {
     resetInputs();
     clearAssignedToAndSubtasks();
     removeSelectedDropdownClass();
-    mediumButton(); // Call mediumButton if necessary
+
+    // Check if the medium button is not active, then call mediumButton
+    let mediumBtn = document.getElementById('medium');
+    if (activeButton !== mediumBtn) {
+        mediumButton();
+    }
+
+    removeValidateTaskInputField();
+    removeValidateTaskDetails();
 };

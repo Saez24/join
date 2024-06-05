@@ -27,6 +27,8 @@ function openDialog() {
     addTaskLoadNames();
     content.classList.remove('addtask-content');
     content.classList.add('addtask-content-dialog');
+    clearContent();
+    mediumButton();
 };
 
 /**
