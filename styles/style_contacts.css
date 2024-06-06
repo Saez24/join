@@ -8,7 +8,7 @@ body {
     display: flex;
     flex-direction: column;
     width: 456px;
-    height: 100vh;
+    height: 80vh;
     background-color: #ffffff;
     left: 232px;
     position: relative;
@@ -163,11 +163,10 @@ h2 {
 #contactForString {
     top: 200px;
     position: relative;
-    flex: 1;
-    max-height: calc(100vh - 200px);
     overflow-y: auto;
     width: 100%;
     left: 4px;
+    height: 100%;
 }
 
 /* Scrollbar styles */
@@ -690,8 +689,8 @@ h2 {
 
     #contactForString {
         top: 152px;
-        max-height: 100vh;
         width: 85%;
+        flex: content;
     }
 
     .contacts-left {
