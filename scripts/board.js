@@ -4,6 +4,16 @@ let priorityImages = {
     low: './assets/img/prio_baja.png'
 };
 
+let CategoryColors = {
+    Finance: { background: '#FF7A00', color: '#FFFFFF' },
+    IT: { background: '#FF5EB3', color: '#FFFFFF' },
+    Sales: { background: '#6E52FF', color: '#FFFFFF' },
+    HR: { background: '#9327FF', color: '#FFFFFF' },
+    Marketing: { background: '#00BEE8', color: '#FFFFFF' },
+    Operations: { background: '#1FD7C1', color: '#FFFFFF' },
+    Product: { background: '#FF745E', color: '#FFFFFF' }
+};
+
 let taskIdCounter = 0;
 
 /**
@@ -160,7 +170,7 @@ function generateAssignedNamesHTML(assignedNames) {
         return /*html*/`
             <div class="assignedName" style="background-color: ${randomColor};"><span>${initials}</span></div>`;
     }).join('');
-}
+};
 
 /**
  * Generates the HTML string for subtask count.
@@ -170,10 +180,10 @@ function generateAssignedNamesHTML(assignedNames) {
 function generateSubtaskCountHTML(subtask) {
     let count = subtask ? `${subtask.length}/${subtask.length} Subtask${subtask.length > 1 ? 's' : ''}` : '0/0 Subtasks';
     return `<p class="subtaskCount">${count}</p>`;
-}
+};
 
 /**
- * Generates the HTML element string for a given task.
+ * Generates the full HTML element string for a given task.
  * @param {Object} task - The task object.
  * @param {string} task.category - The category of the task.
  * @param {string} task.title - The title of the task.
@@ -186,12 +196,27 @@ function generateSubtaskCountHTML(subtask) {
 function createTaskElement(task) {
     let taskid = `taskBox${taskIdCounter++}`; // Generate unique task id
     let assignedNamesHTML = generateAssignedNamesHTML(task.assignto || []);
-    let subtaskCountHTML = generateSubtaskCountHTML(task.subtask);
+    let subtaskCountHTML = generateSubtaskCountHTML(task.subtask || []);
     let priorityImage = priorityImages[task.prio] || './assets/img/prio_media.png';
+    let categoryColor = CategoryColors[task.category] || { background: '#000000', color: '#FFFFFF' };
 
+    return createTaskHTML(task, taskid, assignedNamesHTML, subtaskCountHTML, priorityImage, categoryColor);
+};
+
+/**
+ * Generates the HTML string for the task element.
+ * @param {Object} task - The task object.
+ * @param {string} taskid - The unique task id.
+ * @param {string} assignedNamesHTML - The HTML string for the assigned names.
+ * @param {string} subtaskCountHTML - The HTML string for the subtask count.
+ * @param {string} priorityImage - The URL for the priority image.
+ * @param {Object} categoryColor - The color configuration for the category.
+ * @returns {string} The HTML string for the task element.
+ */
+function createTaskHTML(task, taskid, assignedNamesHTML, subtaskCountHTML, priorityImage, categoryColor) {
     return /*html*/`
         <div id="${taskid}" draggable="true" class="toDoBox" onclick="showPopup('popup')">
-            <button class="CategoryBox" >${task.category}</button>
+            <button class="CategoryBox" style="background-color: ${categoryColor.background};" >${task.category}</button>
             <p class="HeadlineBox">${task.title}</p>
             <p class="descriptionBox">${task.description}</p>
             <div class="subtaskProgress">
