@@ -15,6 +15,7 @@ let CategoryColors = {
 };
 
 let taskIdCounter = 0;
+let currentDraggedElement;
 
 /**
  * Opens the dialog by removing the 'd_none' class and ensures CSS and content are loaded.
@@ -215,7 +216,7 @@ function createTaskElement(task) {
  */
 function createTaskHTML(task, taskid, assignedNamesHTML, subtaskCountHTML, priorityImage, categoryColor) {
     return /*html*/`
-        <div id="${taskid}" draggable="true" class="toDoBox" onclick="showPopup('popup')">
+        <div id="${taskid}" draggable="true" ondragstart="startDragging(${taskid}['id'])" class="toDoBox" onclick="showPopup('popup')">
             <button class="CategoryBox" style="background-color: ${categoryColor.background};" >${task.category}</button>
             <p class="HeadlineBox">${task.title}</p>
             <p class="descriptionBox">${task.description}</p>
@@ -232,6 +233,61 @@ function createTaskHTML(task, taskid, assignedNamesHTML, subtaskCountHTML, prior
         </div>
     `;
 };
+
+function startDragging(id) {
+    currentDraggedElement = id;
+    console.log(id)
+}
+
+function allowDrop(ev) {
+    ev.preventDefault();
+}
+
+function moveTo() {
+    updateTaskStatus();
+}
+
+async function updateTaskStatus(taskId, newStatus) {
+    try {
+        // Laden der JSON-Daten von der Server-URL
+        let response = await fetch(BASE_URL + "tasks.json");
+        let tasksObject = await response.json();
+
+        // Suchen der Aufgabe anhand der taskId
+        if (!(taskId in tasksObject)) {
+            throw new Error('Aufgabe nicht gefunden');
+        }
+
+        // Aktualisieren des Status der Aufgabe
+        tasksObject[taskId].status = newStatus;
+
+        // Aktualisierte JSON-Daten zurückschreiben
+        await saveUpdatedTasks(tasksObject);
+
+        console.log('Aufgabenstatus erfolgreich aktualisiert');
+    } catch (error) {
+        console.error('Fehler beim Aktualisieren des Aufgabenstatus:', error);
+    }
+}
+
+async function saveUpdatedTasks(tasks) {
+    try {
+        // Senden der aktualisierten JSON-Daten an den Server
+        await fetch(BASE_URL + "tasks.json", {
+            method: 'PATCH', // oder 'POST', abhängig von Ihrer Serverkonfiguration
+            body: JSON.stringify(tasks),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+    } catch (error) {
+        console.error('Fehler beim Speichern der aktualisierten Aufgaben:', error);
+    }
+}
+
+
+// Verwendung: updateTaskCategory('taskId', 'newCategory');
+
 
 /**
  * Categorizes tasks into their respective status categories.

@@ -38,7 +38,7 @@ Code kopieren
         </div>
 
         <div class="boardTasks">
-            <div id="todoTasks" class="statusTasks">
+            <div id="todoTasks" class="statusTasks" ondrop="moveTo('todoTasks')" ondragover="allowDrop(event)">
                 <div class="headlineStatusTasks">
                     <h5 class="taskStatusTitle">To do</h5>
                     <div class="imageContainer">
@@ -49,7 +49,8 @@ Code kopieren
                 <div class="tasks"></div>
             </div>
 
-            <div id="inProgressTasks" class="statusTasks">
+            <div id="inProgressTasks" class="statusTasks" ondrop="moveTo('inProgressTasks')"
+                ondragover="allowDrop(event)">
                 <div class="headlineStatusTasks">
                     <h5 class="taskStatusTitle">In progress</h5>
                     <img onclick="openDialog(), closeOnBackground(event)" class="add_task_to_board"
@@ -58,7 +59,8 @@ Code kopieren
                 <div class="tasks"></div>
             </div>
 
-            <div id="awaitFeedbackTasks" class="statusTasks">
+            <div id="awaitFeedbackTasks" class="statusTasks" ondrop="moveTo('awaitFeedbackTasks')"
+                ondragover="allowDrop(event)">
                 <div class="headlineStatusTasks">
                     <h5 class="taskStatusTitle">Await feedback</h5>
                     <img onclick="openDialog(), closeOnBackground(event)" class="add_task_to_board"
@@ -67,7 +69,7 @@ Code kopieren
                 <div class="tasks"></div>
             </div>
 
-            <div id="doneTasks" class="statusTasks">
+            <div id="doneTasks" class="statusTasks" ondrop="moveTo('doneTasks')" ondragover="allowDrop(event)">
                 <div class="headlineStatusTasks">
                     <h5 class="taskStatusTitle">Done</h5>
                 </div>
