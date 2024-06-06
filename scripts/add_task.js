@@ -44,7 +44,7 @@ async function addTaskLoadNames() {
     } catch (error) {
         console.error("Error fetching data:", error);
     }
-}
+};
 
 /**
  * Generates HTML for displaying a name with a color-coded short name and a checkbox.
@@ -63,7 +63,7 @@ function generateNameHTML(nameKey, name, firstInitial, lastInitial, id) {
             <input class="checkbox" type="checkbox" id="assignedto_${nameKey}_${id}" data-initials="${firstInitial}${lastInitial}" data-color="${randomColor}" onchange="loadSelectedAssignTo()">
         </div>
     `;
-}
+};
 
 /**
  * Generates the HTML for names, including initials.
@@ -86,7 +86,7 @@ function renderNamesHTML(sortedKeys, names) {
         }
     }
     return namesHTML;
-}
+};
 
 /**
  * Renders names HTML to the DOM.
@@ -95,7 +95,7 @@ function renderNamesHTML(sortedKeys, names) {
 function renderNamesToDOM(namesHTML) {
     let namesContainer = document.getElementById("assignedto");
     namesContainer.innerHTML = namesHTML;
-}
+};
 
 /**
  * Renders names for adding a new task to the DOM.
@@ -105,7 +105,7 @@ function renderNamesToDOM(namesHTML) {
 function renderAddTaskNames(sortedKeys, names) {
     let namesHTML = renderNamesHTML(sortedKeys, names);
     renderNamesToDOM(namesHTML);
-}
+};
 
 /**
  * Toggles the visibility of the assign-to selection container.
@@ -121,7 +121,7 @@ function selectAssignTo() {
         assignToContainer.style.display = 'block';
         assignToInput.style.backgroundImage = 'url(./assets/img/arrow_drop_down.png)';
     }
-}
+};
 
 /**
  * Closes the assignto dropdown menu if it is currently open.
@@ -133,18 +133,17 @@ function closeAssignTo() {
         assignToContainer.style.display = 'none';
     }
     assignToInput.style.backgroundImage = 'url(./assets/img/arrow_drop.png)';
-}
+};
 
 /**
-         * Creates a button for a selected checkbox.
-         * @param {Element} checkbox - The checkbox element.
-         * @param {number} position - The left position of the button.
-         */
+ * Creates a button for a selected checkbox.
+ * @param {Element} checkbox - The checkbox element.
+ * @param {number} position - The left position of the button.
+ */
 function createButton(checkbox, position) {
     let initials = checkbox.getAttribute("data-initials");
     let color = checkbox.getAttribute("data-color");
     let checkboxId = checkbox.id;
-
     let button = document.createElement("button");
     button.className = "selectedAssignTo";
     button.id = `selected_${checkboxId}`;
@@ -152,7 +151,7 @@ function createButton(checkbox, position) {
     button.style.left = `${position}px`;
     button.innerText = initials;
     return button;
-}
+};
 
 /**
  * Adds a "more" button indicating the number of additional selected checkboxes.
@@ -165,7 +164,7 @@ function addMoreButton(count, position) {
     moreButton.style.left = `${position}px`;
     moreButton.innerText = `+${count}`;
     return moreButton;
-}
+};
 
 /**
  * Updates the selectedAssignTo div with buttons representing the selected names.
@@ -175,6 +174,7 @@ function addMoreButton(count, position) {
 function loadSelectedAssignTo() {
     let selectedAssignToDiv = document.getElementById("selectedAssignTo");
     let checkboxes = document.querySelectorAll("#assignedto .checkbox");
+    let buttonContainer = document.getElementById("selectedAssignTo")
 
     selectedAssignToDiv.innerHTML = '';
     let position = 0;
@@ -187,6 +187,7 @@ function loadSelectedAssignTo() {
                 let button = createButton(checkbox, position);
                 selectedAssignToDiv.appendChild(button);
                 position += 32; // Adjust this value to control the overlap
+                buttonContainer.style.display = 'inline-block'
             }
         }
     });
@@ -195,7 +196,10 @@ function loadSelectedAssignTo() {
         let moreButton = addMoreButton(count - 3, position);
         selectedAssignToDiv.appendChild(moreButton);
     }
-}
+    if (count === 0) {
+        buttonContainer.style.display = 'none'
+    }
+};
 
 /**
  * Toggles the "selected_dropdown" class on the given element and toggles the associated checkbox state.
@@ -213,7 +217,7 @@ function dropdownSelectAssignTo(element) {
             loadSelectedAssignTo();
         }
     }
-}
+};
 
 /**
  * Renders categories for adding a new task to the DOM.
@@ -612,22 +616,28 @@ function removeSelectedDropdownClass() {
     }
 };
 
+/**
+ * Removes validation styling from task input fields.
+ */
 function removeValidateTaskInputField() {
-    let errorContainerTitle = document.getElementById('tasktitle');
-    let errorContainerDate = document.getElementById('duedate');
-    let errorContainerCategory = document.getElementById('taskcategoryinput');
-    errorContainerTitle.style.border = '1px solid #D1D1D1';
-    errorContainerDate.style.border = '1px solid #D1D1D1';
-    errorContainerCategory.style.border = '1px solid #D1D1D1';
+    let taskTitleField = document.getElementById('tasktitle');
+    let dueDateField = document.getElementById('duedate');
+    let taskCategoryField = document.getElementById('taskcategoryinput');
+    taskTitleField.style.border = '1px solid #D1D1D1';
+    dueDateField.style.border = '1px solid #D1D1D1';
+    taskCategoryField.style.border = '1px solid #D1D1D1';
 };
 
+/**
+ * Hides error messages for task details.
+ */
 function removeValidateTaskDetails() {
-    let errorContainerTitle = document.getElementById('error-message-title');
-    let errorContainerDate = document.getElementById('error-message-date');
-    let errorContainerCategory = document.getElementById('error-message-category');
-    errorContainerTitle.style.display = 'none';
-    errorContainerDate.style.display = 'none';
-    errorContainerCategory.style.display = 'none';
+    let errorTitleMessage = document.getElementById('error-message-title');
+    let errorDateMessage = document.getElementById('error-message-date');
+    let errorCategoryMessage = document.getElementById('error-message-category');
+    errorTitleMessage.style.display = 'none';
+    errorDateMessage.style.display = 'none';
+    errorCategoryMessage.style.display = 'none';
 };
 
 /**

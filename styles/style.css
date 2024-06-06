@@ -217,7 +217,7 @@ body {
     color: #ff8190;
     position: absolute;
     bottom: 190px;
-    left: 104px;
+    left: 116px;
 }
 
 .remember-container {
@@ -464,11 +464,9 @@ footer a:hover {
     }
 
     #error {
-        font-size: 14px;
-        color: #ff8190;
         position: absolute;
         bottom: 230px;
-        left: 48px;
+        left: 70px;
     }
 
     .login-buttons {

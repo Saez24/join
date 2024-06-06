@@ -38,9 +38,10 @@
                     <input onclick="handleShowpasswordClick(event)" onfocus="showPasswordImage()"
                         onblur="loadPasswordImage(), hidePassword()" required id="password" type="password"
                         placeholder="Password" />
+                    <span id="error" style="display: none"> Wrong password Ups! Try again.
+                    </span>
                 </div>
-                <span id="error" style="display: none"> Wrong password Ups! Try again.
-                </span>
+
                 <div class="options">
                     <div class="remember-container">
                         <input class="checkbox-remember" id="remember" type="checkbox" />

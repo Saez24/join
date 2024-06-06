@@ -93,8 +93,6 @@ function generateNameUserblock(name) {
     `;
 };
 
-window.generateNameUserblock = generateNameUserblock;
-
 /**
  * Monitors Firebase authentication state changes and fetches user data if a user is signed in.
  */
@@ -102,9 +100,12 @@ onAuthStateChanged(auth, (user) => {
     if (user) {
         let email = user.email;
         console.log('User email:', email);
+        // document.getElementById('sidebarMenu').style.visibility = "visible";
         fetchUserData(email);
+        renderUserName();
     } else {
         console.log('No user is signed in.');
+        // document.getElementById('sidebarMenu').style.visibility = "hidden";
         renderUserName(null); // Display 'GS' if no user is signed in
     }
 });
