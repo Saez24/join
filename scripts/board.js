@@ -382,4 +382,13 @@ async function updateTaskStatus(taskId, newStatus) {
     } catch (error) {
         console.error('Error updating task status:', error);
     }
+    removeHighlight(id)
 };
+
+function highlight(id) {
+    document.getElementById(id).classList.add('drag-area-highlight');
+}
+
+function removeHighlight(id) {
+    document.getElementById(id).classList.remove('drag-area-highlight');
+}
