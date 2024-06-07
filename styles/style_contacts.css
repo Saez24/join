@@ -447,6 +447,11 @@ h2 {
     font-family: "Inter";
 }
 
+.contact-input-fields:hover {
+    cursor: pointer;
+    border-color: rgba(41, 171, 226, 1);
+}
+
 #contact-name {
     background-image: url(../assets/img/person.png);
     background-repeat: no-repeat;
@@ -782,7 +787,7 @@ h2 {
         align-items: baseline;
     }
 
-    .contact-summary-headline-name{
+    .contact-summary-headline-name {
         text-wrap: wrap;
         /* max-width: 200px; */
     }
@@ -950,8 +955,8 @@ h2 {
 }
 
 
-@media (max-width: 450px){
-    .contact-row{
+@media (max-width: 450px) {
+    .contact-row {
         padding-left: 0;
         padding-right: 0;
     }
@@ -993,7 +998,7 @@ h2 {
         overflow: hidden;
     }
 
-    .contact-summary-headline-name{
+    .contact-summary-headline-name {
         font-size: 24px;
         text-wrap: wrap;
         width: 184px;
@@ -1006,5 +1011,3 @@ h2 {
     }
 
 }
-
-
