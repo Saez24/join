@@ -20,7 +20,11 @@ async function createTask() {
 
     await postData("tasks", taskData);
     clearContent();
-    window.location.href = "board.html";
+    showSuccessfullTaskCreation();
+    setTimeout(() => {
+        window.location.href = "board.html";
+    }, 1500);
+
 };
 
 /**
@@ -117,4 +121,14 @@ async function postData(path = "tasks", data = {}) {
         body: JSON.stringify(data)
     });
     return await response.json();
+};
+
+function showSuccessfullTaskCreation() {
+    let taskCreated = document.getElementById('task-created');
+
+    taskCreated.classList.add('slide-in-from-right');
+
+    setTimeout(() => {
+        taskCreated.classList.remove('slide-in-from-right');
+    }, 1500);
 };
