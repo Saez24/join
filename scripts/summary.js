@@ -4,9 +4,10 @@ let amountTasksToDos = 0;
 let amountTasksDone = 0;
 let amountTasksUrgent = 0;
 let amountTasksInBoard = 0;
-let amountTasksInProgress = 0; 
-let amountTasksAwaitingFeedback = 0; 
+let amountTasksInProgress = 0;
+let amountTasksAwaitingFeedback = 0;
 let earliestDeadline = null;
+let actualDate = 0;
 
 async function initializeSummary() {
     await determineTasksInBoard();
@@ -126,9 +127,19 @@ async function determineDeadline() {
         earliestDeadline = "No urgent deadlines";
     } else {
         earliestDeadline = earliestDeadline.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+        await dateInPast(earliestDeadline);
     }
 }
 
+
+async function dateInPast(earliestDeadline) {
+    let actualDate = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+    
+    if (new Date(earliestDeadline) < new Date(actualDate)) {
+        document.getElementById("summaryDeadline").classList.add("font-color-red");
+        document.getElementById("upcomingDeadline").classList.add("font-color-red");
+    }
+}
 
 /** Checks if the user has been visited the summary page during log-in. 
  *  If so, the local storage key "greet" will be set to "no" and the good morning message will not be 
