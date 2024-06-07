@@ -7,7 +7,6 @@ let amountTasksInBoard = 0;
 let amountTasksInProgress = 0;
 let amountTasksAwaitingFeedback = 0;
 let earliestDeadline = null;
-let actualDate = 0;
 
 async function initializeSummary() {
     await determineTasksInBoard();
@@ -132,14 +131,19 @@ async function determineDeadline() {
 }
 
 
+/**
+ * Checks if the earliest deadline of all urgent tasks lies in the past. If so, the font is marked red. 
+ * This is achieved by checking if the current date is smaller than the earliest deadline date.
+ * @param {*} earliestDeadline Is the earliest deadline, which was determined in the function "determineDeadline()".
+ */
 async function dateInPast(earliestDeadline) {
     let actualDate = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
     
     if (new Date(earliestDeadline) < new Date(actualDate)) {
         document.getElementById("summaryDeadline").classList.add("font-color-red");
-        document.getElementById("upcomingDeadline").classList.add("font-color-red");
     }
 }
+
 
 /** Checks if the user has been visited the summary page during log-in. 
  *  If so, the local storage key "greet" will be set to "no" and the good morning message will not be 
