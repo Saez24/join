@@ -234,6 +234,58 @@ function createTaskHTML(task, taskid, assignedNamesHTML, subtaskCountHTML, prior
     `;
 };
 
+// function createTaskDetail(task, task.title, task.description, task.assignto, assignedNamesHTML, subtaskCountHTML, priorityImage) {
+//     return `
+//                 <div class="TaskDetails slide-in-right">
+//                     <img class="closePopup" src="./assets/img/close.png" onclick="hidePopup('popup')" alt="Close">
+//                     <button class="CategoryBox">User Story</button>
+//                     <h2 class="HeadlineBox">${task.title}</h2>
+//                     <p class="descriptionDetails">${task.description}</p>
+//                     <div class="TaskDetailsLine">
+//                         <p class="dueDate">Due date:</p>
+//                         <p>${task.assignto}</p>
+//                     </div>
+//                     <div class="priorityContainer">
+//                         <p class="dueDate">Priority:</p>
+//                         <p class="priorityLevel">${task.prio}</p>
+//                         <img class="prioImg" src="${priorityImage}" alt="Priority">
+//                     </div>
+//                     <div class="TaskDetailsLine">
+//                         <p class="dueDate">Assigned To:>${subtaskCountHTML}</p>
+
+//                     </div>
+//                     <div class="assignedContainer">
+//                         <div class="assignedName colorName">${assignedNamesHTML}</div>
+//                         <p>Anna Schuster</p>
+//                     </div>
+//                     <div class="assignedContainer">
+//                         <div class="assignedName colorName">AS</div>
+//                         <p>Anna Schuster</p>
+//                     </div>
+//                     <div class="subtasksTitle">Subtasks</div>
+//                     <div class="subtaskItem">
+//                         <input type="checkbox">
+//                         <p>${task.subtask}</p>
+//                     </div>
+//                     <div class="subtaskItem">
+//                         <input type="checkbox">
+//                         <p>${task.subtask}</p>
+//                     </div>
+//                     <div class="editDeleteWrapper">
+//                         <div class="editDeleteContainer deleteContainer">
+//                             <img src="./assets/img/delete.png" alt="Delete">
+//                             Delete
+//                         </div>
+//                         <div class="editDeleteContainer editContainer">
+//                             <img src="./assets/img/edit.png" alt="Edit">
+//                             Edit
+//                         </div>
+//                     </div>
+//                 </div>
+//     `;
+// }
+
+
 function startDragging(id) {
     currentDraggedElement = id;
     console.log(id)

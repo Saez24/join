@@ -1,5 +1,3 @@
-html
-Code kopieren
 <!DOCTYPE html>
 <html lang="en">
 
@@ -77,8 +75,8 @@ Code kopieren
             </div>
 
 
-            <div id="popup" class="taskBoxBackground hidden">
-                <div class="TaskDetails slide-in-right">
+            <div id="popup" class="taskBoxBackground hidden" onclick="createTaskDetail()">
+                <!-- <div class="TaskDetails slide-in-right">
 
                     <img class="closePopup" src="./assets/img/close.png" onclick="hidePopup('popup')" alt="Close">
                     <button class="CategoryBox">User Story</button>
@@ -90,7 +88,7 @@ Code kopieren
                     </div>
                     <div class="priorityContainer">
                         <p class="dueDate">Priority:</p>
-                        <p>Medium</p>
+                        <p class="priorityLevel">Medium</p>
                         <img class="prioImg" src="./assets/img/prio_baja.png" alt="Priority">
                     </div>
                     <div class="TaskDetailsLine">
@@ -113,13 +111,17 @@ Code kopieren
                         <input type="checkbox">
                         <p>Start Page Layout</p>
                     </div>
-                    <div class="editDeleteContainer">
-                        <img src="./assets/img/delete.png" alt="Delete">
-                        <p>Delete</p>
-                        <img src="./assets/img/edit.png" alt="Edit">
-                        <p>Edit</p>
+                    <div class="editDeleteWrapper">
+                        <div class="editDeleteContainer deleteContainer">
+                            <img src="./assets/img/delete.png" alt="Delete">
+                            Delete
+                        </div>
+                        <div class="editDeleteContainer editContainer">
+                            <img src="./assets/img/edit.png" alt="Edit">
+                            Edit
+                        </div>
                     </div>
-                </div>
+                </div> -->
             </div>
 
         </div>

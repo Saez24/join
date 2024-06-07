@@ -84,6 +84,19 @@ body {
 .TaskDetailsLine {
     display: flex;
     align-items: center;
+    gap: 25px;
+}
+
+.priorityContainer {
+    display: flex;
+    align-items: center;
+    gap: 10px; 
+}
+
+.priorityContainer p {
+    margin: 0 10px 0 0;
+    display: flex;
+    align-items: center;
 }
 
 .TaskDetailsLine p {
@@ -97,18 +110,7 @@ body {
     margin-bottom: 20px;
 }
 
-.editDeleteContainer {
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    margin-top: 20px;
-}
 
-.editDeleteContainer p,
-.editDeleteContainer img {
-    margin-left: 10px;
-    font-size: 14px;
-}
 
 /* Assigned Container */
 .assignedContainer {
@@ -117,6 +119,7 @@ body {
     margin-top: 10px;
     text-align: center;
     justify-content: center;
+    margin-left: 20px;
 }
 
 .assignedContainer .assignedName {
@@ -135,6 +138,12 @@ body {
 }
 
 /* Subtasks */
+.tasks {
+    min-height: 300px;
+    margin-top: 10px;
+    padding-top: 10px;
+}
+
 .subtasksTitle {
     color: gray;
 }
@@ -176,21 +185,27 @@ body {
 }
 
 /* Edit/Delete Container */
+.editDeleteWrapper {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    display: flex;
+}
+
+.deleteContainer {
+    margin-right: 10px;
+}
+
 .editDeleteContainer {
     display: flex;
     align-items: center;
-    justify-content: flex-end;
-    margin-top: 20px;
-    position: absolute;
-    bottom: 10px;
-    right: 10px;
+    justify-content: center;
+    gap: 8px;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 19.2px;
+    color: var(--colorBgPrimary);
 }
-
-.editDeleteContainer p,
-.editDeleteContainer img {
-    margin-left: 10px;
-}
-
 /* Wrapped Max Width */
 .wrapped_maxWidth {
     width: 100%;
@@ -292,15 +307,13 @@ body {
 .boardTasks {
     display: flex;
     align-items: flex-start;
-    gap: 26px;
 }
 
 /* Status Tasks */
 .statusTasks {
-    display: flex;
-    flex-direction: column;
-    width: 252px;
-    font-size: 20px;
+    width: 25%;
+    border-radius: 10px;
+    margin-right: 24px;
 }
 
 /* Headline Status Tasks */
@@ -326,8 +339,9 @@ body {
     filter: drop-shadow(0px 0px 5px rgba(0, 0, 0, 0.1));
     font-size: 16px;
     padding: 18px;
-    min-width: 200px;
-    max-width: 200px;
+    min-width: 250px;
+    max-width: 250px;
+    min-height: 240px;
     margin-bottom: 24px;
     transition: transform 0.3s ease; /* Fügt eine Übergangsanimation hinzu */
     cursor: grab;
@@ -379,6 +393,13 @@ body {
 /* Description Box */
 .descriptionBox {
     color: #A8A8A8;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    height: calc(2 * 1.2em); /* Assuming line-height is 1.2 */
+    line-height: 1.2em; /* Adjust this based on your line height */
 }
 
 /* Name Section */
@@ -391,12 +412,29 @@ body {
 .nameSection .assignedName {
     margin-right: 0px;
 }
+.priorityContainer {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.priorityContainer p {
+    margin: 0;
+    display: flex;
+    align-items: center;
+    white-space: nowrap; /* verhindert Zeilenumbrüche */
+    max-width: 80px; /* begrenzt die Breite auf 80px */
+}
 
 .prioImgContainer {
     margin-left: auto;
     /* Schiebt das prioImgContainer nach rechts */
     display: flex;
     align-items: center;
+}
+
+.prioImg {
+    vertical-align: middle;
 }
 
 .assignedName {
@@ -419,18 +457,24 @@ body {
 .priorityContainer {
     display: flex;
     align-items: center;
+    gap: 10px;
 }
 
 .priorityContainer p {
-    margin: 0 10px 0 0;
     display: flex;
     align-items: center;
+    gap: 10px; /* Abstand zwischen den Elementen */
 }
 
 .priorityContainer .prioImg {
     vertical-align: middle;
 }
 
+.priorityContainer p,
+.priorityContainer .dueDate,
+.priorityContainer .prioImg {
+    vertical-align: middle;
+}
 /* Add Task to Board */
 .add_task_to_board {
     cursor: pointer;
@@ -496,11 +540,13 @@ body {
     align-items: center;
     margin-bottom: 5px;
     font-size: 14px;
+    margin: 0;
 }
 
 .subtaskProgress progress {
     flex: 1;
     margin-right: 10px;
+    margin: 0;
 }
 
 .bottom-container {
@@ -514,7 +560,7 @@ body {
 
 
 
-@media screen and (max-width: 1400px) {
+@media screen and (max-width: 1470px) {
     .wrapped_maxWidth {
         margin-left: 300px;
     }
@@ -535,23 +581,33 @@ body {
 
     .boardTasks {
         flex-wrap: wrap;
-        margin-bottom: 100px;
-        flex-direction: column;
+        padding-bottom: 100px;
+        flex-direction: row;
     }
 
     .statusTasks {
-        width: calc(1000px - 300px);
+        width: 100%;
         font-size: 20px;
     }
 
-    .Tasks {
+    .tasks {
         display: flex;
         gap: 25px;
-        height: 400px;
-        overflow-x: auto;
-        width: 1000px - 1505px;
+        width: 100%;
         flex-wrap: nowrap;
+        overflow-y: visible;
     }
+
+    .TaskBox {
+        width: 252px !important;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+        margin-bottom: 12px;
+        padding: 12px 16px;
+    }
+
 }
 
 @media (max-width: 1100px) {
@@ -668,3 +724,4 @@ body {
 .slide-out-right {
     animation: slide-out-right 0.8s both;
 }
+
