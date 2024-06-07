@@ -18,7 +18,7 @@ body {
 .contact-row {
     display: flex;
     height: 78px;
-    /* width: 374px; */
+    width: 374px;
     padding: 0px 24px 0px 24px;
     align-items: center;
     gap: 30px;
@@ -447,6 +447,11 @@ h2 {
     font-family: "Inter";
 }
 
+.contact-input-fields:hover {
+    cursor: pointer;
+    border-color: rgba(41, 171, 226, 1);
+}
+
 #contact-name {
     background-image: url(../assets/img/person.png);
     background-repeat: no-repeat;
@@ -684,7 +689,7 @@ h2 {
     }
 
     .contact-row {
-        width: 90%;
+        width: 89%;
     }
 
     #contactForString {
@@ -782,7 +787,7 @@ h2 {
         align-items: baseline;
     }
 
-    .contact-summary-headline-name{
+    .contact-summary-headline-name {
         text-wrap: wrap;
         /* max-width: 200px; */
     }
@@ -846,9 +851,11 @@ h2 {
 
     .contacts-left {
         left: 0;
-        width: 100%;
+        width: 99%;
         padding: 0;
     }
+
+    /* Slide in overlay */
 
     .contact-cont {
         flex-direction: column;
@@ -866,7 +873,7 @@ h2 {
     .contact-left {
         height: 267px;
         border-radius: 30px 30px 0 0;
-        width: calc(310px - 20px);
+        width: calc(310px - 25px);
         padding: 20px 0 0 20px;
         justify-content: start;
     }
@@ -947,10 +954,27 @@ h2 {
     }
 }
 
+
+@media (max-width: 450px) {
+    .contact-row {
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    .contacts-left {
+        width: fit-content;
+    }
+}
+
 @media (max-width: 400px) {
+
+    .contacts-left {
+        width: 100%;
+    }
 
     .capital-category {
         padding-left: 10px;
+        width: 84%;
     }
 
     .contact-summary-initials {
@@ -974,7 +998,7 @@ h2 {
         overflow: hidden;
     }
 
-    .contact-summary-headline-name{
+    .contact-summary-headline-name {
         font-size: 24px;
         text-wrap: wrap;
         width: 184px;
@@ -985,4 +1009,5 @@ h2 {
         left: 16px;
         gap: 12px;
     }
+
 }

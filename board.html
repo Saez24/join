@@ -36,7 +36,8 @@
         </div>
 
         <div class="boardTasks">
-            <div id="todoTasks" class="statusTasks" ondrop="moveTo('todoTasks')" ondragover="allowDrop(event)">
+            <div id="todo" class="statusTasks" ondrop="moveTo('todo')" ondragleave="removeHighlight('todo')"
+                ondragover="allowDrop(event); highlight('todo')">
                 <div class="headlineStatusTasks">
                     <h5 class="taskStatusTitle">To do</h5>
                     <div class="imageContainer">
@@ -47,8 +48,8 @@
                 <div class="tasks"></div>
             </div>
 
-            <div id="inProgressTasks" class="statusTasks" ondrop="moveTo('inProgressTasks')"
-                ondragover="allowDrop(event)">
+            <div id="inprogress" class="statusTasks" ondrop="moveTo('inprogress')"
+                ondragleave="removeHighlight('inprogress')" ondragover="allowDrop(event); highlight('inprogress')">
                 <div class="headlineStatusTasks">
                     <h5 class="taskStatusTitle">In progress</h5>
                     <img onclick="openDialog(), closeOnBackground(event)" class="add_task_to_board"
@@ -57,8 +58,9 @@
                 <div class="tasks"></div>
             </div>
 
-            <div id="awaitFeedbackTasks" class="statusTasks" ondrop="moveTo('awaitFeedbackTasks')"
-                ondragover="allowDrop(event)">
+            <div id="awaitfeedback" class="statusTasks" ondrop="moveTo('awaitfeedback')"
+                ondragleave="removeHighlight('awaitfeedback')"
+                ondragover="allowDrop(event); highlight('awaitfeedback')">
                 <div class="headlineStatusTasks">
                     <h5 class="taskStatusTitle">Await feedback</h5>
                     <img onclick="openDialog(), closeOnBackground(event)" class="add_task_to_board"
@@ -67,7 +69,8 @@
                 <div class="tasks"></div>
             </div>
 
-            <div id="doneTasks" class="statusTasks" ondrop="moveTo('doneTasks')" ondragover="allowDrop(event)">
+            <div id="done" class="statusTasks" ondrop="moveTo('done')" ondragleave="removeHighlight('done')"
+                ondragover="allowDrop(event); highlight('done')">
                 <div class="headlineStatusTasks">
                     <h5 class="taskStatusTitle">Done</h5>
                 </div>
@@ -75,28 +78,28 @@
             </div>
 
 
-            <div id="popup" class="taskBoxBackground hidden" onclick="createTaskDetail()">
-                <!-- <div class="TaskDetails slide-in-right">
+            <div id="popup" class="taskBoxBackground hidden">
+                <div id="TaskDetailsDialog" class="TaskDetails slide-in-right">
 
                     <img class="closePopup" src="./assets/img/close.png" onclick="hidePopup('popup')" alt="Close">
-                    <button class="CategoryBox">User Story</button>
-                    <h2 class="HeadlineBox">Headline</h2>
-                    <p class="descriptionDetails">Beschreibung Einfügen</p>
+                    <button id="CategoryBox" class="CategoryBox">User Story</button>
+                    <h2 id="HeadlineBox" class="HeadlineBox">Headline</h2>
+                    <p id="descriptionDetails" class="descriptionDetails">Beschreibung Einfügen</p>
                     <div class="TaskDetailsLine">
                         <p class="dueDate">Due date:</p>
-                        <p>10/05/2023</p>
+                        <p id="dueDate">10/05/2023</p>
                     </div>
                     <div class="priorityContainer">
                         <p class="dueDate">Priority:</p>
-                        <p class="priorityLevel">Medium</p>
-                        <img class="prioImg" src="./assets/img/prio_baja.png" alt="Priority">
+                        <p id="Priority">Medium</p>
+                        <img id="PriorityImg" class="prioImg" src="./assets/img/prio_baja.png" alt="Priority">
                     </div>
                     <div class="TaskDetailsLine">
                         <p class="dueDate">Assigned To:</p>
                     </div>
                     <div class="assignedContainer">
-                        <div class="assignedName colorName">AS</div>
-                        <p>Anna Schuster</p>
+                        <div id="assignedInitials" class="assignedName colorName">AS</div>
+                        <p id="assignedName">Anna Schuster</p>
                     </div>
                     <div class="assignedContainer">
                         <div class="assignedName colorName">AS</div>
@@ -105,7 +108,7 @@
                     <div class="subtasksTitle">Subtasks</div>
                     <div class="subtaskItem">
                         <input type="checkbox">
-                        <p>Implement Recipe Recommendation</p>
+                        <p id="subtaskDialogText">Implement Recipe Recommendation</p>
                     </div>
                     <div class="subtaskItem">
                         <input type="checkbox">

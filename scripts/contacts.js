@@ -52,7 +52,7 @@ async function addContactData(path = "", data = {}) {
     return responseToJson = await response.json();
 }
 
-
+// David edited: let id
 async function createContact() {
 
     if (validateContactInputs()) {
@@ -62,7 +62,9 @@ async function createContact() {
     let email = document.getElementById('contact-email').value;
     let name = document.getElementById('contact-name').value;
     let phonenumber = document.getElementById('contact-phone').value;
-
+    // let id = getId();
+    // console.log("es wurde geloggt: ", email, "und die ID:", id);
+    
     slideOutToRight();
     showSuccessfullContactCreation();
 
@@ -71,6 +73,11 @@ async function createContact() {
     searchAndRenderLastAddedContact(name);
 }
 
+// async function getId(){
+//     return 
+    
+
+// }
 
 function searchAndRenderLastAddedContact(name) {
     let lastAddedName = name;
@@ -303,7 +310,7 @@ function renderContactSummary(color, name, email, phone, uniqueId) {
             <img class="burgermenu-menu-icon" src="assets/img/contacts-edit.png">
             Edit
         </div>
-        <div class="burgermenu-row">
+        <div class="burgermenu-row" onclick="openDeleteContactOverlay('${name}', '${email}', '${phone}', '${color}', '${uniqueId}')">
             <img class="burgermenu-menu-icon" src="assets/img/contacts-delete.png">
             Delete
         </div>
@@ -422,17 +429,6 @@ async function editContact(event) {
     showSuccessfulEdit();
 }
 
-async function updateContactData(contactId, data = {}) {
-    let response = await fetch(BASE_URL + 'names/' + contactId + ".json", {
-        method: "PUT", // Verwenden von PUT für Updates
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data)
-    });
-    return await response.json();
-}
-
 
 function showSuccessfulEdit() {
     let contactCreated = document.getElementById('contact-created');
@@ -444,3 +440,31 @@ function showSuccessfulEdit() {
     }, 1500);
 }
 
+// Funktion zum Löschen eines Kontakts
+async function deleteContact(name, email, phone, color, contactId) {
+    console.log("Deleting contact with ID:", contactId); // Debugging-Ausgabe
+    let response = await fetch(BASE_URL + 'names/' + contactId + ".json", {
+        method: "DELETE",
+        headers: {
+            "Content-Type": "application/json",
+        }
+    });
+    let responseData = await response.json(); // Serverantwort einholen
+    console.log("Server response:", responseData); // Debugging-Ausgabe
+    if (response.ok) {
+        await getNames();
+        showSuccessfulDeletion();
+    } else {
+        console.error("Fehler beim Löschen des Kontakts:", response.statusText);
+    }
+}
+
+
+function showSuccessfulDeletion() {
+    let contactDeleted = document.getElementById('contact-deleted');
+    contactDeleted.classList.add('slide-in-from-right');
+
+    setTimeout(() => {
+        contactDeleted.classList.remove('slide-in-from-right');
+    }, 1500);
+}

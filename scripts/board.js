@@ -15,7 +15,10 @@ let CategoryColors = {
 };
 
 let taskIdCounter = 0;
-let currentDraggedElement;
+let currentDraggedElement = 0;
+let touchOffsetX = 0;
+let touchOffsetY = 0;
+let tasks = [];
 
 /**
  * Opens the dialog by removing the 'd_none' class and ensures CSS and content are loaded.
@@ -102,16 +105,16 @@ function loadAddTaskContent() {
 /**
  * Open the dialog for TaskDetails.
  */
-function showPopup(id) {
-    const popup = document.getElementById(id);
-    const taskDetails = popup.querySelector('.TaskDetails');
-
-    popup.classList.remove('hidden');
-    popup.classList.add('fade-in');
+function showPopup(task, taskid, assignedNamesHTML, subtaskCountHTML, priorityImage, categoryColor) {
+    const popup = document.getElementById('popup');
+    const taskDetails = document.getElementById('TaskDetailsDialog');
 
     setTimeout(() => {
+        popup.classList.remove('hidden');
+        popup.classList.add('fade-in');
         taskDetails.classList.add('slide-in-right');
     }, 300);
+    // renderTaskDialog(task, taskid, assignedNamesHTML, subtaskCountHTML, priorityImage, categoryColor);
 };
 
 /**
@@ -134,22 +137,26 @@ function hidePopup(id) {
 };
 
 /**
- * Fetches data from the specified endpoint.
+ * Fetches data from Firebase.
+ * 
  * @async
- * @param {string} [path="tasks"] - The endpoint path to fetch data from.
- * @returns {Promise<Object[]>} The fetched data as an array of objects.
+ * @function fetchData
+ * @param {string} [path="tasks"] - The path in the Firebase database to fetch data from.
+ * @returns {Promise<Object[]>} An array of task objects with their IDs.
  */
 async function fetchData(path = "tasks") {
     let response = await fetch(BASE_URL + path + ".json");
     let responseToJson = await response.json();
-    let responseToObject = Object.values(responseToJson);
+    let responseToObject = Object.entries(responseToJson).map(([id, task]) => ({ id, ...task }));
     console.log(responseToJson);
     return responseToObject;
 };
 
 /**
  * Generates a random color excluding white.
- * @returns {string} The generated color in hex format.
+ * 
+ * @function generateRandomColor
+ * @returns {string} A random color in hexadecimal format.
  */
 function generateRandomColor() {
     let randomColor;
@@ -160,42 +167,65 @@ function generateRandomColor() {
 };
 
 /**
- * Generates the HTML string for assigned names.
- * @param {Array<string>} assignedNames - The list of assigned names.
- * @returns {string} The HTML string representing the assigned names.
+ * Generates HTML for assigned names with a 'Plus' button for overflow.
+ * 
+ * @function generateAssignedNamesHTML
+ * @param {string[]} assignedNames - An array of names assigned to a task.
+ * @returns {string} HTML string representing the assigned names.
  */
 function generateAssignedNamesHTML(assignedNames) {
-    return assignedNames.map(name => {
+    let MAX_NAMES_DISPLAYED = 3;
+    let position = 0;
+    let html = '';
+    let overflowCount = Math.max(0, assignedNames.length - MAX_NAMES_DISPLAYED);
+
+    assignedNames.slice(0, MAX_NAMES_DISPLAYED).forEach(name => {
         let initials = name.split(' ').map(n => n[0]).join('');
         let randomColor = generateRandomColor();
-        return /*html*/`
+        html += /*html*/`
             <div class="assignedName" style="background-color: ${randomColor};"><span>${initials}</span></div>`;
-    }).join('');
-};
+    });
+
+    if (overflowCount > 0) {
+        position += 110;
+        html += /*html*/ `
+            <div class="moreButtonBoard" style="left:${position}px">+${overflowCount}</div>`;
+    }
+
+    return html;
+}
+
 
 /**
- * Generates the HTML string for subtask count.
- * @param {Array<string>} subtask - The list of subtasks.
- * @returns {string} The HTML string representing the subtask count.
+ * Generates HTML for subtask count and progress bar.
+ * 
+ * @function generateSubtaskCountHTML
+ * @param {Object[]} [subtasks] - An array of subtasks.
+ * @returns {string} HTML string representing the subtask count and progress bar.
  */
-function generateSubtaskCountHTML(subtask) {
-    let count = subtask ? `${subtask.length}/${subtask.length} Subtask${subtask.length > 1 ? 's' : ''}` : '0/0 Subtasks';
-    return `<p class="subtaskCount">${count}</p>`;
-};
+function generateSubtaskCountHTML(subtasks) {
+    let totalSubtasks = subtasks ? subtasks.length : 0;
+    let completedSubtasks = subtasks ? subtasks.filter(subtask => subtask.completed).length : 0;
+    let progressPercentage = totalSubtasks > 0 ? (completedSubtasks / totalSubtasks) * 100 : 0;
+
+    let progressBarStyle = `width: ${progressPercentage}%;`;
+
+    let count = `${completedSubtasks}/${totalSubtasks} Subtask${totalSubtasks !== 1 ? 's' : ''}`;
+    let progressBarHTML = `<div class="progressBar"><div class="progress" style="${progressBarStyle}"></div></div>`;
+
+    return `<div class="subtaskProgress">${progressBarHTML}<p class="subtaskCount">${count}</p></div>`;
+}
+
 
 /**
- * Generates the full HTML element string for a given task.
+ * Creates a task element.
+ * 
+ * @function createTaskElement
  * @param {Object} task - The task object.
- * @param {string} task.category - The category of the task.
- * @param {string} task.title - The title of the task.
- * @param {string} task.description - The description of the task.
- * @param {Array<string>} task.assignto - The list of names assigned to the task.
- * @param {Array<string>} task.subtask - The list of subtasks.
- * @param {string} task.prio - The priority of the task.
- * @returns {string} The HTML string representing the task.
+ * @returns {string} HTML string representing the task element.
  */
 function createTaskElement(task) {
-    let taskid = `taskBox${taskIdCounter++}`; // Generate unique task id
+    let taskid = task.id; // Use the task ID from Firebase
     let assignedNamesHTML = generateAssignedNamesHTML(task.assignto || []);
     let subtaskCountHTML = generateSubtaskCountHTML(task.subtask || []);
     let priorityImage = priorityImages[task.prio] || './assets/img/prio_media.png';
@@ -205,21 +235,24 @@ function createTaskElement(task) {
 };
 
 /**
- * Generates the HTML string for the task element.
+ * Creates the HTML string for a task element.
+ * 
+ * @function createTaskHTML
  * @param {Object} task - The task object.
- * @param {string} taskid - The unique task id.
- * @param {string} assignedNamesHTML - The HTML string for the assigned names.
- * @param {string} subtaskCountHTML - The HTML string for the subtask count.
- * @param {string} priorityImage - The URL for the priority image.
- * @param {Object} categoryColor - The color configuration for the category.
- * @returns {string} The HTML string for the task element.
+ * @param {string} taskid - The task ID.
+ * @param {string} assignedNamesHTML - HTML string of assigned names.
+ * @param {string} subtaskCountHTML - HTML string of subtask count.
+ * @param {string} priorityImage - URL of the priority image.
+ * @param {Object} categoryColor - Object containing background and text color for the category.
+ * @returns {string} HTML string representing the task element.
  */
 function createTaskHTML(task, taskid, assignedNamesHTML, subtaskCountHTML, priorityImage, categoryColor) {
+    let descriptionSection = task.description ? `<p class="descriptionBox">${task.description}</p>` : '';
     return /*html*/`
-        <div id="${taskid}" draggable="true" ondragstart="startDragging(${taskid}['id'])" class="toDoBox" onclick="showPopup('popup')">
-            <button class="CategoryBox" style="background-color: ${categoryColor.background};" >${task.category}</button>
+        <div id="${taskid}" draggable="true" ondragstart="startDragging('${taskid}')" class="toDoBox" onclick="showPopup('${taskid}')">
+            <button class="CategoryBox" style="background-color: ${categoryColor.background};">${task.category}</button>
             <p class="HeadlineBox">${task.title}</p>
-            <p class="descriptionBox">${task.description}</p>
+            <p class="descriptionBox">${descriptionSection}</p>
             <div class="subtaskProgress">
                 <progress value="0" max="100"></progress>
                 ${subtaskCountHTML}
@@ -343,8 +376,10 @@ async function saveUpdatedTasks(tasks) {
 
 /**
  * Categorizes tasks into their respective status categories.
- * @param {Object[]} tasks - The array of task objects.
- * @returns {Object} An object containing HTML strings for each task status category.
+ * 
+ * @function categorizeTasks
+ * @param {Object[]} tasks - An array of task objects.
+ * @returns {Object} An object containing categorized tasks as HTML strings.
  */
 function categorizeTasks(tasks) {
     let categorizedTasks = {
@@ -380,18 +415,26 @@ function categorizeTasks(tasks) {
 
 /**
  * Inserts categorized tasks into the DOM.
- * @param {Object} categorizedTasks - An object containing HTML strings for each task status category.
+ * 
+ * @function insertTasksIntoDOM
+ * @param {Object} categorizedTasks - An object containing categorized tasks as HTML strings.
  */
 function insertTasksIntoDOM(categorizedTasks) {
-    document.querySelector('#todoTasks .tasks').innerHTML = categorizedTasks.todo;
-    document.querySelector('#inProgressTasks .tasks').innerHTML = categorizedTasks.inprogress;
-    document.querySelector('#awaitFeedbackTasks .tasks').innerHTML = categorizedTasks.awaitfeedback;
-    document.querySelector('#doneTasks .tasks').innerHTML = categorizedTasks.done;
-};
+    document.querySelector('#todo .tasks').innerHTML = categorizedTasks.todo;
+    document.querySelector('#inprogress .tasks').innerHTML = categorizedTasks.inprogress;
+    document.querySelector('#awaitfeedback .tasks').innerHTML = categorizedTasks.awaitfeedback;
+    document.querySelector('#done .tasks').innerHTML = categorizedTasks.done;
+    document.getElementById('todo').classList.remove('drag-area-highlight');
+    document.getElementById('inprogress').classList.remove('drag-area-highlight');
+    document.getElementById('awaitfeedback').classList.remove('drag-area-highlight');
+    document.getElementById('done').classList.remove('drag-area-highlight');
+}
 
 /**
  * Fetches tasks, categorizes them, and inserts them into the DOM.
+ * 
  * @async
+ * @function displayTasks
  */
 async function displayTasks() {
     try {
@@ -403,5 +446,123 @@ async function displayTasks() {
     }
 };
 
-// Call the displayTasks function to fetch and display tasks.
+// Call the displayTasks function to fetch and display tasks
 displayTasks();
+
+/**
+ * Handles drag start event.
+ * 
+ * @function startDragging
+ * @param {string} id - The ID of the task being dragged.
+ */
+function startDragging(id) {
+    currentDraggedElement = id;
+    console.log(`Started dragging task with id: ${id}`);
+};
+
+/**
+ * Allows drop event.
+ * 
+ * @function allowDrop
+ * @param {DragEvent} event - The drag event.
+ */
+function allowDrop(event) {
+    event.preventDefault();
+};
+
+/**
+ * Handles drop event and updates the task status.
+ * 
+ * @async
+ * @function moveTo
+ * @param {string} newStatus - The new status of the task.
+ */
+async function moveTo(newStatus) {
+    if (currentDraggedElement) {
+        await updateTaskStatus(currentDraggedElement, newStatus);
+        displayTasks(); // Refresh the task display after status update
+    }
+};
+
+/**
+ * Updates the status of a task in Firebase.
+ * 
+ * @async
+ * @function updateTaskStatus
+ * @param {string} taskId - The ID of the task to update.
+ * @param {string} newStatus - The new status to set for the task.
+ */
+async function updateTaskStatus(taskId, newStatus) {
+    try {
+        // Fetch current tasks from Firebase
+        let response = await fetch(BASE_URL + "tasks.json");
+        let tasksObject = await response.json();
+
+        // Find the task by id and update its status
+        if (tasksObject[taskId]) {
+            tasksObject[taskId].status = newStatus;
+
+            // Update tasks in Firebase
+            await fetch(BASE_URL + "tasks.json", {
+                method: 'PATCH',
+                body: JSON.stringify({ [taskId]: tasksObject[taskId] }),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+
+            console.log('Task status successfully updated');
+        } else {
+            console.error('Task not found');
+        }
+    } catch (error) {
+        console.error('Error updating task status:', error);
+    }
+};
+
+/**
+ * Adds a highlight class to an element with the given ID.
+ * 
+ * This function selects an HTML element by its ID and adds the 'drag-area-highlight' 
+ * class to it, which can be used to apply specific styles defined in CSS.
+ * 
+ * @param {string} id - The ID of the element to highlight.
+ */
+function highlight(id) {
+    document.getElementById(id).classList.add('drag-area-highlight');
+};
+
+/**
+ * Removes a highlight class from an element with the given ID.
+ * 
+ * This function selects an HTML element by its ID and removes the 'drag-area-highlight' 
+ * class from it, which can be used to remove specific styles defined in CSS.
+ * 
+ * @param {string} id - The ID of the element to remove the highlight from.
+ */
+function removeHighlight(id) {
+    document.getElementById(id).classList.remove('drag-area-highlight');
+};
+
+// async function renderTaskDialog(task, taskid, assignedNamesHTML, subtaskCountHTML, priorityImage, categoryColor) {
+//     try {
+//         let tasks = await fetchData();
+//         let selectedTask = tasks.find(item => item.id === taskid);
+//         if (!selectedTask) {
+//             console.error(`Keine Aufgabe gefunden mit der id ${taskid}`);
+//             return;
+//         }
+
+
+//         let TaskDetailsDialog = document.getElementById('TaskDetailsDialog');
+
+//         TaskDetailsDialog.innerHTML = "";
+//         TaskDetailsDialog.innerHTML += /*html*/`
+//             <img id="${taskid}" class="closePopup" src="./assets/img/close.png" onclick="hidePopup('${taskid}')" alt="Close">
+//             <button id="CategoryBox" class="CategoryBox"></button>
+//         `;
+
+//     } catch (error) { }
+
+// };
+
