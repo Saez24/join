@@ -374,3 +374,7 @@ h1 {
         margin: 0 6px 0 6px;
     }
 }
+
+.font-color-red {
+    color: red;
+}
