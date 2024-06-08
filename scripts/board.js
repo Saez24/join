@@ -224,14 +224,14 @@ function generateSubtaskCountHTML(subtasks) {
  * @param {Object} task - The task object.
  * @returns {string} HTML string representing the task element.
  */
-function createTaskElement(task) {
+function createTaskElement(task, search) {
     let taskid = task.id; // Use the task ID from Firebase
     let assignedNamesHTML = generateAssignedNamesHTML(task.assignto || []);
     let subtaskCountHTML = generateSubtaskCountHTML(task.subtask || []);
     let priorityImage = priorityImages[task.prio] || './assets/img/prio_media.png';
     let categoryColor = CategoryColors[task.category] || { background: '#000000', color: '#FFFFFF' };
 
-    return createTaskHTML(task, taskid, assignedNamesHTML, subtaskCountHTML, priorityImage, categoryColor);
+    return createTaskHTML(task, taskid, assignedNamesHTML, subtaskCountHTML, priorityImage, categoryColor, search);
 };
 
 /**
@@ -246,7 +246,7 @@ function createTaskElement(task) {
  * @param {Object} categoryColor - Object containing background and text color for the category.
  * @returns {string} HTML string representing the task element.
  */
-function createTaskHTML(task, taskid, assignedNamesHTML, subtaskCountHTML, priorityImage, categoryColor) {
+function createTaskHTML(task, taskid, assignedNamesHTML, subtaskCountHTML, priorityImage, categoryColor, search) {
     let descriptionSection = task.description ? `<p class="descriptionBox">${task.description}</p>` : '';
     return /*html*/`
         <div id="${taskid}" draggable="true" ondragstart="startDragging('${taskid}')" class="toDoBox" onclick="showPopup('${taskid}')">
@@ -274,7 +274,7 @@ function createTaskHTML(task, taskid, assignedNamesHTML, subtaskCountHTML, prior
  * @param {Object[]} tasks - An array of task objects.
  * @returns {Object} An object containing categorized tasks as HTML strings.
  */
-function categorizeTasks(tasks) {
+function categorizeTasks(tasks, search) {
     let categorizedTasks = {
         todo: '',
         inprogress: '',
@@ -283,7 +283,7 @@ function categorizeTasks(tasks) {
     };
 
     tasks.forEach(task => {
-        let taskHTML = createTaskElement(task);
+        let taskHTML = createTaskElement(task, search);
 
         switch (task.status) {
             case 'todo':
@@ -329,11 +329,11 @@ function insertTasksIntoDOM(categorizedTasks) {
  * @async
  * @function displayTasks
  */
-async function displayTasks() {
+async function displayTasks(search) {
     try {
         let tasks = await fetchData();
-        let categorizedTasks = categorizeTasks(tasks);
-        insertTasksIntoDOM(categorizedTasks);
+        let categorizedTasks = categorizeTasks(tasks, search);
+        insertTasksIntoDOM(categorizedTasks, search);
     } catch (error) {
         console.error('Error fetching and displaying tasks:', error);
     }
@@ -459,3 +459,43 @@ function removeHighlight(id) {
 
 // };
 
+
+//Relevante Funktionen displayTasks, (insertTasksIntoDOM Muss evtl geleert werden), =>createTaskHTML
+//Releveante Variabeln: assignedNamesHTML, descriptionSection, task.title
+function searchTask() {
+    let search = document.getElementById('search').value;
+    search = search.toLowerCase();
+
+    if (search.length < 4) {
+        return;
+    }
+
+    let done = document.getElementById('done');
+    let awaitfeedback = document.getElementById('awaitfeedback');
+    let inprogress = document.getElementById('inprogress');
+    let todo = document.getElementById('todo');
+    done.innerHTML = '';
+    awaitfeedback.innerHTML = '';
+    inprogress.innerHTML = '';
+    todo.innerHTML = '';
+
+
+    displayTasks(search);
+}
+
+
+function searchCheck(search, assignedNamesHTML, descriptionSection, task.title) {
+    for (let i = 0; i < allPokemon.length; i++) {
+        let pokemonName = allPokemon[i]['name'];
+        let pokemonImg = allPokemon[i]['sprites']['other']['dream_world']['front_default'];
+        let pokemonTypeBackground = allPokemon[i]['types']['0']['type']['name'];
+
+        pokemonName = capitalizeFirstLetter(pokemonName);
+        pokemonImg = obtainAlternativeImgInCaseOfNull(pokemonImg, i);
+
+        if (pokemonName.toLowerCase().includes(search)) {
+            cards.innerHTML += htmlCardsClosed(i, pokemonTypeBackground, pokemonImg, pokemonName);
+            generateTypeImg(i);
+        }
+    }
+}
