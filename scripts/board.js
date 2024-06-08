@@ -484,7 +484,7 @@ function searchTask() {
 }
 
 
-function searchCheck(search, assignedNamesHTML, descriptionSection, task.title) {
+function searchCheck(search, assignedNamesHTML, descriptionSection, task.title) { //muss in createTaskHTML angepast werden
     for (let i = 0; i < allPokemon.length; i++) {
         let pokemonName = allPokemon[i]['name'];
         let pokemonImg = allPokemon[i]['sprites']['other']['dream_world']['front_default'];
