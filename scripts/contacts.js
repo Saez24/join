@@ -221,55 +221,6 @@ function renderContactInformation(name, email, color, phone, uniqueId) {
 }
 
 
-
-// Render Contact Summary HTML
-// function renderContactSummary(color, name, email, phone, uniqueId) {
-//     return `
-//     <div class="main-contacts-text">
-//         <h1>Contacts</h1>
-//         <div class="vertical-line"></div>
-//         <h2>Better with a team</h2>
-//         <div class="horizontal-line"></div>
-//     </div>
-//     <div id="contactSummary">
-//         <div id="backArrow" class="arrow-icon" onclick="closeContactInformation()"><img src="assets/img/arrow_left.png"></div>
-//         <div class="contact-summary-headline">
-//             <div class="contact-summary-initials" style="background-color: ${color};">${getInitials(name)}</div>
-//             <div class="contact-summary-headline-rightside">
-//                 <div class="contact-summary-headline-name">${name}</div>
-//                 <div class="edit-and-delete">
-//                     <div id="edit${uniqueId}" class="edit-and-delete-row" onclick="openEditContactOverlay('${name}', '${email}', '${phone}', '${color}')">
-//                         <img src="assets/img/contacts-edit.png" alt="edit">Edit
-//                     </div>
-//                     <div id="delete${uniqueId}" class="edit-and-delete-row"><img src="assets/img/contacts-delete.png" alt="delete">Delete</div>
-//                 </div>
-//                 <button onclick="burgerSlideInFromRight()" class="contact-burger-menu" id="contactBurgerMenuIcon">
-//                     <img src="assets/img/contacts-burger-menu.png" alt="add contact" class="burger-menu-icon">
-//                 </button>
-//             </div>
-//         </div>
-//         <div class="contact-summary-contact-information">Contact Information</div>
-//         <div class="contact-summary-mail-and-phone">
-//             <div><b>Email</b></div>
-//             <span>${email}</span>
-//             <div><b>Phone</b></div>
-//             <span>${phone}</span>
-//         </div>
-//     </div>
-//     <!-- BURGER MENU EDIT AND DELETE -->
-//     <div class="burger-menu-overlay" id="burgerMenu">
-//         <div class="burgermenu-row" onclick="openEditContactOverlay('${name}', '${email}', '${phone}', '${color}')">
-//             <img class="burgermenu-menu-icon" src="assets/img/contacts-edit.png">
-//             Edit
-//         </div>
-//         <div class="burgermenu-row">
-//             <img class="burgermenu-menu-icon" src="assets/img/contacts-delete.png">
-//             Delete
-//         </div>
-//     </div>
-//     `;
-// }
-
 // <!-- Render Contact Summary HTML -->
 function renderContactSummary(color, name, email, phone, uniqueId) {
     return `
@@ -441,30 +392,3 @@ function showSuccessfulEdit() {
 }
 
 // Funktion zum Löschen eines Kontakts
-async function deleteContact(name, email, phone, color, contactId) {
-    console.log("Deleting contact with ID:", contactId); // Debugging-Ausgabe
-    let response = await fetch(BASE_URL + 'names/' + contactId + ".json", {
-        method: "DELETE",
-        headers: {
-            "Content-Type": "application/json",
-        }
-    });
-    let responseData = await response.json(); // Serverantwort einholen
-    console.log("Server response:", responseData); // Debugging-Ausgabe
-    if (response.ok) {
-        await getNames();
-        showSuccessfulDeletion();
-    } else {
-        console.error("Fehler beim Löschen des Kontakts:", response.statusText);
-    }
-}
-
-
-function showSuccessfulDeletion() {
-    let contactDeleted = document.getElementById('contact-deleted');
-    contactDeleted.classList.add('slide-in-from-right');
-
-    setTimeout(() => {
-        contactDeleted.classList.remove('slide-in-from-right');
-    }, 1500);
-}

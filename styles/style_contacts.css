@@ -8,7 +8,7 @@ body {
     display: flex;
     flex-direction: column;
     width: 456px;
-    height: 80vh;
+    height: 100vh;
     background-color: #ffffff;
     left: 232px;
     position: relative;
@@ -166,7 +166,7 @@ h2 {
     overflow-y: auto;
     width: 100%;
     left: 4px;
-    height: 100%;
+    height: 78%;
 }
 
 /* Scrollbar styles */
@@ -693,13 +693,13 @@ h2 {
     }
 
     #contactForString {
-        top: 152px;
+        top: 97px;
         width: 85%;
         flex: content;
+        padding-bottom: 96px;
     }
 
     .contacts-left {
-        top: -56px;
         width: 100%;
         left: 145px;
         padding-right: 100px;
@@ -759,6 +759,14 @@ h2 {
     .f-size-27 {
         font-size: 16px;
     }
+
+    .contacts-left{
+        padding-bottom: 96px;
+    }
+
+    #contactForString{
+        padding-bottom: 100px;
+    }
 }
 
 @media (max-width: 1000px) {
@@ -772,7 +780,20 @@ h2 {
 
     #contactForString {
         width: 80%;
+        top: 97px;
+        height: 100%;
+        padding-bottom: 96px;
     }
+
+    .contacts-left {
+        top: 0;
+    }
+}
+
+::-webkit-scrollbar-track {
+
+    margin-bottom: 100px;
+    margin-top: 96px;
 }
 
 
@@ -847,6 +868,7 @@ h2 {
         left: 0;
         width: 100%;
         right: 0;
+        margin-bottom: 78px;
     }
 
     .contacts-left {
