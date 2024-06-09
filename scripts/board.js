@@ -537,6 +537,7 @@ function searchTask() {
     search = search.toLowerCase();
 
     if (search === '') {
+        activeSearch = false;
         displayTasks(search);
     } if (search.length > 3) {
         activeSearch = true;
