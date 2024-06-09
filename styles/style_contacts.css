@@ -850,6 +850,11 @@ h2 {
 }
 
 @media (max-width: 750px) {
+
+    .contact-row {
+        width: 90%;
+    }
+
     .main-contacts {
         align-items: flex-start;
         width: 100%;
@@ -981,6 +986,7 @@ h2 {
     .contact-row {
         padding-left: 0;
         padding-right: 0;
+        width: 98%;
     }
 
     .contacts-left {

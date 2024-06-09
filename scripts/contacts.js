@@ -64,7 +64,7 @@ async function createContact() {
     let phonenumber = document.getElementById('contact-phone').value;
     // let id = getId();
     // console.log("es wurde geloggt: ", email, "und die ID:", id);
-    
+
     slideOutToRight();
     showSuccessfullContactCreation();
 
@@ -75,7 +75,7 @@ async function createContact() {
 
 // async function getId(){
 //     return 
-    
+
 
 // }
 
@@ -143,7 +143,7 @@ async function getNames() {
 
         // Validierung der empfangenen Daten
         if (data && data.names && typeof data.names === 'object') {
-            let namesArray = Object.values(data.names);
+            let namesArray = Object.entries(data.names);
             renderContacts(namesArray);
         } else {
             throw new Error("Invalid data format");
@@ -168,13 +168,14 @@ function renderContacts(data) {
             `;
             groupedContacts[initial].forEach((contact, index) => {
                 const randomColor = getRandomColor(); // Zufällige Farbe auswählen
-                const uniqueId = `contact-${initial}-${index}`; // Eindeutige ID erstellen
+                const uniqueId = contact[0]; // Eindeutige ID erstellen
+                const contactData = contact[1];
                 container.innerHTML += `
-                    <div class="contact-row" id="${uniqueId}" onclick="renderContactInformation('${contact.name}', '${contact.email}', '${randomColor}', '${contact.phonenumber}', '${uniqueId}')">
-                        <div class="initials" style="background-color: ${randomColor}" id="initials${index}">${getInitials(contact.name)}</div>
+                    <div class="contact-row" id="${uniqueId}" onclick="renderContactInformation('${contactData.name}', '${contactData.email}', '${randomColor}', '${contactData.phonenumber}', '${uniqueId}')">
+                        <div class="initials" style="background-color: ${randomColor}" id="initials${index}">${getInitials(contactData.name)}</div>
                         <div class="name-and-email">
-                            <div class="contact-name-row">${contact.name}</div>
-                            <div class="contact-email-row">${contact.email}</div>
+                            <div class="contact-name-row">${contactData.name}</div>
+                            <div class="contact-email-row">${contactData.email}</div>
                         </div>
                     </div>
                 `;
@@ -187,16 +188,15 @@ function getRandomColor() {
     return initialsBackgroundColors[Math.floor(Math.random() * initialsBackgroundColors.length)];
 }
 
+
+// Funktion zur Gruppierung der Kontakte nach dem Anfangsbuchstaben des Namens
 function groupByInitial(data) {
-    return data.reduce((acc, contact) => {
-        // Überprüfen, ob contact und contact.name definiert sind
-        if (contact && contact.name) {
-            let initial = contact.name.charAt(0).toUpperCase();
-            if (!acc[initial]) {
-                acc[initial] = [];
-            }
-            acc[initial].push(contact);
+    return data.reduce((acc, [id, contact]) => {
+        const initial = contact.name.charAt(0).toUpperCase();
+        if (!acc[initial]) {
+            acc[initial] = [];
         }
+        acc[initial].push([id, contact]);
         return acc;
     }, {});
 }
@@ -207,7 +207,8 @@ function getInitials(name) {
     return initials.toUpperCase();
 }
 
-function renderContactInformation(name, email, color, phone, uniqueId) {
+function renderContactInformation(name, email, color, phone, id) {
+    console.log(`Name: ${name}, Email: ${email}, Farbe: ${color}, Telefonnummer: ${phone}, ID: ${id}`);
     checkResponsive();
     const contactSummary = document.getElementById('mainContacts');
     contactSummary.classList.add('bgcolorgrey');
@@ -215,9 +216,9 @@ function renderContactInformation(name, email, color, phone, uniqueId) {
     for (let row of contactRows) {
         row.classList.remove('selected-contact');
     }
-    let contactName = document.getElementById(uniqueId);
+    let contactName = document.getElementById(id);
     contactName.classList.add('selected-contact');
-    contactSummary.innerHTML = renderContactSummary(color, name, email, phone, uniqueId);
+    contactSummary.innerHTML = renderContactSummary(color, name, email, phone, id);
 }
 
 
