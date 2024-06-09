@@ -19,6 +19,7 @@ let currentDraggedElement = 0;
 let touchOffsetX = 0;
 let touchOffsetY = 0;
 let tasks = [];
+let activeSearch = false;
 
 /**
  * Opens the dialog by removing the 'd_none' class and ensures CSS and content are loaded.
@@ -247,8 +248,21 @@ function createTaskElement(task, search) {
  * @returns {string} HTML string representing the task element.
  */
 function createTaskHTML(task, taskid, assignedNamesHTML, subtaskCountHTML, priorityImage, categoryColor, search) {
-    let descriptionSection = task.description ? `<p class="descriptionBox">${task.description}</p>` : '';
-    return /*html*/`
+
+
+    if (activeSearch) {
+
+
+
+        // Check if the task matches the search criteria
+        if (assignedNamesHTML.toLowerCase().includes(search) ||
+            (task.description && task.description.toLowerCase().includes(search)) ||
+            task.title.toLowerCase().includes(search)) {
+
+
+
+            let descriptionSection = task.description ? `<p class="descriptionBox">${task.description}</p>` : '';
+            return /*html*/`
         <div id="${taskid}" draggable="true" ondragstart="startDragging('${taskid}')" class="toDoBox" onclick="showPopup('${taskid}')">
             <button class="CategoryBox" style="background-color: ${categoryColor.background};">${task.category}</button>
             <p class="HeadlineBox">${task.title}</p>
@@ -265,6 +279,28 @@ function createTaskHTML(task, taskid, assignedNamesHTML, subtaskCountHTML, prior
             </div>
         </div>
     `;
+        }
+    } else {
+        let descriptionSection = task.description ? `<p class="descriptionBox">${task.description}</p>` : '';
+        return /*html*/`
+        <div id="${taskid}" draggable="true" ondragstart="startDragging('${taskid}')" class="toDoBox" onclick="showPopup('${taskid}')">
+            <button class="CategoryBox" style="background-color: ${categoryColor.background};">${task.category}</button>
+            <p class="HeadlineBox">${task.title}</p>
+            <p class="descriptionBox">${descriptionSection}</p>
+            <div class="subtaskProgress">
+                <progress value="0" max="100"></progress>
+                ${subtaskCountHTML}
+            </div>
+            <div class="nameSection">
+                ${assignedNamesHTML}
+                <div class="prioImgContainer">
+                    <img class="prioImg" src="${priorityImage}" alt="Priority">
+                </div>
+            </div>
+        </div>
+    `;
+    }
+    return '';
 };
 
 /**
@@ -505,36 +541,22 @@ function searchTask() {
     let search = document.getElementById('search').value;
     search = search.toLowerCase();
 
-    if (search.length < 4) {
+    if (search.length < 4 || search === '') {
+        displayTasks(search);
         return;
+    } else {
+
+        activeSearch = true;
+        displayTasks(search);
     }
-
-    let done = document.getElementById('done');
-    let awaitfeedback = document.getElementById('awaitfeedback');
-    let inprogress = document.getElementById('inprogress');
-    let todo = document.getElementById('todo');
-    done.innerHTML = '';
-    awaitfeedback.innerHTML = '';
-    inprogress.innerHTML = '';
-    todo.innerHTML = '';
-
-
-    displayTasks(search);
 }
 
 
-function searchCheck(search, assignedNamesHTML, descriptionSection, task) { //muss in createTaskHTML angepast werden
-    for (let i = 0; i < allPokemon.length; i++) {
-        let pokemonName = allPokemon[i]['name'];
-        let pokemonImg = allPokemon[i]['sprites']['other']['dream_world']['front_default'];
-        let pokemonTypeBackground = allPokemon[i]['types']['0']['type']['name'];
+function searchCheck(search, assignedNamesHTML, taskDescription, taskTitle) { //muss in createTaskHTML angepast werden
 
-        pokemonName = capitalizeFirstLetter(pokemonName);
-        pokemonImg = obtainAlternativeImgInCaseOfNull(pokemonImg, i);
 
-        if (pokemonName.toLowerCase().includes(search)) {
-            cards.innerHTML += htmlCardsClosed(i, pokemonTypeBackground, pokemonImg, pokemonName);
-            generateTypeImg(i);
-        }
-    }
+    return assignedNamesHTML.toLowerCase().includes(search) ||
+        taskDescription.toLowerCase().includes(search) ||
+        taskTitle.toLowerCase().includes(search);
+
 }
