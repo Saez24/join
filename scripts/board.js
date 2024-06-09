@@ -536,13 +536,14 @@ function searchTask() {
     let search = document.getElementById('search').value;
     search = search.toLowerCase();
 
-    if (search.length < 4 || search === '') {
+    if (search === '') {
         displayTasks(search);
         return;
-    } else {
-
+    } if (search.length > 3) {
         activeSearch = true;
         displayTasks(search);
+    } else {
+        return;
     }
 }
 
