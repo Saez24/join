@@ -440,6 +440,11 @@ function removeHighlight(id) {
     document.getElementById(id).classList.remove('drag-area-highlight');
 };
 
+/**
+ * Renders the task dialog based on the provided task ID.
+ * @param {string} taskid - The ID of the task to render the dialog for.
+ * @returns {void}
+ */
 async function renderTaskDialog(taskid) {
     try {
         let tasks = await fetchData();
@@ -447,7 +452,6 @@ async function renderTaskDialog(taskid) {
         if (!selectedTask) {
             return;
         }
-
         let { assignto = [], subtask = [], prio, category, description, title, duedate } = selectedTask;
         let assignedNamesHTML = generateAssignedNamesHTML(assignto);
         let priorityImage = priorityImages[prio] || './assets/img/prio_media.png';
@@ -460,38 +464,35 @@ async function renderTaskDialog(taskid) {
                 <p>${task}</p>
             </div>
         `).join('');
-
         let taskDetailsDialog = document.getElementById('TaskDetailsDialog');
         let categoryBox = document.getElementById('CategoryBox');
         let headline = document.getElementById('HeadlineBox');
         let descriptionDetails = document.getElementById('descriptionDetails');
         let dueDate = document.getElementById('dueDate');
+        let dueDateObj = new Date(duedate);
+        let formattedDueDate = dueDateObj.toLocaleDateString('de-DE', { day: '2-digit', month: '2-digit', year: 'numeric' });
         let priority = document.getElementById('Priority');
         let priorityImg = document.getElementById('PriorityImg');
         let assignedInitials = document.getElementById('assignedInitials');
         let assignedName = document.getElementById('assignedName');
         let subtaskContainer = document.getElementById('subtaskDialogText');
-
         if (!taskDetailsDialog) {
             return;
         }
-
         categoryBox.innerText = category;
         categoryBox.style.backgroundColor = categoryColor.background;
         headline.innerText = title;
         descriptionDetails.innerText = description;
-        dueDate.innerText = duedate;
+        dueDate.innerText = formattedDueDate;
         priority.innerText = prio;
         priorityImg.src = priorityImage;
         assignedInitials.innerHTML = assignedNamesHTMLSeparated;
         assignedName.innerHTML = assigntoHTML;
         subtaskContainer.innerHTML = subtaskHTML;
-
     } catch (error) {
-        console.error('Fehler beim Rendern des Task-Dialogs:', error);
+        console.error('Error rendering task dialog:', error);
     }
 };
-
 
 //Relevante Funktionen displayTasks, (insertTasksIntoDOM Muss evtl geleert werden), =>createTaskHTML
 //Releveante Variabeln: assignedNamesHTML, descriptionSection, task.title
