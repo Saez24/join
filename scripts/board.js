@@ -114,15 +114,15 @@ function showPopup(task, taskid, assignedNamesHTML, subtaskCountHTML, priorityIm
         popup.classList.add('fade-in');
         taskDetails.classList.add('slide-in-right');
     }, 300);
-    // renderTaskDialog(task, taskid, assignedNamesHTML, subtaskCountHTML, priorityImage, categoryColor);
+    renderTaskDialog(task, taskid, assignedNamesHTML, subtaskCountHTML, priorityImage, categoryColor);
 };
 
 /**
  * Closes the dialog.
  */
-function hidePopup(id) {
-    const popup = document.getElementById(id);
-    const taskDetails = popup.querySelector('.TaskDetails');
+function hidePopup(task, taskid, assignedNamesHTML, subtaskCountHTML, priorityImage, categoryColor) {
+    const popup = document.getElementById('popup');
+    const taskDetails = document.getElementById('TaskDetailsDialog');
 
     taskDetails.classList.remove('slide-in-right');
     taskDetails.classList.add('slide-out-right');
@@ -437,27 +437,46 @@ function removeHighlight(id) {
     document.getElementById(id).classList.remove('drag-area-highlight');
 };
 
-// async function renderTaskDialog(task, taskid, assignedNamesHTML, subtaskCountHTML, priorityImage, categoryColor) {
-//     try {
-//         let tasks = await fetchData();
-//         let selectedTask = tasks.find(item => item.id === taskid);
-//         if (!selectedTask) {
-//             console.error(`Keine Aufgabe gefunden mit der id ${taskid}`);
-//             return;
-//         }
+async function renderTaskDialog(taskid) {
+    try {
+        let tasks = await fetchData();
 
+        let selectedTask = tasks.find(item => item.id === taskid);
+        if (!selectedTask) {
+            console.error(`Keine Aufgabe gefunden mit der id ${taskid}`);
+            return;
+        }
+        let { assignto, subtask, prio, category, description, title } = selectedTask;
+        let assignedNamesHTML = generateAssignedNamesHTML(assignto || []);
+        let subtaskCountHTML = generateSubtaskCountHTML(subtask || []);
+        let priorityImage = priorityImages[prio] || './assets/img/prio_media.png';
+        let categoryColor = CategoryColors[category] || { background: '#000000', color: '#FFFFFF' };
+        let TaskDetailsDialog = document.getElementById('TaskDetailsDialog');
 
-//         let TaskDetailsDialog = document.getElementById('TaskDetailsDialog');
+        TaskDetailsDialog.innerHTML = "";
+        TaskDetailsDialog.innerHTML += /*html*/`
+        <div id="${taskid}">
+            <img  class="closePopup" src="./assets/img/close.png" onclick="hidePopup('${taskid}')" alt="Close">
+            <button id="CategoryBox" class="CategoryBox" style="background-color: ${categoryColor.background};">${category}</button>
+            <h2>${title}</h2>
+            <p class="descriptionBox">${description}</p>
+            <div class="subtaskProgress">
+                <progress value="0" max="100"></progress>
+                ${subtaskCountHTML}
+            </div>
+            <div class="nameSection">
+                ${assignedNamesHTML}
+                <div class="prioImgContainer">
+                    <img class="prioImg" src="${priorityImage}" alt="Priority">
+                </div>
+            </div>
+        </div>
+        `;
+    } catch (error) {
+        console.error('Fehler beim Rendern des Task-Dialogs:', error);
+    }
+}
 
-//         TaskDetailsDialog.innerHTML = "";
-//         TaskDetailsDialog.innerHTML += /*html*/`
-//             <img id="${taskid}" class="closePopup" src="./assets/img/close.png" onclick="hidePopup('${taskid}')" alt="Close">
-//             <button id="CategoryBox" class="CategoryBox"></button>
-//         `;
-
-//     } catch (error) { }
-
-// };
 
 
 //Relevante Funktionen displayTasks, (insertTasksIntoDOM Muss evtl geleert werden), =>createTaskHTML
@@ -484,7 +503,7 @@ function searchTask() {
 }
 
 
-function searchCheck(search, assignedNamesHTML, descriptionSection, task.title) { //muss in createTaskHTML angepast werden
+function searchCheck(search, assignedNamesHTML, descriptionSection, task) { //muss in createTaskHTML angepast werden
     for (let i = 0; i < allPokemon.length; i++) {
         let pokemonName = allPokemon[i]['name'];
         let pokemonImg = allPokemon[i]['sprites']['other']['dream_world']['front_default'];
