@@ -538,7 +538,6 @@ function searchTask() {
 
     if (search === '') {
         displayTasks(search);
-        return;
     } if (search.length > 3) {
         activeSearch = true;
         displayTasks(search);
