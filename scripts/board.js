@@ -134,6 +134,9 @@ function hidePopup(task, taskid, assignedNamesHTML, subtaskCountHTML, priorityIm
         popup.classList.remove('fade-out');
         taskDetails.classList.remove('slide-out-right');
     }, 800);
+
+    let taskDetailsDialog = document.getElementById('TaskDetailsDialog');
+    taskDetailsDialog = "";
 };
 
 /**
@@ -442,7 +445,6 @@ async function renderTaskDialog(taskid) {
         let tasks = await fetchData();
         let selectedTask = tasks.find(item => item.id === taskid);
         if (!selectedTask) {
-            console.error(`Keine Aufgabe gefunden mit der id ${taskid}`);
             return;
         }
 
@@ -455,49 +457,41 @@ async function renderTaskDialog(taskid) {
         let subtaskHTML = subtask.map(task => `
             <div class="subtaskItem">
                 <input type="checkbox">
-                <p id="subtaskDialogText">${task}</p>
+                <p>${task}</p>
             </div>
         `).join('');
+
+        let taskDetailsDialog = document.getElementById('TaskDetailsDialog');
+        let categoryBox = document.getElementById('CategoryBox');
         let headline = document.getElementById('HeadlineBox');
-        headline.innerHTML = `${title}`;
+        let descriptionDetails = document.getElementById('descriptionDetails');
+        let dueDate = document.getElementById('dueDate');
+        let priority = document.getElementById('Priority');
+        let priorityImg = document.getElementById('PriorityImg');
+        let assignedInitials = document.getElementById('assignedInitials');
+        let assignedName = document.getElementById('assignedName');
+        let subtaskContainer = document.getElementById('subtaskDialogText');
 
-        document.getElementById('TaskDetailsDialog').innerHTML = /*html*/`
+        if (!taskDetailsDialog) {
+            return;
+        }
 
-                <img class="closePopup" src="./assets/img/close.png" onclick="hidePopup('${taskid}')" alt="Close">
-                <button class="CategoryBox" style="background-color: ${categoryColor.background};">${category}</button>
-                <!-- <h2>${title}</h2> -->
-                <p class="descriptionDetails">${description}</p>
-                <p class="dueDate">Due date:</p>
-                <p id="dueDate">${duedate}</p>
-                <div class="priorityContainer">
-                    <p class="dueDate">Priority:</p>
-                    <p id="Priority">${prio}</p>
-                    <img id="PriorityImg" class="prioImg" src="${priorityImage}" alt="Priority">
-                </div>
-                <div class="TaskDetailsLine">
-                    <p class="dueDate">Assigned To:</p>
-                </div>
-                <div class="assignedContainer">
-                    <div id="assignedInitials">${assignedNamesHTMLSeparated}</div>
-                    <div id="assignedNames">${assigntoHTML}</div>
-                </div>
-                <div class="subtasksTitle">Subtasks</div>
-                <div id="subtaskContainer">${subtaskHTML}</div>
-                <div class="editDeleteWrapper">
-                    <div class="editDeleteContainer deleteContainer">
-                        <img src="./assets/img/delete.png" alt="Delete">
-                        Delete
-                    </div>
-                    <div class="editDeleteContainer editContainer">
-                        <img src="./assets/img/edit.png" alt="Edit">
-                        Edit
-                    </div>
-                </div>
-        `;
+        categoryBox.innerText = category;
+        categoryBox.style.backgroundColor = categoryColor.background;
+        headline.innerText = title;
+        descriptionDetails.innerText = description;
+        dueDate.innerText = duedate;
+        priority.innerText = prio;
+        priorityImg.src = priorityImage;
+        assignedInitials.innerHTML = assignedNamesHTMLSeparated;
+        assignedName.innerHTML = assigntoHTML;
+        subtaskContainer.innerHTML = subtaskHTML;
+
     } catch (error) {
         console.error('Fehler beim Rendern des Task-Dialogs:', error);
     }
 };
+
 
 //Relevante Funktionen displayTasks, (insertTasksIntoDOM Muss evtl geleert werden), =>createTaskHTML
 //Releveante Variabeln: assignedNamesHTML, descriptionSection, task.title
