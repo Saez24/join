@@ -57,7 +57,8 @@ body {
 }
 
 .TaskDetails h2 {
-    font-size: 42px;
+    font-size: 36px;
+    margin-bottom: 15px;
 }
 
 .TaskDetails button {
@@ -81,35 +82,42 @@ body {
 
 .descriptionDetails {
     color: #000;
+    margin: 0;
+    margin-bottom: 15px !important;
 }
 
 .TaskDetailsLine {
     display: flex;
     align-items: center;
-    gap: 25px;
+    width: 100%;
+    margin-bottom: 15px;
 }
 
 .priorityContainer {
     display: flex;
     align-items: center;
     gap: 10px; 
+    margin-bottom: 15px;
 }
 
 .priorityContainer p {
-    margin: 0 10px 0 0;
+    margin: 0;
+    margin-right: 10px; /* Abstand rechts */
     display: flex;
     align-items: center;
 }
 
 .TaskDetailsLine p {
     margin-right: 10px;
+    margin: 0;
 }
 
 .TaskDetailsLine .dueDate,
 .priorityContainer .dueDate,
 .assignedContainer .dueDate {
     color: gray;
-    margin-bottom: 20px;
+    margin: 0;
+    min-width: 100px;
 }
 
 
@@ -117,12 +125,20 @@ body {
 /* Assigned Container */
 .assignedContainer {
     display: flex;
-    align-items: center;
+    flex-direction: column;  /* Stellt sicher, dass die Initialen und Namen untereinander angezeigt werden */
+    align-items: flex-start; /* Richtet die Elemente am Anfang des Containers aus */
     margin-top: 10px;
-    text-align: center;
-    justify-content: center;
     margin-left: 20px;
 }
+
+#assignedInitials,
+#assignedName {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;  /* Abstand zwischen den einzelnen Zuordnungen */
+}
+
+
 
 .assignedContainer .assignedName {
     margin-right: 10px;
@@ -149,6 +165,7 @@ body {
     width: 100%;
     flex-wrap: nowrap;
     overflow-y: visible;
+    padding-left: 10px;
 }
 
 .subtasksTitle {
@@ -216,7 +233,7 @@ body {
 /* Wrapped Max Width */
 .wrapped_maxWidth {
     width: 100%;
-    max-width: 1220px;
+    max-width: 1250px;
     padding-left: 150px;
     margin: 0 auto;
 }
@@ -437,21 +454,19 @@ body {
 }
 
 .priorityContainer p {
-    margin: 0;
     display: flex;
     align-items: center;
-    white-space: nowrap; /* verhindert Zeilenumbrüche */
-    max-width: 80px; /* begrenzt die Breite auf 80px */
+    white-space: nowrap; 
+    margin: 0;
 }
 
 .prioImgContainer {
     margin-left: auto;
-    /* Schiebt das prioImgContainer nach rechts */
     display: flex;
     align-items: center;
 }
 
-.prioImg {
+.prioImg .priorityContainer  {
     vertical-align: middle;
 }
 
@@ -559,6 +574,7 @@ body {
     margin-bottom: 5px;
     font-size: 14px;
     margin: 0;
+    gap: 8px
 }
 
 .subtaskProgress progress {
@@ -613,6 +629,7 @@ body {
     .searchTask {
         width: calc(100% - 10px);
         margin-top: 0;
+        margin-left: 10px;
     }
 }
 
@@ -645,6 +662,7 @@ body {
         width: calc(100% - 10px);
         margin-top: 20px;
         margin-bottom: 20px;
+        margin-left: 20px;
     }
 
     .addTaskButton {
@@ -686,7 +704,6 @@ body {
         max-width: 700px;
         width: 100%;
         padding-left: 0;
-        margin-bottom: 1000px;
     }
 
     .addTaskButton {
