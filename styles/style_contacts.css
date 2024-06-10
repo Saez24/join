@@ -178,6 +178,7 @@ h2 {
 ::-webkit-scrollbar-track {
     background: #ffffff;
     border-radius: 10px;
+    margin-bottom: 0;
 }
 
 ::-webkit-scrollbar-thumb {
@@ -408,7 +409,7 @@ h2 {
 .contact-person {
     height: 120px;
     width: 120px;
-    background-color: rgb(209, 209, 209);
+    /* background-color: rgb(209, 209, 209); Background wird durch JS determiniert*/
     border: 3px solid white;
     border-radius: 70px;
     box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.1);
@@ -448,7 +449,7 @@ h2 {
 }
 
 .contact-input-fields:hover {
-    cursor: pointer;
+    cursor: text;
     border-color: rgba(41, 171, 226, 1);
 }
 
@@ -568,16 +569,19 @@ h2 {
 
 /* CSS FOR DELETE */
 .overlay {
-    display: none; /* Start hidden */
+    display: none;
+    /* Start hidden */
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    background-color: rgba(0, 0, 0, 0.5);
+    /* Semi-transparent background */
     justify-content: center;
     align-items: center;
-    z-index: 1000; /* Ensure it appears above other elements */
+    z-index: 1000;
+    /* Ensure it appears above other elements */
 }
 
 .overlay-content {
@@ -622,11 +626,12 @@ h2 {
     color: white;
     font-family: 'Inter';
     font-weight: 700;
+    font-size: 24px;
     border-radius: 10px;
     border-style: none;
 }
 
-.yes-no-btn:hover{
+.yes-no-btn:hover {
     background-color: #29ABE2;
 }
 
@@ -634,6 +639,7 @@ h2 {
     from {
         transform: translateX(100%);
     }
+
     to {
         transform: translateX(0);
     }
@@ -776,9 +782,14 @@ h2 {
     .contact-summary-headline-rightside {
         flex-direction: row;
         align-items: center;
+        max-width: calc(100% - 150px);
     }
 
 
+    ::-webkit-scrollbar-track {
+        margin-bottom: 100px;
+        margin-top: 96px;
+    }
 
 }
 
@@ -817,11 +828,11 @@ h2 {
         font-size: 16px;
     }
 
-    .contacts-left{
+    .contacts-left {
         padding-bottom: 96px;
     }
 
-    #contactForString{
+    #contactForString {
         padding-bottom: 100px;
     }
 }
@@ -847,11 +858,7 @@ h2 {
     }
 }
 
-::-webkit-scrollbar-track {
 
-    margin-bottom: 100px;
-    margin-top: 96px;
-}
 
 
 @media (max-width: 900px) {
@@ -867,7 +874,7 @@ h2 {
 
     .contact-summary-headline-name {
         text-wrap: wrap;
-        /* max-width: 200px; */
+        max-width: 380px;
     }
 
     #contactSummary {
@@ -952,6 +959,10 @@ h2 {
     .contact-summary-headline-name {
         font-size: 36px;
         font-weight: 1000;
+    }
+
+    #contactSummary {
+        width: 90%;
     }
 
     .contact-left {
@@ -1039,6 +1050,21 @@ h2 {
 }
 
 
+@media (max-width: 500px) {
+    .overlay-content {
+        height: auto;
+        width: 80%;
+    }
+
+    .yes-no-btn {
+        width: 45%;
+    }
+    .contact-summary-headline-name {
+        max-width: calc(100% - 200px);
+    }
+}
+
+
 @media (max-width: 450px) {
     .contact-row {
         padding-left: 0;
@@ -1048,6 +1074,11 @@ h2 {
 
     .contacts-left {
         width: 98vw;
+    }
+
+    .contact-summary-initials {
+        width: 120px !important;
+        height: 120px !important;
     }
 }
 
@@ -1063,8 +1094,8 @@ h2 {
     }
 
     .contact-summary-initials {
-        width: 80px;
-        height: 80px;
+        width: 80px !important;
+        height: 80px !important;
         font-size: 27px;
     }
 
@@ -1096,4 +1127,3 @@ h2 {
     }
 
 }
-

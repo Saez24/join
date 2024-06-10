@@ -54,7 +54,6 @@ async function addContactData(path = "", data = {}) {
     return responseToJson = await response.json();
 }
 
-// David edited: let id
 async function createContact() {
 
     if (validateContactInputs()) {
@@ -64,8 +63,6 @@ async function createContact() {
     let email = document.getElementById('contact-email').value;
     let name = document.getElementById('contact-name').value;
     let phonenumber = document.getElementById('contact-phone').value;
-    // let id = getId();
-    // console.log("es wurde geloggt: ", email, "und die ID:", id);
 
     slideOutToRight();
     showSuccessfullContactCreation();
@@ -75,11 +72,6 @@ async function createContact() {
     searchAndRenderLastAddedContact(name);
 }
 
-// async function getId(){
-//     return 
-
-
-// }
 
 function searchAndRenderLastAddedContact(name) {
     let lastAddedName = name;
@@ -133,7 +125,6 @@ function showSuccessfullContactCreation() {
 }
 
 
-
 async function getNames() {
     try {
         let response = await fetch(BASE_URL + ".json");
@@ -155,36 +146,6 @@ async function getNames() {
     }
 }
 
-function renderContacts(data) {
-    const container = document.getElementById('contactForString');
-    container.innerHTML = '';
-
-    // Gruppieren der Kontakte nach dem Anfangsbuchstaben des Namens
-    const groupedContacts = groupByInitial(data);
-
-    for (let initial in groupedContacts) {
-        if (groupedContacts.hasOwnProperty(initial)) {
-            container.innerHTML += `
-                <div class="capital-category">${initial}</div>
-                <div class="dividing-line"></div>
-            `;
-            groupedContacts[initial].forEach((contact, index) => {
-                const randomColor = getRandomColor(); // Zufällige Farbe auswählen
-                const uniqueId = contact[0]; // Eindeutige ID erstellen
-                const contactData = contact[1];
-                container.innerHTML += `
-                    <div class="contact-row" id="${uniqueId}" onclick="renderContactInformation('${contactData.name}', '${contactData.email}', '${randomColor}', '${contactData.phonenumber}', '${uniqueId}')">
-                        <div class="initials" style="background-color: ${randomColor}" id="initials${index}">${getInitials(contactData.name)}</div>
-                        <div class="name-and-email">
-                            <div class="contact-name-row">${contactData.name}</div>
-                            <div class="contact-email-row">${contactData.email}</div>
-                        </div>
-                    </div>
-                `;
-            });
-        }
-    }
-}
 
 function getRandomColor() {
     return initialsBackgroundColors[Math.floor(Math.random() * initialsBackgroundColors.length)];
@@ -224,57 +185,6 @@ function renderContactInformation(name, email, color, phone, id) {
 }
 
 
-// <!-- Render Contact Summary HTML -->
-function renderContactSummary(color, name, email, phone, uniqueId) {
-    return `
-    <div class="main-contacts-text">
-        <h1>Contacts</h1>
-        <div class="vertical-line"></div>
-        <h2>Better with a team</h2>
-        <div class="horizontal-line"></div>
-    </div>
-    <div id="contactSummary">
-        <div id="backArrow" class="arrow-icon" onclick="closeContactInformation()"><img src="assets/img/arrow_left.png"></div>
-        <div class="contact-summary-headline">
-            <div class="contact-summary-initials" style="background-color: ${color};">${getInitials(name)}</div>
-            <div class="contact-summary-headline-rightside">
-                <div class="contact-summary-headline-name">${name}</div>
-                <div class="edit-and-delete">
-                    <div id="edit${uniqueId}" class="edit-and-delete-row" onclick="openEditContactOverlay('${name}', '${email}', '${phone}', '${color}', '${uniqueId}')">
-                        <img src="assets/img/contacts-edit.png" alt="edit">Edit
-                    </div>
-                    <div id="delete${uniqueId}" class="edit-and-delete-row" onclick="openDeleteContactOverlay('${uniqueId}')">
-                        <img src="assets/img/contacts-delete.png" alt="delete">Delete
-                    </div>
-                </div>
-                <button onclick="burgerSlideInFromRight()" class="contact-burger-menu" id="contactBurgerMenuIcon">
-                    <img src="assets/img/contacts-burger-menu.png" alt="add contact" class="burger-menu-icon">
-                </button>
-            </div>
-        </div>
-        <div class="contact-summary-contact-information">Contact Information</div>
-        <div class="contact-summary-mail-and-phone">
-            <div><b>Email</b></div>
-            <span>${email}</span>
-            <div><b>Phone</b></div>
-            <span>${phone}</span>
-        </div>
-    </div>
-    <!-- BURGER MENU EDIT AND DELETE -->
-    <div class="burger-menu-overlay" id="burgerMenu">
-        <div class="burgermenu-row" onclick="openEditContactOverlay('${name}', '${email}', '${phone}', '${color}', '${uniqueId}')">
-            <img class="burgermenu-menu-icon" src="assets/img/contacts-edit.png">
-            Edit
-        </div>
-        <div class="burgermenu-row" onclick="openDeleteContactOverlay('${uniqueId}')">
-            <img class="burgermenu-menu-icon" src="assets/img/contacts-delete.png">
-            Delete
-        </div>
-    </div>
-    `;
-}
-
-
 function closeContactInformation() {
     if (window.innerWidth < 1401) {
         document.getElementById('mainContacts').style.display = 'none';
@@ -291,7 +201,6 @@ function checkResponsive() {
         document.getElementById('contactsLeft').style.display = 'none';
         document.getElementById('mainContacts').style.display = 'flex';
     }
-
 }
 
 
@@ -300,20 +209,18 @@ function burgerSlideInFromRight() {
     let burgerIcon = document.getElementById('contactBurgerMenuIcon');
     burgerMenu.classList.toggle('active');
     burgerIcon.classList.add('d-none');
-
-    // Event-Listener zum Schließen des Menüs hinzufügen
     document.addEventListener('click', closeBurgerMenuWhenGreyAreaWasClicked);
 }
+
 
 function burgerMenuSlideOutToRight() {
     let burgerMenu = document.getElementById('burgerMenu');
     let burgerIcon = document.getElementById('contactBurgerMenuIcon');
     burgerMenu.classList.remove('active');
     burgerIcon.classList.remove('d-none');
-
-    // Event-Listener entfernen
     document.removeEventListener('click', closeBurgerMenuWhenGreyAreaWasClicked);
 }
+
 
 function closeBurgerMenuWhenGreyAreaWasClicked(event) {
     let burgerMenu = document.getElementById('burgerMenu');
@@ -321,6 +228,7 @@ function closeBurgerMenuWhenGreyAreaWasClicked(event) {
         burgerMenuSlideOutToRight();
     }
 }
+
 
 function openEditContactOverlay(name, email, phone, color, uniqueId) {
     console.log('folgendes wird übergeben: ', name, email, phone, color, uniqueId);
@@ -335,7 +243,6 @@ function openEditContactOverlay(name, email, phone, color, uniqueId) {
 }
 
 
-
 function editSlideInFromRight() {
     let editContactOverlay = document.getElementById('edit-contact-overlay');
     let editContactCont = document.getElementById('edit-contact-cont');
@@ -347,6 +254,7 @@ function editSlideInFromRight() {
         editContactOverlay.classList.add('fade-to-grey-overlay');
     }, 300);
 }
+
 
 function editSlideOutToRight() {
     let contactOverlay = document.getElementById('edit-contact-overlay');
@@ -360,25 +268,17 @@ function editSlideOutToRight() {
     }, 100);
 }
 
+
 async function editContact(event) {
     event.preventDefault(); // Verhindert das Standardverhalten des Formulars
-
     let name = document.getElementById('edit-contact-name').value;
     let email = document.getElementById('edit-contact-email').value;
     let phone = document.getElementById('edit-contact-phone').value;
-
-
     if (!editingContactId) {
         console.error('Keine Kontakt-ID vorhanden für das Update');
         return;
     }
-
-    // Hier die Kontaktinformationen aktualisieren
-    console.log('Aktualisierte Kontaktinformationen:', { name, email, phone });
-
-    // Beispiel: Aktualisierte Kontaktinformationen speichern (implementieren Sie Ihre eigene Speicherlogik)
     await updateContactData(editingContactId, { email: email, name: name, phonenumber: phone });
-
     editSlideOutToRight();
     await getNames();
     searchAndRenderLastAddedContact(name);
@@ -414,8 +314,8 @@ function showSuccessfulEdit() {
     }, 1500);
 }
 
-// Funktion zum Löschen eines Kontakts
 
+// Funktion zum Löschen eines Kontakts
 function openDeleteContactOverlay(uniqueId) {
     const deleteContactOverlay = document.getElementById('delete-contact-overlay');
     if (deleteContactOverlay) {
@@ -425,6 +325,7 @@ function openDeleteContactOverlay(uniqueId) {
         console.error('delete-contact-overlay Element nicht gefunden');
     }
 }
+
 
 function deleteSlideOutToRight() {
     const deleteContactOverlay = document.getElementById('delete-contact-overlay');
@@ -437,6 +338,7 @@ function deleteSlideOutToRight() {
         console.error('delete-contact-overlay Element nicht gefunden');
     }
 }
+
 
 async function deleteContact() {
     const deleteContactOverlay = document.getElementById('delete-contact-overlay');
