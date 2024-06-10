@@ -408,7 +408,7 @@ function allowDrop(event) {
 async function moveTo(newStatus) {
     if (currentDraggedElement) {
         await updateTaskStatus(currentDraggedElement, newStatus);
-        displayTasks(); // Refresh the task display after status update
+        searchTask(); // Refresh the task display after status update via searchTask(), previously displayTasks() was used.
     }
 };
 
