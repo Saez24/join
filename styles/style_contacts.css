@@ -448,7 +448,7 @@ h2 {
 }
 
 .contact-input-fields:hover {
-    cursor: pointer;
+    cursor: text;
     border-color: rgba(41, 171, 226, 1);
 }
 
@@ -867,7 +867,7 @@ h2 {
 
     .contact-summary-headline-name {
         text-wrap: wrap;
-        /* max-width: 200px; */
+        max-width: 200px;
     }
 
     #contactSummary {
