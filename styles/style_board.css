@@ -46,6 +46,8 @@ body {
     position: relative;
 }
 
+
+
 .TaskDetails h1,
 .TaskDetails h2,
 .TaskDetails h5,
@@ -142,6 +144,11 @@ body {
     min-height: 300px;
     margin-top: 10px;
     padding-top: 10px;
+    display: flex;
+    gap: 25px;
+    width: 100%;
+    flex-wrap: nowrap;
+    overflow-y: visible;
 }
 
 .subtasksTitle {
@@ -210,7 +217,8 @@ body {
 .wrapped_maxWidth {
     width: 100%;
     max-width: 1220px;
-    margin-left: 150px;
+    padding-left: 150px;
+    margin: 0 auto;
 }
 
 /* Board Headline */
@@ -307,7 +315,10 @@ body {
 .boardTasks {
     display: flex;
     align-items: flex-start;
-    /* gap: 26px; */
+    flex-wrap: wrap;
+    padding-bottom: 100px;
+    flex-direction: row;
+
 }
 
 /* Status Tasks */
@@ -315,9 +326,11 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 252px;
+    /* width: 252px; */
     font-size: 20px;
     padding: 10px;
+    width: 100%;
+    overflow-x: auto;
 }
 
 /* Headline Status Tasks */
@@ -333,7 +346,8 @@ body {
     color: #42526E;
     font-size: 26px;
     font-weight: 700;
-    margin: 26px 0;
+    margin-top: 0;
+    margin-bottom: 0;
 }
 
 /* To Do Box */
@@ -348,13 +362,12 @@ body {
     min-height: 240px;
     margin-bottom: 24px;
     transition: transform 0.3s ease;
-    /* Fügt eine Übergangsanimation hinzu */
     cursor: grab;
 }
 
 .toDoBox:hover {
     filter: drop-shadow(0px 0px 5px rgba(0, 0, 0, 0.3));
-    transform: rotate(8deg);
+    transform: rotate(5deg);
 }
 
 .toDoBox_noTask {
@@ -582,58 +595,33 @@ body {
     border: 2px solid #FFFFFF;
     cursor: pointer;
 }
+@media screen and (max-width: 1550px) {
+    .wrapped_maxWidth {
+        max-width: 1000px;
+        margin: 30px;
+        padding-left: 250px;
+    }
+}
+
 
 @media screen and (max-width: 1470px) {
     .wrapped_maxWidth {
-        margin-left: 300px;
-    }
-
-    .boardHeadlineActions {
-        flex-direction: row;
-        align-items: center;
+        max-width: 950px;
+        padding-left: 220px;
     }
 
     .searchTask {
         width: calc(100% - 10px);
         margin-top: 0;
     }
-
-    .taskStatusTitle {
-        font-size: 22px;
-    }
-
-    .boardTasks {
-        flex-wrap: wrap;
-        padding-bottom: 100px;
-        flex-direction: row;
-    }
-
-    .statusTasks {
-        width: 100%;
-        font-size: 20px;
-    }
-
-    .tasks {
-        display: flex;
-        gap: 25px;
-        width: 100%;
-        flex-wrap: nowrap;
-        overflow-y: visible;
-    }
-
-    .TaskBox {
-        width: 252px !important;
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-start;
-        align-items: flex-start;
-        margin-bottom: 12px;
-        padding: 12px 16px;
-    }
-
 }
 
-@media (max-width: 1100px) {
+@media (max-width: 1200px) {
+    .wrapped_maxWidth {
+        max-width: 750px;
+        padding-left: 250px;
+    }
+
     h1 {
         font-size: 50px !important;
     }
@@ -641,6 +629,7 @@ body {
     .boardHeadline {
         flex-direction: column;
         align-items: flex-start;
+        margin-left: 20px;
     }
 
     .boardHeadlineActions {
@@ -648,12 +637,14 @@ body {
         gap: 10px;
         width: 100%;
         margin-top: -125px;
+
     }
 
     .searchTask {
         order: 2;
         width: calc(100% - 10px);
-        margin-top: 0;
+        margin-top: 20px;
+        margin-bottom: 20px;
     }
 
     .addTaskButton {
@@ -676,21 +667,36 @@ body {
     }
 }
 
+@media (max-width: 1000px) {
+    .wrapped_maxWidth {
+        max-width: 550px;
+        padding-left: 250px;
+    }
+}
+
+@media (max-width: 800px) {
+    .wrapped_maxWidth {
+        max-width: 400px;
+        padding-left: 260px;
+    }
+}
+
 @media screen and (max-width: 750px) {
     .wrapped_maxWidth {
+        max-width: 700px;
         width: 100%;
-        margin-left: -155px;
+        padding-left: 0;
         margin-bottom: 1000px;
     }
 
     .addTaskButton {
         margin-top: 50px;
-        width: 100% -125px;
+        margin-right: 17px;
     }
 
     .SearchTask {
         margin-left: 30px;
-        height: 35px !important;
+        height: 30px !important;
     }
 
     .boardTasks {
@@ -700,16 +706,18 @@ body {
 }
 
 @media screen and (max-width: 480px) {
+
+    
     h1 {
-        font-size: 40px !important;
+        font-size: 48px !important;
 
-    }
+    } 
 
-    .addTaskButton {
+    /* .addTaskButton {
         height: 40px;
         width: 40px;
         margin-bottom: 20px;
-    }
+    }  */
 }
 
 
