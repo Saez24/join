@@ -178,6 +178,7 @@ h2 {
 ::-webkit-scrollbar-track {
     background: #ffffff;
     border-radius: 10px;
+    margin-bottom: 0;
 }
 
 ::-webkit-scrollbar-thumb {
@@ -785,6 +786,10 @@ h2 {
     }
 
 
+    ::-webkit-scrollbar-track {
+        margin-bottom: 100px;
+        margin-top: 96px;
+    }
 
 }
 
@@ -853,11 +858,7 @@ h2 {
     }
 }
 
-::-webkit-scrollbar-track {
 
-    margin-bottom: 100px;
-    margin-top: 96px;
-}
 
 
 @media (max-width: 900px) {
