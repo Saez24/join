@@ -5,6 +5,8 @@ let initialsBackgroundColors = [
     '#0038FF', '#00FFFF', '#FF00000', '#FF4646', '#FFBB2B'
 ];
 
+let editingContactId = null; // Globale Variable zur Speicherung der Kontakt-ID während der Bearbeitung
+
 
 function slideInFromRight() {
     let contactOverlay = document.getElementById('contact-overlay');
@@ -241,7 +243,9 @@ function renderContactSummary(color, name, email, phone, uniqueId) {
                     <div id="edit${uniqueId}" class="edit-and-delete-row" onclick="openEditContactOverlay('${name}', '${email}', '${phone}', '${color}', '${uniqueId}')">
                         <img src="assets/img/contacts-edit.png" alt="edit">Edit
                     </div>
-                    <div id="delete${uniqueId}" class="edit-and-delete-row"><img src="assets/img/contacts-delete.png" alt="delete">Delete</div>
+                    <div id="delete${uniqueId}" class="edit-and-delete-row" onclick="openDeleteContactOverlay('${uniqueId}')">
+                        <img src="assets/img/contacts-delete.png" alt="delete">Delete
+                    </div>
                 </div>
                 <button onclick="burgerSlideInFromRight()" class="contact-burger-menu" id="contactBurgerMenuIcon">
                     <img src="assets/img/contacts-burger-menu.png" alt="add contact" class="burger-menu-icon">
@@ -262,7 +266,7 @@ function renderContactSummary(color, name, email, phone, uniqueId) {
             <img class="burgermenu-menu-icon" src="assets/img/contacts-edit.png">
             Edit
         </div>
-        <div class="burgermenu-row" onclick="openDeleteContactOverlay('${name}', '${email}', '${phone}', '${color}', '${uniqueId}')">
+        <div class="burgermenu-row" onclick="openDeleteContactOverlay('${uniqueId}')">
             <img class="burgermenu-menu-icon" src="assets/img/contacts-delete.png">
             Delete
         </div>
@@ -318,14 +322,13 @@ function closeBurgerMenuWhenGreyAreaWasClicked(event) {
     }
 }
 
-
-let editingContactId = null; // Globale Variable zur Speicherung der Kontakt-ID während der Bearbeitung
-
 function openEditContactOverlay(name, email, phone, color, uniqueId) {
     console.log('folgendes wird übergeben: ', name, email, phone, color, uniqueId);
     document.getElementById('edit-contact-name').value = name;
     document.getElementById('edit-contact-email').value = email;
     document.getElementById('edit-contact-phone').value = phone;
+    document.getElementById('contactEditProfileInitials').style.background = color;
+    document.getElementById('contactEditProfileInitials').innerHTML = getInitials(name);
     editingContactId = uniqueId; // Speichern der ID des zu bearbeitenden Kontakts
     console.log('Kontakt-ID für Bearbeitung gesetzt:', editingContactId); // Debugging Ausgabe
     editSlideInFromRight();
@@ -364,6 +367,7 @@ async function editContact(event) {
     let email = document.getElementById('edit-contact-email').value;
     let phone = document.getElementById('edit-contact-phone').value;
 
+
     if (!editingContactId) {
         console.error('Keine Kontakt-ID vorhanden für das Update');
         return;
@@ -381,6 +385,24 @@ async function editContact(event) {
     showSuccessfulEdit();
 }
 
+async function updateContactData(id, data) {
+    try {
+        let response = await fetch(`${BASE_URL}/names/${id}.json`, {
+            method: "PATCH",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(data)
+        });
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        return response.json();
+    } catch (error) {
+        console.error("Error updating data:", error);
+    }
+}
+
 
 function showSuccessfulEdit() {
     let contactCreated = document.getElementById('contact-created');
@@ -393,3 +415,67 @@ function showSuccessfulEdit() {
 }
 
 // Funktion zum Löschen eines Kontakts
+
+function openDeleteContactOverlay(uniqueId) {
+    const deleteContactOverlay = document.getElementById('delete-contact-overlay');
+    if (deleteContactOverlay) {
+        deleteContactOverlay.classList.add('slide-in-from-right');
+        deleteContactOverlay.dataset.contactId = uniqueId;
+    } else {
+        console.error('delete-contact-overlay Element nicht gefunden');
+    }
+}
+
+function deleteSlideOutToRight() {
+    const deleteContactOverlay = document.getElementById('delete-contact-overlay');
+    if (deleteContactOverlay) {
+        deleteContactOverlay.classList.remove('slide-in-from-right');
+        setTimeout(() => {
+            deleteContactOverlay.classList.remove('fade-to-grey-overlay');
+        }, 100);
+    } else {
+        console.error('delete-contact-overlay Element nicht gefunden');
+    }
+}
+
+async function deleteContact() {
+    const deleteContactOverlay = document.getElementById('delete-contact-overlay');
+    const contactId = deleteContactOverlay ? deleteContactOverlay.dataset.contactId : null;
+
+    if (!contactId) {
+        console.error('Keine Kontakt-ID vorhanden für das Löschen');
+        return;
+    }
+
+    try {
+        let response = await fetch(`${BASE_URL}/names/${contactId}.json`, {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json",
+            }
+        });
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        deleteSlideOutToRight();
+        await getNames();
+        closeContactInformation();
+        showSuccessfulDelete();
+    } catch (error) {
+        console.error("Error deleting data:", error);
+    }
+}
+
+function showSuccessfulDelete() {
+    let contactDeleted = document.getElementById('contact-deleted');
+    if (contactDeleted) {
+        contactDeleted.innerHTML = "Contact successfully deleted"; // Anzeige der Nachricht
+        contactDeleted.classList.add('slide-in-from-right');
+
+        setTimeout(() => {
+            contactDeleted.classList.remove('slide-in-from-right');
+        }, 1500);
+    } else {
+        console.error('contact-deleted Element nicht gefunden');
+    }
+}
