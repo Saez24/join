@@ -96,14 +96,13 @@ body {
 .priorityContainer {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 10px; 
     margin-bottom: 15px;
 }
 
 .priorityContainer p {
     margin: 0;
-    margin-right: 10px;
-    /* Abstand rechts */
+    margin-right: 10px; /* Abstand rechts */
     display: flex;
     align-items: center;
 }
@@ -121,43 +120,27 @@ body {
     min-width: 100px;
 }
 
-
-
-/* Assigned Container */
 .assignedContainer {
     display: flex;
     flex-direction: column;
-    /* Stellt sicher, dass die Initialen und Namen untereinander angezeigt werden */
-    align-items: flex-start;
-    /* Richtet die Elemente am Anfang des Containers aus */
-    margin-top: 10px;
-    margin-left: 20px;
 }
 
-#assignedInitials,
-#assignedName {
+.assignedItem {
     display: flex;
-    align-items: center;
-    margin-bottom: 10px;
-    /* Abstand zwischen den einzelnen Zuordnungen */
+    align-items: center; 
+    margin-bottom: 8px; 
+    text-align: centergit;
 }
 
-
-
-.assignedContainer .assignedName {
-    margin-right: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background-color: #584c7c;
-    color: white;
-    font-size: 18px;
-    line-height: 40px;
-    text-align: center;
+.assignedInitials {
+    margin-right: 8px; /* Abstand zwischen Initialen und Namen */
+    /* Weitere Stilregeln für Initialen */
 }
+
+.assignedNameDetails {
+    color: black;
+}
+
 
 /* Subtasks */
 .tasks {
@@ -234,7 +217,6 @@ body {
     line-height: 19.2px;
     color: var(--colorBgPrimary);
 }
-
 /* Wrapped Max Width */
 .wrapped_maxWidth {
     width: 100%;
@@ -438,10 +420,8 @@ body {
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
-    height: calc(2 * 1.2em);
-    /* Assuming line-height is 1.2 */
-    line-height: 1.2em;
-    /* Adjust this based on your line height */
+    height: calc(2 * 1.2em); /* Assuming line-height is 1.2 */
+    line-height: 1.2em; /* Adjust this based on your line height */
 }
 
 /* Name Section */
@@ -454,7 +434,6 @@ body {
 .nameSection .assignedName {
     margin-right: 0px;
 }
-
 .priorityContainer {
     display: flex;
     align-items: center;
@@ -464,7 +443,7 @@ body {
 .priorityContainer p {
     display: flex;
     align-items: center;
-    white-space: nowrap;
+    white-space: nowrap; 
     margin: 0;
 }
 
@@ -474,7 +453,7 @@ body {
     align-items: center;
 }
 
-.prioImg .priorityContainer {
+.prioImg .priorityContainer  {
     vertical-align: middle;
 }
 
@@ -504,8 +483,7 @@ body {
 .priorityContainer p {
     display: flex;
     align-items: center;
-    gap: 10px;
-    /* Abstand zwischen den Elementen */
+    gap: 10px; /* Abstand zwischen den Elementen */
 }
 
 .priorityContainer .prioImg {
@@ -517,7 +495,6 @@ body {
 .priorityContainer .prioImg {
     vertical-align: middle;
 }
-
 /* Add Task to Board */
 .add_task_to_board {
     cursor: pointer;
@@ -552,8 +529,8 @@ body {
     display: flex;
     flex-direction: column;
     right: 0;
-    top: 30px;
-    height: 800px;
+    top: 70px;
+    height: 700px;
     line-height: 20px;
     opacity: 1;
     position: relative;
@@ -621,7 +598,6 @@ body {
     border: 2px solid #FFFFFF;
     cursor: pointer;
 }
-
 @media screen and (max-width: 1550px) {
     .wrapped_maxWidth {
         max-width: 1000px;
@@ -735,11 +711,11 @@ body {
 
 @media screen and (max-width: 480px) {
 
-
+    
     h1 {
         font-size: 48px !important;
 
-    }
+    } 
 
     /* .addTaskButton {
         height: 40px;
@@ -783,3 +759,4 @@ body {
 .slide-out-right {
     animation: slide-out-right 0.8s both;
 }
+
