@@ -92,7 +92,7 @@ body {
 .priorityContainer {
     display: flex;
     align-items: center;
-    gap: 10px; 
+    gap: 10px;
 }
 
 .priorityContainer p {
@@ -213,6 +213,7 @@ body {
     line-height: 19.2px;
     color: var(--colorBgPrimary);
 }
+
 /* Wrapped Max Width */
 .wrapped_maxWidth {
     width: 100%;
@@ -416,8 +417,10 @@ body {
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
-    height: calc(2 * 1.2em); /* Assuming line-height is 1.2 */
-    line-height: 1.2em; /* Adjust this based on your line height */
+    height: calc(2 * 1.2em);
+    /* Assuming line-height is 1.2 */
+    line-height: 1.2em;
+    /* Adjust this based on your line height */
 }
 
 /* Name Section */
@@ -430,6 +433,7 @@ body {
 .nameSection .assignedName {
     margin-right: 0px;
 }
+
 .priorityContainer {
     display: flex;
     align-items: center;
@@ -440,8 +444,10 @@ body {
     margin: 0;
     display: flex;
     align-items: center;
-    white-space: nowrap; /* verhindert Zeilenumbrüche */
-    max-width: 80px; /* begrenzt die Breite auf 80px */
+    white-space: nowrap;
+    /* verhindert Zeilenumbrüche */
+    max-width: 80px;
+    /* begrenzt die Breite auf 80px */
 }
 
 .prioImgContainer {
@@ -481,7 +487,8 @@ body {
 .priorityContainer p {
     display: flex;
     align-items: center;
-    gap: 10px; /* Abstand zwischen den Elementen */
+    gap: 10px;
+    /* Abstand zwischen den Elementen */
 }
 
 .priorityContainer .prioImg {
@@ -493,6 +500,7 @@ body {
 .priorityContainer .prioImg {
     vertical-align: middle;
 }
+
 /* Add Task to Board */
 .add_task_to_board {
     cursor: pointer;
@@ -527,8 +535,8 @@ body {
     display: flex;
     flex-direction: column;
     right: 0;
-    top: 70px;
-    height: 700px;
+    top: 30px;
+    height: 800px;
     line-height: 20px;
     opacity: 1;
     position: relative;
@@ -595,6 +603,7 @@ body {
     border: 2px solid #FFFFFF;
     cursor: pointer;
 }
+
 @media screen and (max-width: 1550px) {
     .wrapped_maxWidth {
         max-width: 1000px;
@@ -707,11 +716,11 @@ body {
 
 @media screen and (max-width: 480px) {
 
-    
+
     h1 {
         font-size: 48px !important;
 
-    } 
+    }
 
     /* .addTaskButton {
         height: 40px;
@@ -755,4 +764,3 @@ body {
 .slide-out-right {
     animation: slide-out-right 0.8s both;
 }
-
