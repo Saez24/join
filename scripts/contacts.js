@@ -132,7 +132,6 @@ async function getNames() {
             throw new Error(`HTTP error! Status: ${response.status}`);
         }
         let data = await response.json();
-        console.log("Fetched data:", data); // Debugging Ausgabe
 
         // Validierung der empfangenen Daten
         if (data && data.names && typeof data.names === 'object') {
@@ -171,7 +170,6 @@ function getInitials(name) {
 }
 
 function renderContactInformation(name, email, color, phone, id) {
-    console.log(`Name: ${name}, Email: ${email}, Farbe: ${color}, Telefonnummer: ${phone}, ID: ${id}`);
     checkResponsive();
     const contactSummary = document.getElementById('mainContacts');
     contactSummary.classList.add('bgcolorgrey');
@@ -231,14 +229,12 @@ function closeBurgerMenuWhenGreyAreaWasClicked(event) {
 
 
 function openEditContactOverlay(name, email, phone, color, uniqueId) {
-    console.log('folgendes wird übergeben: ', name, email, phone, color, uniqueId);
     document.getElementById('edit-contact-name').value = name;
     document.getElementById('edit-contact-email').value = email;
     document.getElementById('edit-contact-phone').value = phone;
     document.getElementById('contactEditProfileInitials').style.background = color;
     document.getElementById('contactEditProfileInitials').innerHTML = getInitials(name);
     editingContactId = uniqueId; // Speichern der ID des zu bearbeitenden Kontakts
-    console.log('Kontakt-ID für Bearbeitung gesetzt:', editingContactId); // Debugging Ausgabe
     editSlideInFromRight();
 }
 
