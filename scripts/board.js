@@ -255,21 +255,17 @@ function createTaskHTML(task, taskid, assignedNamesHTML, subtaskCountHTML, prior
 
     if (activeSearch) {
 
-
-
         // Check if the task matches the search criteria
         if (assignedNamesHTML.toLowerCase().includes(search) ||
             (task.description && task.description.toLowerCase().includes(search)) ||
             task.title.toLowerCase().includes(search)) {
 
-
-
-            let descriptionSection = task.description ? `<p class="descriptionBox">${task.description}</p>` : '';
+            // let descriptionSection = task.description ? `<p class="descriptionBox">${task.description}</p>` : '';
             return /*html*/`
         <div id="${taskid}" draggable="true" ondragstart="startDragging('${taskid}')" class="toDoBox" onclick="showPopup('${taskid}')">
             <button class="CategoryBox" style="background-color: ${categoryColor.background};">${task.category}</button>
             <p class="HeadlineBox">${task.title}</p>
-            <p class="descriptionBox">${descriptionSection}</p>
+            <p class="descriptionBox">${task.description}</p>
             <div class="subtaskProgress">
                 <progress value="0" max="100"></progress>
                 ${subtaskCountHTML}
@@ -284,12 +280,12 @@ function createTaskHTML(task, taskid, assignedNamesHTML, subtaskCountHTML, prior
     `;
         }
     } else {
-        let descriptionSection = task.description ? `<p class="descriptionBox">${task.description}</p>` : '';
+        // let descriptionSection = task.description ? `<p class="descriptionBox">${task.description}</p>` : '';
         return /*html*/`
         <div id="${taskid}" draggable="true" ondragstart="startDragging('${taskid}')" class="toDoBox" onclick="showPopup('${taskid}')">
             <button class="CategoryBox" style="background-color: ${categoryColor.background};">${task.category}</button>
             <p class="HeadlineBox">${task.title}</p>
-            <p class="descriptionBox">${descriptionSection}</p>
+            <p class="descriptionBox">${task.description}</p>
             <div class="subtaskProgress">
                 <progress value="0" max="100"></progress>
                 ${subtaskCountHTML}
