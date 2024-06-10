@@ -958,7 +958,10 @@ h2 {
     .contact-summary-headline-name {
         font-size: 36px;
         font-weight: 1000;
-        max-width: 336px;
+    }
+
+    #contactSummary {
+        width: 90%;
     }
 
     .contact-left {
