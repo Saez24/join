@@ -604,6 +604,32 @@ h2 {
     align-items: center;
 }
 
+.flex-row {
+    display: flex;
+    justify-content: space-around;
+    padding: 20px 20px 0 20px;
+}
+
+.yes-no-btn {
+    cursor: pointer;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    background-color: #2a3647;
+    width: 152px;
+    height: 56px;
+    color: white;
+    font-family: 'Inter';
+    font-weight: 700;
+    border-radius: 10px;
+    border-style: none;
+}
+
+.yes-no-btn:hover{
+    background-color: #29ABE2;
+}
+
 @keyframes slideInFromRight {
     from {
         transform: translateX(100%);
