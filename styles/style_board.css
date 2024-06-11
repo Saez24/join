@@ -44,6 +44,7 @@ body {
     border-radius: 30px;
     animation: slide-in 0.8s both;
     position: relative;
+    font-size: 20px;
 }
 
 
@@ -151,8 +152,8 @@ body {
     gap: 25px;
     width: 100%;
     flex-wrap: nowrap;
-    overflow-y: visible;
-    padding-left: 10px;
+    overflow-x: auto;
+    padding: 14px
 }
 
 .subtasksTitle {
@@ -334,7 +335,7 @@ body {
     font-size: 20px;
     padding: 10px;
     width: 100%;
-    overflow-x: auto;
+
 }
 
 /* Headline Status Tasks */
@@ -353,6 +354,30 @@ body {
     margin-top: 0;
     margin-bottom: 0;
 }
+
+.headerContainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.CategoryBox {
+    flex-grow: 1;
+}
+
+.arrowContainer {
+    display: none; 
+    margin-top: -25px;
+}
+
+.arrow {
+    width: 45px; 
+    height: 45px;
+    cursor: pointer;
+    right: 0;
+}
+
+
 
 /* To Do Box */
 .toDoBox {
@@ -394,7 +419,6 @@ body {
     color: white;
     padding: 6px 16px;
     border-radius: 12px;
-    margin-bottom: 24px;
     background-color: #0038FF;
     font-weight: 400;
     display: flex;
@@ -403,6 +427,7 @@ body {
     align-items: center;
     border: none;
     font-size: 18px;
+    max-width: 110px;
 }
 
 /* Headline Box */
@@ -707,6 +732,11 @@ body {
         margin-left: 20px;
         margin-right: 20px;
     }
+
+    .arrowContainer {
+        display: flex; /* Bei einer Breite von unter 750px anzeigen */
+        gap: 8px;
+    }
 }
 
 @media screen and (max-width: 480px) {
@@ -758,5 +788,28 @@ body {
 
 .slide-out-right {
     animation: slide-out-right 0.8s both;
+}
+
+
+/* ===== Scrollbar CSS ===== */
+/* Firefox */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: #c0c0c0 #ededed;
+}
+
+/* Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+    width: 16px;
+}
+
+*::-webkit-scrollbar-track {
+    background: #ededed;
+}
+
+*::-webkit-scrollbar-thumb {
+    background-color: #787878;
+    border-radius: 19px;
+    border: 300px dashed #911d1d;
 }
 
