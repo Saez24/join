@@ -283,8 +283,8 @@ function createTaskHTML(task, taskid, assignedNamesHTML, subtaskCountHTML, prior
         <div class="headerContainer">
             <button class="CategoryBox" style="background-color: ${categoryColor.background};">${task.category}</button>
         <div class="arrowContainer">
-            <img src="./assets/img/arrow_drop.png" class="arrow" alt="Arrow Drop">
-            <img src="./assets/img/arrow_drop_down.png" class="arrow" alt="Arrow Drop Down">
+            <img src="./assets/img/arrow_drop.svg" class="arrow" alt="Arrow Drop">
+            <img src="./assets/img/arrow_drop_down.svg" class="arrow" alt="Arrow Drop Down">
         </div>
         </div>
             <p class="HeadlineBox">${task.title}</p>

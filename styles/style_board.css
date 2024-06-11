@@ -367,14 +367,14 @@ body {
 
 .arrowContainer {
     display: none; 
-    margin-top: -25px;
+    gap: 40px;
 }
 
 .arrow {
-    width: 45px; 
-    height: 45px;
+    width: 20px; 
+    height: auto;
     cursor: pointer;
-    right: 0;
+    margin-left: 25px;
 }
 
 
