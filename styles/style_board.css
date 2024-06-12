@@ -91,13 +91,13 @@ body {
 .priorityContainer {
     display: flex;
     align-items: center;
-    gap: 10px; 
+    gap: 10px;
     margin-bottom: 15px;
 }
 
 .priorityContainer p {
     margin: 0;
-    margin-right: 10px; 
+    margin-right: 10px;
     display: flex;
     align-items: center;
 }
@@ -127,7 +127,7 @@ body {
 }
 
 .assignedInitials {
-    margin-right: 8px; 
+    margin-right: 8px;
 }
 
 .assignedNameDetails {
@@ -150,7 +150,6 @@ body {
     flex-wrap: nowrap;
     overflow-x: auto;
     padding: 14px
-
 }
 
 .subtasksTitle {
@@ -347,19 +346,19 @@ body {
 }
 
 .arrowContainer {
-    display: none; 
+    display: none;
     gap: 40px;
 }
 
 .arrow {
-    width: 20px; 
+    width: 20px;
     height: auto;
     cursor: pointer;
     margin-left: 25px;
 }
 
 .arrow:hover path {
-    fill: #0038FF; 
+    fill: #0038FF;
 }
 
 .toDoBox {
@@ -423,8 +422,8 @@ body {
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
-    height: calc(2 * 1.2em); 
-    line-height: 1.2em; 
+    height: calc(2 * 1.2em);
+    line-height: 1.2em;
 }
 
 .nameSection {
@@ -436,6 +435,7 @@ body {
 .nameSection .assignedName {
     margin-right: 0px;
 }
+
 .priorityContainer {
     display: flex;
     align-items: center;
@@ -445,7 +445,7 @@ body {
 .priorityContainer p {
     display: flex;
     align-items: center;
-    white-space: nowrap; 
+    white-space: nowrap;
     margin: 0;
 }
 
@@ -455,7 +455,7 @@ body {
     align-items: center;
 }
 
-.prioImg .priorityContainer  {
+.prioImg .priorityContainer {
     vertical-align: middle;
 }
 
@@ -484,7 +484,7 @@ body {
 .priorityContainer p {
     display: flex;
     align-items: center;
-    gap: 10px; 
+    gap: 10px;
 }
 
 .priorityContainer .prioImg {
@@ -595,6 +595,47 @@ body {
     font-weight: bold;
     border: 2px solid #FFFFFF;
     cursor: pointer;
+}
+
+.assignedtoDialogInitials {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+
+.edit-task-overlay {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0);
+    z-index: 1000;
+    transform: translateX(100vw);
+    transition: transform 300ms ease-out, background-color 100ms ease-out;
+}
+
+.edit-task-cont {
+    position: relative;
+    top: 150px;
+    left: 20px;
+    transform: translateX(100vw);
+    transition: transform 300ms ease-out;
+    background-color: #FFFFFF;
+    height: 60%;
+    border-radius: 16px;
+    padding: 20px;
+}
+
+.slide-in-from-right {
+    /*Reference to classes "contact-overlay" and "contact-cont"*/
+    display: flex !important;
+    transform: translateX(0);
+}
+
+.fade-to-grey-overlay {
+    background-color: rgba(0, 0, 0, 0.3);
 }
 @media screen and (max-width: 1550px) {
     .wrapped_maxWidth {
@@ -707,7 +748,7 @@ body {
     }
 
     .arrowContainer {
-        display: flex; 
+        display: flex;
         gap: 8px;
     }
 }
@@ -715,7 +756,7 @@ body {
 @media screen and (max-width: 480px) {
     h1 {
         font-size: 48px !important;
-    } 
+    }
 }
 
 
@@ -773,4 +814,5 @@ body {
     background-color: #787878;
     border-radius: 19px;
     border: 300px dashed #911d1d;
-} 
+    border: 300px dashed #911d1d;
+}
