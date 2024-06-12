@@ -598,6 +598,40 @@ body {
     border: 2px solid #FFFFFF;
     cursor: pointer;
 }
+
+.edit-task-overlay {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0);
+    z-index: 1000;
+    transform: translateX(100vw);
+    transition: transform 300ms ease-out, background-color 100ms ease-out;
+}
+
+.edit-task-cont {
+    position: relative;
+    top: 150px;
+    left: 20px;
+    transform: translateX(100vw);
+    transition: transform 300ms ease-out;
+    background-color: #FFFFFF;
+    height: 60%;
+    border-radius: 16px;
+    padding: 20px;
+}
+
+.slide-in-from-right {
+    /*Reference to classes "contact-overlay" and "contact-cont"*/
+    display: flex !important;
+    transform: translateX(0);
+}
+
+.fade-to-grey-overlay {
+    background-color: rgba(0, 0, 0, 0.3);
+}
 @media screen and (max-width: 1550px) {
     .wrapped_maxWidth {
         max-width: 1000px;

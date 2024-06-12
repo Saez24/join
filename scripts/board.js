@@ -549,3 +549,31 @@ function searchCheck(search, assignedNamesHTML, taskDescription, taskTitle) { //
         taskTitle.toLowerCase().includes(search);
 
 }
+
+// EDIT TASK AREA
+
+function editTaskSlideInFromRight() {
+    hidePopup('popup');
+    let editTaskOverlay = document.getElementById('editTaskOverlay');
+    let editTaskCont = document.getElementById('editTaskCont');
+
+    editTaskOverlay.classList.add('slide-in-from-right');
+    editTaskCont.classList.add('slide-in-from-right');
+
+    setTimeout(() => {
+        editTaskOverlay.classList.add('fade-to-grey-overlay');
+    }, 300);
+}
+
+
+function editTaskSlideOutToRight() {
+    let editTaskOverlay = document.getElementById('editTaskOverlay');
+    let editTaskCont = document.getElementById('editTaskCont');
+
+    editTaskOverlay.classList.remove('fade-to-grey-overlay');
+
+    setTimeout(() => {
+        editTaskOverlay.classList.remove('slide-in-from-right');
+        editTaskCont.classList.remove('slide-in-from-right');
+    }, 100);
+}
