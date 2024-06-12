@@ -19,6 +19,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    width: 100%;
 }
 
 h1 {
@@ -35,7 +36,6 @@ h2 {
 h3 {
     margin: 0;
     font-size: 22px;
-
 }
 
 h4 {
@@ -44,9 +44,33 @@ h4 {
 }
 
 mark {
-    color: 
-    #29ABE2;
+    color: #29ABE2;
     background-color: #F6F7F8;
+}
+
+.arrow-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.arrow-container:hover {
+    background-color: #e0e0e0; /* Hellgrauer Kreis */
+    transform: scale(1.1); /* Leicht größerer Kreis und Pfeil */
+}
+
+.arrow {
+    width: 100%;
+    height: auto;
+    transition: transform 0.2s ease;
+}
+
+.arrow-container:hover .arrow {
+    transform: scale(1.01); /* Leicht größerer Pfeil */
 }
 
 @media screen and (max-width: 750px) {
