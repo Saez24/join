@@ -234,20 +234,12 @@ function createTaskElement(task, search) {
     let subtaskCountHTML = generateSubtaskCountHTML(task.subtask || []);
     let priorityImage = priorityImages[task.prio] || './assets/img/prio_media.png';
     let categoryColor = CategoryColors[task.category] || { background: '#000000', color: '#FFFFFF' };
+    let descriptionSection = task.description ? `<p class="descriptionBox">${task.description}</p>` : '';
 
-    if (activeSearch) {
-      
-        if (assignedNamesHTML.toLowerCase().includes(search) ||
-            (task.description && task.description.toLowerCase().includes(search)) ||
-            task.title.toLowerCase().includes(search)) {
-            return createTaskHTML(task, taskid, assignedNamesHTML, subtaskCountHTML, priorityImage, categoryColor);
-        }
-    } else {
-        return createTaskHTML(task, taskid, assignedNamesHTML, subtaskCountHTML, priorityImage, categoryColor);
+    if (shouldCreateTaskElement(task, assignedNamesHTML, search)) {
+        return createTaskHTML(task, taskid, assignedNamesHTML, subtaskCountHTML, priorityImage, categoryColor, descriptionSection);
     }
     return '';
-
-    // return createTaskHTML(task, taskid, assignedNamesHTML, subtaskCountHTML, priorityImage, categoryColor, search);
 };
 
 /**
@@ -262,8 +254,7 @@ function createTaskElement(task, search) {
  * @param {Object} categoryColor - Object containing background and text color for the category.
  * @returns {string} HTML string representing the task element.
  */
-function createTaskHTML(task, taskid, assignedNamesHTML, subtaskCountHTML, priorityImage, categoryColor, search) {
-            let descriptionSection = task.description ? `<p class="descriptionBox">${task.description}</p>` : '';
+function createTaskHTML(task, taskid, assignedNamesHTML, subtaskCountHTML, priorityImage, categoryColor, descriptionSection) {
             return /*html*/`
         <div id="${taskid}" draggable="true" ondragstart="startDragging('${taskid}')" class="toDoBox" onclick="showPopup('${taskid}')">
             <button class="CategoryBox" style="background-color: ${categoryColor.background};">${task.category}</button>
@@ -525,16 +516,17 @@ function searchTask() {
     }
 }
 
-// function createTaskHTML1(task, taskid, assignedNamesHTML, subtaskCountHTML, priorityImage, categoryColor, search) {
-//     if (activeSearch) {
-      
-//         if (assignedNamesHTML.toLowerCase().includes(search) ||
-//             (task.description && task.description.toLowerCase().includes(search)) ||
-//             task.title.toLowerCase().includes(search)) {
-//             return generateTaskHTML(task, taskid, assignedNamesHTML, subtaskCountHTML, priorityImage, categoryColor);
-//         }
-//     } else {
-//         return generateTaskHTML(task, taskid, assignedNamesHTML, subtaskCountHTML, priorityImage, categoryColor);
-//     }
-//     return '';
-// }
+
+function shouldCreateTaskElement(task, assignedNamesHTML, search) {
+    if (activeSearch) {
+        return checkSearchInput(task, assignedNamesHTML, search);
+    }
+    return true;
+}
+
+
+function checkSearchInput(task, assignedNamesHTML, search) {
+    return assignedNamesHTML.toLowerCase().includes(search) ||
+           (task.description && task.description.toLowerCase().includes(search)) ||
+           task.title.toLowerCase().includes(search);
+}
