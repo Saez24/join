@@ -3,7 +3,6 @@ body {
     width: 100%;
 }
 
-/* Task Box */
 .TaskBox {
     width: 252px !important;
     display: flex;
@@ -14,7 +13,6 @@ body {
     padding: 12px 16px;
 }
 
-/* Task Box Background */
 .taskBoxBackground {
     position: fixed;
     top: 0;
@@ -29,7 +27,6 @@ body {
     overflow: clip;
 }
 
-/* Task Details */
 .TaskDetails {
     width: 525px !important;
     display: flex;
@@ -44,9 +41,8 @@ body {
     border-radius: 30px;
     animation: slide-in 0.8s both;
     position: relative;
+    font-size: 20px;
 }
-
-
 
 .TaskDetails h1,
 .TaskDetails h2,
@@ -96,13 +92,13 @@ body {
 .priorityContainer {
     display: flex;
     align-items: center;
-    gap: 10px; 
+    gap: 10px;
     margin-bottom: 15px;
 }
 
 .priorityContainer p {
     margin: 0;
-    margin-right: 10px; /* Abstand rechts */
+    margin-right: 10px;
     display: flex;
     align-items: center;
 }
@@ -127,32 +123,30 @@ body {
 
 .assignedItem {
     display: flex;
-    align-items: center; 
-    margin-bottom: 8px; 
-    text-align: centergit;
+    align-items: center;
+    margin-bottom: 8px;
+    text-align: center;
 }
 
 .assignedInitials {
-    margin-right: 8px; /* Abstand zwischen Initialen und Namen */
-    /* Weitere Stilregeln für Initialen */
+    margin-right: 8px;
 }
 
 .assignedNameDetails {
     color: black;
 }
 
-
-/* Subtasks */
 .tasks {
     min-height: 300px;
     margin-top: 10px;
+    margin-bottom: 1px;
     padding-top: 10px;
     display: flex;
     gap: 25px;
     width: 100%;
     flex-wrap: nowrap;
-    overflow-y: visible;
-    padding-left: 10px;
+    overflow-x: auto;
+    padding: 14px
 }
 
 .subtasksTitle {
@@ -188,14 +182,13 @@ body {
 .subtaskItem input[type="checkbox"]:checked::before {
     content: '✓';
     color: black;
-    font-size: 14px;
+    font-size: 18px;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
 }
 
-/* Edit/Delete Container */
 .editDeleteWrapper {
     position: fixed;
     bottom: 20px;
@@ -217,7 +210,7 @@ body {
     line-height: 19.2px;
     color: var(--colorBgPrimary);
 }
-/* Wrapped Max Width */
+
 .wrapped_maxWidth {
     width: 100%;
     max-width: 1250px;
@@ -225,7 +218,6 @@ body {
     margin: 0 auto;
 }
 
-/* Board Headline */
 .boardHeadline {
     display: flex;
     flex-direction: row;
@@ -237,15 +229,12 @@ body {
     gap: 25px;
 }
 
-
-
 .boardHeadlineActions {
     display: flex;
     flex-direction: row;
     align-items: center;
 }
 
-/* Search Task */
 .searchTask {
     display: flex !important;
     background-color: white !important;
@@ -257,12 +246,9 @@ body {
     margin-right: 20px;
 }
 
-
-/* Search Task Hover */
 .searchTask:hover {
     border-color: #29ABE2 !important;
 }
-
 
 .inputSearchTask {
     flex: 1 !important;
@@ -274,7 +260,6 @@ body {
     outline: none !important;
     cursor: pointer !important;
     box-shadow: none !important;
-    /* Entfernt den inneren Rahmen */
     width: 100%;
 }
 
@@ -286,7 +271,6 @@ body {
     cursor: pointer !important;
 }
 
-/* Add Task Button */
 .addTaskButton {
     border: none;
     outline: none;
@@ -312,32 +296,26 @@ body {
 
 .addTaskButton:hover {
     background-color: #29ABE2;
-    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
+    box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.2);
 }
 
-/* Board Tasks */
 .boardTasks {
     display: flex;
     align-items: flex-start;
     flex-wrap: wrap;
     padding-bottom: 100px;
     flex-direction: row;
-
 }
 
-/* Status Tasks */
 .statusTasks {
     display: flex;
     flex-direction: column;
     align-items: center;
-    /* width: 252px; */
     font-size: 20px;
     padding: 10px;
     width: 100%;
-    overflow-x: auto;
 }
 
-/* Headline Status Tasks */
 .headlineStatusTasks {
     display: flex;
     align-items: center;
@@ -354,7 +332,32 @@ body {
     margin-bottom: 0;
 }
 
-/* To Do Box */
+.headerContainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.CategoryBox {
+    flex-grow: 1;
+}
+
+.arrowContainer {
+    display: none;
+    gap: 40px;
+}
+
+.arrow {
+    width: 20px;
+    height: auto;
+    cursor: pointer;
+    margin-left: 25px;
+}
+
+.arrow:hover path {
+    fill: #0038FF;
+}
+
 .toDoBox {
     background-color: white;
     border-radius: 20px;
@@ -364,7 +367,6 @@ body {
     min-width: 250px;
     max-width: 250px;
     min-height: 240px;
-    margin-bottom: 24px;
     transition: transform 0.3s ease;
     cursor: grab;
 }
@@ -389,12 +391,10 @@ body {
     padding: 4px;
 }
 
-/* Category Box */
 .CategoryBox {
     color: white;
     padding: 6px 16px;
     border-radius: 12px;
-    margin-bottom: 24px;
     background-color: #0038FF;
     font-weight: 400;
     display: flex;
@@ -403,16 +403,15 @@ body {
     align-items: center;
     border: none;
     font-size: 18px;
+    max-width: 110px;
 }
 
-/* Headline Box */
 .HeadlineBox {
     overflow: hidden;
     font-weight: 700;
     font-size: 20px;
 }
 
-/* Description Box */
 .descriptionBox {
     color: #A8A8A8;
     display: -webkit-box;
@@ -420,11 +419,10 @@ body {
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
-    height: calc(2 * 1.2em); /* Assuming line-height is 1.2 */
-    line-height: 1.2em; /* Adjust this based on your line height */
+    height: calc(2 * 1.2em);
+    line-height: 1.2em;
 }
 
-/* Name Section */
 .nameSection {
     display: flex;
     justify-content: space-between;
@@ -434,6 +432,7 @@ body {
 .nameSection .assignedName {
     margin-right: 0px;
 }
+
 .priorityContainer {
     display: flex;
     align-items: center;
@@ -443,7 +442,7 @@ body {
 .priorityContainer p {
     display: flex;
     align-items: center;
-    white-space: nowrap; 
+    white-space: nowrap;
     margin: 0;
 }
 
@@ -453,7 +452,7 @@ body {
     align-items: center;
 }
 
-.prioImg .priorityContainer  {
+.prioImg .priorityContainer {
     vertical-align: middle;
 }
 
@@ -473,7 +472,6 @@ body {
     background-color: #584c7c;
 }
 
-/* Priority Container */
 .priorityContainer {
     display: flex;
     align-items: center;
@@ -483,7 +481,7 @@ body {
 .priorityContainer p {
     display: flex;
     align-items: center;
-    gap: 10px; /* Abstand zwischen den Elementen */
+    gap: 10px;
 }
 
 .priorityContainer .prioImg {
@@ -495,7 +493,7 @@ body {
 .priorityContainer .prioImg {
     vertical-align: middle;
 }
-/* Add Task to Board */
+
 .add_task_to_board {
     cursor: pointer;
     color: #42526E;
@@ -509,7 +507,6 @@ body {
     color: #29ABE2;
 }
 
-/* Dialog Background */
 .dialog-bg {
     background-color: rgba(0, 0, 0, 0.2);
     z-index: 999;
@@ -520,7 +517,6 @@ body {
     top: 0;
 }
 
-/* Add Task Dialog */
 .add_task_dialog {
     border-radius: 16px;
     box-sizing: border-box;
@@ -554,7 +550,6 @@ body {
     display: none;
 }
 
-/* Subtask Progress */
 .subtaskProgress {
     display: flex;
     align-items: center;
@@ -598,6 +593,13 @@ body {
     border: 2px solid #FFFFFF;
     cursor: pointer;
 }
+
+.assignedtoDialogInitials {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
 
 .edit-task-overlay {
     position: fixed;
@@ -741,21 +743,17 @@ body {
         margin-left: 20px;
         margin-right: 20px;
     }
+
+    .arrowContainer {
+        display: flex;
+        gap: 8px;
+    }
 }
 
 @media screen and (max-width: 480px) {
-
-    
     h1 {
         font-size: 48px !important;
-
-    } 
-
-    /* .addTaskButton {
-        height: 40px;
-        width: 40px;
-        margin-bottom: 20px;
-    }  */
+    }
 }
 
 
@@ -794,3 +792,24 @@ body {
     animation: slide-out-right 0.8s both;
 }
 
+
+/* /* ===== Scrollbar CSS =====*/
+* {
+    scrollbar-width: thin;
+    scrollbar-color: #c0c0c0 #ededed;
+}
+
+*::-webkit-scrollbar {
+    width: 16px;
+}
+
+*::-webkit-scrollbar-track {
+    background: #ededed;
+}
+
+*::-webkit-scrollbar-thumb {
+    background-color: #787878;
+    border-radius: 19px;
+    border: 300px dashed #911d1d;
+    border: 300px dashed #911d1d;
+}

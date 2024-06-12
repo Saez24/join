@@ -25,6 +25,7 @@
             <div class="boardHeadlineActions">
                 <div id="searchTask" class="searchTask">
                     <input class="inputSearchTask" type="text" id="search" placeholder="Find Task"
+                       
                         oninput="searchTask()">
                     <div class="verticalLineSearchTask"></div>
                     <img class="magnifyingGlass" src="./assets/img/search.svg" width="32" height="32" alt="Lupe">
@@ -46,7 +47,12 @@
                             src="./assets/img/add.svg" width="24" alt="Add task">
                     </div>
                 </div>
-                <div class="tasks"></div>
+                <div class="tasks">
+                    <div class="arrowContainer">
+                        <img src="./assets/img/arrow_drop.svg" class="arrow" alt="Arrow Drop">
+                        <img src="./assets/img/arrow_drop_down.svg" class="arrow" alt="Arrow Drop Down">
+                    </div>
+                </div>
             </div>
 
             <div id="inprogress" class="statusTasks" ondrop="moveTo('inprogress')"
@@ -100,9 +106,8 @@
                     </div>
                     <div class="assignedContainer">
                         <div class="assignedItem">
-                            <div class="assignedInitials" id="assignedInitials"></div>
-                            <p class="assignedNameDetails" id="assignedName"></p>
-                        </div>
+                        <div  class="assignedInitials" id="assignedInitials"></div>
+                        <p class="assignedNameDetails" id="assignedName"></p></div>
                     </div>
                     <div class="subtasksTitle">Subtasks</div>
                     <div class="subtaskItem">
