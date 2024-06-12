@@ -211,9 +211,7 @@ function generateSubtaskCountHTML(subtasks) {
     let totalSubtasks = subtasks ? subtasks.length : 0;
     let completedSubtasks = subtasks ? subtasks.filter(subtask => subtask.completed).length : 0;
     let progressPercentage = totalSubtasks > 0 ? (completedSubtasks / totalSubtasks) * 100 : 0;
-
     let progressBarStyle = `width: ${progressPercentage}%;`;
-
     let count = `${completedSubtasks}/${totalSubtasks} Subtask${totalSubtasks !== 1 ? 's' : ''}`;
     let progressBarHTML = `<div class="progressBar"><div class="progress" style="${progressBarStyle}"></div></div>`;
 
@@ -255,7 +253,7 @@ function createTaskElement(task, search) {
  * @returns {string} HTML string representing the task element.
  */
 function createTaskHTML(task, taskid, assignedNamesHTML, subtaskCountHTML, priorityImage, categoryColor, descriptionSection) {
-            return /*html*/`
+    return /*html*/`
         <div id="${taskid}" draggable="true" ondragstart="startDragging('${taskid}')" class="toDoBox" onclick="showPopup('${taskid}')">
             <button class="CategoryBox" style="background-color: ${categoryColor.background};">${task.category}</button>
             <p class="HeadlineBox">${task.title}</p>
@@ -272,8 +270,8 @@ function createTaskHTML(task, taskid, assignedNamesHTML, subtaskCountHTML, prior
             </div>
         </div>
     `;
-        }
-  
+}
+
 
 /**
  * Categorizes tasks into their respective status categories.
@@ -469,26 +467,33 @@ function findSelectedTask(tasks, taskid) {
 }
 
 /**
- * Processes the details of the selected task.
+ * Extracts and returns the relevant task data from the selected task object.
  * @param {Object} selectedTask - The selected task object.
- * @returns {Object} Processed task details.
+ * @returns {Object} Extracted task data.
  */
-async function processTaskDetails(selectedTask) {
+function extractTaskData(selectedTask) {
     const { assignto = [], subtask = [], prio, category, description, title, duedate } = selectedTask;
-    const assignedNamesHTML = generateAssignedNamesHTML(assignto);
-    const priorityImage = priorityImages[prio] || './assets/img/prio_media.png';
-    const categoryColor = CategoryColors[category] || { background: '#000000', color: '#FFFFFF' };
-    const assigntoHTML = assignto.map((name => ``)).join('');
+    return { assignto, subtask, prio, category, description, title, duedate };
+}
 
-    // Function to generate initials and name side by side within div
+/**
+ * Generates HTML content for the task details.
+ * @param {Array} assignto - The list of assigned users.
+ * @param {Array} subtask - The list of subtasks.
+ * @returns {Object} HTML content for task details.
+ */
+function generateHTMLContent(assignto, subtask) {
+    const assignedNamesHTML = generateAssignedNamesHTML(assignto);
+    const assigntoHTML = assignto.map(name => ``).join('');
+
     const generateInitialsAndNameHTML = (names) => {
         return names.map(name => {
             const initials = name.split(' ').map(word => word[0]).join('');
             const randomColor = generateRandomColor();
             return `
                 <div class="assignedtoDialogInitials">
-                    <p class="assignedName" style="background-color: ${randomColor};">${initials}<p>${name}
-                    
+                    <p class="assignedName" style="background-color: ${randomColor};">${initials}</p>
+                    <p>${name}</p>
                 </div>
             `;
         }).join('');
@@ -503,6 +508,46 @@ async function processTaskDetails(selectedTask) {
         </div>
     `).join('');
 
+    return { assignedNamesHTML, assigntoHTML, assignedNamesHTMLSeparated, subtaskHTML };
+}
+
+/**
+ * Processes the details of the selected task.
+ * @param {Object} selectedTask - The selected task object.
+ * @returns {Object} Processed task details.
+ */
+async function processTaskDetails(selectedTask) {
+    const taskData = extractTaskData(selectedTask);
+    const htmlContent = generateHTMLContent(taskData.assignto, taskData.subtask);
+    return formatTaskDetails(taskData, htmlContent);
+}
+
+/**
+ * Generates a random color excluding white.
+ * 
+ * @function generateRandomColor
+ * @returns {string} A random color in hexadecimal format.
+ */
+function generateRandomColor() {
+    let randomColor;
+    do {
+        randomColor = "#" + Math.floor(Math.random() * 16777215).toString(16).padStart(6, '0');
+    } while (randomColor.toUpperCase() === '#FFFFFF');
+    return randomColor;
+}
+
+
+/**
+ * Formats the task details including dates and category colors.
+ * @param {Object} taskData - The extracted task data.
+ * @param {Object} htmlContent - The generated HTML content.
+ * @returns {Object} Formatted task details.
+ */
+function formatTaskDetails(taskData, htmlContent) {
+    const { prio, category, description, title, duedate } = taskData;
+    const priorityImage = priorityImages[prio] || './assets/img/prio_media.png';
+    const categoryColor = CategoryColors[category] || { background: '#000000', color: '#FFFFFF' };
+
     const dueDateObj = new Date(duedate);
     const formattedDueDate = dueDateObj.toLocaleDateString('de-DE', { day: '2-digit', month: '2-digit', year: 'numeric' });
 
@@ -514,12 +559,10 @@ async function processTaskDetails(selectedTask) {
         formattedDueDate,
         prio,
         priorityImage,
-        assignedNamesHTMLSeparated,
-        assigntoHTML,
-        subtaskHTML,
-        assignedNamesHTML
+        ...htmlContent
     };
 }
+
 
 
 /**
@@ -648,34 +691,6 @@ function shouldCreateTaskElement(task, assignedNamesHTML, search) {
 
 function checkSearchInput(task, assignedNamesHTML, search) {
     return assignedNamesHTML.toLowerCase().includes(search) ||
-           (task.description && task.description.toLowerCase().includes(search)) ||
-           task.title.toLowerCase().includes(search);
-}
-
-// EDIT TASK AREA
-
-function editTaskSlideInFromRight() {
-    hidePopup('popup');
-    let editTaskOverlay = document.getElementById('editTaskOverlay');
-    let editTaskCont = document.getElementById('editTaskCont');
-
-    editTaskOverlay.classList.add('slide-in-from-right');
-    editTaskCont.classList.add('slide-in-from-right');
-
-    setTimeout(() => {
-        editTaskOverlay.classList.add('fade-to-grey-overlay');
-    }, 300);
-}
-
-
-function editTaskSlideOutToRight() {
-    let editTaskOverlay = document.getElementById('editTaskOverlay');
-    let editTaskCont = document.getElementById('editTaskCont');
-
-    editTaskOverlay.classList.remove('fade-to-grey-overlay');
-
-    setTimeout(() => {
-        editTaskOverlay.classList.remove('slide-in-from-right');
-        editTaskCont.classList.remove('slide-in-from-right');
-    }, 100);
+        (task.description && task.description.toLowerCase().includes(search)) ||
+        task.title.toLowerCase().includes(search);
 }
