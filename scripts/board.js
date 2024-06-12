@@ -256,6 +256,11 @@ function createTaskHTML(task, taskid, assignedNamesHTML, subtaskCountHTML, prior
     return /*html*/`
         <div id="${taskid}" draggable="true" ondragstart="startDragging('${taskid}')" class="toDoBox" onclick="showPopup('${taskid}')">
             <button class="CategoryBox" style="background-color: ${categoryColor.background};">${task.category}</button>
+             <div class="headerContainer">       
+            <div class="arrowContainer">
+            <img src="./assets/img/arrow_drop.svg" class="arrow" alt="Arrow Drop">
+            <img src="./assets/img/arrow_drop_down.svg" class="arrow" alt="Arrow Drop Down">
+        </div></div>
             <p class="HeadlineBox">${task.title}</p>
             ${descriptionSection}
             <div class="subtaskProgress">
