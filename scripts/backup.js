@@ -235,19 +235,7 @@ function createTaskElement(task, search) {
     let priorityImage = priorityImages[task.prio] || './assets/img/prio_media.png';
     let categoryColor = CategoryColors[task.category] || { background: '#000000', color: '#FFFFFF' };
 
-    if (activeSearch) {
-      
-        if (assignedNamesHTML.toLowerCase().includes(search) ||
-            (task.description && task.description.toLowerCase().includes(search)) ||
-            task.title.toLowerCase().includes(search)) {
-            return createTaskHTML(task, taskid, assignedNamesHTML, subtaskCountHTML, priorityImage, categoryColor);
-        }
-    } else {
-        return createTaskHTML(task, taskid, assignedNamesHTML, subtaskCountHTML, priorityImage, categoryColor);
-    }
-    return '';
-
-    // return createTaskHTML(task, taskid, assignedNamesHTML, subtaskCountHTML, priorityImage, categoryColor, search);
+    return createTaskHTML(task, taskid, assignedNamesHTML, subtaskCountHTML, priorityImage, categoryColor, search);
 };
 
 /**
@@ -263,6 +251,12 @@ function createTaskElement(task, search) {
  * @returns {string} HTML string representing the task element.
  */
 function createTaskHTML(task, taskid, assignedNamesHTML, subtaskCountHTML, priorityImage, categoryColor, search) {
+    if (activeSearch) {
+        // Check if the task matches the search criteria
+        if (assignedNamesHTML.toLowerCase().includes(search) ||
+            (task.description && task.description.toLowerCase().includes(search)) ||
+            task.title.toLowerCase().includes(search)) {
+
             let descriptionSection = task.description ? `<p class="descriptionBox">${task.description}</p>` : '';
             return /*html*/`
         <div id="${taskid}" draggable="true" ondragstart="startDragging('${taskid}')" class="toDoBox" onclick="showPopup('${taskid}')">
@@ -282,7 +276,28 @@ function createTaskHTML(task, taskid, assignedNamesHTML, subtaskCountHTML, prior
         </div>
     `;
         }
-  
+    } else {
+        let descriptionSection = task.description ? `<p class="descriptionBox">${task.description}</p>` : '';
+        return /*html*/`
+        <div id="${taskid}" draggable="true" ondragstart="startDragging('${taskid}')" class="toDoBox" onclick="showPopup('${taskid}')">
+            <button class="CategoryBox" style="background-color: ${categoryColor.background};">${task.category}</button>
+            <p class="HeadlineBox">${task.title}</p>
+            ${descriptionSection}
+            <div class="subtaskProgress">
+                <progress value="0" max="100"></progress>
+                ${subtaskCountHTML}
+            </div>
+            <div class="nameSection">
+                ${assignedNamesHTML}
+                <div class="prioImgContainer">
+                    <img class="prioImg" src="${priorityImage}" alt="Priority">
+                </div>
+            </div>
+        </div>
+    `;
+    }
+    return '';
+};
 
 /**
  * Categorizes tasks into their respective status categories.
@@ -525,16 +540,16 @@ function searchTask() {
     }
 }
 
-// function createTaskHTML1(task, taskid, assignedNamesHTML, subtaskCountHTML, priorityImage, categoryColor, search) {
-//     if (activeSearch) {
+function createTaskHTML1(task, taskid, assignedNamesHTML, subtaskCountHTML, priorityImage, categoryColor, search) {
+    if (activeSearch) {
       
-//         if (assignedNamesHTML.toLowerCase().includes(search) ||
-//             (task.description && task.description.toLowerCase().includes(search)) ||
-//             task.title.toLowerCase().includes(search)) {
-//             return generateTaskHTML(task, taskid, assignedNamesHTML, subtaskCountHTML, priorityImage, categoryColor);
-//         }
-//     } else {
-//         return generateTaskHTML(task, taskid, assignedNamesHTML, subtaskCountHTML, priorityImage, categoryColor);
-//     }
-//     return '';
-// }
+        if (assignedNamesHTML.toLowerCase().includes(search) ||
+            (task.description && task.description.toLowerCase().includes(search)) ||
+            task.title.toLowerCase().includes(search)) {
+            return generateTaskHTML(task, taskid, assignedNamesHTML, subtaskCountHTML, priorityImage, categoryColor);
+        }
+    } else {
+        return generateTaskHTML(task, taskid, assignedNamesHTML, subtaskCountHTML, priorityImage, categoryColor);
+    }
+    return '';
+}
