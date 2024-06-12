@@ -470,58 +470,179 @@ function removeHighlight(id) {
 };
 
 /**
+ * Fetches task data from an external data source.
+ * @returns {Promise<Array>} An array of tasks.
+ */
+async function fetchTaskData() {
+    try {
+        return await fetchData();
+    } catch (error) {
+        console.error('Error fetching task data:', error);
+        throw error;
+    }
+}
+
+/**
+ * Finds the selected task from the provided tasks based on its ID.
+ * @param {Array} tasks - An array of tasks.
+ * @param {string} taskid - The ID of the task to find.
+ * @returns {Object|null} The selected task if found, otherwise null.
+ */
+function findSelectedTask(tasks, taskid) {
+    return tasks.find(item => item.id === taskid);
+}
+
+/**
+ * Processes the details of the selected task.
+ * @param {Object} selectedTask - The selected task object.
+ * @returns {Object} Processed task details.
+ */
+async function processTaskDetails(selectedTask) {
+    const { assignto = [], subtask = [], prio, category, description, title, duedate } = selectedTask;
+    const assignedNamesHTML = generateAssignedNamesHTML(assignto);
+    const priorityImage = priorityImages[prio] || './assets/img/prio_media.png';
+    const categoryColor = CategoryColors[category] || { background: '#000000', color: '#FFFFFF' };
+    const assigntoHTML = assignto.map((name => ``)).join('');
+
+    // Function to generate initials and name side by side within div
+    const generateInitialsAndNameHTML = (names) => {
+        return names.map(name => {
+            const initials = name.split(' ').map(word => word[0]).join('');
+            const randomColor = generateRandomColor();
+            return `
+                <div class="assignedtoDialogInitials">
+                    <p class="assignedName" style="background-color: ${randomColor};">${initials}<p>${name}
+                    
+                </div>
+            `;
+        }).join('');
+    };
+
+    const assignedNamesHTMLSeparated = generateInitialsAndNameHTML(assignto);
+
+    const subtaskHTML = subtask.map(task => `
+        <div class="subtaskItem">
+            <input type="checkbox">
+            <p>${task}</p>
+        </div>
+    `).join('');
+
+    const dueDateObj = new Date(duedate);
+    const formattedDueDate = dueDateObj.toLocaleDateString('de-DE', { day: '2-digit', month: '2-digit', year: 'numeric' });
+
+    return {
+        category,
+        categoryColor,
+        title,
+        description,
+        formattedDueDate,
+        prio,
+        priorityImage,
+        assignedNamesHTMLSeparated,
+        assigntoHTML,
+        subtaskHTML,
+        assignedNamesHTML
+    };
+}
+
+
+/**
+ * Renders HTML elements with processed task details.
+ * @param {Object} taskDetails - Processed task details.
+ * @returns {void}
+ */
+function renderTaskElements(taskDetails) {
+    const {
+        category,
+        categoryColor,
+        title,
+        description,
+        formattedDueDate,
+        prio,
+        priorityImage,
+        assignedNamesHTMLSeparated,
+        assigntoHTML,
+        subtaskHTML
+    } = taskDetails;
+
+    updateCategoryBox(category, categoryColor);
+    updateTaskDetails(title, description, formattedDueDate, prio, priorityImage, assignedNamesHTMLSeparated, assigntoHTML, subtaskHTML);
+}
+
+/**
+ * Updates the category box in the task dialog.
+ * @param {string} category - The category of the task.
+ * @param {Object} categoryColor - The color object for the category.
+ * @returns {void}
+ */
+function updateCategoryBox(category, categoryColor) {
+    const categoryBox = document.getElementById('CategoryBox');
+    categoryBox.innerText = category;
+    categoryBox.style.backgroundColor = categoryColor.background;
+}
+
+/**
+ * Updates the task details in the task dialog.
+ * @param {string} title - The title of the task.
+ * @param {string} description - The description of the task.
+ * @param {string} formattedDueDate - The formatted due date of the task.
+ * @param {string} prio - The priority of the task.
+ * @param {string} priorityImage - The image URL for the task priority.
+ * @param {string} assignedNamesHTMLSeparated - HTML string for assigned names.
+ * @param {string} assigntoHTML - HTML string for assigned task.
+ * @param {string} subtaskHTML - HTML string for subtasks.
+ * @returns {void}
+ */
+function updateTaskDetails(title, description, formattedDueDate, prio, priorityImage, assignedNamesHTMLSeparated, assigntoHTML, subtaskHTML) {
+    const headline = document.getElementById('HeadlineBox');
+    const descriptionDetails = document.getElementById('descriptionDetails');
+    const dueDate = document.getElementById('dueDate');
+    const priority = document.getElementById('Priority');
+    const priorityImg = document.getElementById('PriorityImg');
+    const assignedInitials = document.getElementById('assignedInitials');
+    const assignedName = document.getElementById('assignedName');
+    const subtaskContainer = document.getElementById('subtaskDialogText');
+
+    headline.innerText = title;
+    descriptionDetails.innerText = description;
+    dueDate.innerText = formattedDueDate;
+    priority.innerText = prio;
+    priorityImg.src = priorityImage;
+    assignedInitials.innerHTML = assignedNamesHTMLSeparated;
+    assignedName.innerHTML = assigntoHTML;
+    subtaskContainer.innerHTML = subtaskHTML;
+}
+
+/**
  * Renders the task dialog based on the provided task ID.
  * @param {string} taskid - The ID of the task to render the dialog for.
  * @returns {void}
  */
 async function renderTaskDialog(taskid) {
     try {
-        let tasks = await fetchData();
-        let selectedTask = tasks.find(item => item.id === taskid);
+        const tasks = await fetchTaskData();
+        const selectedTask = findSelectedTask(tasks, taskid);
         if (!selectedTask) {
             return;
         }
-        let { assignto = [], subtask = [], prio, category, description, title, duedate } = selectedTask;
-        let assignedNamesHTML = generateAssignedNamesHTML(assignto);
-        let priorityImage = priorityImages[prio] || './assets/img/prio_media.png';
-        let categoryColor = CategoryColors[category] || { background: '#000000', color: '#FFFFFF' };
-        let assigntoHTML = assignto.map(name => `<p>${name}</p>`).join('');
-        let assignedNamesHTMLSeparated = assignedNamesHTML.split(',').map(name => `<p>${name}</p>`).join('');
-        let subtaskHTML = subtask.map(task => `
-            <div class="subtaskItem">
-                <input type="checkbox">
-                <p>${task}</p>
-            </div>
-        `).join('');
-        let taskDetailsDialog = document.getElementById('TaskDetailsDialog');
-        let categoryBox = document.getElementById('CategoryBox');
-        let headline = document.getElementById('HeadlineBox');
-        let descriptionDetails = document.getElementById('descriptionDetails');
-        let dueDate = document.getElementById('dueDate');
-        let dueDateObj = new Date(duedate);
-        let formattedDueDate = dueDateObj.toLocaleDateString('de-DE', { day: '2-digit', month: '2-digit', year: 'numeric' });
-        let priority = document.getElementById('Priority');
-        let priorityImg = document.getElementById('PriorityImg');
-        let assignedInitials = document.getElementById('assignedInitials');
-        let assignedName = document.getElementById('assignedName');
-        let subtaskContainer = document.getElementById('subtaskDialogText');
-        if (!taskDetailsDialog) {
-            return;
-        }
-        categoryBox.innerText = category;
-        categoryBox.style.backgroundColor = categoryColor.background;
-        headline.innerText = title;
-        descriptionDetails.innerText = description;
-        dueDate.innerText = formattedDueDate;
-        priority.innerText = prio;
-        priorityImg.src = priorityImage;
-        assignedInitials.innerHTML = assignedNamesHTMLSeparated;
-        assignedName.innerHTML = assigntoHTML;
-        subtaskContainer.innerHTML = subtaskHTML;
+
+        const taskDetails = await processTaskDetails(selectedTask);
+        renderTaskElements(taskDetails);
     } catch (error) {
         console.error('Error rendering task dialog:', error);
+        handleError(error);
     }
-};
+}
+
+/**
+ * Handles errors that occur during rendering of the task dialog.
+ * @param {Error} error - The error object.
+ * @returns {void}
+ */
+function handleError(error) {
+    console.error('Error rendering task dialog:', error);
+}
+
 
 //Relevante Funktionen displayTasks, (insertTasksIntoDOM Muss evtl geleert werden), =>createTaskHTML
 //Releveante Variabeln: assignedNamesHTML, descriptionSection, task.title

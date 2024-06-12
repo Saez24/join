@@ -594,6 +594,12 @@ body {
     cursor: pointer;
 }
 
+.assignedtoDialogInitials {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
 @media screen and (max-width: 1550px) {
     .wrapped_maxWidth {
         max-width: 1000px;
