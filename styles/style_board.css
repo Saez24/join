@@ -348,6 +348,8 @@ body {
 .arrowContainer {
     display: none;
     gap: 40px;
+    margin-top: -20px;
+    margin-right: -50px;
 }
 
 .arrow {
