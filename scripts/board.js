@@ -283,7 +283,7 @@ function createTaskHTML(task, taskid, assignedNamesHTML, subtaskCountHTML, prior
             </div>
             <p class="HeadlineBox">${task.title}</p>
             ${descriptionSection}
-            ${subtaskCountHTML}
+            ${subtaskCountHTML} <!-- Insert subtask count HTML here -->
             <div class="nameSection">
                 ${assignedNamesHTML}
                 <div class="prioImgContainer">
@@ -292,8 +292,7 @@ function createTaskHTML(task, taskid, assignedNamesHTML, subtaskCountHTML, prior
             </div>
         </div>
     `;
-}
-
+};
 
 /**
  * Categorizes tasks into their respective status categories.
@@ -501,10 +500,10 @@ function extractTaskData(selectedTask) {
 /**
  * Generates HTML content for the task details.
  * @param {Array} assignto - The list of assigned users.
- * @param {Array} subtask - The list of subtasks.
+ * @param {Array} subtasks - The list of subtasks.
  * @returns {Object} HTML content for task details.
  */
-function generateHTMLContent(assignto, subtask) {
+function generateHTMLContent(assignto, subtasks) {
     const assignedNamesHTML = generateAssignedNamesHTML(assignto);
     const assigntoHTML = assignto.map(name => ``).join('');
 
@@ -521,22 +520,18 @@ function generateHTMLContent(assignto, subtask) {
         }).join('');
     };
 
-    for (let i = 0; i < subtask.length; i++) {
-        const element = subtask[i];
-
-    }
-
     const assignedNamesHTMLSeparated = generateInitialsAndNameHTML(assignto);
 
-    const subtaskHTML = subtask.map(task => `
+    const subtaskHTML = subtasks.map((task, index) => `
         <div class="subtaskItem">
-            <input id="${i}" type="checkbox">
+            <input id="subtask-${index}" type="checkbox">
             <p>${task}</p>
         </div>
     `).join('');
 
     return { assignedNamesHTML, assigntoHTML, assignedNamesHTMLSeparated, subtaskHTML };
 }
+
 
 /**
  * Processes the details of the selected task.
@@ -672,7 +667,7 @@ function updateTaskDetails(title, description, formattedDueDate, prio, priorityI
  * @param {string} taskid - The ID of the task to render the dialog for.
  * @returns {void}
  */
-async function renderTaskDialog(taskid) {
+async function renderTaskDialog(taskid, subtaskid) {
     try {
         const tasks = await fetchTaskData();
         const selectedTask = findSelectedTask(tasks, taskid);
