@@ -254,8 +254,10 @@ function createTaskElement(task, search) {
     let descriptionSection = task.description ? `<p class="descriptionBox">${task.description}</p>` : '';
 
     if (shouldCreateTaskElement(task, assignedNamesHTML, search)) {
+        setTimeout(checkEmptyTaskContainers, 0); //Warum ein Timeout?
         return createTaskHTML(task, taskid, assignedNamesHTML, subtaskCountHTML, priorityImage, categoryColor, descriptionSection);
     }
+    setTimeout(checkEmptyTaskContainers, 0);
     return '';
 };
 
@@ -729,4 +731,26 @@ function openEditTask() {
     let content = document.getElementById('editTaskOverlay');
 
     content.classList.remove('hidden');
+}
+
+
+function addEmptyMessage(container, text) {
+    if (container.children.length === 0) {
+        let p = document.createElement('p');
+        p.textContent = text;
+        p.className = 'empty-text';
+        container.appendChild(p);
+    }
+}
+
+function checkEmptyTaskContainers() {
+    let container1 = document.getElementById('to-do-tasks-container');
+    let container2 = document.getElementById('in-progress-tasks-container');
+    let container3 = document.getElementById('await-feedback-tasks-container');
+    let container4 = document.getElementById('done-tasks-container');
+
+    addEmptyMessage(container1, 'No tasks To do');
+    addEmptyMessage(container2, 'No tasks In progress');
+    addEmptyMessage(container3, 'No tasks Await feedback');
+    addEmptyMessage(container4, 'No tasks Done');
 }

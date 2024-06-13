@@ -46,7 +46,7 @@
                             src="./assets/img/add.svg" width="24" alt="Add task">
                     </div>
                 </div>
-                <div class="tasks">
+                <div class="tasks" id="to-do-tasks-container">
                     <div class="arrowContainer">
                         <img src="./assets/img/arrow_drop.svg" class="arrow" alt="Arrow Drop">
                         <img src="./assets/img/arrow_drop_down.svg" class="arrow" alt="Arrow Drop Down">
@@ -61,7 +61,7 @@
                     <img onclick="openDialog(), closeOnBackground(event)" class="add_task_to_board"
                         src="./assets/img/add.svg" width="24" height="24" alt="Add task">
                 </div>
-                <div class="tasks"></div>
+                <div class="tasks" id="in-progress-tasks-container"></div>
             </div>
 
             <div id="awaitfeedback" class="statusTasks" ondrop="moveTo('awaitfeedback')"
@@ -72,7 +72,7 @@
                     <img onclick="openDialog(), closeOnBackground(event)" class="add_task_to_board"
                         src="./assets/img/add.svg" width="24" height="24" alt="Add task">
                 </div>
-                <div class="tasks"></div>
+                <div class="tasks" id="await-feedback-tasks-container"></div>
             </div>
 
             <div id="done" class="statusTasks" ondrop="moveTo('done')" ondragleave="removeHighlight('done')"
@@ -80,7 +80,7 @@
                 <div class="headlineStatusTasks">
                     <h5 class="taskStatusTitle">Done</h5>
                 </div>
-                <div class="tasks"></div>
+                <div class="tasks" id="done-tasks-container"></div>
             </div>
 
 

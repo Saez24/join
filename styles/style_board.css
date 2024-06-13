@@ -642,6 +642,19 @@ body {
     background-color: rgba(0, 0, 0, 0.3);
 }
 
+.empty-text {
+    color: rgba(168, 168, 168, 1);
+    font-size: 16px;
+    font-weight: 400;
+    height: 48px;
+    border: 1px dashed rgba(168, 168, 168, 1);
+    width: 100%;
+    text-align: center;
+    border-radius: 10px;
+    line-height: 48px;
+    background-color: rgba(231, 231, 231, 1);
+}
+
 @media screen and (max-width: 1550px) {
     .wrapped_maxWidth {
         max-width: 1000px;
