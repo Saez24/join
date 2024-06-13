@@ -30,14 +30,14 @@ body {
 .TaskDetails {
     width: 525px !important;
     display: flex;
-    max-height: 70vh;
+    max-height: 85%;
+    min-height: 60%;
     overflow-y: auto;
     flex-direction: column;
-    justify-content: center;
     align-items: flex-start;
     background-color: white;
     margin-bottom: 12px;
-    padding: 68px 40px 38px 40px;
+    padding: 40px 40px 38px 40px;
     border-radius: 30px;
     animation: slide-in 0.8s both;
     position: relative;
@@ -54,6 +54,7 @@ body {
 .TaskDetails h2 {
     font-size: 36px;
     margin-bottom: 15px;
+    margin-top: 0;
 }
 
 .TaskDetails button {
@@ -78,7 +79,7 @@ body {
 .descriptionDetails {
     color: #000;
     margin: 0;
-    margin-bottom: 15px !important;
+    margin-bottom: 22px !important;
 }
 
 .TaskDetailsLine {
@@ -118,11 +119,12 @@ body {
 .assignedContainer {
     display: flex;
     flex-direction: column;
+    padding-bottom: 15px;
 }
 
 .assignedItem {
     display: flex;
-    align-items: center; 
+    align-items: center;
     margin-left: 20px;
 }
 
@@ -134,7 +136,7 @@ body {
     color: black;
 }
 
-.assignedNameDetails p{
+.assignedNameDetails p {
     padding-bottom: 5px;
 
 }
@@ -154,12 +156,14 @@ body {
 
 .subtasksTitle {
     color: gray;
+    padding-bottom: 15px;
 }
 
 .subtaskItem {
     display: flex;
     align-items: center;
     margin-top: 5px;
+    height: 32px;
 }
 
 .subtaskItem input[type="checkbox"] {
@@ -339,10 +343,6 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-around;
-}
-
-.CategoryBox {
-    flex-grow: 1;
 }
 
 .arrowContainer {
@@ -603,6 +603,7 @@ body {
     display: flex;
     align-items: center;
     gap: 5px;
+    height: 48px;
 }
 
 
@@ -639,6 +640,7 @@ body {
 .fade-to-grey-overlay {
     background-color: rgba(0, 0, 0, 0.3);
 }
+
 @media screen and (max-width: 1550px) {
     .wrapped_maxWidth {
         max-width: 1000px;
