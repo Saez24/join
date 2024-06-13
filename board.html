@@ -119,7 +119,7 @@
                             <img src="./assets/img/delete.png" alt="Delete">
                             Delete
                         </div>
-                        <div class="editDeleteContainer editContainer" onclick="editTaskSlideInFromRight()"
+                        <div class="editDeleteContainer editContainer" onclick="openEditTask()"
                             style="cursor: pointer;">
                             <img src="./assets/img/edit.png" alt="Edit">
                             Edit
@@ -137,28 +137,28 @@
         </div>
     </div>
     <!-- EDIT TASK OVERLAY -->
-    <div class="edit-task-overlay d-flex j-center a-center" id="editTaskOverlay" onclick="editTaskSlideOutToRight()">
-        <div class="edit-task-cont" id="editTaskCont"> <!-- ID updated -->
-            <div class="addtask-content-header"><!-- -->
+    <div class="taskBoxBackground hidden" id="editTaskOverlay" onclick="editTaskSlideOutToRight()">
+        <div class="TaskDetails" id="editTaskCont"> <!-- ID and class updated -->
+            <div class="addtask-content-header"><!-- übertragen -->
                 <h1>Edit Task</h1>
             </div>
-            <div class="main-addtask">
-                <div class="left-container">
-                    <div class="inputfields">
-                        <span class="required">Title</span>
+            <div class="main-addtask"><!-- übertragen -->
+                <div class="left-container"><!-- übertragen -->
+                    <div class="inputfields"><!-- übertragen -->
+                        <span class="required">Title</span><!-- übertragen -->
                         <input id="tasktitle" required type="text" placeholder="Enter a title">
                         <div id="error-message-placeholder"><span id="error-message-title" class="error-message">Please
-                                enter a title</span>
+                                enter a title</span><!-- übertragen -->
                         </div>
                     </div>
-                    <div class="description">
+                    <div class="description"><!-- übertragen -->
                         <span>Description</span>
-                        <textarea class="textarea" name="Description" id="description"
-                            placeholder="Enter a Description"></textarea>
+                        <textarea class="textarea" name="Description" id="description" 
+                            placeholder="Enter a Description"></textarea><!-- übertragen -->
                     </div>
-                    <div class="inputfields">
+                    <div class="inputfields"><!-- übertragen -->
                         <span>Assigned to</span>
-                        <div class="dropdown_container">
+                        <div class="dropdown_container"><!-- übertragen -->
                             <input oninput="handleAssignToInput()" onclick="selectAssignTo(), closeOnBackground(event)"
                                 id="assignedtoinput" class="dropdown-content" name="assignedto"
                                 placeholder="Select contacts to assign">
@@ -219,21 +219,12 @@
 
                         </div>
                     </div>
+                    <div class="bottom-container-mobile submit-buttons">
+                        <span class="required-2">This field is required</span>
+                        <button onclick="createTask()" class="create-button">Ok<img src="./assets/img/check.png"
+                                alt=""></button>
+                    </div>
                 </div>
-            </div>
-            <div class="bottom-container">
-                <span class="required-2">This field is required</span>
-                <div class="submit-buttons">
-                    <button onclick="clearContent()" id="clear" class="clear-button">Clear </button>
-                    <button onclick="createTask()" id="create" class="create-button">Create Task <img
-                            src="./assets/img/check.png" alt=""></button>
-                </div>
-            </div>
-
-            <div class="bottom-container-mobile submit-buttons">
-                <span class="required-2">This field is required</span>
-                <button onclick="createTask()" class="create-button">Save Edit<img src="./assets/img/check.png"
-                        alt=""></button>
             </div>
 
             <div class="task-created task-cont" id="task-created">
