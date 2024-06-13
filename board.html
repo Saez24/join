@@ -84,8 +84,8 @@
             </div>
 
 
-            <div id="popup" class="taskBoxBackground hidden">
-                <div id="TaskDetailsDialog" class="TaskDetails slide-in-right">
+            <div onclick="hidePopup()" id="popup" class="taskBoxBackground hidden">
+                <div onclick="closeOnBackground(event)" id="TaskDetailsDialog" class="TaskDetails slide-in-right">
 
                     <img class="closePopup" src="./assets/img/close.png" onclick="hidePopup('popup')" alt="Close">
                     <button id="CategoryBox" class="CategoryBox"></button>
@@ -153,7 +153,7 @@
                     </div>
                     <div class="description"><!-- übertragen -->
                         <span>Description</span>
-                        <textarea class="textarea" name="Description" id="description" 
+                        <textarea class="textarea" name="Description" id="description"
                             placeholder="Enter a Description"></textarea><!-- übertragen -->
                     </div>
                     <div class="inputfields"><!-- übertragen -->

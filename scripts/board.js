@@ -15,6 +15,7 @@ let CategoryColors = {
 };
 
 let tasks = [];
+let subtaskStatus = {};
 let activeSearch = false;
 let i = 0;
 
@@ -526,12 +527,27 @@ function generateHTMLContent(assignto, subtasks) {
 
     const subtaskHTML = subtasks.map((task, index) => `
         <div class="subtaskItem">
-            <input id="subtask-${index}" type="checkbox">
+            <input id="subtask-${index}" type="checkbox" ${subtaskStatus[task] ? 'checked' : ''} onchange="updateSubtaskStatus('${index}', this.checked)">
             <p>${task}</p>
         </div>
     `).join('');
 
     return { assignedNamesHTML, assigntoHTML, assignedNamesHTMLSeparated, subtaskHTML };
+}
+
+/**
+ * Updates the subtask status and progress bar.
+ * @param {string} task - The name of the subtask.
+ * @param {boolean} isChecked - The checked status of the subtask.
+ */
+function updateSubtaskStatus(task, isChecked) {
+    subtaskStatus[task] = isChecked;
+
+    // Update the progress bar
+    const progressBarContainer = document.getElementById('subtaskProgressContainer');
+    if (progressBarContainer) {
+        progressBarContainer.innerHTML = generateSubtaskCountHTML(Object.keys(subtaskStatus));
+    }
 }
 
 
