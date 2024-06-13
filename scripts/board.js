@@ -699,3 +699,9 @@ function checkSearchInput(task, assignedNamesHTML, search) {
         (task.description && task.description.toLowerCase().includes(search)) ||
         task.title.toLowerCase().includes(search);
 }
+
+function openEditTask() {
+    let content = document.getElementById('editTaskOverlay');
+
+    content.classList.remove('hidden');
+}
