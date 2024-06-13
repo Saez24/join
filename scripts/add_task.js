@@ -24,6 +24,16 @@ let buttonColors = {
     low: { background: '#7AE229', color: '#FFFFFF' }
 };
 
+
+/**
+ * Prevents event propagation when clicking on the background.
+ * 
+ * @param {Event} event - The event object.
+ */
+function closeOnBackground(event) {
+    event.stopPropagation();
+};
+
 /**
  * Loads names and categories for adding a new task asynchronously when the page loads.
  */
@@ -439,11 +449,6 @@ function lowButton() {
 };
 
 /**
- * Renders categories for adding a new task to the DOM.
- * @param {Object} categories - An object containing categories.
- */
-
-/**
  * Opens the subtask field for adding a new subtask.
  */
 function openAddSubtaskField() {
@@ -451,6 +456,12 @@ function openAddSubtaskField() {
     let subtaskField = document.getElementById('subtask');
     addSubtaskField.style.display = 'none';
     subtaskField.style.display = 'block';
+
+    // Set the focus on the specific input field by ID
+    let inputField = document.getElementById('subtask');
+    if (inputField) {
+        inputField.focus();
+    }
 };
 
 /**
@@ -461,21 +472,37 @@ function closeAddSubtaskField() {
     let subtaskField = document.getElementById('subtask');
     addSubtaskField.style.display = 'block';
     subtaskField.style.display = 'none';
+    subtaskField.value = "";
 };
 
 /**
  * Handles click events on the subtask field.
- * Closes the subtask field if the click is within the area of the close.png image,
- * otherwise triggers adding a subtask if the click is within the area of the check_black.png image.
+ * Determines whether to close the field or add a subtask based on the clicked area.
  * @param {MouseEvent} event - The click event object.
  */
 function handleSubtaskClick(event) {
     let input = document.getElementById("subtask");
     let clickX = event.clientX;
     let inputRight = input.getBoundingClientRect().right;
-    // Check if the click is within the area of the close.png image
-    if (clickX >= inputRight - 56 && clickX <= inputRight - 28) {
+
+    // Check if the click is within the area of the close.png image (rightmost 28px)
+    if (clickX >= inputRight - 28) {
+        addSubtask();
+    }
+    // Check if the click is within the area of the check_black.png image (next 28px from right)
+    else if (clickX >= inputRight - 56 && clickX < inputRight - 28) {
         closeAddSubtaskField();
+    }
+};
+
+/**
+ * Handles the Enter key press to add a subtask.
+ * @param {KeyboardEvent} event - The keydown event object.
+ */
+function checkEnter(event) {
+    if (event.key === "Enter") {
+        event.preventDefault(); // Prevent the default form submission behavior
+        addSubtask();
     }
 };
 
@@ -505,6 +532,7 @@ function addSubtask() {
         closeAddSubtaskField();
     }
     input.value = "";
+    return false;
 };
 
 /**

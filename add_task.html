@@ -13,7 +13,7 @@
     <link rel="icon" href="./assets/img/favicon.png" type="image/x-icon">
 </head>
 
-<body onclick="closeSelectCategory(), closeAssignTo()" onload="addTaskLoadNames()">
+<body onclick="closeSelectCategory(), closeAssignTo(), closeAddSubtaskField()" onload="addTaskLoadNames()">
     <div id="sidebarContainer">
         <script type="module" src="./scripts/singnedinuser.js"></script>
     </div>
@@ -87,10 +87,10 @@
                 </div>
                 <div class="inputfields">
                     <span>Subtasks</span>
-                    <input onclick="openAddSubtaskField()" id="addsubtask" class="subtask" type="text"
-                        placeholder="Add new subtask">
-                    <input onclick="handleSubtaskClick(event), addSubtask(event)" id="subtask" class="aktive-subtask"
-                        type="text">
+                    <input onclick="openAddSubtaskField(), closeOnBackground(event)" id="addsubtask" class="subtask"
+                        type="text" placeholder="Add new subtask">
+                    <input onclick="handleSubtaskClick(event), closeOnBackground(event)" onkeydown="checkEnter(event)"
+                        id="subtask" class="aktive-subtask" type="text">
                 </div>
                 <div class="subtask-container">
                     <div id="addsubtasks">
