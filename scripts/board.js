@@ -14,12 +14,9 @@ let CategoryColors = {
     Product: { background: '#FF745E', color: '#FFFFFF' }
 };
 
-let taskIdCounter = 0;
-let currentDraggedElement = 0;
-let touchOffsetX = 0;
-let touchOffsetY = 0;
 let tasks = [];
 let activeSearch = false;
+let i = 0;
 
 /**
  * Opens the dialog by removing the 'd_none' class and ensures CSS and content are loaded.
@@ -105,18 +102,26 @@ function loadAddTaskContent() {
 
 /**
  * Open the dialog for TaskDetails.
+ * 
+ * @param {string} taskid - The unique ID of the task element.
  */
-function showPopup(task, taskid, assignedNamesHTML, subtaskCountHTML, priorityImage, categoryColor) {
+function showPopup(taskid) {
     const popup = document.getElementById('popup');
     const taskDetails = document.getElementById('TaskDetailsDialog');
+
+    // Set the taskid as a data attribute on the TaskDetailsDialog element
+    taskDetails.setAttribute('data-taskid', taskid);
 
     setTimeout(() => {
         popup.classList.remove('hidden');
         popup.classList.add('fade-in');
         taskDetails.classList.add('slide-in-right');
     }, 300);
-    renderTaskDialog(task, taskid, assignedNamesHTML, subtaskCountHTML, priorityImage, categoryColor);
-};
+
+    // Call the renderTaskDialog function to render the task details
+    renderTaskDialog(taskid);
+}
+
 
 /**
  * Closes the dialog.
@@ -197,27 +202,41 @@ function generateAssignedNamesHTML(assignedNames) {
     }
 
     return html;
-}
+};
 
-
-/**
- * Generates HTML for subtask count and progress bar.
- * 
- * @function generateSubtaskCountHTML
- * @param {Object[]} [subtasks] - An array of subtasks.
- * @returns {string} HTML string representing the subtask count and progress bar.
- */
-function generateSubtaskCountHTML(subtasks) {
+function generateSubtaskCountHTML(subtasks, isChecked) {
     let totalSubtasks = subtasks ? subtasks.length : 0;
     let completedSubtasks = subtasks ? subtasks.filter(subtask => subtask.completed).length : 0;
+
+    // Calculate progress percentage based on total and completed subtasks
     let progressPercentage = totalSubtasks > 0 ? (completedSubtasks / totalSubtasks) * 100 : 0;
     let progressBarStyle = `width: ${progressPercentage}%;`;
     let count = `${completedSubtasks}/${totalSubtasks} Subtask${totalSubtasks !== 1 ? 's' : ''}`;
-    let progressBarHTML = `<div class="progressBar"><div class="progress" style="${progressBarStyle}"></div></div>`;
 
-    return `<div class="subtaskProgress">${progressBarHTML}<p class="subtaskCount">${count}</p></div>`;
+    // Display progress bar and count only if there are subtasks or if the checkbox is checked
+    if (totalSubtasks > 0 || isChecked) {
+        let progressBarHTML = `<progress value="${progressPercentage}" max="100"></progress>`;
+        return `<div id="subtaskProgress" class="subtaskProgress">${progressBarHTML}<p class="subtaskCount">${count}</p></div>`;
+    } else {
+        // If there are no subtasks and checkbox is not checked, return an empty string
+        return '';
+    }
 }
 
+function updateSubtaskHTML() {
+    let checkbox = document.getElementById('myCheckbox');
+    let isChecked = checkbox.checked;
+
+    let subtasks = [
+        { completed: true },
+        { completed: false },
+        { completed: true }
+        // Add more subtasks as needed
+    ];
+
+    let subtaskHTML = generateSubtaskCountHTML(subtasks, isChecked);
+    document.getElementById('subtaskContainer').innerHTML = subtaskHTML;
+}
 
 /**
  * Creates a task element.
@@ -243,30 +262,28 @@ function createTaskElement(task, search) {
 /**
  * Creates the HTML string for a task element.
  * 
- * @function createTaskHTML
- * @param {Object} task - The task object.
- * @param {string} taskid - The task ID.
- * @param {string} assignedNamesHTML - HTML string of assigned names.
- * @param {string} subtaskCountHTML - HTML string of subtask count.
- * @param {string} priorityImage - URL of the priority image.
- * @param {Object} categoryColor - Object containing background and text color for the category.
+ * @param {Object} task - The task object containing details like title and category.
+ * @param {string} taskid - The unique ID of the task element.
+ * @param {string} assignedNamesHTML - HTML string representing assigned names.
+ * @param {string} subtaskCountHTML - HTML string representing subtask count and progress.
+ * @param {string} priorityImage - URL of the priority image associated with the task.
+ * @param {Object} categoryColor - Object containing background and text color for the category button.
+ * @param {string} descriptionSection - Optional HTML string for the task description.
  * @returns {string} HTML string representing the task element.
  */
 function createTaskHTML(task, taskid, assignedNamesHTML, subtaskCountHTML, priorityImage, categoryColor, descriptionSection) {
     return /*html*/`
         <div id="${taskid}" draggable="true" ondragstart="startDragging('${taskid}')" class="toDoBox" onclick="showPopup('${taskid}')">
             <button class="CategoryBox" style="background-color: ${categoryColor.background};">${task.category}</button>
-             <div class="headerContainer">       
-            <div class="arrowContainer">
-            <img src="./assets/img/arrow_drop.svg" class="arrow" alt="Arrow Drop">
-            <img src="./assets/img/arrow_drop_down.svg" class="arrow" alt="Arrow Drop Down">
-        </div></div>
+            <div class="headerContainer">       
+                <div class="arrowContainer">
+                    <img src="./assets/img/arrow_drop.svg" class="arrow" alt="Arrow Drop">
+                    <img src="./assets/img/arrow_drop_down.svg" class="arrow" alt="Arrow Drop Down">
+                </div>
+            </div>
             <p class="HeadlineBox">${task.title}</p>
             ${descriptionSection}
-            <div class="subtaskProgress">
-                <progress value="0" max="100"></progress>
-                ${subtaskCountHTML}
-            </div>
+            ${subtaskCountHTML}
             <div class="nameSection">
                 ${assignedNamesHTML}
                 <div class="prioImgContainer">
@@ -504,11 +521,16 @@ function generateHTMLContent(assignto, subtask) {
         }).join('');
     };
 
+    for (let i = 0; i < subtask.length; i++) {
+        const element = subtask[i];
+
+    }
+
     const assignedNamesHTMLSeparated = generateInitialsAndNameHTML(assignto);
 
     const subtaskHTML = subtask.map(task => `
         <div class="subtaskItem">
-            <input type="checkbox">
+            <input id="${i}" type="checkbox">
             <p>${task}</p>
         </div>
     `).join('');
@@ -628,14 +650,22 @@ function updateTaskDetails(title, description, formattedDueDate, prio, priorityI
     const subtaskContainer = document.getElementById('subtaskDialogText');
 
     headline.innerText = title;
-    descriptionDetails.innerText = description;
     dueDate.innerText = formattedDueDate;
     priority.innerText = prio;
     priorityImg.src = priorityImage;
     assignedInitials.innerHTML = assignedNamesHTMLSeparated;
     assignedName.innerHTML = assigntoHTML;
     subtaskContainer.innerHTML = subtaskHTML;
+
+    // Check if description is provided before setting its value
+    if (description) {
+        descriptionDetails.innerText = description;
+    } else {
+        // If description is empty or null, hide or clear the element
+        descriptionDetails.innerText = ''; // or descriptionDetails.style.display = 'none'; to hide
+    }
 }
+
 
 /**
  * Renders the task dialog based on the provided task ID.
