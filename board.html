@@ -85,7 +85,7 @@
 
 
             <div onclick="hidePopup()" id="popup" class="taskBoxBackground hidden">
-                <div onclick="closeOnBackground(event)" id="TaskDetailsDialog" class="TaskDetails slide-in-right">
+                <!-- <div onclick="closeOnBackground(event)" id="TaskDetailsDialog" class="TaskDetails slide-in-right">
 
                     <img class="closePopup" src="./assets/img/close.png" onclick="hidePopup('popup')" alt="Close">
                     <button id="CategoryBox" class="CategoryBox"></button>
@@ -119,13 +119,52 @@
                             <img src="./assets/img/delete.png" alt="Delete">
                             Delete
                         </div>
-                        <div class="editDeleteContainer editContainer" onclick="openEditTask()"
+                        <div class="editDeleteContainer editContainer" onclick="openEditTask(getCurrentTaskId())"
                             style="cursor: pointer;">
                             <img src="./assets/img/edit.png" alt="Edit">
                             Edit
                         </div>
                     </div>
+                </div> -->
+                <div onclick="closeOnBackground(event)" id="TaskDetailsDialog" class="TaskDetails slide-in-right" data-taskid="">
+                    <img class="closePopup" src="./assets/img/close.png" onclick="hidePopup('popup')" alt="Close">
+                    <button id="CategoryBox" class="CategoryBox"></button>
+                    <h2 id="HeadlineBox" class="HeadlineBox"></h2>
+                    <p id="descriptionDetails" class="descriptionDetails"></p>
+                    <div class="TaskDetailsLine">
+                        <p class="dueDate">Due date:</p>
+                        <p id="dueDate"></p>
+                    </div>
+                    <div class="priorityContainer">
+                        <p class="dueDate">Priority:</p>
+                        <p id="Priority"></p>
+                        <img id="PriorityImg" class="prioImg" src="./assets/img/prio_baja.png" alt="Priority">
+                    </div>
+                    <div class="TaskDetailsLine">
+                        <p class="dueDate">Assigned To:</p>
+                    </div>
+                    <div class="assignedContainer">
+                        <div class="assignedItem">
+                            <div class="assignedInitials" id="assignedInitials"></div>
+                            <p class="assignedNameDetails" id="assignedName"></p>
+                        </div>
+                    </div>
+                    <div class="subtasksTitle">Subtasks</div>
+                    <div class="subtaskItem">
+                        <p id="subtaskDialogText"></p>
+                    </div>
+                    <div class="editDeleteWrapper">
+                        <div class="editDeleteContainer deleteContainer" onclick="openDeleteTask()" style="cursor: pointer;">
+                            <img src="./assets/img/delete.png" alt="Delete">
+                            Delete
+                        </div>
+                        <div class="editDeleteContainer editContainer" onclick="openEditTask(getCurrentTaskId())" style="cursor: pointer;">
+                            <img src="./assets/img/edit.png" alt="Edit">
+                            Edit
+                        </div>
+                    </div>
                 </div>
+                
             </div>
         </div>
         <div id="dialog" class="dialog-bg d_none">
@@ -143,7 +182,7 @@
                 <div class="left-container-edit-task"><!-- übertragen -->
                     <div class="inputfields"><!-- übertragen -->
                         <span class="required">Title</span><!-- übertragen -->
-                        <input id="tasktitle" required type="text" placeholder="Enter a title">
+                        <input id="HeadlineBox" required type="text" placeholder="Enter a title">
                         <div id="error-message-placeholder"><span id="error-message-title" class="error-message">Please
                                 enter a title</span><!-- übertragen -->
                         </div>
@@ -218,7 +257,7 @@
                     </div>
                     <div class="bottom-container-mobile-edit-task submit-buttons"><!-- übertragen -->
                         <span class="required-2">This field is required</span><!-- übertragen -->
-                        <button onclick="createTask()" class="create-button">Ok<img src="./assets/img/check.png"
+                        <button onclick="editTask()" class="create-button">Ok<img src="./assets/img/check.png"
                                 alt=""></button><!-- übertragen -->
                     </div>
                 </div>
