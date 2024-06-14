@@ -280,8 +280,8 @@ function createTaskHTML(task, taskid, assignedNamesHTML, subtaskCountHTML, prior
             <button class="CategoryBox" style="background-color: ${categoryColor.background};">${task.category}</button>
             <div class="headerContainer">       
                 <div class="arrowContainer">
-                    <img src="./assets/img/arrow_drop.svg" class="arrow" alt="Arrow Drop">
-                    <img src="./assets/img/arrow_drop_down.svg" class="arrow" alt="Arrow Drop Down">
+                    <img id="ArrowDrop" src="./assets/img/arrow_drop.svg" class="arrow" alt="Arrow Drop" onclick="moveTaskUp(event)">
+                    <img id="ArrowDropDown" src="./assets/img/arrow_drop_down.svg" class="arrow" alt="Arrow Drop Down" onclick="moveTaskDown(event)">
                 </div>
             </div>
             <p class="HeadlineBox">${task.title}</p>
@@ -770,3 +770,98 @@ function checkEmptyTaskContainers() {
     addEmptyMessage(container3, 'No tasks Await feedback');
     addEmptyMessage(container4, 'No tasks Done');
 }
+
+/**
+ * Moves the task up in the task list.
+ * 
+ * @param {Event} event - The event object.
+ */
+function moveTaskUp(event) {
+    event.stopPropagation();
+    const taskElement = event.target.closest('.toDoBox');
+    const taskId = taskElement.id;
+    const currentStatus = taskElement.closest('.statusTasks').id;
+    const newStatus = getPreviousStatus(currentStatus);
+
+    if (newStatus) {
+        updateTaskStatus(taskId, newStatus).then(() => searchTask());
+    }
+}
+
+/**
+ * Moves the task down in the task list.
+ * 
+ * @param {Event} event - The event object.
+ */
+function moveTaskDown(event) {
+    event.stopPropagation();
+    const taskElement = event.target.closest('.toDoBox');
+    const taskId = taskElement.id;
+    const currentStatus = taskElement.closest('.statusTasks').id;
+    const newStatus = getNextStatus(currentStatus);
+
+    if (newStatus) {
+        updateTaskStatus(taskId, newStatus).then(() => searchTask());
+    }
+}
+
+/**
+ * Gets the previous status in the task workflow.
+ * 
+ * @param {string} currentStatus - The current status of the task.
+ * @returns {string|null} The previous status or null if there is no previous status.
+ */
+function getPreviousStatus(currentStatus) {
+    const statuses = ['todo', 'inprogress', 'awaitfeedback', 'done'];
+    const currentIndex = statuses.indexOf(currentStatus);
+
+    return currentIndex > 0 ? statuses[currentIndex - 1] : null;
+}
+
+/**
+ * Gets the next status in the task workflow.
+ * 
+ * @param {string} currentStatus - The current status of the task.
+ * @returns {string|null} The next status or null if there is no next status.
+ */
+function getNextStatus(currentStatus) {
+    const statuses = ['todo', 'inprogress', 'awaitfeedback', 'done'];
+    const currentIndex = statuses.indexOf(currentStatus);
+
+    return currentIndex < statuses.length - 1 ? statuses[currentIndex + 1] : null;
+}
+
+/**
+ * Hides the upward arrow in the "To Do" column.
+ */
+function hideUpArrowInToDo() {
+    const todoColumn = document.getElementById('todo');
+    if (todoColumn) {
+        const upArrows = todoColumn.querySelectorAll('.arrowContainer #ArrowDrop');
+        upArrows.forEach(arrow => arrow.style.display = 'none');
+    }
+}
+
+/**
+ * Hides the downward arrow in the "Done" column.
+ */
+function hideDownArrowInDone() {
+    const doneColumn = document.getElementById('done');
+    if (doneColumn) {
+        const downArrows = doneColumn.querySelectorAll('.arrowContainer #ArrowDropDown');
+        downArrows.forEach(arrow => arrow.style.display = 'none');
+    }
+}
+
+/**
+ * Calls the functions to hide arrows in the respective columns.
+ */
+function updateArrowVisibility() {
+    hideUpArrowInToDo();
+    hideDownArrowInDone();
+}
+
+// Call this function after rendering the tasks
+displayTasks().then(() => {
+    updateArrowVisibility();
+});
