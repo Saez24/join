@@ -85,8 +85,7 @@
 
 
             <div onclick="hidePopup()" id="popup" class="taskBoxBackground hidden">
-                <div onclick="closeOnBackground(event)" id="TaskDetailsDialog" class="TaskDetails slide-in-right">
-
+                <div id="TaskDetailsDialog" class="TaskDetails slide-in-right" data-taskid="">
                     <img class="closePopup" src="./assets/img/close.png" onclick="hidePopup('popup')" alt="Close">
                     <button id="CategoryBox" class="CategoryBox"></button>
                     <h2 id="HeadlineBox" class="HeadlineBox"></h2>
@@ -114,18 +113,17 @@
                         <p id="subtaskDialogText"></p>
                     </div>
                     <div class="editDeleteWrapper">
-                        <div class="editDeleteContainer deleteContainer" onclick="openDeleteTask()"
-                            style="cursor: pointer;">
+                        <div class="editDeleteContainer deleteContainer" onclick="openDeleteTask()" style="cursor: pointer;">
                             <img src="./assets/img/delete.png" alt="Delete">
                             Delete
                         </div>
-                        <div class="editDeleteContainer editContainer" onclick="openEditTask()"
-                            style="cursor: pointer;">
+                        <div class="editDeleteContainer editContainer" onclick="openEditTask(getCurrentTaskId())" style="cursor: pointer;">
                             <img src="./assets/img/edit.png" alt="Edit">
                             Edit
                         </div>
                     </div>
                 </div>
+                
             </div>
         </div>
         <div id="dialog" class="dialog-bg d_none">
@@ -137,16 +135,14 @@
         </div>
     </div>
     <!-- EDIT TASK OVERLAY -->
-    <div class="taskBoxBackground hidden" id="editTaskOverlay" onclick="editTaskSlideOutToRight()">
-        <div class="TaskDetails" id="editTaskCont"> <!-- ID and class updated -->
-            <div class="addtask-content-header"><!-- übertragen -->
-                <h1>Edit Task</h1>
-            </div>
-            <div class="main-addtask"><!-- übertragen -->
-                <div class="left-container"><!-- übertragen -->
+    <div class="taskBoxBackground hidden" id="editTaskOverlay">
+        <div class="EditTaskDetails" id="editTaskCont"> <!-- ID and class updated -->
+            <img class="closePopup" src="./assets/img/close.png" onclick="editTaskSlideOutToRight()" alt="Close">
+            <div class="main-edittask"><!-- übertragen -->
+                <div class="left-container-edit-task"><!-- übertragen -->
                     <div class="inputfields"><!-- übertragen -->
                         <span class="required">Title</span><!-- übertragen -->
-                        <input id="tasktitle" required type="text" placeholder="Enter a title">
+                        <input id="HeadlineBox" required type="text" placeholder="Enter a title">
                         <div id="error-message-placeholder"><span id="error-message-title" class="error-message">Please
                                 enter a title</span><!-- übertragen -->
                         </div>
@@ -160,18 +156,18 @@
                         <span>Assigned to</span>
                         <div class="dropdown_container"><!-- übertragen -->
                             <input oninput="handleAssignToInput()" onclick="selectAssignTo(), closeOnBackground(event)"
-                                id="assignedtoinput" class="dropdown-content" name="assignedto"
-                                placeholder="Select contacts to assign">
+                                id="assignedtoinput" class="dropdown-content-edit-task" name="assignedto"
+                                placeholder="Select contacts to assign"><!-- übertragen -->
                             <div onclick="closeOnBackground(event)" id="assignedto" class="dropdown_box">
-                            </div>
+                            </div><!-- übertragen -->
                         </div>
-                        <div class="button-container" id="selectedAssignTo">
+                        <div class="button-container" id="selectedAssignTo"><!-- übertragen -->
                         </div>
                     </div>
                 </div>
-                <div class="separator"></div>
-                <div class="right-container">
-                    <div class="inputfields">
+                <div class="separator"></div><!-- übertragen -->
+                <div class="right-container"></div>
+                    <div class="inputfields"><!-- übertragen -->
                         <span class="required">Due Date</span>
                         <input onfocus="setDateRestriction()" id="duedate" name="duedate" class="datefield" required
                             type="date" placeholder="dd/mm/yyyy">
@@ -180,9 +176,9 @@
                                 a Date</span>
                         </div>
                     </div>
-                    <div class="prio">
+                    <div class="prio"><!-- übertragen -->
                         <span>Prio</span>
-                        <div id="priobuttons" class="prio-buttons">
+                        <div id="priobuttons" class="prio-buttons"><!-- übertragen -->
                             <button onclick="urgentButton()" id="urgent">Urgent <img src="./assets/img/prio_alta.png"
                                     alt=""></button>
                             <button onclick="mediumButton()" id="medium">Medium <img src="./assets/img/prio_media.png"
@@ -191,43 +187,43 @@
                                     alt=""></button>
                         </div>
                     </div>
-                    <div class="inputfields">
-                        <span class="required">Category</span>
-                        <div class="dropdown_container">
+                    <div class="inputfields"><!-- übertragen -->
+                        <span class="required">Category</span><!-- übertragen -->
+                        <div class="dropdown_container"><!-- übertragen -->
                             <input oninput="handleCategoryInput()" onclick="selectCategory(), closeOnBackground(event)"
-                                id="taskcategoryinput" class="dropdown-category-content" name="taskcategory"
-                                placeholder="Select task category">
-                            <div onclick="closeOnBackground(event)" id="taskcategory" class="category_dropdown_box">
+                                id="taskcategoryinput" class="dropdown-category-content-edit-task" name="taskcategory"
+                                placeholder="Select task category"><!-- übertragen -->
+                            <div onclick="closeOnBackground(event)" id="taskcategory" class="category_dropdown_box"><!-- übertragen -->
 
                             </div>
                         </div>
                         <div id="error-message-placeholder"><span id="error-message-category"
-                                class="error-message">Please
+                                class="error-message"><!-- übertragen -->Please
                                 select
                                 category</span>
                         </div>
                     </div>
-                    <div class="inputfields">
+                    <div class="inputfields"><!-- übertragen -->
                         <span>Subtasks</span>
                         <input onclick="openAddSubtaskField()" id="addsubtask" class="subtask" type="text"
-                            placeholder="Add new subtask">
+                            placeholder="Add new subtask"><!-- übertragen -->
                         <input onclick="handleSubtaskClick(event), addSubtask(event)" id="subtask"
-                            class="aktive-subtask" type="text">
+                            class="aktive-subtask" type="text"><!-- übertragen -->
                     </div>
-                    <div class="subtask-container">
+                    <div class="subtask-container"><!-- übertragen -->
                         <div id="addsubtasks">
 
                         </div>
                     </div>
-                    <div class="bottom-container-mobile submit-buttons">
-                        <span class="required-2">This field is required</span>
-                        <button onclick="createTask()" class="create-button">Ok<img src="./assets/img/check.png"
-                                alt=""></button>
+                    <div class="bottom-container-mobile-edit-task submit-buttons"><!-- übertragen -->
+                        <span class="required-2">This field is required</span><!-- übertragen -->
+                        <button onclick="editTask()" class="create-button">Ok<img src="./assets/img/check.png"
+                                alt=""></button><!-- übertragen -->
                     </div>
                 </div>
             </div>
 
-            <div class="task-created task-cont" id="task-created">
+            <div class="task-created task-cont" id="task-created"><!-- übertragen -->
                 <p class="#">Task successfully edited</p>
             </div>
         </div>

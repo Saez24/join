@@ -277,13 +277,19 @@ function createTaskElement(task, search) {
 function createTaskHTML(task, taskid, assignedNamesHTML, subtaskCountHTML, priorityImage, categoryColor, descriptionSection) {
     return /*html*/`
         <div id="${taskid}" draggable="true" ondragstart="startDragging('${taskid}')" class="toDoBox" onclick="showPopup('${taskid}')">
-            <button class="CategoryBox" style="background-color: ${categoryColor.background};">${task.category}</button>
-            <div class="headerContainer">       
-                <div class="arrowContainer">
-                    <img src="./assets/img/arrow_drop.svg" class="arrow" alt="Arrow Drop">
-                    <img src="./assets/img/arrow_drop_down.svg" class="arrow" alt="Arrow Drop Down">
-                </div>
+            <div class="taskHeader">
+                <button class="CategoryBox" style="background-color: ${categoryColor.background};">${task.category}</button>
+                    <div class="arrowContainer">
+                        <svg id="ArrowDrop" class="arrow" onclick="moveTaskUp(event)" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M7 14l5-5 5 5z"/>
+                        </svg>
+                        <svg id="ArrowDropDown" class="arrow" onclick="moveTaskDown(event)" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M7 10l5 5 5-5z"/>
+                        </svg>
+                    </div>
             </div>
+
+
             <p class="HeadlineBox">${task.title}</p>
             ${descriptionSection}
             ${subtaskCountHTML} <!-- Insert subtask count HTML here -->
@@ -769,4 +775,229 @@ function checkEmptyTaskContainers() {
     addEmptyMessage(container2, 'No tasks In progress');
     addEmptyMessage(container3, 'No tasks Await feedback');
     addEmptyMessage(container4, 'No tasks Done');
+}
+
+/**
+ * Moves the task up in the task list.
+ * 
+ * @param {Event} event - The event object.
+ */
+function moveTaskUp(event) {
+    event.stopPropagation();
+    const taskElement = event.target.closest('.toDoBox');
+    const taskId = taskElement.id;
+    const currentStatus = taskElement.closest('.statusTasks').id;
+    const newStatus = getPreviousStatus(currentStatus);
+
+    if (newStatus) {
+        updateTaskStatus(taskId, newStatus).then(() => {
+            searchTask();
+            updateArrowVisibility(); // Update arrow visibility after task is moved
+        });
+    }
+}
+
+/**
+ * Moves the task down in the task list.
+ * 
+ * @param {Event} event - The event object.
+ */
+function moveTaskDown(event) {
+    event.stopPropagation();
+    const taskElement = event.target.closest('.toDoBox');
+    const taskId = taskElement.id;
+    const currentStatus = taskElement.closest('.statusTasks').id;
+    const newStatus = getNextStatus(currentStatus);
+
+    if (newStatus) {
+        updateTaskStatus(taskId, newStatus).then(() => {
+            searchTask();
+            updateArrowVisibility(); // Update arrow visibility after task is moved
+        });
+    }
+}
+
+/**
+ * Gets the previous status in the task workflow.
+ * 
+ * @param {string} currentStatus - The current status of the task.
+ * @returns {string|null} The previous status or null if there is no previous status.
+ */
+function getPreviousStatus(currentStatus) {
+    const statuses = ['todo', 'inprogress', 'awaitfeedback', 'done'];
+    const currentIndex = statuses.indexOf(currentStatus);
+
+    return currentIndex > 0 ? statuses[currentIndex - 1] : null;
+}
+
+/**
+ * Gets the next status in the task workflow.
+ * 
+ * @param {string} currentStatus - The current status of the task.
+ * @returns {string|null} The next status or null if there is no next status.
+ */
+function getNextStatus(currentStatus) {
+    const statuses = ['todo', 'inprogress', 'awaitfeedback', 'done'];
+    const currentIndex = statuses.indexOf(currentStatus);
+
+    return currentIndex < statuses.length - 1 ? statuses[currentIndex + 1] : null;
+}
+
+/**
+ * Resets the display property of all arrows.
+ */
+function resetAllArrows() {
+    const allArrows = document.querySelectorAll('.arrowContainer #ArrowDrop, .arrowContainer #ArrowDropDown');
+    allArrows.forEach(arrow => arrow.style.display = '');
+}
+
+/**
+ * Hides the upward arrow in the "To Do" column.
+ */
+function hideUpArrowInToDo() {
+    const todoColumn = document.getElementById('todo');
+    if (todoColumn) {
+        const upArrows = todoColumn.querySelectorAll('.arrowContainer #ArrowDrop');
+        upArrows.forEach(arrow => arrow.style.display = 'none');
+    }
+}
+
+/**
+ * Hides the downward arrow in the "Done" column.
+ */
+function hideDownArrowInDone() {
+    const doneColumn = document.getElementById('done');
+    if (doneColumn) {
+        const downArrows = doneColumn.querySelectorAll('.arrowContainer #ArrowDropDown');
+        downArrows.forEach(arrow => arrow.style.display = 'none');
+    }
+}
+
+/**
+ * Calls the functions to hide arrows in the respective columns.
+ */
+function updateArrowVisibility() {
+    resetAllArrows(); // Reset all arrows first
+    hideUpArrowInToDo();
+    hideDownArrowInDone();
+}
+
+// Call this function after rendering the tasks
+displayTasks().then(() => {
+    updateArrowVisibility();
+});
+
+
+// EDIT TASK
+
+function openEditTask() {
+    const taskId = getCurrentTaskId();
+    if (!taskId) {
+        console.error('Task-ID fehlt');
+        return;
+    }
+
+    fetch(`${BASE_URL}tasks/${taskId}.json`)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP-Fehler! Status: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then(task => {
+            if (!task) {
+                throw new Error('Task nicht gefunden');
+            }
+
+            console.log('Geladene Task-Details:', task);
+
+            // Setze die Werte in die Editierfelder
+            document.getElementById('HeadlineBox').value = task.title || '';
+            document.getElementById('description').value = task.description || '';
+            document.getElementById('assignedtoinput').value = (task.assignto || []).join(', ') || '';
+            document.getElementById('duedate').value = task.duedate || '';
+            document.getElementById('priobuttons').value = task.prio || '';
+
+            // Zeige das Editierfenster
+            document.getElementById('editTaskOverlay').classList.remove('hidden');
+        })
+        .catch(error => {
+            console.error('Fehler beim Laden der Task-Details:', error);
+            alert('Fehler beim Laden der Task-Details: ' + error.message);
+        });
+}
+
+// Funktion zum Schließen des Editierfensters
+function closeEditTask() {
+    document.getElementById('editTaskOverlay').classList.add('hidden');
+}
+
+
+function editTask() {
+    // Get the task ID from the task details dialog
+    const taskId = document.getElementById('TaskDetailsDialog').getAttribute('data-taskid');
+
+    // Get the updated values from the form
+    const updatedTask = {
+        title: document.getElementById('tasktitle').value,
+        description: document.getElementById('description').value,
+        assignto: document.getElementById('assignedtoinput').value.split(',').map(name => name.trim()),
+        duedate: document.getElementById('duedate').value,
+        prio: document.getElementById('priobuttons').value
+    };
+
+
+
+    // Save the updated task to the database or state
+    fetch(`${BASE_URL}tasks/${taskId}.json`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(updatedTask)
+    })
+        .then(response => response.json())
+        .then(() => {
+            // Hide the edit task overlay
+            document.getElementById('editTaskOverlay').classList.add('hidden');
+
+            // Refresh the task list to show the updated task details
+            displayTasks();
+        })
+        .catch(error => console.error('Error updating task:', error));
+        showTaskDetails();
+}
+
+function getCurrentTaskId() {
+    return document.getElementById('TaskDetailsDialog').getAttribute('data-taskid');
+}
+
+
+function editTaskSlideOutToRight() {
+    document.getElementById('editTaskOverlay').classList.add('hidden');
+}
+
+// Funktion zum Anzeigen der Task-Details und Setzen der Task-ID
+function showTaskDetails(task) {
+    const taskDetailsDialog = document.getElementById('TaskDetailsDialog');
+    taskDetailsDialog.setAttribute('data-taskid', task.id);
+
+    document.getElementById('CategoryBox').innerText = task.category;
+    document.getElementById('HeadlineBox').innerText = task.title;
+    document.getElementById('descriptionDetails').innerText = task.description;
+    document.getElementById('dueDate').innerText = task.duedate;
+    document.getElementById('Priority').innerText = task.prio;
+    document.getElementById('PriorityImg').src = getPriorityImage(task.prio);
+    document.getElementById('assignedInitials').innerText = getAssignedInitials(task.assignto);
+    document.getElementById('assignedName').innerText = (task.assignto || []).join(', ');
+    document.getElementById('subtaskDialogText').innerText = (task.subtask || []).join(', ');
+
+    // Zeige das Popup
+    document.getElementById('popup').classList.remove('hidden');
+}
+
+
+// Funktion, um die aktuelle Task-ID zu holen
+function getCurrentTaskId() {
+    return document.getElementById('TaskDetailsDialog').getAttribute('data-taskid');
 }
