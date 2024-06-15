@@ -230,7 +230,7 @@ body {
 
 .editContainer:hover {
     font-weight: bold;
-    background-color: #f0f0f0; /
+    background-color: #f0f0f0;
     border-radius: 10px;
 }
 
@@ -790,6 +790,16 @@ body {
 
     .arrowContainer {
         display: flex;
+    }
+
+    .TaskDetails {
+        margin: 30px;
+        font-size: 16px;
+        padding: 20px 20px 20px 20px;
+    }
+
+    .TaskDetails h2 {
+        font-size: 24px;
     }
 }
 
