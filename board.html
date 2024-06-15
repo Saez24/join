@@ -59,9 +59,9 @@
                 ondragleave="removeHighlight('inprogress')" ondragover="allowDrop(event); highlight('inprogress')">
                 <div class="headlineStatusTasks">
                     <h5 class="taskStatusTitle">In progress</h5>
-                    <img onclick="openDialog(), closeOnBackground(event)" class="add_task_to_board"
-                        src="./assets/img/add.svg" width="24" height="24" alt="Add task">
+                    <img onclick="openDialog(), closeOnBackground(event)" class="add_task_to_board" src="./assets/img/add.svg" width="24" height="24" alt="Add task">
                 </div>
+                
                 <div class="tasks" id="in-progress-tasks-container"></div>
             </div>
 
@@ -114,15 +114,16 @@
                         <p id="subtaskDialogText"></p>
                     </div>
                     <div class="editDeleteWrapper">
-                        <div class="editDeleteContainer deleteContainer" onclick="openDeleteTask()" style="cursor: pointer;">
+                        <div class="editDeleteContainer deleteContainer" onclick="openDeleteTask()" onmouseover="hoverDelete()" onmouseout="unhoverDelete()">
                             <img src="./assets/img/delete.png" alt="Delete">
-                            Delete
+                            <span>Delete</span>
                         </div>
-                        <div class="editDeleteContainer editContainer" onclick="openEditTask(getCurrentTaskId())" style="cursor: pointer;">
+                        <div class="editDeleteContainer editContainer" onclick="openEditTask(getCurrentTaskId())" onmouseover="hoverEdit()" onmouseout="unhoverEdit()">
                             <img src="./assets/img/edit.png" alt="Edit">
-                            Edit
+                            <span>Edit</span>
                         </div>
                     </div>
+                    
                 </div>
                 
             </div>
