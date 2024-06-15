@@ -7,7 +7,7 @@ return `
                 <div class="left-container-edit-task"><!-- übertragen -->
                     <div class="inputfields"><!-- übertragen -->
                         <span class="required">Title</span><!-- übertragen -->
-                        <input id="HeadlineBox" required type="text" placeholder="Enter a title">
+                        <input id="HeadlineBox" required type="text" placeholder="Enter a title" value="${task.title}">
                         <div id="error-message-placeholder"><span id="error-message-title" class="error-message">Please
                                 enter a title</span><!-- übertragen -->
                         </div>
