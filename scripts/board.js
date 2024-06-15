@@ -884,9 +884,9 @@ function openEditTask() {
             console.log('Geladene Task-Details:', task);
 
             // Setze die Werte in die Editierfelder
-            document.getElementById('tasktitle').value = task.title || '';
+            document.getElementById('HeadlineBox').value = task.title || '';
             document.getElementById('description').value = task.description || '';
-            document.getElementById('assignedtoinput').value = (task.assignedTo || []).join(', ') || '';
+            document.getElementById('assignedtoinput').value = (task.assignto || []).join(', ') || '';
             document.getElementById('duedate').value = task.duedate || '';
             document.getElementById('priobuttons').value = task.prio || '';
 
@@ -918,6 +918,8 @@ function editTask() {
         prio: document.getElementById('priobuttons').value
     };
 
+
+
     // Save the updated task to the database or state
     fetch(`${BASE_URL}tasks/${taskId}.json`, {
         method: 'PUT',
@@ -935,6 +937,7 @@ function editTask() {
             displayTasks();
         })
         .catch(error => console.error('Error updating task:', error));
+        showTaskDetails();
 }
 
 function getCurrentTaskId() {
@@ -946,19 +949,20 @@ function editTaskSlideOutToRight() {
     document.getElementById('editTaskOverlay').classList.add('hidden');
 }
 
+// Funktion zum Anzeigen der Task-Details und Setzen der Task-ID
 function showTaskDetails(task) {
     const taskDetailsDialog = document.getElementById('TaskDetailsDialog');
     taskDetailsDialog.setAttribute('data-taskid', task.id);
 
-    document.getElementById('CategoryBox').value = task.category;
-    document.getElementById('HeadlineBox').value = task.title;
+    document.getElementById('CategoryBox').innerText = task.category;
+    document.getElementById('HeadlineBox').innerText = task.title;
     document.getElementById('descriptionDetails').innerText = task.description;
     document.getElementById('dueDate').innerText = task.duedate;
     document.getElementById('Priority').innerText = task.prio;
     document.getElementById('PriorityImg').src = getPriorityImage(task.prio);
-    document.getElementById('assignedInitials').innerText = getAssignedInitials(task.assignedTo);
-    document.getElementById('assignedName').innerText = task.assignedTo;
-    document.getElementById('subtaskDialogText').innerText = task.subtasks.join(', ');
+    document.getElementById('assignedInitials').innerText = getAssignedInitials(task.assignto);
+    document.getElementById('assignedName').innerText = (task.assignto || []).join(', ');
+    document.getElementById('subtaskDialogText').innerText = (task.subtask || []).join(', ');
 
     // Zeige das Popup
     document.getElementById('popup').classList.remove('hidden');
@@ -968,36 +972,4 @@ function showTaskDetails(task) {
 // Funktion, um die aktuelle Task-ID zu holen
 function getCurrentTaskId() {
     return document.getElementById('TaskDetailsDialog').getAttribute('data-taskid');
-}
-
-// Beispielaufruf
-function openEditTask(taskId) {
-    console.log('Öffne Bearbeitungsansicht für Task-ID:', taskId);
-
-    fetch(`${BASE_URL}tasks/${taskId}.json`)
-        .then(response => {
-            if (!response.ok) {
-                throw new Error(`HTTP-Fehler! Status: ${response.status}`);
-            }
-            return response.json();
-        })
-        .then(task => {
-            if (!task) {
-                throw new Error('Task nicht gefunden');
-            }
-
-            console.log('Geladene Task-Details:', task);
-
-            document.getElementById('tasktitle').value = task.title || '';
-            document.getElementById('description').value = task.description || '';
-            document.getElementById('assignedtoinput').value = (task.assignedTo || []).join(', ') || '';
-            document.getElementById('duedate').value = task.duedate || '';
-            document.getElementById('priobuttons').value = task.prio || '';
-
-            document.getElementById('editTaskOverlay').classList.remove('hidden');
-        })
-        .catch(error => {
-            console.error('Fehler beim Laden der Task-Details:', error);
-            alert('Fehler beim Laden der Task-Details: ' + error.message);
-        });
 }
