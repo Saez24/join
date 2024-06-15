@@ -937,7 +937,6 @@ function editTask() {
             displayTasks();
         })
         .catch(error => console.error('Error updating task:', error));
-        showTaskDetails();
 }
 
 function getCurrentTaskId() {
