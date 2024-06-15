@@ -31,7 +31,7 @@ body {
     width: 525px !important;
     display: flex;
     max-height: 85%;
-    min-height: 60%;
+    min-height: 80%;
     overflow-y: auto;
     flex-direction: column;
     align-items: flex-start;
@@ -65,11 +65,11 @@ body {
 .TaskDetails h5,
 .TaskDetails p {
     padding: 0;
+
 }
 
 .TaskDetails h2 {
     font-size: 36px;
-    margin-bottom: 15px;
     margin-top: 0;
 }
 
@@ -154,7 +154,6 @@ body {
 
 .assignedNameDetails p {
     padding-bottom: 5px;
-
 }
 
 .tasks {
@@ -173,6 +172,7 @@ body {
 .subtasksTitle {
     color: gray;
     padding-bottom: 15px;
+
 }
 
 .subtaskItem {
@@ -221,6 +221,18 @@ body {
 
 .deleteContainer {
     margin-right: 10px;
+}
+
+.deleteContainer:hover {
+    font-weight: bold;
+    background-color: #f0f0f0; 
+    border-radius: 10px;
+}
+
+.editContainer:hover {
+    font-weight: bold;
+    background-color: #f0f0f0;
+    border-radius: 10px;
 }
 
 .editDeleteContainer {
@@ -519,15 +531,10 @@ body {
 
 .add_task_to_board {
     cursor: pointer;
-    color: #42526E;
 }
 
-.imageContainer {
-    display: inline-block;
-}
-
-.imageContainer:hover .add_task_to_board {
-    color: #29ABE2;
+.add_task_to_board:hover {
+    filter: brightness(0) saturate(100%) invert(65%) sepia(96%) saturate(2626%) hue-rotate(165deg) brightness(95%) contrast(85%);
 }
 
 .dialog-bg {
@@ -784,6 +791,16 @@ body {
 
     .arrowContainer {
         display: flex;
+    }
+
+    .TaskDetails {
+        margin: 30px;
+        font-size: 16px;
+        padding: 20px 20px 20px 20px;
+    }
+
+    .TaskDetails h2 {
+        font-size: 24px;
     }
 }
 

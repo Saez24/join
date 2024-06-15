@@ -965,7 +965,6 @@ function editTask() {
             displayTasks();
         })
         .catch(error => console.error('Error updating task:', error));
-        showTaskDetails();
 }
 
 function getCurrentTaskId() {
@@ -982,18 +981,9 @@ function showTaskDetails(task) {
     const taskDetailsDialog = document.getElementById('TaskDetailsDialog');
     taskDetailsDialog.setAttribute('data-taskid', task.id);
 
-    document.getElementById('CategoryBox').innerText = task.category;
-    document.getElementById('HeadlineBox').innerText = task.title;
-    document.getElementById('descriptionDetails').innerText = task.description;
-    document.getElementById('dueDate').innerText = task.duedate;
-    document.getElementById('Priority').innerText = task.prio;
-    document.getElementById('PriorityImg').src = getPriorityImage(task.prio);
-    document.getElementById('assignedInitials').innerText = getAssignedInitials(task.assignto);
-    document.getElementById('assignedName').innerText = (task.assignto || []).join(', ');
-    document.getElementById('subtaskDialogText').innerText = (task.subtask || []).join(', ');
-
     // Zeige das Popup
     document.getElementById('popup').classList.remove('hidden');
+    renderEditTask(task);
 }
 
 
