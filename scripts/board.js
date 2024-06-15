@@ -277,13 +277,19 @@ function createTaskElement(task, search) {
 function createTaskHTML(task, taskid, assignedNamesHTML, subtaskCountHTML, priorityImage, categoryColor, descriptionSection) {
     return /*html*/`
         <div id="${taskid}" draggable="true" ondragstart="startDragging('${taskid}')" class="toDoBox" onclick="showPopup('${taskid}')">
-            <button class="CategoryBox" style="background-color: ${categoryColor.background};">${task.category}</button>
-            <div class="headerContainer">       
-                <div class="arrowContainer">
-                    <img id="ArrowDrop" src="./assets/img/arrow_drop.svg" class="arrow" alt="Arrow Drop" onclick="moveTaskUp(event)">
-                    <img id="ArrowDropDown" src="./assets/img/arrow_drop_down.svg" class="arrow" alt="Arrow Drop Down" onclick="moveTaskDown(event)">
-                </div>
+            <div class="taskHeader">
+                <button class="CategoryBox" style="background-color: ${categoryColor.background};">${task.category}</button>
+                    <div class="arrowContainer">
+                        <svg id="ArrowDrop" class="arrow" onclick="moveTaskUp(event)" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M7 14l5-5 5 5z"/>
+                        </svg>
+                        <svg id="ArrowDropDown" class="arrow" onclick="moveTaskDown(event)" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M7 10l5 5 5-5z"/>
+                        </svg>
+                    </div>
             </div>
+
+
             <p class="HeadlineBox">${task.title}</p>
             ${descriptionSection}
             ${subtaskCountHTML} <!-- Insert subtask count HTML here -->
@@ -778,7 +784,10 @@ function moveTaskUp(event) {
     const newStatus = getPreviousStatus(currentStatus);
 
     if (newStatus) {
-        updateTaskStatus(taskId, newStatus).then(() => searchTask());
+        updateTaskStatus(taskId, newStatus).then(() => {
+            searchTask();
+            updateArrowVisibility(); // Update arrow visibility after task is moved
+        });
     }
 }
 
@@ -795,7 +804,10 @@ function moveTaskDown(event) {
     const newStatus = getNextStatus(currentStatus);
 
     if (newStatus) {
-        updateTaskStatus(taskId, newStatus).then(() => searchTask());
+        updateTaskStatus(taskId, newStatus).then(() => {
+            searchTask();
+            updateArrowVisibility(); // Update arrow visibility after task is moved
+        });
     }
 }
 
@@ -826,6 +838,14 @@ function getNextStatus(currentStatus) {
 }
 
 /**
+ * Resets the display property of all arrows.
+ */
+function resetAllArrows() {
+    const allArrows = document.querySelectorAll('.arrowContainer #ArrowDrop, .arrowContainer #ArrowDropDown');
+    allArrows.forEach(arrow => arrow.style.display = '');
+}
+
+/**
  * Hides the upward arrow in the "To Do" column.
  */
 function hideUpArrowInToDo() {
@@ -851,6 +871,7 @@ function hideDownArrowInDone() {
  * Calls the functions to hide arrows in the respective columns.
  */
 function updateArrowVisibility() {
+    resetAllArrows(); // Reset all arrows first
     hideUpArrowInToDo();
     hideDownArrowInDone();
 }
@@ -859,6 +880,7 @@ function updateArrowVisibility() {
 displayTasks().then(() => {
     updateArrowVisibility();
 });
+
 
 // EDIT TASK
 
