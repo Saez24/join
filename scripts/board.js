@@ -711,8 +711,6 @@ function handleError(error) {
 }
 
 
-//Relevante Funktionen displayTasks, (insertTasksIntoDOM Muss evtl geleert werden), =>createTaskHTML
-//Releveante Variabeln: assignedNamesHTML, descriptionSection, task.title
 function searchTask() {
     let search = document.getElementById('search').value;
     search = search.toLowerCase();
@@ -743,6 +741,7 @@ function checkSearchInput(task, assignedNamesHTML, search) {
         task.title.toLowerCase().includes(search);
 }
 
+
 function openEditTask() {
     let content = document.getElementById('editTaskOverlay');
 
@@ -758,6 +757,7 @@ function addEmptyMessage(container, text) {
         container.appendChild(p);
     }
 }
+
 
 function checkEmptyTaskContainers() {
     let container1 = document.getElementById('to-do-tasks-container');
