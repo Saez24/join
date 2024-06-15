@@ -1,4 +1,4 @@
-function renderEditTask() {
+function renderEditTask(task) {
 return `
 <div class="taskBoxBackground hidden" id="editTaskOverlay">
         <div class="EditTaskDetails" id="editTaskCont"> <!-- ID and class updated -->
