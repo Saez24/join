@@ -355,28 +355,22 @@ body {
     margin-bottom: 0;
 }
 
-.headerContainer {
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-}
 
 .arrowContainer {
     display: none;
-    gap: 40px;
-    margin-top: -20px;
-    margin-right: -50px;
 }
 
 .arrow {
-    width: 20px;
-    height: auto;
+    width: 50px;
+    height: 50px;
     cursor: pointer;
-    margin-left: 25px;
+    fill: rgb(87, 86, 86); /* Set the default color */
 }
 
 .arrow:hover path {
     fill: #0038FF;
+    filter: drop-shadow(0px 0px 5px rgba(0, 0, 0, 0.3));
+
 }
 
 .toDoBox {
@@ -411,6 +405,13 @@ body {
     text-align: center;
     margin: 0;
     padding: 4px;
+}
+
+.taskHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
 }
 
 .CategoryBox {
@@ -783,7 +784,6 @@ body {
 
     .arrowContainer {
         display: flex;
-        gap: 8px;
     }
 }
 
