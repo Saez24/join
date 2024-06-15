@@ -87,7 +87,7 @@
 
 
             <div onclick="hidePopup()" id="popup" class="taskBoxBackground hidden">
-                <div id="TaskDetailsDialog" class="TaskDetails slide-in-right" data-taskid="">
+                <div id="TaskDetailsDialog" onclick="closeOnBackground(event)" class="TaskDetails slide-in-right" data-taskid="">
                     <img class="closePopup" src="./assets/img/close.png" onclick="hidePopup('popup')" alt="Close">
                     <button id="CategoryBox" class="CategoryBox"></button>
                     <h2 id="HeadlineBox" class="HeadlineBox"></h2>
