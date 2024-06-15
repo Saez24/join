@@ -133,6 +133,10 @@ body {
     height: 20px;
 }
 
+.help-icon:hover {
+    transform: scale(1.2); 
+}
+
 .bounding-box {
     display: flex;
     width: 32px;

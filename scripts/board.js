@@ -717,8 +717,6 @@ function handleError(error) {
 }
 
 
-//Relevante Funktionen displayTasks, (insertTasksIntoDOM Muss evtl geleert werden), =>createTaskHTML
-//Releveante Variabeln: assignedNamesHTML, descriptionSection, task.title
 function searchTask() {
     let search = document.getElementById('search').value;
     search = search.toLowerCase();
@@ -750,6 +748,13 @@ function checkSearchInput(task, assignedNamesHTML, search) {
 }
 
 
+function openEditTask() {
+    let content = document.getElementById('editTaskOverlay');
+
+    content.classList.remove('hidden');
+}
+
+
 function addEmptyMessage(container, text) {
     if (container.children.length === 0) {
         let p = document.createElement('p');
@@ -758,6 +763,7 @@ function addEmptyMessage(container, text) {
         container.appendChild(p);
     }
 }
+
 
 function checkEmptyTaskContainers() {
     let container1 = document.getElementById('to-do-tasks-container');
