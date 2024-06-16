@@ -261,7 +261,7 @@ body {
     font-size: 38px;
     margin: 0;
     padding-top: 120px;
-    gap: 25px;
+    gap: 20px;
 }
 
 .boardHeadlineActions {
@@ -320,7 +320,6 @@ body {
     gap: 4px;
     background-color: #2A3647;
     color: white;
-    margin-right: 10px;
 }
 
 .addTaskButton img {
@@ -721,16 +720,18 @@ body {
         flex-direction: column;
         gap: 10px;
         width: 100%;
-        margin-top: -125px;
-
+        margin-top: -135px;
+        margin-right: 12px;
     }
 
     .searchTask {
         order: 2;
-        width: calc(100% - 10px);
-        margin-top: 20px;
-        margin-bottom: 20px;
-        margin-left: 20px;
+        width: calc(100% - 20px);
+       margin: 20px;
+    }
+
+    .inputSearchTask {
+        margin-right: 20px;
     }
 
     .addTaskButton {
@@ -775,8 +776,12 @@ body {
     }
 
     .addTaskButton {
-        margin-top: 50px;
-        margin-right: 17px;
+        margin-top: 60px;
+        margin-right: 15px;
+    }
+
+    .boardHeadline {
+        padding-top: 80px;
     }
 
     .SearchTask {
@@ -807,6 +812,7 @@ body {
 @media screen and (max-width: 480px) {
     h1 {
         font-size: 48px !important;
+        padding-left: 10px !important;
     }
 }
 
