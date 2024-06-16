@@ -91,7 +91,7 @@ async function determineTasksInProgress() {
 async function determineTasksAwaitingFeedback() {
     let responseToObject = await loadData('tasks');
     for (let i = 0; i < responseToObject.length; i++) {
-        if (responseToObject[i].status === "inprogress") {
+        if (responseToObject[i].status === "awaitfeedback") {
             amountTasksAwaitingFeedback++;
         }
     }

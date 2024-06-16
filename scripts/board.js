@@ -533,13 +533,14 @@ function generateHTMLContent(assignto, subtasks) {
 
     const subtaskHTML = subtasks.map((task, index) => `
         <div class="subtaskItem">
-            <input id="subtask-${index}" type="checkbox" ${subtaskStatus[task] ? 'checked' : ''} onchange="updateSubtaskStatus('${index}', this.checked)">
-            <p>${task}</p>
+            <input id="subtask-${index}" type="checkbox" ${task.Boolean ? 'checked' : ''} onchange="updateSubtaskStatus('${index}', this.checked)">
+            <p>${task.Titel}</p>
         </div>
     `).join('');
 
     return { assignedNamesHTML, assigntoHTML, assignedNamesHTMLSeparated, subtaskHTML };
 }
+
 
 /**
  * Updates the subtask status and progress bar.
@@ -717,8 +718,6 @@ function handleError(error) {
 }
 
 
-//Relevante Funktionen displayTasks, (insertTasksIntoDOM Muss evtl geleert werden), =>createTaskHTML
-//Releveante Variabeln: assignedNamesHTML, descriptionSection, task.title
 function searchTask() {
     let search = document.getElementById('search').value;
     search = search.toLowerCase();
@@ -750,6 +749,13 @@ function checkSearchInput(task, assignedNamesHTML, search) {
 }
 
 
+function openEditTask() {
+    let content = document.getElementById('editTaskOverlay');
+
+    content.classList.remove('hidden');
+}
+
+
 function addEmptyMessage(container, text) {
     if (container.children.length === 0) {
         let p = document.createElement('p');
@@ -758,6 +764,7 @@ function addEmptyMessage(container, text) {
         container.appendChild(p);
     }
 }
+
 
 function checkEmptyTaskContainers() {
     let container1 = document.getElementById('to-do-tasks-container');
@@ -880,108 +887,3 @@ function updateArrowVisibility() {
 displayTasks().then(() => {
     updateArrowVisibility();
 });
-
-
-// EDIT TASK
-
-function openEditTask() {
-    const taskId = getCurrentTaskId();
-    if (!taskId) {
-        console.error('Task-ID fehlt');
-        return;
-    }
-
-    fetch(`${BASE_URL}tasks/${taskId}.json`)
-        .then(response => {
-            if (!response.ok) {
-                throw new Error(`HTTP-Fehler! Status: ${response.status}`);
-            }
-            return response.json();
-        })
-        .then(task => {
-            if (!task) {
-                throw new Error('Task nicht gefunden');
-            }
-
-            console.log('Geladene Task-Details:', task);
-
-            // Setze die Werte in die Editierfelder
-            document.getElementById('HeadlineBox').value = task.title || '';
-            document.getElementById('description').value = task.description || '';
-            document.getElementById('assignedtoinput').value = (task.assignto || []).join(', ') || '';
-            document.getElementById('duedate').value = task.duedate || '';
-            document.getElementById('priobuttons').value = task.prio || '';
-
-            // Zeige das Editierfenster
-            document.getElementById('editTaskOverlay').classList.remove('hidden');
-        })
-        .catch(error => {
-            console.error('Fehler beim Laden der Task-Details:', error);
-            alert('Fehler beim Laden der Task-Details: ' + error.message);
-        });
-}
-
-// Funktion zum Schließen des Editierfensters
-function closeEditTask() {
-    document.getElementById('editTaskOverlay').classList.add('hidden');
-}
-
-
-function editTask() {
-    // Get the task ID from the task details dialog
-    const taskId = document.getElementById('TaskDetailsDialog').getAttribute('data-taskid');
-
-    // Get the updated values from the form
-    const updatedTask = {
-        title: document.getElementById('tasktitle').value,
-        description: document.getElementById('description').value,
-        assignto: document.getElementById('assignedtoinput').value.split(',').map(name => name.trim()),
-        duedate: document.getElementById('duedate').value,
-        prio: document.getElementById('priobuttons').value
-    };
-
-
-
-    // Save the updated task to the database or state
-    fetch(`${BASE_URL}tasks/${taskId}.json`, {
-        method: 'PUT',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(updatedTask)
-    })
-        .then(response => response.json())
-        .then(() => {
-            // Hide the edit task overlay
-            document.getElementById('editTaskOverlay').classList.add('hidden');
-
-            // Refresh the task list to show the updated task details
-            displayTasks();
-        })
-        .catch(error => console.error('Error updating task:', error));
-}
-
-function getCurrentTaskId() {
-    return document.getElementById('TaskDetailsDialog').getAttribute('data-taskid');
-}
-
-
-function editTaskSlideOutToRight() {
-    document.getElementById('editTaskOverlay').classList.add('hidden');
-}
-
-// Funktion zum Anzeigen der Task-Details und Setzen der Task-ID
-function showTaskDetails(task) {
-    const taskDetailsDialog = document.getElementById('TaskDetailsDialog');
-    taskDetailsDialog.setAttribute('data-taskid', task.id);
-
-    // Zeige das Popup
-    document.getElementById('popup').classList.remove('hidden');
-    renderEditTask(task);
-}
-
-
-// Funktion, um die aktuelle Task-ID zu holen
-function getCurrentTaskId() {
-    return document.getElementById('TaskDetailsDialog').getAttribute('data-taskid');
-}

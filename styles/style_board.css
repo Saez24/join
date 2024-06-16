@@ -231,7 +231,11 @@ body {
 
 .editContainer:hover {
     font-weight: bold;
+<<<<<<< HEAD
+    background-color: #f0f0f0; 
+=======
     background-color: #f0f0f0;
+>>>>>>> eb62703a86abfacd05e95677c3ae3a055eaec387
     border-radius: 10px;
 }
 

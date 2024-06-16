@@ -36,7 +36,8 @@ function getTaskDetails() {
         title: document.getElementById('tasktitle').value,
         duedate: document.getElementById('duedate').value,
         category: document.getElementById('taskcategoryinput').value,
-        prio: activeButton ? activeButton.id : null
+        prio: activeButton ? activeButton.id : null,
+        description: document.getElementById('description').value
     };
 };
 
@@ -83,13 +84,27 @@ function validateTaskInputField(taskDetails) {
 function getAssignedTo() {
     let assignedToCheckboxes = document.querySelectorAll('input[type="checkbox"][id^="assignedto_"]:checked');
     let assignedTo = [];
+
     assignedToCheckboxes.forEach((checkbox) => {
+        // Splitting the ID to get the key parts
         let idParts = checkbox.id.split('_');
-        let nameSpan = document.getElementById(`assignname_${idParts[1]}_${idParts[2]}`);
-        if (nameSpan) {
-            assignedTo.push(nameSpan.innerText.trim());
+
+        // Handling cases with IDs like -O-2Vl5jkNUBw8YFvq0O
+        if (idParts.length >= 3) {
+            let nameSpan = document.getElementById(`assignname_${idParts[1]}_${idParts.slice(2).join('_')}`);
+            if (nameSpan) {
+                assignedTo.push(nameSpan.innerText.trim());
+            }
+        } else if (idParts.length === 2) {
+            // Handling simpler ID cases, e.g., assignedto_<key>
+            let nameSpan = document.getElementById(`assignname_${idParts[1]}`);
+            if (nameSpan) {
+                assignedTo.push(nameSpan.innerText.trim());
+            }
         }
     });
+
+    console.log(`Assigned to (final): ${assignedTo}`);
     return assignedTo;
 };
 
@@ -101,7 +116,10 @@ function getSubtasks() {
     let subtasksElements = document.querySelectorAll('.addedtask span');
     let subtasks = [];
     subtasksElements.forEach((subtask) => {
-        subtasks.push(subtask.innerText);
+        subtasks.push({
+            Boolean: false,
+            Titel: subtask.innerText
+        });
     });
     return subtasks;
 };
