@@ -14,12 +14,10 @@ let CategoryColors = {
     Product: { background: '#FF745E', color: '#FFFFFF' }
 };
 
-let taskIdCounter = 0;
-let currentDraggedElement = 0;
-let touchOffsetX = 0;
-let touchOffsetY = 0;
 let tasks = [];
+let subtaskStatus = {};
 let activeSearch = false;
+let i = 0;
 
 /**
  * Opens the dialog by removing the 'd_none' class and ensures CSS and content are loaded.
@@ -105,18 +103,26 @@ function loadAddTaskContent() {
 
 /**
  * Open the dialog for TaskDetails.
+ * 
+ * @param {string} taskid - The unique ID of the task element.
  */
-function showPopup(task, taskid, assignedNamesHTML, subtaskCountHTML, priorityImage, categoryColor) {
+function showPopup(taskid) {
     const popup = document.getElementById('popup');
     const taskDetails = document.getElementById('TaskDetailsDialog');
+
+    // Set the taskid as a data attribute on the TaskDetailsDialog element
+    taskDetails.setAttribute('data-taskid', taskid);
 
     setTimeout(() => {
         popup.classList.remove('hidden');
         popup.classList.add('fade-in');
         taskDetails.classList.add('slide-in-right');
     }, 300);
-    renderTaskDialog(task, taskid, assignedNamesHTML, subtaskCountHTML, priorityImage, categoryColor);
-};
+
+    // Call the renderTaskDialog function to render the task details
+    renderTaskDialog(taskid);
+}
+
 
 /**
  * Closes the dialog.
@@ -197,29 +203,41 @@ function generateAssignedNamesHTML(assignedNames) {
     }
 
     return html;
-}
+};
 
-
-/**
- * Generates HTML for subtask count and progress bar.
- * 
- * @function generateSubtaskCountHTML
- * @param {Object[]} [subtasks] - An array of subtasks.
- * @returns {string} HTML string representing the subtask count and progress bar.
- */
-function generateSubtaskCountHTML(subtasks) {
+function generateSubtaskCountHTML(subtasks, isChecked) {
     let totalSubtasks = subtasks ? subtasks.length : 0;
     let completedSubtasks = subtasks ? subtasks.filter(subtask => subtask.completed).length : 0;
+
+    // Calculate progress percentage based on total and completed subtasks
     let progressPercentage = totalSubtasks > 0 ? (completedSubtasks / totalSubtasks) * 100 : 0;
-
     let progressBarStyle = `width: ${progressPercentage}%;`;
-
     let count = `${completedSubtasks}/${totalSubtasks} Subtask${totalSubtasks !== 1 ? 's' : ''}`;
-    let progressBarHTML = `<div class="progressBar"><div class="progress" style="${progressBarStyle}"></div></div>`;
 
-    return `<div class="subtaskProgress">${progressBarHTML}<p class="subtaskCount">${count}</p></div>`;
+    // Display progress bar and count only if there are subtasks or if the checkbox is checked
+    if (totalSubtasks > 0 || isChecked) {
+        let progressBarHTML = `<progress value="${progressPercentage}" max="100"></progress>`;
+        return `<div id="subtaskProgress" class="subtaskProgress">${progressBarHTML}<p class="subtaskCount">${count}</p></div>`;
+    } else {
+        // If there are no subtasks and checkbox is not checked, return an empty string
+        return '';
+    }
 }
 
+function updateSubtaskHTML() {
+    let checkbox = document.getElementById('myCheckbox');
+    let isChecked = checkbox.checked;
+
+    let subtasks = [
+        { completed: true },
+        { completed: false },
+        { completed: true }
+        // Add more subtasks as needed
+    ];
+
+    let subtaskHTML = generateSubtaskCountHTML(subtasks, isChecked);
+    document.getElementById('subtaskContainer').innerHTML = subtaskHTML;
+}
 
 /**
  * Creates a task element.
@@ -234,39 +252,47 @@ function createTaskElement(task, search) {
     let subtaskCountHTML = generateSubtaskCountHTML(task.subtask || []);
     let priorityImage = priorityImages[task.prio] || './assets/img/prio_media.png';
     let categoryColor = CategoryColors[task.category] || { background: '#000000', color: '#FFFFFF' };
+    let descriptionSection = task.description ? `<p class="descriptionBox">${task.description}</p>` : '';
 
-    return createTaskHTML(task, taskid, assignedNamesHTML, subtaskCountHTML, priorityImage, categoryColor, search);
+    if (shouldCreateTaskElement(task, assignedNamesHTML, search)) {
+        setTimeout(checkEmptyTaskContainers, 0); //Warum ein Timeout?
+        return createTaskHTML(task, taskid, assignedNamesHTML, subtaskCountHTML, priorityImage, categoryColor, descriptionSection);
+    }
+    setTimeout(checkEmptyTaskContainers, 0);
+    return '';
 };
 
 /**
  * Creates the HTML string for a task element.
  * 
- * @function createTaskHTML
- * @param {Object} task - The task object.
- * @param {string} taskid - The task ID.
- * @param {string} assignedNamesHTML - HTML string of assigned names.
- * @param {string} subtaskCountHTML - HTML string of subtask count.
- * @param {string} priorityImage - URL of the priority image.
- * @param {Object} categoryColor - Object containing background and text color for the category.
+ * @param {Object} task - The task object containing details like title and category.
+ * @param {string} taskid - The unique ID of the task element.
+ * @param {string} assignedNamesHTML - HTML string representing assigned names.
+ * @param {string} subtaskCountHTML - HTML string representing subtask count and progress.
+ * @param {string} priorityImage - URL of the priority image associated with the task.
+ * @param {Object} categoryColor - Object containing background and text color for the category button.
+ * @param {string} descriptionSection - Optional HTML string for the task description.
  * @returns {string} HTML string representing the task element.
  */
-function createTaskHTML(task, taskid, assignedNamesHTML, subtaskCountHTML, priorityImage, categoryColor, search) {
-    if (activeSearch) {
-        // Check if the task matches the search criteria
-        if (assignedNamesHTML.toLowerCase().includes(search) ||
-            (task.description && task.description.toLowerCase().includes(search)) ||
-            task.title.toLowerCase().includes(search)) {
+function createTaskHTML(task, taskid, assignedNamesHTML, subtaskCountHTML, priorityImage, categoryColor, descriptionSection) {
+    return /*html*/`
+        <div id="${taskid}" draggable="true" ondragstart="startDragging('${taskid}')" class="toDoBox" onclick="showPopup('${taskid}')">
+            <div class="taskHeader">
+                <button class="CategoryBox" style="background-color: ${categoryColor.background};">${task.category}</button>
+                    <div class="arrowContainer">
+                        <svg id="ArrowDrop" class="arrow" onclick="moveTaskUp(event)" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M7 14l5-5 5 5z"/>
+                        </svg>
+                        <svg id="ArrowDropDown" class="arrow" onclick="moveTaskDown(event)" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M7 10l5 5 5-5z"/>
+                        </svg>
+                    </div>
+            </div>
 
-            let descriptionSection = task.description ? `<p class="descriptionBox">${task.description}</p>` : '';
-            return /*html*/`
-        <div id="${taskid}" draggable="true" ondragstart="startDragging('${taskid}')" class="toDoBox" onclick="showPopup('${taskid}')">
-            <button class="CategoryBox" style="background-color: ${categoryColor.background};">${task.category}</button>
+
             <p class="HeadlineBox">${task.title}</p>
             ${descriptionSection}
-            <div class="subtaskProgress">
-                <progress value="0" max="100"></progress>
-                ${subtaskCountHTML}
-            </div>
+            ${subtaskCountHTML} <!-- Insert subtask count HTML here -->
             <div class="nameSection">
                 ${assignedNamesHTML}
                 <div class="prioImgContainer">
@@ -275,28 +301,6 @@ function createTaskHTML(task, taskid, assignedNamesHTML, subtaskCountHTML, prior
             </div>
         </div>
     `;
-        }
-    } else {
-        let descriptionSection = task.description ? `<p class="descriptionBox">${task.description}</p>` : '';
-        return /*html*/`
-        <div id="${taskid}" draggable="true" ondragstart="startDragging('${taskid}')" class="toDoBox" onclick="showPopup('${taskid}')">
-            <button class="CategoryBox" style="background-color: ${categoryColor.background};">${task.category}</button>
-            <p class="HeadlineBox">${task.title}</p>
-            ${descriptionSection}
-            <div class="subtaskProgress">
-                <progress value="0" max="100"></progress>
-                ${subtaskCountHTML}
-            </div>
-            <div class="nameSection">
-                ${assignedNamesHTML}
-                <div class="prioImgContainer">
-                    <img class="prioImg" src="${priorityImage}" alt="Priority">
-                </div>
-            </div>
-        </div>
-    `;
-    }
-    return '';
 };
 
 /**
@@ -470,61 +474,249 @@ function removeHighlight(id) {
 };
 
 /**
+ * Fetches task data from an external data source.
+ * @returns {Promise<Array>} An array of tasks.
+ */
+async function fetchTaskData() {
+    try {
+        return await fetchData();
+    } catch (error) {
+        console.error('Error fetching task data:', error);
+        throw error;
+    }
+}
+
+/**
+ * Finds the selected task from the provided tasks based on its ID.
+ * @param {Array} tasks - An array of tasks.
+ * @param {string} taskid - The ID of the task to find.
+ * @returns {Object|null} The selected task if found, otherwise null.
+ */
+function findSelectedTask(tasks, taskid) {
+    return tasks.find(item => item.id === taskid);
+}
+
+/**
+ * Extracts and returns the relevant task data from the selected task object.
+ * @param {Object} selectedTask - The selected task object.
+ * @returns {Object} Extracted task data.
+ */
+function extractTaskData(selectedTask) {
+    const { assignto = [], subtask = [], prio, category, description, title, duedate } = selectedTask;
+    return { assignto, subtask, prio, category, description, title, duedate };
+}
+
+/**
+ * Generates HTML content for the task details.
+ * @param {Array} assignto - The list of assigned users.
+ * @param {Array} subtasks - The list of subtasks.
+ * @returns {Object} HTML content for task details.
+ */
+function generateHTMLContent(assignto, subtasks) {
+    const assignedNamesHTML = generateAssignedNamesHTML(assignto);
+    const assigntoHTML = assignto.map(name => ``).join('');
+
+    const generateInitialsAndNameHTML = (names) => {
+        return names.map(name => {
+            const initials = name.split(' ').map(word => word[0]).join('');
+            const randomColor = generateRandomColor();
+            return `
+                <div class="assignedtoDialogInitials">
+                    <p class="assignedName" style="background-color: ${randomColor};">${initials}</p>
+                    <p>${name}</p>
+                </div>
+            `;
+        }).join('');
+    };
+
+    const assignedNamesHTMLSeparated = generateInitialsAndNameHTML(assignto);
+
+    const subtaskHTML = subtasks.map((task, index) => `
+        <div class="subtaskItem">
+            <input id="subtask-${index}" type="checkbox" ${subtaskStatus[task] ? 'checked' : ''} onchange="updateSubtaskStatus('${index}', this.checked)">
+            <p>${task}</p>
+        </div>
+    `).join('');
+
+    return { assignedNamesHTML, assigntoHTML, assignedNamesHTMLSeparated, subtaskHTML };
+}
+
+/**
+ * Updates the subtask status and progress bar.
+ * @param {string} task - The name of the subtask.
+ * @param {boolean} isChecked - The checked status of the subtask.
+ */
+function updateSubtaskStatus(task, isChecked) {
+    subtaskStatus[task] = isChecked;
+
+    // Update the progress bar
+    const progressBarContainer = document.getElementById('subtaskProgressContainer');
+    if (progressBarContainer) {
+        progressBarContainer.innerHTML = generateSubtaskCountHTML(Object.keys(subtaskStatus));
+    }
+}
+
+
+/**
+ * Processes the details of the selected task.
+ * @param {Object} selectedTask - The selected task object.
+ * @returns {Object} Processed task details.
+ */
+async function processTaskDetails(selectedTask) {
+    const taskData = extractTaskData(selectedTask);
+    const htmlContent = generateHTMLContent(taskData.assignto, taskData.subtask);
+    return formatTaskDetails(taskData, htmlContent);
+}
+
+/**
+ * Generates a random color excluding white.
+ * 
+ * @function generateRandomColor
+ * @returns {string} A random color in hexadecimal format.
+ */
+function generateRandomColor() {
+    let randomColor;
+    do {
+        randomColor = "#" + Math.floor(Math.random() * 16777215).toString(16).padStart(6, '0');
+    } while (randomColor.toUpperCase() === '#FFFFFF');
+    return randomColor;
+}
+
+
+/**
+ * Formats the task details including dates and category colors.
+ * @param {Object} taskData - The extracted task data.
+ * @param {Object} htmlContent - The generated HTML content.
+ * @returns {Object} Formatted task details.
+ */
+function formatTaskDetails(taskData, htmlContent) {
+    const { prio, category, description, title, duedate } = taskData;
+    const priorityImage = priorityImages[prio] || './assets/img/prio_media.png';
+    const categoryColor = CategoryColors[category] || { background: '#000000', color: '#FFFFFF' };
+
+    const dueDateObj = new Date(duedate);
+    const formattedDueDate = dueDateObj.toLocaleDateString('de-DE', { day: '2-digit', month: '2-digit', year: 'numeric' });
+
+    return {
+        category,
+        categoryColor,
+        title,
+        description,
+        formattedDueDate,
+        prio,
+        priorityImage,
+        ...htmlContent
+    };
+}
+
+
+
+/**
+ * Renders HTML elements with processed task details.
+ * @param {Object} taskDetails - Processed task details.
+ * @returns {void}
+ */
+function renderTaskElements(taskDetails) {
+    const {
+        category,
+        categoryColor,
+        title,
+        description,
+        formattedDueDate,
+        prio,
+        priorityImage,
+        assignedNamesHTMLSeparated,
+        assigntoHTML,
+        subtaskHTML
+    } = taskDetails;
+
+    updateCategoryBox(category, categoryColor);
+    updateTaskDetails(title, description, formattedDueDate, prio, priorityImage, assignedNamesHTMLSeparated, assigntoHTML, subtaskHTML);
+}
+
+/**
+ * Updates the category box in the task dialog.
+ * @param {string} category - The category of the task.
+ * @param {Object} categoryColor - The color object for the category.
+ * @returns {void}
+ */
+function updateCategoryBox(category, categoryColor) {
+    const categoryBox = document.getElementById('CategoryBox');
+    categoryBox.innerText = category;
+    categoryBox.style.backgroundColor = categoryColor.background;
+}
+
+/**
+ * Updates the task details in the task dialog.
+ * @param {string} title - The title of the task.
+ * @param {string} description - The description of the task.
+ * @param {string} formattedDueDate - The formatted due date of the task.
+ * @param {string} prio - The priority of the task.
+ * @param {string} priorityImage - The image URL for the task priority.
+ * @param {string} assignedNamesHTMLSeparated - HTML string for assigned names.
+ * @param {string} assigntoHTML - HTML string for assigned task.
+ * @param {string} subtaskHTML - HTML string for subtasks.
+ * @returns {void}
+ */
+function updateTaskDetails(title, description, formattedDueDate, prio, priorityImage, assignedNamesHTMLSeparated, assigntoHTML, subtaskHTML) {
+    const headline = document.getElementById('HeadlineBox');
+    const descriptionDetails = document.getElementById('descriptionDetails');
+    const dueDate = document.getElementById('dueDate');
+    const priority = document.getElementById('Priority');
+    const priorityImg = document.getElementById('PriorityImg');
+    const assignedInitials = document.getElementById('assignedInitials');
+    const assignedName = document.getElementById('assignedName');
+    const subtaskContainer = document.getElementById('subtaskDialogText');
+
+    headline.innerText = title;
+    dueDate.innerText = formattedDueDate;
+    priority.innerText = prio;
+    priorityImg.src = priorityImage;
+    assignedInitials.innerHTML = assignedNamesHTMLSeparated;
+    assignedName.innerHTML = assigntoHTML;
+    subtaskContainer.innerHTML = subtaskHTML;
+
+    // Check if description is provided before setting its value
+    if (description) {
+        descriptionDetails.innerText = description;
+    } else {
+        // If description is empty or null, hide or clear the element
+        descriptionDetails.innerText = ''; // or descriptionDetails.style.display = 'none'; to hide
+    }
+}
+
+
+/**
  * Renders the task dialog based on the provided task ID.
  * @param {string} taskid - The ID of the task to render the dialog for.
  * @returns {void}
  */
-async function renderTaskDialog(taskid) {
+async function renderTaskDialog(taskid, subtaskid) {
     try {
-        let tasks = await fetchData();
-        let selectedTask = tasks.find(item => item.id === taskid);
+        const tasks = await fetchTaskData();
+        const selectedTask = findSelectedTask(tasks, taskid);
         if (!selectedTask) {
             return;
         }
-        let { assignto = [], subtask = [], prio, category, description, title, duedate } = selectedTask;
-        let assignedNamesHTML = generateAssignedNamesHTML(assignto);
-        let priorityImage = priorityImages[prio] || './assets/img/prio_media.png';
-        let categoryColor = CategoryColors[category] || { background: '#000000', color: '#FFFFFF' };
-        let assigntoHTML = assignto.map(name => `<p>${name}</p>`).join('');
-        let assignedNamesHTMLSeparated = assignedNamesHTML.split(',').map(name => `<p>${name}</p>`).join('');
-        let subtaskHTML = subtask.map(task => `
-            <div class="subtaskItem">
-                <input type="checkbox">
-                <p>${task}</p>
-            </div>
-        `).join('');
-        let taskDetailsDialog = document.getElementById('TaskDetailsDialog');
-        let categoryBox = document.getElementById('CategoryBox');
-        let headline = document.getElementById('HeadlineBox');
-        let descriptionDetails = document.getElementById('descriptionDetails');
-        let dueDate = document.getElementById('dueDate');
-        let dueDateObj = new Date(duedate);
-        let formattedDueDate = dueDateObj.toLocaleDateString('de-DE', { day: '2-digit', month: '2-digit', year: 'numeric' });
-        let priority = document.getElementById('Priority');
-        let priorityImg = document.getElementById('PriorityImg');
-        let assignedInitials = document.getElementById('assignedInitials');
-        let assignedName = document.getElementById('assignedName');
-        let subtaskContainer = document.getElementById('subtaskDialogText');
-        if (!taskDetailsDialog) {
-            return;
-        }
-        categoryBox.innerText = category;
-        categoryBox.style.backgroundColor = categoryColor.background;
-        headline.innerText = title;
-        descriptionDetails.innerText = description;
-        dueDate.innerText = formattedDueDate;
-        priority.innerText = prio;
-        priorityImg.src = priorityImage;
-        assignedInitials.innerHTML = assignedNamesHTMLSeparated;
-        assignedName.innerHTML = assigntoHTML;
-        subtaskContainer.innerHTML = subtaskHTML;
+
+        const taskDetails = await processTaskDetails(selectedTask);
+        renderTaskElements(taskDetails);
     } catch (error) {
         console.error('Error rendering task dialog:', error);
+        handleError(error);
     }
-};
+}
 
-//Relevante Funktionen displayTasks, (insertTasksIntoDOM Muss evtl geleert werden), =>createTaskHTML
-//Releveante Variabeln: assignedNamesHTML, descriptionSection, task.title
+/**
+ * Handles errors that occur during rendering of the task dialog.
+ * @param {Error} error - The error object.
+ * @returns {void}
+ */
+function handleError(error) {
+    console.error('Error rendering task dialog:', error);
+}
+
+
 function searchTask() {
     let search = document.getElementById('search').value;
     search = search.toLowerCase();
@@ -540,16 +732,262 @@ function searchTask() {
     }
 }
 
-function createTaskHTML1(task, taskid, assignedNamesHTML, subtaskCountHTML, priorityImage, categoryColor, search) {
+
+function shouldCreateTaskElement(task, assignedNamesHTML, search) {
     if (activeSearch) {
-      
-        if (assignedNamesHTML.toLowerCase().includes(search) ||
-            (task.description && task.description.toLowerCase().includes(search)) ||
-            task.title.toLowerCase().includes(search)) {
-            return generateTaskHTML(task, taskid, assignedNamesHTML, subtaskCountHTML, priorityImage, categoryColor);
-        }
-    } else {
-        return generateTaskHTML(task, taskid, assignedNamesHTML, subtaskCountHTML, priorityImage, categoryColor);
+        return checkSearchInput(task, assignedNamesHTML, search);
     }
-    return '';
+    return true;
+}
+
+
+function checkSearchInput(task, assignedNamesHTML, search) {
+    return assignedNamesHTML.toLowerCase().includes(search) ||
+        (task.description && task.description.toLowerCase().includes(search)) ||
+        task.title.toLowerCase().includes(search);
+}
+
+
+function openEditTask() {
+    let content = document.getElementById('editTaskOverlay');
+
+    content.classList.remove('hidden');
+}
+
+
+function addEmptyMessage(container, text) {
+    if (container.children.length === 0) {
+        let p = document.createElement('p');
+        p.textContent = text;
+        p.className = 'empty-text';
+        container.appendChild(p);
+    }
+}
+
+
+function checkEmptyTaskContainers() {
+    let container1 = document.getElementById('to-do-tasks-container');
+    let container2 = document.getElementById('in-progress-tasks-container');
+    let container3 = document.getElementById('await-feedback-tasks-container');
+    let container4 = document.getElementById('done-tasks-container');
+
+    addEmptyMessage(container1, 'No tasks To do');
+    addEmptyMessage(container2, 'No tasks In progress');
+    addEmptyMessage(container3, 'No tasks Await feedback');
+    addEmptyMessage(container4, 'No tasks Done');
+}
+
+/**
+ * Moves the task up in the task list.
+ * 
+ * @param {Event} event - The event object.
+ */
+function moveTaskUp(event) {
+    event.stopPropagation();
+    const taskElement = event.target.closest('.toDoBox');
+    const taskId = taskElement.id;
+    const currentStatus = taskElement.closest('.statusTasks').id;
+    const newStatus = getPreviousStatus(currentStatus);
+
+    if (newStatus) {
+        updateTaskStatus(taskId, newStatus).then(() => {
+            searchTask();
+            updateArrowVisibility(); // Update arrow visibility after task is moved
+        });
+    }
+}
+
+/**
+ * Moves the task down in the task list.
+ * 
+ * @param {Event} event - The event object.
+ */
+function moveTaskDown(event) {
+    event.stopPropagation();
+    const taskElement = event.target.closest('.toDoBox');
+    const taskId = taskElement.id;
+    const currentStatus = taskElement.closest('.statusTasks').id;
+    const newStatus = getNextStatus(currentStatus);
+
+    if (newStatus) {
+        updateTaskStatus(taskId, newStatus).then(() => {
+            searchTask();
+            updateArrowVisibility(); // Update arrow visibility after task is moved
+        });
+    }
+}
+
+/**
+ * Gets the previous status in the task workflow.
+ * 
+ * @param {string} currentStatus - The current status of the task.
+ * @returns {string|null} The previous status or null if there is no previous status.
+ */
+function getPreviousStatus(currentStatus) {
+    const statuses = ['todo', 'inprogress', 'awaitfeedback', 'done'];
+    const currentIndex = statuses.indexOf(currentStatus);
+
+    return currentIndex > 0 ? statuses[currentIndex - 1] : null;
+}
+
+/**
+ * Gets the next status in the task workflow.
+ * 
+ * @param {string} currentStatus - The current status of the task.
+ * @returns {string|null} The next status or null if there is no next status.
+ */
+function getNextStatus(currentStatus) {
+    const statuses = ['todo', 'inprogress', 'awaitfeedback', 'done'];
+    const currentIndex = statuses.indexOf(currentStatus);
+
+    return currentIndex < statuses.length - 1 ? statuses[currentIndex + 1] : null;
+}
+
+/**
+ * Resets the display property of all arrows.
+ */
+function resetAllArrows() {
+    const allArrows = document.querySelectorAll('.arrowContainer #ArrowDrop, .arrowContainer #ArrowDropDown');
+    allArrows.forEach(arrow => arrow.style.display = '');
+}
+
+/**
+ * Hides the upward arrow in the "To Do" column.
+ */
+function hideUpArrowInToDo() {
+    const todoColumn = document.getElementById('todo');
+    if (todoColumn) {
+        const upArrows = todoColumn.querySelectorAll('.arrowContainer #ArrowDrop');
+        upArrows.forEach(arrow => arrow.style.display = 'none');
+    }
+}
+
+/**
+ * Hides the downward arrow in the "Done" column.
+ */
+function hideDownArrowInDone() {
+    const doneColumn = document.getElementById('done');
+    if (doneColumn) {
+        const downArrows = doneColumn.querySelectorAll('.arrowContainer #ArrowDropDown');
+        downArrows.forEach(arrow => arrow.style.display = 'none');
+    }
+}
+
+/**
+ * Calls the functions to hide arrows in the respective columns.
+ */
+function updateArrowVisibility() {
+    resetAllArrows(); // Reset all arrows first
+    hideUpArrowInToDo();
+    hideDownArrowInDone();
+}
+
+// Call this function after rendering the tasks
+displayTasks().then(() => {
+    updateArrowVisibility();
+});
+
+
+// EDIT TASK
+
+function openEditTask() {
+    const taskId = getCurrentTaskId();
+    if (!taskId) {
+        console.error('Task-ID fehlt');
+        return;
+    }
+
+    fetch(`${BASE_URL}tasks/${taskId}.json`)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP-Fehler! Status: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then(task => {
+            if (!task) {
+                throw new Error('Task nicht gefunden');
+            }
+
+            console.log('Geladene Task-Details:', task);
+
+            // Setze die Werte in die Editierfelder
+            document.getElementById('HeadlineBox').value = task.title || '';
+            document.getElementById('description').value = task.description || '';
+            document.getElementById('assignedtoinput').value = (task.assignto || []).join(', ') || '';
+            document.getElementById('duedate').value = task.duedate || '';
+            document.getElementById('priobuttons').value = task.prio || '';
+
+            // Zeige das Editierfenster
+            document.getElementById('editTaskOverlay').classList.remove('hidden');
+        })
+        .catch(error => {
+            console.error('Fehler beim Laden der Task-Details:', error);
+            alert('Fehler beim Laden der Task-Details: ' + error.message);
+        });
+}
+
+// Funktion zum Schließen des Editierfensters
+function closeEditTask() {
+    document.getElementById('editTaskOverlay').classList.add('hidden');
+}
+
+
+function editTask() {
+    // Get the task ID from the task details dialog
+    const taskId = document.getElementById('TaskDetailsDialog').getAttribute('data-taskid');
+
+    // Get the updated values from the form
+    const updatedTask = {
+        title: document.getElementById('tasktitle').value,
+        description: document.getElementById('description').value,
+        assignto: document.getElementById('assignedtoinput').value.split(',').map(name => name.trim()),
+        duedate: document.getElementById('duedate').value,
+        prio: document.getElementById('priobuttons').value
+    };
+
+
+
+    // Save the updated task to the database or state
+    fetch(`${BASE_URL}tasks/${taskId}.json`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(updatedTask)
+    })
+        .then(response => response.json())
+        .then(() => {
+            // Hide the edit task overlay
+            document.getElementById('editTaskOverlay').classList.add('hidden');
+
+            // Refresh the task list to show the updated task details
+            displayTasks();
+        })
+        .catch(error => console.error('Error updating task:', error));
+}
+
+function getCurrentTaskId() {
+    return document.getElementById('TaskDetailsDialog').getAttribute('data-taskid');
+}
+
+
+function editTaskSlideOutToRight() {
+    document.getElementById('editTaskOverlay').classList.add('hidden');
+}
+
+// Funktion zum Anzeigen der Task-Details und Setzen der Task-ID
+function showTaskDetails(task) {
+    const taskDetailsDialog = document.getElementById('TaskDetailsDialog');
+    taskDetailsDialog.setAttribute('data-taskid', task.id);
+
+    // Zeige das Popup
+    document.getElementById('popup').classList.remove('hidden');
+    renderEditTask(task);
+}
+
+
+// Funktion, um die aktuelle Task-ID zu holen
+function getCurrentTaskId() {
+    return document.getElementById('TaskDetailsDialog').getAttribute('data-taskid');
 }
