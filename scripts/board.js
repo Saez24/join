@@ -533,13 +533,14 @@ function generateHTMLContent(assignto, subtasks) {
 
     const subtaskHTML = subtasks.map((task, index) => `
         <div class="subtaskItem">
-            <input id="subtask-${index}" type="checkbox" ${subtaskStatus[task] ? 'checked' : ''} onchange="updateSubtaskStatus('${index}', this.checked)">
-            <p>${task}</p>
+            <input id="subtask-${index}" type="checkbox" ${task.Boolean ? 'checked' : ''} onchange="updateSubtaskStatus('${index}', this.checked)">
+            <p>${task.Titel}</p>
         </div>
     `).join('');
 
     return { assignedNamesHTML, assigntoHTML, assignedNamesHTMLSeparated, subtaskHTML };
 }
+
 
 /**
  * Updates the subtask status and progress bar.
