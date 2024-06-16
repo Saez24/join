@@ -36,7 +36,8 @@ function getTaskDetails() {
         title: document.getElementById('tasktitle').value,
         duedate: document.getElementById('duedate').value,
         category: document.getElementById('taskcategoryinput').value,
-        prio: activeButton ? activeButton.id : null
+        prio: activeButton ? activeButton.id : null,
+        description: document.getElementById('description').value
     };
 };
 
