@@ -102,7 +102,10 @@ function getSubtasks() {
     let subtasksElements = document.querySelectorAll('.addedtask span');
     let subtasks = [];
     subtasksElements.forEach((subtask) => {
-        subtasks.push(subtask.innerText);
+        subtasks.push({
+            Boolean: false,
+            Titel: subtask.innerText
+        });
     });
     return subtasks;
 };
