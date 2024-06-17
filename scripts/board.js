@@ -205,9 +205,16 @@ function generateAssignedNamesHTML(assignedNames) {
     return html;
 };
 
-function generateSubtaskCountHTML(subtasks, isChecked) {
+/**
+ * Generates HTML content for displaying subtask count and progress bar.
+ * @param {Array} subtasks - The array of subtasks.
+ * @param {boolean} isChecked - The state of the checkbox.
+ * @param {string} taskId - The ID of the task.
+ * @returns {string} HTML content for subtask count and progress bar.
+ */
+function generateSubtaskCountHTML(subtasks, isChecked, taskId) {
     let totalSubtasks = subtasks ? subtasks.length : 0;
-    let completedSubtasks = subtasks ? subtasks.filter(subtask => subtask.completed).length : 0;
+    let completedSubtasks = subtasks ? subtasks.filter(subtask => subtask.Boolean).length : 0;
 
     // Calculate progress percentage based on total and completed subtasks
     let progressPercentage = totalSubtasks > 0 ? (completedSubtasks / totalSubtasks) * 100 : 0;
@@ -217,27 +224,14 @@ function generateSubtaskCountHTML(subtasks, isChecked) {
     // Display progress bar and count only if there are subtasks or if the checkbox is checked
     if (totalSubtasks > 0 || isChecked) {
         let progressBarHTML = `<progress value="${progressPercentage}" max="100"></progress>`;
-        return `<div id="subtaskProgress" class="subtaskProgress">${progressBarHTML}<p class="subtaskCount">${count}</p></div>`;
+        return `<div id="subtaskProgress_${taskId}" class="subtaskProgress">${progressBarHTML}<p class="subtaskCount">${count}</p></div>`;
     } else {
         // If there are no subtasks and checkbox is not checked, return an empty string
         return '';
     }
 }
 
-function updateSubtaskHTML() {
-    let checkbox = document.getElementById('myCheckbox');
-    let isChecked = checkbox.checked;
 
-    let subtasks = [
-        { completed: true },
-        { completed: false },
-        { completed: true }
-        // Add more subtasks as needed
-    ];
-
-    let subtaskHTML = generateSubtaskCountHTML(subtasks, isChecked);
-    document.getElementById('subtaskContainer').innerHTML = subtaskHTML;
-}
 
 /**
  * Creates a task element.
@@ -249,18 +243,19 @@ function updateSubtaskHTML() {
 function createTaskElement(task, search) {
     let taskid = task.id; // Use the task ID from Firebase
     let assignedNamesHTML = generateAssignedNamesHTML(task.assignto || []);
-    let subtaskCountHTML = generateSubtaskCountHTML(task.subtask || []);
+    let subtaskCountHTML = generateSubtaskCountHTML(task.subtask || [], false, taskid); // Pass taskid here
     let priorityImage = priorityImages[task.prio] || './assets/img/prio_media.png';
     let categoryColor = CategoryColors[task.category] || { background: '#000000', color: '#FFFFFF' };
     let descriptionSection = task.description ? `<p class="descriptionBox">${task.description}</p>` : '';
 
     if (shouldCreateTaskElement(task, assignedNamesHTML, search)) {
-        setTimeout(checkEmptyTaskContainers, 0); //Warum ein Timeout?
+        setTimeout(checkEmptyTaskContainers, 0); // Warum ein Timeout?
         return createTaskHTML(task, taskid, assignedNamesHTML, subtaskCountHTML, priorityImage, categoryColor, descriptionSection);
     }
     setTimeout(checkEmptyTaskContainers, 0);
     return '';
 };
+
 
 /**
  * Creates the HTML string for a task element.
@@ -544,22 +539,6 @@ function generateHTMLContent(assignto, subtasks, taskId) {
     return { assignedNamesHTML, assigntoHTML, assignedNamesHTMLSeparated, subtaskHTML };
 };
 
-/**
- * Updates the subtask status and progress bar.
- * @param {string} task - The name of the subtask.
- * @param {boolean} isChecked - The checked status of the subtask.
- */
-function updateSubtaskStatus(taskId, index, isChecked) {
-    subtaskStatus[taskId] = subtaskStatus[taskId] || {};
-    subtaskStatus[taskId][index] = isChecked;
-
-    // Update the progress bar
-    const progressBarContainer = document.getElementById('subtaskProgressContainer');
-    if (progressBarContainer) {
-        progressBarContainer.innerHTML = generateSubtaskCountHTML(Object.keys(subtaskStatus));
-    }
-};
-
 async function updateSubtaskStatus(taskId, index, isChecked) {
     try {
         // Fetch current tasks from Firebase
@@ -583,17 +562,16 @@ async function updateSubtaskStatus(taskId, index, isChecked) {
             }
         });
 
-        // Update UI or any other logic after successful update
-        const progressBarContainer = document.getElementById('subtaskProgressContainer');
+        // Update UI after successful update
+        const progressBarContainer = document.getElementById(`subtaskProgress_${taskId}`);
         if (progressBarContainer) {
-            progressBarContainer.innerHTML = generateSubtaskCountHTML(Object.keys(subtaskStatus));
+            progressBarContainer.innerHTML = generateSubtaskCountHTML(tasksObject[taskId].subtask, isChecked, taskId);
         }
 
     } catch (error) {
         console.error('Error updating task status:', error);
     }
-}
-
+};
 
 /**
  * Processes the details of the selected task.
