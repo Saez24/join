@@ -484,7 +484,7 @@ async function fetchTaskData() {
         console.error('Error fetching task data:', error);
         throw error;
     }
-}
+};
 
 /**
  * Finds the selected task from the provided tasks based on its ID.
@@ -494,7 +494,7 @@ async function fetchTaskData() {
  */
 function findSelectedTask(tasks, taskid) {
     return tasks.find(item => item.id === taskid);
-}
+};
 
 /**
  * Extracts and returns the relevant task data from the selected task object.
@@ -503,16 +503,19 @@ function findSelectedTask(tasks, taskid) {
  */
 function extractTaskData(selectedTask) {
     const { assignto = [], subtask = [], prio, category, description, title, duedate } = selectedTask;
-    return { assignto, subtask, prio, category, description, title, duedate };
-}
+    const taskId = selectedTask.id;
+    console.log(taskId);  // Überprüfen Sie, ob die taskId korrekt ist
+    return { assignto, subtask, prio, category, description, title, duedate, taskId };
+};
 
 /**
  * Generates HTML content for the task details.
  * @param {Array} assignto - The list of assigned users.
  * @param {Array} subtasks - The list of subtasks.
+ * @param {string} taskId - The ID of the task.
  * @returns {Object} HTML content for task details.
  */
-function generateHTMLContent(assignto, subtasks) {
+function generateHTMLContent(assignto, subtasks, taskId) {
     const assignedNamesHTML = generateAssignedNamesHTML(assignto);
     const assigntoHTML = assignto.map(name => ``).join('');
 
@@ -533,30 +536,29 @@ function generateHTMLContent(assignto, subtasks) {
 
     const subtaskHTML = subtasks.map((task, index) => `
         <div class="subtaskItem">
-            <input id="subtask-${index}" type="checkbox" ${task.Boolean ? 'checked' : ''} onchange="updateSubtaskStatus('${index}', this.checked)">
+            <input id="subtask-${index}" type="checkbox" ${task.Boolean ? 'checked' : ''} onchange="updateSubtaskStatus('${taskId}', ${index}, this.checked)">
             <p>${task.Titel}</p>
         </div>
     `).join('');
 
     return { assignedNamesHTML, assigntoHTML, assignedNamesHTMLSeparated, subtaskHTML };
-}
-
+};
 
 /**
  * Updates the subtask status and progress bar.
  * @param {string} task - The name of the subtask.
  * @param {boolean} isChecked - The checked status of the subtask.
  */
-function updateSubtaskStatus(task, isChecked) {
-    subtaskStatus[task] = isChecked;
+function updateSubtaskStatus(taskId, index, isChecked) {
+    subtaskStatus[taskId] = subtaskStatus[taskId] || {};
+    subtaskStatus[taskId][index] = isChecked;
 
     // Update the progress bar
     const progressBarContainer = document.getElementById('subtaskProgressContainer');
     if (progressBarContainer) {
         progressBarContainer.innerHTML = generateSubtaskCountHTML(Object.keys(subtaskStatus));
     }
-}
-
+};
 
 /**
  * Processes the details of the selected task.
@@ -565,9 +567,9 @@ function updateSubtaskStatus(task, isChecked) {
  */
 async function processTaskDetails(selectedTask) {
     const taskData = extractTaskData(selectedTask);
-    const htmlContent = generateHTMLContent(taskData.assignto, taskData.subtask);
+    const htmlContent = generateHTMLContent(taskData.assignto, taskData.subtask, taskData.taskId);
     return formatTaskDetails(taskData, htmlContent);
-}
+};
 
 /**
  * Generates a random color excluding white.
@@ -581,8 +583,7 @@ function generateRandomColor() {
         randomColor = "#" + Math.floor(Math.random() * 16777215).toString(16).padStart(6, '0');
     } while (randomColor.toUpperCase() === '#FFFFFF');
     return randomColor;
-}
-
+};
 
 /**
  * Formats the task details including dates and category colors.
@@ -608,9 +609,7 @@ function formatTaskDetails(taskData, htmlContent) {
         priorityImage,
         ...htmlContent
     };
-}
-
-
+};
 
 /**
  * Renders HTML elements with processed task details.
@@ -633,7 +632,7 @@ function renderTaskElements(taskDetails) {
 
     updateCategoryBox(category, categoryColor);
     updateTaskDetails(title, description, formattedDueDate, prio, priorityImage, assignedNamesHTMLSeparated, assigntoHTML, subtaskHTML);
-}
+};
 
 /**
  * Updates the category box in the task dialog.
@@ -645,7 +644,7 @@ function updateCategoryBox(category, categoryColor) {
     const categoryBox = document.getElementById('CategoryBox');
     categoryBox.innerText = category;
     categoryBox.style.backgroundColor = categoryColor.background;
-}
+};
 
 /**
  * Updates the task details in the task dialog.
@@ -684,8 +683,7 @@ function updateTaskDetails(title, description, formattedDueDate, prio, priorityI
         // If description is empty or null, hide or clear the element
         descriptionDetails.innerText = ''; // or descriptionDetails.style.display = 'none'; to hide
     }
-}
-
+};
 
 /**
  * Renders the task dialog based on the provided task ID.
@@ -706,7 +704,7 @@ async function renderTaskDialog(taskid, subtaskid) {
         console.error('Error rendering task dialog:', error);
         handleError(error);
     }
-}
+};
 
 /**
  * Handles errors that occur during rendering of the task dialog.
@@ -715,8 +713,7 @@ async function renderTaskDialog(taskid, subtaskid) {
  */
 function handleError(error) {
     console.error('Error rendering task dialog:', error);
-}
-
+};
 
 function searchTask() {
     let search = document.getElementById('search').value;
