@@ -894,7 +894,27 @@ function updateArrowVisibility() {
     hideDownArrowInDone();
 }
 
-// Call this function after rendering the tasks
-displayTasks().then(() => {
-    updateArrowVisibility();
+/**
+ * Funktion um einen MutationObserver zu erstellen und zu initialisieren
+ * 
+ * @param {string} columnId - Die ID der zu beobachtenden Spalte
+ * @param {Function} callback - Die Callback-Funktion, die bei Änderungen aufgerufen wird
+ */
+function observeColumn(columnId, callback) {
+    const column = document.getElementById(columnId);
+    if (column) {
+        const observer = new MutationObserver(callback);
+        observer.observe(column, { childList: true, subtree: true });
+    }
+}
+
+// Initialisierung der Beobachtung für ToDo- und Done-Spalten
+document.addEventListener('DOMContentLoaded', (event) => {
+    observeColumn('todo', updateArrowVisibility);
+    observeColumn('done', updateArrowVisibility);
+
+    // Initialer Aufruf der Funktionen
+    displayTasks().then(() => {
+        updateArrowVisibility();
+    });
 });
