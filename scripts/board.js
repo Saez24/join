@@ -536,12 +536,9 @@ function generateHTMLContent(assignto, subtasks, taskId) {
         </div>
     `).join('');
 
-    // Load the subtaskHTML into the element with id 'subtaskItem'
-    document.getElementById('subtaskItem').innerHTML = subtaskHTML;
-
     return { assignedNamesHTML, assigntoHTML, assignedNamesHTMLSeparated, subtaskHTML };
-}
 
+};
 
 async function updateSubtaskStatus(taskId, index, isChecked) {
     try {

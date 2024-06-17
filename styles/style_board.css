@@ -42,6 +42,7 @@ body {
     animation: slide-in 0.8s both;
     position: relative;
     font-size: 20px;
+    overflow-y: hidden;
 }
 
 .EditTaskDetails {
@@ -679,6 +680,10 @@ body {
     border-radius: 10px;
     line-height: 48px;
     background-color: rgba(231, 231, 231, 1);
+}
+
+.taskDialogContent {
+    overflow-y: auto;
 }
 
 @media screen and (max-width: 1550px) {
