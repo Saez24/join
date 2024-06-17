@@ -186,11 +186,13 @@ body {
 
 .subtaskItem input[type="checkbox"] {
     appearance: none;
-    width: 18px;
-    height: 18px;
-    border: 1px solid black;
+    height: 24px;
+    width: 32px;
+    border: 0px;
+    background-image: url(../assets/img/unchecked.png);
+    background-repeat: no-repeat;
+    /* background-position: center right 20px; */
     border-radius: 4px;
-    background-color: white;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -201,11 +203,10 @@ body {
 }
 
 .subtaskItem input[type="checkbox"]:checked {
-    background-color: white;
+    background-image: url(../assets/img/checked.png);
 }
 
 .subtaskItem input[type="checkbox"]:checked::before {
-    content: '✓';
     color: black;
     font-size: 18px;
     position: absolute;
