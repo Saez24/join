@@ -560,6 +560,41 @@ function updateSubtaskStatus(taskId, index, isChecked) {
     }
 };
 
+async function updateSubtaskStatus(taskId, index, isChecked) {
+    try {
+        // Fetch current tasks from Firebase
+        let response = await fetch(BASE_URL + "tasks.json");
+        let tasksObject = await response.json();
+
+        // Ensure subtasks array exists and update the Boolean value
+        if (tasksObject[taskId]?.subtask && tasksObject[taskId].subtask[index]) {
+            tasksObject[taskId].subtask[index].Boolean = isChecked;
+        } else {
+            console.error(`Subtask with index ${index} not found for task ${taskId}`);
+            return;
+        }
+
+        // Update tasks in Firebase
+        await fetch(BASE_URL + "tasks.json", {
+            method: 'PATCH',
+            body: JSON.stringify({ [taskId]: tasksObject[taskId] }),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+
+        // Update UI or any other logic after successful update
+        const progressBarContainer = document.getElementById('subtaskProgressContainer');
+        if (progressBarContainer) {
+            progressBarContainer.innerHTML = generateSubtaskCountHTML(Object.keys(subtaskStatus));
+        }
+
+    } catch (error) {
+        console.error('Error updating task status:', error);
+    }
+}
+
+
 /**
  * Processes the details of the selected task.
  * @param {Object} selectedTask - The selected task object.
