@@ -862,25 +862,25 @@ body {
 }
 
 
-/* /* ===== Scrollbar CSS =====*/
+/* /* ===== Scrollbar CSS =====
 * {
     scrollbar-width: thin;
     scrollbar-color: #c0c0c0 #ededed;
-}
+} */
 
 *::-webkit-scrollbar {
-    width: 16px;
+    width: 3px;
+    height: 3px;
 }
 
 *::-webkit-scrollbar-track {
-    background: #ededed;
+    background: rgb(246, 247, 248);
 }
 
 *::-webkit-scrollbar-thumb {
-    background-color: #787878;
+    background-color: rgb(246, 247, 248);
     border-radius: 19px;
-    border: 300px dashed #911d1d;
-    border: 300px dashed #911d1d;
+    background: #344358;
 }
 
 /* EDIT TASK */
@@ -989,20 +989,6 @@ textarea:hover {
     position: relative;
     display: none;
     margin-bottom: 30px;
-}
-
-.dropdown_box {
-    display: none;
-    background-color: #ffffff;
-    border-radius: 10px;
-    position: static;
-    top: calc(100% + 0px);
-    left: 0;
-    width: 100%;
-    max-height: 185px;
-    overflow-y: auto;
-    z-index: 999;
-    padding-right: 14px;
 }
 
 .right-container {

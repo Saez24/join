@@ -337,6 +337,7 @@ label {
     max-height: 185px;
     overflow-y: auto;
     z-index: 999;
+    overflow-x: hidden;
 }
 
 .category_dropdown_box {
@@ -350,6 +351,7 @@ label {
     max-height: 185px;
     overflow-y: auto;
     z-index: 999;
+    overflow-x: hidden;
 }
 
 .separator {
@@ -366,6 +368,7 @@ label {
 .subtask-container {
     height: 90px;
     overflow-y: auto;
+    overflow-x: hidden;
 }
 
 .aktive-subtask {
@@ -394,6 +397,7 @@ label {
     padding-left: 10px;
     padding-right: 12px;
     width: 100%;
+    font-size: 14px;
 }
 
 .addedtask:hover {
@@ -401,6 +405,32 @@ label {
     background-color: #EEEEEE;
     border-radius: 10px;
     height: 40px;
+}
+
+.subtask-container::-webkit-scrollbar {
+    width: 3px;
+}
+
+.subtask-container::-webkit-scrollbar-thumb {
+    background: #344358;
+}
+
+.dropdown_box::-webkit-scrollbar {
+    width: 3px;
+}
+
+.dropdown_box::-webkit-scrollbar-thumb {
+    background: #344358;
+    height: 80px;
+}
+
+.category_dropdown_box::-webkit-scrollbar {
+    width: 3px;
+}
+
+.category_dropdown_box::-webkit-scrollbar-thumb {
+    background: #344358;
+    height: 80px;
 }
 
 .subtask-buttons {
