@@ -342,6 +342,8 @@ body {
     flex-wrap: wrap;
     padding-bottom: 100px;
     flex-direction: row;
+    height: 550px;
+    overflow-y: auto;
 }
 
 .statusTasks {
@@ -559,7 +561,7 @@ body {
     flex-direction: column;
     right: 0;
     top: 70px;
-    height: 700px;
+    height: 720px;
     line-height: 20px;
     opacity: 1;
     position: relative;
@@ -599,12 +601,9 @@ body {
 }
 
 .bottom-container {
-    justify-content: space-around !important;
-    margin-left: 0 !important;
-}
-
-.dropdown_container {
-    padding-right: 0 !important;
+    justify-content: space-between !important;
+    margin-left: 65px !important;
+    width: 89% !important;
 }
 
 .drag-area-highlight {
@@ -1004,10 +1003,6 @@ textarea:hover {
     padding-right: 14px;
 }
 
-.separator {
-    display: none;
-}
-
 .right-container {
     display: flex;
     flex-direction: column;
@@ -1097,10 +1092,6 @@ textarea:hover {
     background-position: center right 28px, center right 28px, center right 8px;
 }
 
-.subtask-container {
-    margin-top: 10px;
-}
-
 .required-2::before {
     content: "*";
     color: red;
@@ -1110,21 +1101,6 @@ textarea:hover {
     padding-left: 10px;
 }
 
-.create-button {
-    background: #2A3647;
-    border-radius: 10px;
-    width: 124px;
-    color: white;
-    cursor: pointer;
-    font-weight: 700;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 4px;
-    font-size: 14px;
-    background-size: 16px 16px;
-    height: 38px;
-}
 
 .create-button img {
     width: 126px;

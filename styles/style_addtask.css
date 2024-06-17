@@ -354,12 +354,18 @@ label {
 
 .separator {
     border: 1px solid #D1D1D1;
+    height: 425px;
 }
 
 .subtask {
     background-image: url("../assets/img/plus.png");
     background-repeat: no-repeat;
     background-position: center right 4px;
+}
+
+.subtask-container {
+    height: 90px;
+    overflow-y: auto;
 }
 
 .aktive-subtask {
@@ -370,9 +376,6 @@ label {
     background-position: center right 28px, center right 28px, center right 8px;
 }
 
-.subtask-container {
-    margin-top: 10px;
-}
 
 .subtaskblock {
     display: flex;
@@ -432,13 +435,13 @@ label {
 .bottom-container {
     display: flex;
     position: fixed;
-    bottom: 20px;
-    justify-content: space-evenly;
+    bottom: 10px;
+    justify-content: space-around;
     align-items: center;
     height: 80px;
     width: 100%;
     left: 0px;
-    margin-left: 120px;
+    margin-left: 140px;
 }
 
 .bottom-container-mobile {
@@ -510,10 +513,7 @@ label {
     padding-left: 5px;
 }
 
-::-webkit-scrollbar {
-    display: none;
-    /* make scrollbar transparent */
-}
+
 
 .task-created {
     position: fixed;

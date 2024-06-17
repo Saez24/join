@@ -3,6 +3,7 @@ body {
     display: flex;
     background-color: rgb(246, 247, 248);
     overflow-x: hidden;
+    overflow-y: hidden;
 }
 
 .sidebar {
@@ -134,7 +135,7 @@ body {
 }
 
 .help-icon:hover {
-    transform: scale(1.2); 
+    transform: scale(1.2);
 }
 
 .bounding-box {
@@ -156,9 +157,10 @@ body {
 
 .profile-icon button:hover {
     background-color: #29ABE2;
+
     h2 {
         color: white;
-}
+    }
 }
 
 .profile-icon button h2 {
