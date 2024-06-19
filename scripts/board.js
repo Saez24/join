@@ -760,13 +760,6 @@ function checkSearchInput(task, assignedNamesHTML, search) {
 }
 
 
-function openEditTask() {
-    let content = document.getElementById('editTaskOverlay');
-
-    content.classList.remove('hidden');
-}
-
-
 function addEmptyMessage(container, text) {
     if (container.children.length === 0) {
         let p = document.createElement('p');

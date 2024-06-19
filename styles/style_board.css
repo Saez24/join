@@ -228,19 +228,24 @@ body {
 
 .deleteContainer:hover {
     font-weight: bold;
+    color: #29ABE2;
     background-color: #f0f0f0;
     border-radius: 10px;
+    cursor: pointer;
 }
 
 .editContainer:hover {
     font-weight: bold;
+    color: #29ABE2;
     background-color: #f0f0f0;
     background-color: #f0f0f0;
     border-radius: 10px;
+    
 }
 
 .editDeleteContainer {
     display: flex;
+    cursor: pointer;
     align-items: center;
     justify-content: center;
     gap: 8px;
@@ -926,8 +931,9 @@ body {
     justify-content: flex-end;
 }
 
-.separator {
+.separator-1px {
     display: block !important;
+    border: 1px solid #D1D1D1;
 }
 
 .main-edittask {

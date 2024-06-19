@@ -122,13 +122,11 @@
                         </div>
                     </div>
                     <div class="editDeleteWrapper">
-                        <div class="editDeleteContainer deleteContainer" onclick="openDeleteTask()"
-                            onmouseover="hoverDelete()" onmouseout="unhoverDelete()">
+                        <div class="editDeleteContainer deleteContainer" onclick="openDeleteTask()">
                             <img src="./assets/img/delete.png" alt="Delete">
                             <span>Delete</span>
                         </div>
-                        <div class="editDeleteContainer editContainer" onclick="openEditTask(getCurrentTaskId())"
-                            onmouseover="hoverEdit()" onmouseout="unhoverEdit()">
+                        <div class="editDeleteContainer editContainer" onclick="openEditTask()">
                             <img src="./assets/img/edit.png" alt="Edit">
                             <span>Edit</span>
                         </div>
@@ -147,98 +145,8 @@
         </div>
     </div>
     <!-- EDIT TASK OVERLAY -->
-    <!-- <div class="taskBoxBackground hidden" id="editTaskOverlay">
-        <div class="EditTaskDetails" id="editTaskCont"> 
-            <img class="closePopup" src="./assets/img/close.png" onclick="editTaskSlideOutToRight()" alt="Close">
-            <div class="main-edittask">
-                <div class="left-container-edit-task">
-                    <div class="inputfields">
-                        <span class="required">Title</span>
-                        <input id="HeadlineBox" required type="text" placeholder="Enter a title">
-                        <div id="error-message-placeholder"><span id="error-message-title" class="error-message">Please
-                                enter a title</span>
-                        </div>
-                    </div>
-                    <div class="description">
-                        <span>Description</span>
-                        <textarea class="textarea" name="Description" id="description"
-                            placeholder="Enter a Description"></textarea>
-                    </div>
-                    <div class="inputfields">
-                        <span>Assigned to</span>
-                        <div class="dropdown_container">
-                            <input oninput="handleAssignToInput()" onclick="selectAssignTo(), closeOnBackground(event)"
-                                id="assignedtoinput" class="dropdown-content-edit-task" name="assignedto"
-                                placeholder="Select contacts to assign">
-                            <div onclick="closeOnBackground(event)" id="assignedto" class="dropdown_box">
-                            </div>
-                        </div>
-                        <div class="button-container" id="selectedAssignTo">
-                        </div>
-                    </div>
-                </div>
-                <div class="separator"></div>
-                <div class="right-container"></div>
-                    <div class="inputfields">
-                        <span class="required">Due Date</span>
-                        <input onfocus="setDateRestriction()" id="duedate" name="duedate" class="datefield" required
-                            type="date" placeholder="dd/mm/yyyy">
-                        <div id="error-message-placeholder"><span id="error-message-date" class="error-message">Please
-                                enter
-                                a Date</span>
-                        </div>
-                    </div>
-                    <div class="prio">
-                        <span>Prio</span>
-                        <div id="priobuttons" class="prio-buttons">
-                            <button onclick="urgentButton()" id="urgent">Urgent <img src="./assets/img/prio_alta.png"
-                                    alt=""></button>
-                            <button onclick="mediumButton()" id="medium">Medium <img src="./assets/img/prio_media.png"
-                                    alt=""></button>
-                            <button onclick="lowButton()" id="low">Low <img src="./assets/img/prio_baja.png"
-                                    alt=""></button>
-                        </div>
-                    </div>
-                    <div class="inputfields">
-                        <span class="required">Category</span>
-                        <div class="dropdown_container">
-                            <input oninput="handleCategoryInput()" onclick="selectCategory(), closeOnBackground(event)"
-                                id="taskcategoryinput" class="dropdown-category-content-edit-task" name="taskcategory"
-                                placeholder="Select task category">
-                            <div onclick="closeOnBackground(event)" id="taskcategory" class="category_dropdown_box">
-
-                            </div>
-                        </div>
-                        <div id="error-message-placeholder"><span id="error-message-category"
-                                class="error-message">Please
-                                select
-                                category</span>
-                        </div>
-                    </div>
-                    <div class="inputfields">
-                        <span>Subtasks</span>
-                        <input onclick="openAddSubtaskField()" id="addsubtask" class="subtask" type="text"
-                            placeholder="Add new subtask">
-                        <input onclick="handleSubtaskClick(event), addSubtask(event)" id="subtask"
-                            class="aktive-subtask" type="text">
-                    </div>
-                    <div class="subtask-container">
-                        <div id="addsubtasks">
-
-                        </div>
-                    </div>
-                    <div class="bottom-container-mobile-edit-task submit-buttons">
-                        <span class="required-2">This field is required</span>
-                        <button onclick="editTask()" class="create-button">Ok<img src="./assets/img/check.png"
-                                alt=""></button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="task-created task-cont" id="task-created">
-                <p class="#">Task successfully edited</p>
-            </div>
-        </div> -->
+    <div class="taskBoxBackground hidden" id="editTaskOverlay">
+        </div>
 
     </div>
 
