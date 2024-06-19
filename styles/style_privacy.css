@@ -1,3 +1,14 @@
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    overflow-y: scroll; /* Stelle sicher, dass das Body-Element scrollbar ist */
+}
+
+html {
+    overflow-y: scroll; /* Sicherstellen, dass das HTML-Element scrollbar ist */
+}
+
 .everything {
     display: flex;
     align-items: flex-start;
@@ -98,4 +109,19 @@ mark {
     p {
         font-size: 16px;
     }
+}
+
+
+*::-webkit-scrollbar {
+    width: 3px;
+    height: 3px;
+}
+
+*::-webkit-scrollbar-track {
+    background: rgb(246, 247, 248);
+}
+
+*::-webkit-scrollbar-thumb {
+    border-radius: 19px;
+    background: #344358;
 }
