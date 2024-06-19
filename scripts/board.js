@@ -888,10 +888,10 @@ function updateArrowVisibility() {
 }
 
 /**
- * Funktion um einen MutationObserver zu erstellen und zu initialisieren
+ * Creates and initializes a MutationObserver for a column.
  * 
- * @param {string} columnId - Die ID der zu beobachtenden Spalte
- * @param {Function} callback - Die Callback-Funktion, die bei Änderungen aufgerufen wird
+ * @param {string} columnId - The ID of the column to observe
+ * @param {Function} callback - The callback function to call on mutations
  */
 function observeColumn(columnId, callback) {
     const column = document.getElementById(columnId);
@@ -901,12 +901,12 @@ function observeColumn(columnId, callback) {
     }
 }
 
-// Initialisierung der Beobachtung für ToDo- und Done-Spalten
+// Initialize observation for ToDo and Done columns
 document.addEventListener('DOMContentLoaded', (event) => {
     observeColumn('todo', updateArrowVisibility);
     observeColumn('done', updateArrowVisibility);
 
-    // Initialer Aufruf der Funktionen
+    // Initial call of the functions
     displayTasks().then(() => {
         updateArrowVisibility();
     });
