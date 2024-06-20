@@ -6,7 +6,7 @@ function openEditTask() {
         return;
     }
 
-    fetch(`${BASE_URL}tasks/${taskId}.json`)
+    fetch(`${BASE_URL}/tasks/${taskId}.json`)
         .then(response => {
             if (!response.ok) {
                 throw new Error(`HTTP-Fehler! Status: ${response.status}`);
@@ -37,72 +37,95 @@ function closeEditTask() {
 }
 
 
-function editTask() {
-    const taskId = getCurrentTaskId();
-    
+async function editTask() {
+    let taskDetails = getTaskDetails();
+
+    if (!validateTaskDetails(taskDetails) || !validateTaskInputField(taskDetails)) {
+        return;
+    }
+
+    let assignedTo = getAssignedTo();
+    let subtasks = getSubtasks();
+    let taskId = getCurrentTaskId(); // Annahme: getCurrentTaskId() gibt die aktuelle Task-ID zurück
+
     if (!taskId) {
         console.error('Task-ID fehlt');
         return;
     }
 
-    // Get the active priority button, if any
-    const activePrioButton = document.getElementById('priobuttons').querySelector('.active');
-    const prio = activePrioButton ? activePrioButton.id : 'medium'; // Default to 'medium' if no button is active
-
-    // Get the updated values from the form
-    const updatedTask = {
-        title: document.getElementById('HeadlineBox').value,
-        description: document.getElementById('description').value,
-        assignto: document.getElementById('assignedtoinput').value.split(',').map(name => name.trim()),
-        duedate: document.getElementById('duedate').value,
-        prio: prio,
-        status: 'todo' // oder den aktuellen Status der Aufgabe setzen
+    let taskData = {
+        ...taskDetails,
+        assignto: assignedTo,
+        subtask: subtasks,
+        status: 'todo'
     };
 
-    fetch(`${BASE_URL}tasks/${taskId}.json`, {
-        method: 'PUT',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(updatedTask)
-    })
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Fehler beim Aktualisieren der Aufgabe');
-        }
-        return response.json();
-    })
-    .then(() => {
-        document.getElementById('editTaskOverlay').classList.add('hidden');
-        console.log('Aufgabe erfolgreich aktualisiert');
-        // Hier können Sie zusätzliche Logik hinzufügen, wie das erneute Laden der Aufgabenliste oder die Anzeige einer Erfolgsmeldung
-    })
-    .catch(error => {
+    try {
+        await updateData(`tasks/${taskId}`, taskData);
+        clearContent();
+        showSuccessfullTaskUpdate();
+        setTimeout(() => {
+            window.location.href = "board.html";
+        }, 1500);
+    } catch (error) {
         console.error('Fehler beim Aktualisieren der Aufgabe:', error);
         alert('Fehler beim Aktualisieren der Aufgabe: ' + error.message);
+    }
+}
+
+async function updateData(path, data = {}) {
+    let response = await fetch(BASE_URL + path + ".json", {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
     });
+    if (!response.ok) {
+        throw new Error('Fehler beim Aktualisieren der Aufgabe');
+    }
+    return await response.json();
 }
 
-// Prio-Button-Handling
-document.getElementById('urgent').addEventListener('click', () => setPrio('urgent'));
-document.getElementById('medium').addEventListener('click', () => setPrio('medium'));
-document.getElementById('low').addEventListener('click', () => setPrio('low'));
-
-function setPrio(prio) {
-    document.getElementById('urgent').classList.remove('active');
-    document.getElementById('medium').classList.remove('active');
-    document.getElementById('low').classList.remove('active');
-
-    document.getElementById(prio).classList.add('active');
+// Hier einige Hilfsfunktionen zur Vollständigkeit
+function getTaskDetails() {
+    return {
+        title: document.getElementById('HeadlineBox').value || '',
+        description: document.getElementById('description').value || '',
+        duedate: document.getElementById('duedate').value || '',
+        prio: document.querySelector('#priobuttons .active')?.id || 'medium', // Assuming one button has class 'active'
+        category: document.getElementById('taskcategoryinput').value || ''
+    };
 }
 
 
-
-
-
-function getCurrentTaskId() {
-    return document.getElementById('TaskDetailsDialog').getAttribute('data-taskid');
+function validateTaskDetails(taskDetails) {
+    // Validierungslogik hier
+    return true;
 }
+
+function validateTaskInputField(taskDetails) {
+    // Validierungslogik hier
+    return true;
+}
+
+function getAssignedTo() {
+    return document.getElementById('assignedtoinput').value.split(',').map(name => name.trim());
+}
+
+function getSubtasks() {
+    // Subtask-Logik hier
+    return [];
+}
+
+function clearContent() {
+    // Logik zum Zurücksetzen der Felder hier
+}
+
+function showSuccessfullTaskUpdate() {
+    // Logik zur Anzeige einer Erfolgsnachricht hier
+}
+
 
 
 function editTaskSlideOutToRight() {
@@ -124,3 +147,23 @@ function showTaskDetails(task) {
 function getCurrentTaskId() {
     return document.getElementById('TaskDetailsDialog').getAttribute('data-taskid');
 }
+
+function urgentButton() {
+    setActivePrioButton('urgent');
+}
+
+function mediumButton() {
+    setActivePrioButton('medium');
+}
+
+function lowButton() {
+    setActivePrioButton('low');
+}
+
+function setActivePrioButton(prio) {
+    document.getElementById('urgent').classList.remove('active');
+    document.getElementById('medium').classList.remove('active');
+    document.getElementById('low').classList.remove('active');
+    document.getElementById(prio).classList.add('active');
+}
+
