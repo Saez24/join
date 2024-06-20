@@ -1,5 +1,7 @@
 function renderEditTask(task) {
-    return `
+    return /*html*/`
+        
+    
         <div class="EditTaskDetails" id="editTaskCont">
             <img class="closePopup" src="./assets/img/close.png" onclick="editTaskSlideOutToRight()" alt="Close">
             <div class="main-edittask">
