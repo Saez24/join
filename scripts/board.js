@@ -1,24 +1,3 @@
-let priorityImages = {
-    urgent: './assets/img/prio_alta.png',
-    medium: './assets/img/prio_media.png',
-    low: './assets/img/prio_baja.png'
-};
-
-let CategoryColors = {
-    Finance: { background: '#FF7A00', color: '#FFFFFF' },
-    IT: { background: '#FF5EB3', color: '#FFFFFF' },
-    Sales: { background: '#6E52FF', color: '#FFFFFF' },
-    HR: { background: '#9327FF', color: '#FFFFFF' },
-    Marketing: { background: '#00BEE8', color: '#FFFFFF' },
-    Operations: { background: '#1FD7C1', color: '#FFFFFF' },
-    Product: { background: '#FF745E', color: '#FFFFFF' }
-};
-
-let tasks = [];
-let subtaskStatus = {};
-let activeSearch = false;
-let i = 0;
-
 /**
  * Opens the dialog by removing the 'd_none' class and ensures CSS and content are loaded.
  */
@@ -102,6 +81,28 @@ function loadAddTaskContent() {
 };
 
 /**
+ * Loads the content of 'add_task.html' into the dialog if it hasn't been loaded yet.
+ */
+function loadEditTaskContent() {
+    let contentContainer = document.getElementById('edit_task_dialog_content');
+    if (!document.getElementById('edittask-content')) {
+        fetch('./edit_task.html')
+            .then(response => response.text())
+            .then(html => {
+                let tempElement = document.createElement('div');
+                tempElement.innerHTML = html;
+                let addTaskContent = tempElement.querySelector('#edittask-content');
+                if (addTaskContent) {
+                    contentContainer.appendChild(addTaskContent);
+                } else {
+                    console.error('Could not find #addtask-content in the fetched HTML.');
+                }
+            })
+            .catch(error => console.error('Error fetching edit_task.html:', error));
+    }
+};
+
+/**
  * Open the dialog for TaskDetails.
  * 
  * @param {string} taskid - The unique ID of the task element.
@@ -130,6 +131,8 @@ function showPopup(taskid) {
 function hidePopup(task, taskid, assignedNamesHTML, subtaskCountHTML, priorityImage, categoryColor) {
     const popup = document.getElementById('popup');
     const taskDetails = document.getElementById('TaskDetailsDialog');
+
+    taskDetails.setAttribute('data-taskid', taskid);
 
     taskDetails.classList.remove('slide-in-right');
     taskDetails.classList.add('slide-out-right');

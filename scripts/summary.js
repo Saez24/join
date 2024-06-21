@@ -1,5 +1,3 @@
-const BASE_URL = "https://remotestorage-b0ea0-default-rtdb.europe-west1.firebasedatabase.app/"
-
 let amountTasksToDos = 0;
 let amountTasksDone = 0;
 let amountTasksUrgent = 0;
@@ -138,7 +136,7 @@ async function determineDeadline() {
  */
 async function dateInPast(earliestDeadline) {
     let actualDate = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
-    
+
     if (new Date(earliestDeadline) < new Date(actualDate)) {
         document.getElementById("summaryDeadline").classList.add("font-color-red");
     }

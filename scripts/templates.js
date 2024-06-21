@@ -1,3 +1,51 @@
+const BASE_URL = "https://remotestorage-b0ea0-default-rtdb.europe-west1.firebasedatabase.app/"
+let currentTaskId = null;
+let names
+let category
+let id = 0;
+let subtaskCounter = 0;
+let counter = 0;
+let activeButton = null;
+
+let buttonImages = {
+    urgent: './assets/img/prio_alta.png',
+    medium: './assets/img/prio_media.png',
+    low: './assets/img/prio_baja.png'
+};
+
+let buttonNames = {
+    urgent: 'Urgent',
+    medium: 'Medium',
+    low: 'Low'
+};
+
+let buttonColors = {
+    urgent: { background: '#FF3D00', color: '#FFFFFF' },
+    medium: { background: '#FFA800', color: '#FFFFFF' },
+    low: { background: '#7AE229', color: '#FFFFFF' }
+};
+
+let priorityImages = {
+    urgent: './assets/img/prio_alta.png',
+    medium: './assets/img/prio_media.png',
+    low: './assets/img/prio_baja.png'
+};
+
+let CategoryColors = {
+    Finance: { background: '#FF7A00', color: '#FFFFFF' },
+    IT: { background: '#FF5EB3', color: '#FFFFFF' },
+    Sales: { background: '#6E52FF', color: '#FFFFFF' },
+    HR: { background: '#9327FF', color: '#FFFFFF' },
+    Marketing: { background: '#00BEE8', color: '#FFFFFF' },
+    Operations: { background: '#1FD7C1', color: '#FFFFFF' },
+    Product: { background: '#FF745E', color: '#FFFFFF' }
+};
+
+let tasks = [];
+let subtaskStatus = {};
+let activeSearch = false;
+let i = 0;
+
 /**
  * Fetches the sidebar HTML content and injects it into the sidebar container.
  * Also, sets the 'selected' class for the button corresponding to the current page.

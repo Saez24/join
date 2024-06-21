@@ -1,30 +1,3 @@
-const BASE_URL = "https://remotestorage-b0ea0-default-rtdb.europe-west1.firebasedatabase.app/"
-let names
-let category
-let id = 0;
-let subtaskCounter = 0;
-let counter = 0;
-let activeButton = null;
-
-let buttonImages = {
-    urgent: './assets/img/prio_alta.png',
-    medium: './assets/img/prio_media.png',
-    low: './assets/img/prio_baja.png'
-};
-
-let buttonNames = {
-    urgent: 'Urgent',
-    medium: 'Medium',
-    low: 'Low'
-};
-
-let buttonColors = {
-    urgent: { background: '#FF3D00', color: '#FFFFFF' },
-    medium: { background: '#FFA800', color: '#FFFFFF' },
-    low: { background: '#7AE229', color: '#FFFFFF' }
-};
-
-
 /**
  * Prevents event propagation when clicking on the background.
  * 
