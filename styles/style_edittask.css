@@ -1,12 +1,15 @@
 .edittask-content {
     display: flex;
     flex-direction: column;
-    top: 136px;
     max-width: 100%;
-    width: 100%;
-    max-height: calc(100% - 136px);
-    height: 100%;
-    margin: 96px 14px 0 22px;
+    width: 525px !important;
+    height: 735.188px;
+    margin: 0px 14px 12px 15px;
+    background-color: white;
+    border-radius: 30px;
+    padding: 40px 40px 38px 40px;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
 .edittask-content::-webkit-scrollbar {
@@ -27,8 +30,6 @@
 .main-edittask {
     display: flex;
     gap: 22px;
-    padding-left: 60px;
-    padding-right: 60px;
     justify-content: center;
     flex-direction: column;
 }
@@ -169,7 +170,7 @@ textarea:hover {
 
 .edit-bottom-container-mobile {
     display: flex !important;
-    position: fixed;
+    position: unset;
     bottom: 80px;
     justify-content: space-around;
     align-items: center;
@@ -178,6 +179,10 @@ textarea:hover {
     height: 80px;
     width: 100%;
     left: 0px;
+}
+
+.height40 {
+    height: 40px !important;
 }
 
 .edit-submit-buttons {
