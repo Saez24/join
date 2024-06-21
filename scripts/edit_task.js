@@ -75,7 +75,7 @@ async function editTask() {
 
 async function updateData(path, data = {}) {
     let response = await fetch(BASE_URL + path + ".json", {
-        method: "PUT",
+        method: "PATCH",
         headers: {
             "Content-Type": "application/json"
         },
