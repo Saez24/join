@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./styles/style_board.css">
     <link rel="stylesheet" href="./styles/style_addtask.css">
+    <link rel="stylesheet" href="./styles/style_edittask.css">
     <script src="./scripts/add_task.js"></script>
     <script src="./scripts/edit_task.js"></script>
     <script src="./scripts/templates.js"></script>
@@ -145,6 +146,100 @@
     </div>
     <!-- EDIT TASK OVERLAY -->
     <div class="taskBoxBackground hidden" id="editTaskOverlay">
+        <div onclick="closeSelectCategory(), closeAssignTo(), closeAddSubtaskField()" id="addtask-content"
+        class="edittask-content"><!-- ex addtask-content -->
+        <div class="main-edittask"> <!-- ex main-addtask -->
+            <div class="edittaskcontainer"> <!-- ex addtaskcontainer -->
+                <div class="edit-left-container"> <!-- ex left-container -->
+                    <div class="inputfields"> <!-- keine Änderung nötig-->
+                        <span class="required">Title</span> <!-- keine Änderung nötig-->
+                        <input id="tasktitle" required type="text" placeholder="Enter a title">
+                        <div id="error-message-placeholder"><span id="error-message-title" class="error-message">Please
+                                enter
+                                a Title</span> <!-- keine Änderung nötig-->
+                        </div>
+                    </div>
+                    <div class="description"> <!-- keine Änderung nötig-->
+                        <span>Description</span>
+                        <textarea class="edit-textarea" name="Description" id="description"
+                            placeholder="Enter a Description"></textarea> <!-- ex textarea -->
+                    </div>
+                    <div class="inputfields"><!-- keine Änderung nötig-->
+                        <span>Assigned to</span>
+                        <div class="edit-dropdown_container"><!-- ex dropdown_container -->
+                            <input oninput="handleAssignToInput()" onclick="selectAssignTo(), closeOnBackground(event)"
+                                id="assignedtoinput" class="dropdown-content" name="assignedto"
+                                placeholder="Select contacts to assign"><!-- keine Änderung nötig-->
+                            <div onclick="closeOnBackground(event)" id="assignedto" class="edit-dropdown_box"><!-- ex dropdown_box -->
+                            </div>
+                        </div>
+                        <div class="button-container" id="selectedAssignTo"><!-- keine Änderung nötig-->
+                        </div>
+                    </div>
+                </div>
+                <div class="edit-right-container"><!-- ex right-container -->
+                    <div class="inputfields">
+                        <span class="required">Due Date</span> <!-- keine Änderung nötig-->
+                        <input onfocus="setDateRestriction()" id="duedate" name="duedate" class="edit-datefield" required
+                            type="date" placeholder="dd/mm/yyyy"><!-- ex datefield -->
+                        <div id="error-message-placeholder"><span id="error-message-date" class="error-message">Please
+                                enter
+                                a Date</span><!-- keine Änderung nötig-->
+                        </div>
+                    </div>
+                    <div class="prio"><!-- keine Änderung nötig-->
+                        <span>Prio</span>
+                        <div id="priobuttons" class="edit-prio-buttons"><!-- ex prio-buttons -->
+                            <button onclick="urgentButton()" id="urgent">Urgent <img src="./assets/img/prio_alta.png"
+                                    alt=""></button>
+                            <button onclick="mediumButton()" id="medium">Medium <img src="./assets/img/prio_media.png"
+                                    alt=""></button>
+                            <button onclick="lowButton()" id="low">Low <img src="./assets/img/prio_baja.png"
+                                    alt=""></button>
+                        </div>
+                    </div>
+                    <div class="inputfields"><!-- keine Änderung nötig-->
+                        <span class="required">Category</span> <!-- keine Änderung nötig-->
+                        <div class="edit-dropdown_container"><!-- ex dropdown_container -->
+                            <input oninput="handleCategoryInput()" onclick="selectCategory(), closeOnBackground(event)"
+                                id="taskcategoryinput" class="dropdown-category-content" name="taskcategory"
+                                placeholder="Select task category"><!-- keine Änderung nötig-->
+                            <div onclick="closeOnBackground(event)" id="taskcategory" class="edit-category_dropdown_box"><!-- ex category_dropdown_box -->
+
+                            </div>
+                        </div>
+                        <div id="error-message-placeholder"><span id="error-message-category"
+                                class="error-message">Please
+                                select
+                                category</span><!-- keine Änderung nötig-->
+                        </div>
+                    </div>
+                    <div class="inputfields"><!-- keine Änderung nötig-->
+                        <span>Subtasks</span>
+                        <input onclick="openAddSubtaskField(), closeOnBackground(event)" id="addsubtask" class="subtask"
+                            type="text" placeholder="Add new subtask"><!-- keine Änderung nötig-->
+                        <input onclick="handleSubtaskClick(event), closeOnBackground(event)"
+                            onkeydown="checkEnter(event)" id="subtask" class="aktive-subtask" type="text" minlength="4"
+                            maxlength="20"><!-- keine Änderung nötig-->
+
+                        <div class="subtask-container"><!-- keine Änderung nötig-->
+                            <div id="addsubtasks">
+
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="task-created edit-task-cont" id="task-created"><!-- ex task-cont, task created muss nicht verändert werden-->
+                        <p class="#">Task successfully created</p>
+                    </div>
+                </div>
+            </div>
+            <div class="edit-bottom-container-mobile edit-submit-buttons"><!-- ex bottom-container-mobile / ex submit-buttons-->
+                <span class="edit-required-2">This field is required</span> <!-- ex required-2-->
+                <button onclick="createTask()" class="edit-create-button">Ok <img src="./assets/img/check.png"
+                        alt=""></button><!-- ex create-button-->
+            </div>
     </div>
 
     </div>
