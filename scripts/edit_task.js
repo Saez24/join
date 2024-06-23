@@ -92,6 +92,23 @@ function renderEditTask(task) {
             }
         });
 
+        // Set priority buttons based on task.priority
+        switch (task.prio) {
+            case 'urgent':
+                editUrgentButton(); // Aktiviere den Urgent Button
+                break;
+            case 'medium':
+                editMediumButton(); // Aktiviere den Medium Button
+                break;
+            case 'low':
+                editLowButton(); // Aktiviere den Low Button
+                break;
+            default:
+                // Reset all buttons if no priority matches
+                editResetButtonStyles(); // Setze alle Buttons zurück
+                break;
+        }
+
         if (subtasksContainer && task.subtask) {
             subtasksContainer.innerHTML = ''; // Clear existing subtasks
 
@@ -710,7 +727,6 @@ function editDeleteSubtask(subtaskId) {
     }
 };
 
-// Collects updated task data from the form
 function getUpdatedTaskData() {
     let titleInput = document.getElementById('edit-tasktitle').value;
     let descriptionInput = document.getElementById('edit-description').value;
@@ -718,14 +734,35 @@ function getUpdatedTaskData() {
     let categoryInput = document.getElementById('edit-taskcategoryinput').value;
     let subtasks = [...document.querySelectorAll('#edit-addsubtasks .addedtask .subtask-title')].map(span => ({ Titel: span.innerText }));
 
+    let prio = null;
+
+    if (activeButton) {
+        switch (activeButton.id) {
+            case 'edit-urgent':
+                prio = 'urgent';
+                break;
+            case 'edit-medium':
+                prio = 'medium';
+                break;
+            case 'edit-low':
+                prio = 'low';
+                break;
+            default:
+                prio = null;
+                break;
+        }
+    }
+
     return {
         title: titleInput,
         description: descriptionInput,
         duedate: duedateInput,
         category: categoryInput,
+        prio: prio,
         subtask: subtasks
     };
 }
+
 
 async function saveUpdatedTask() {
     const taskid = getCurrentTaskId();  // Get the current task ID
@@ -742,7 +779,6 @@ async function saveUpdatedTask() {
     console.log('Updated task:', result, taskid);
 }
 
-// Updates the task on the server
 async function updateTask(taskid, updatedData) {
     try {
         let response = await fetch(`${BASE_URL}tasks/${taskid}.json`, {
@@ -752,14 +788,17 @@ async function updateTask(taskid, updatedData) {
             },
             body: JSON.stringify(updatedData)
         });
+
         if (!response.ok) {
             throw new Error(`HTTP error! Status: ${response.status}`);
         }
+
         return response.json();
     } catch (error) {
         console.error("Error updating data:", error);
     }
 }
+
 
 async function handleSaveButtonClicked() {
     let taskid = getCurrentTaskId(); // Hier taskid holen, möglicherweise async
