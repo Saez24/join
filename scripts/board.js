@@ -913,3 +913,5 @@ document.addEventListener('DOMContentLoaded', (event) => {
         updateArrowVisibility();
     });
 });
+
+
