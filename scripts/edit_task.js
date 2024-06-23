@@ -65,65 +65,81 @@ function renderEditTask(task) {
     let descriptionInput = document.getElementById('edit-description');
     let duedateInput = document.getElementById('edit-duedate');
     let categoryInput = document.getElementById('edit-taskcategoryinput');
-    let subtasksContainer = document.getElementById('edit-addsubtasks');
-    let assignToContainer = document.getElementById('edit-selectedAssignTo');
 
-    if (titleInput && descriptionInput && duedateInput && categoryInput && assignToContainer) {
+    if (titleInput && descriptionInput && duedateInput && categoryInput) {
         titleInput.value = task.title || '';
         descriptionInput.value = task.description || '';
         duedateInput.value = task.duedate || '';
         categoryInput.value = task.category || '';
 
-        // Vorherigen Inhalt löschen
-        assignToContainer.innerHTML = '';
-
-        // Checkboxen für zugewiesene Benutzer markieren
-        let checkboxes = document.querySelectorAll("#edit-assignedto .checkbox");
-        checkboxes.forEach(checkbox => {
-            checkbox.checked = task.assignto.includes(checkbox.id);
-        });
-
-        // UI mit ausgewählten zugewiesenen Benutzern aktualisieren
-        editLoadSelectedAssignTo();
-
-        // Prioritäts-Buttons basierend auf task.priority setzen
-        switch (task.prio) {
-            case 'urgent':
-                editUrgentButton();
-                break;
-            case 'medium':
-                editMediumButton();
-                break;
-            case 'low':
-                editLowButton();
-                break;
-            default:
-                editResetButtonStyles();
-                break;
-        }
-
-        if (subtasksContainer && task.subtask) {
-            subtasksContainer.innerHTML = '';
-
-            Object.keys(task.subtask).forEach(key => {
-                let subtask = task.subtask[key];
-
-                subtasksContainer.innerHTML += `
-                    <div class="addedtask" id="addedtask${key}">
-                        <span class="subtask-title">${subtask.Titel}</span>
-                        <div class="subtask-buttons">
-                            <button onclick="editSubtask('${key}')"><img src="./assets/img/edit.png" alt=""></button>
-                            <img src="./assets/img/separator.png" alt="">
-                            <button onclick="deleteSubtask('${key}')"><img src="./assets/img/delete.png" alt=""></button>
-                        </div>
-                    </div>`;
-            });
-        }
+        renderEditAssignTo(task)
+        renderEditPrio(task);
+        renderEditSubtasks(task.subtask);
     } else {
-        console.error('Ein oder mehrere Input-Felder nicht gefunden.');
+        console.error('One or more input fields not found.');
     }
-}
+};
 
+function renderEditAssignTo(task) {
+    let assignToContainer = document.getElementById('edit-selectedAssignTo');
+    assignToContainer.innerHTML = ''; // Clear previous content
+
+    task.assignto.forEach((name, index) => {
+        let nameParts = name.split(' ');
+        let firstInitial = nameParts[0].charAt(0).toUpperCase();
+        let lastInitial = nameParts.length > 1 ? nameParts[1].charAt(0).toUpperCase() : '';
+        let randomColor = "#" + Math.floor(Math.random() * 16777215).toString(16);
+
+        assignToContainer.innerHTML += /*html*/ `
+                <button id="${name}" class="shortname" style="background-color: ${randomColor};"><span>${firstInitial}${lastInitial}</span></button>
+            `;
+
+        if (index < task.assignto.length - 1) {
+            assignToContainer.innerHTML += '';
+        }
+    });
+};
+
+function renderEditPrio(task) {
+    // Set priority buttons based on task.priority
+    switch (task.prio) {
+        case 'urgent':
+            editUrgentButton(); // Aktiviere den Urgent Button
+            break;
+        case 'medium':
+            editMediumButton(); // Aktiviere den Medium Button
+            break;
+        case 'low':
+            editLowButton(); // Aktiviere den Low Button
+            break;
+        default:
+            // Reset all buttons if no priority matches
+            editResetButtonStyles(); // Setze alle Buttons zurück
+            break;
+    }
+};
+
+function renderEditSubtasks(subtaskData) {
+    let subtasksContainer = document.getElementById('edit-addsubtasks');
+
+    if (subtasksContainer && subtaskData) {
+        subtasksContainer.innerHTML = ''; // Clear existing subtasks
+
+        Object.keys(subtaskData).forEach(key => {
+            let subtask = subtaskData[key];
+
+            subtasksContainer.innerHTML += `
+                <div class="addedtask" id="edit-addedtask${key}">
+                    <span class="edit-subtask-title">${subtask.Titel}</span>
+                    <div class="subtask-buttons">
+                        <button onclick="editSubtask('${key}')"><img src="./assets/img/edit.png" alt=""></button>
+                        <img src="./assets/img/separator.png" alt="">
+                        <button onclick="deleteSubtask('${key}')"><img src="./assets/img/delete.png" alt=""></button>
+                    </div>
+                </div>`;
+        });
+    }
+};
 
 /**
  * Ensures the 'style_addtask.css' stylesheet is loaded.
@@ -153,6 +169,9 @@ function closeDialogEdit() {
     showPopup(currentTaskId);
 };
 
+/**
+ * Loads names and categories for adding a new task asynchronously when the page loads.
+ */
 async function editAddTaskLoadNames() {
     try {
         let response = await fetch(BASE_URL + ".json");
@@ -169,25 +188,26 @@ async function editAddTaskLoadNames() {
     } catch (error) {
         console.error("Error fetching data:", error);
     }
-}
+};
 
 /**
- * Erzeugt HTML zur Anzeige eines Namens mit einem farbkodierten Kürzel und einer Checkbox.
- * @param {string} nameKey - Der Schlüssel des Namens.
- * @param {string} name - Der Name.
- * @param {string} firstInitial - Der erste Initialbuchstabe des Vornamens.
- * @param {string} lastInitial - Der erste Initialbuchstabe des Nachnamens.
- * @returns {string} Das generierte HTML.
+ * Generates HTML for displaying a name with a color-coded short name and a checkbox.
+ * @param {string} nameKey - The key of the name.
+ * @param {string} name - The name.
+ * @param {string} firstInitial - The first initial of the first name.
+ * @param {string} lastInitial - The first initial of the last name.
+ * @param {number} id - The ID for the HTML element.
+ * @returns {string} The generated HTML.
  */
 function editGenerateNameHTML(nameKey, name, firstInitial, lastInitial) {
     let randomColor = "#" + Math.floor(Math.random() * 16777215).toString(16);
     return /*html*/ `
         <div class="dropdown_selection" onclick="editDropdownSelectAssignTo(this)">
-            <button class="shortname" style="background-color: ${randomColor};"><span>${firstInitial}${lastInitial}</span></button><span id="${nameKey}">${name}</span>
-            <input class="checkbox" type="checkbox" id="${nameKey}" data-initials="${firstInitial}${lastInitial}" data-color="${randomColor}" onchange="editLoadSelectedAssignTo()">
+            <button class="shortname" style="background-color: ${randomColor};"><span>${firstInitial}${lastInitial}</span></button><span id="editassignname_${nameKey}">${name}</span>
+            <input class="checkbox" type="checkbox" id="editassignedto_${nameKey}" data-initials="${firstInitial}${lastInitial}" data-color="${randomColor}" onchange="editLoadSelectedAssignTo()">
         </div>
     `;
-}
+};
 
 /**
  * Generates the HTML for names, including initials.
@@ -290,6 +310,11 @@ function editAddMoreButton(count, position) {
     return moreButton;
 };
 
+/**
+ * Updates the selectedAssignTo div with buttons representing the selected names.
+ * This function goes through all checkboxes with the class "checkbox" and, if checked,
+ * creates a button with the initials and color associated with the checkbox.
+ */
 function editLoadSelectedAssignTo() {
     let selectedAssignToDiv = document.getElementById("edit-selectedAssignTo");
     let checkboxes = document.querySelectorAll("#edit-assignedto .checkbox");
@@ -305,7 +330,7 @@ function editLoadSelectedAssignTo() {
             if (count <= 3) {
                 let button = editCreateButton(checkbox, position);
                 selectedAssignToDiv.appendChild(button);
-                position += 32; // Diesen Wert anpassen, um die Überlappung zu steuern
+                position += 12; // Adjust this value to control the overlap
                 buttonContainer.style.display = 'inline-block'
             }
         }
@@ -318,8 +343,7 @@ function editLoadSelectedAssignTo() {
     if (count === 0) {
         buttonContainer.style.display = 'none'
     }
-}
-
+};
 
 /**
  * Toggles the "selected_dropdown" class on the given element and toggles the associated checkbox state.
@@ -625,24 +649,34 @@ function editAddSubtask() {
     let inputContent = input.value.trim();
 
     if (inputContent !== "") {
-        let subtasks = document.getElementById("edit-addsubtasks");
-        subtasks.classList.add("subtaskblock");
-        subtaskCounter++;
+        let subtasksContainer = document.getElementById("edit-addsubtasks");
+        subtasksContainer.classList.add("subtaskblock");
+
+        // Create unique ID for the subtask
         let subtaskId = "subtask" + subtaskCounter;
-        subtasks.innerHTML += /*html*/ `
-        <div class="addedtask" id="edit-addedtask${subtaskId}">
-            <span class="${subtaskId}" id="${subtaskId}">${inputContent}</span>
-            <div id="edit-subtask-buttons" class="subtask-buttons">
-                <button onclick="editSubtask('${subtaskId}')" ><img src="./assets/img/edit.png" alt=""></button>
-                <img src="./assets/img/separator.png" alt="">
-                <button onclick="deleteSubtask('${subtaskId}')"><img src="./assets/img/delete.png" alt=""></button>
-            </div>
-        </div>`;
-        editCloseAddSubtaskField();
+        subtaskCounter++;
+
+        // Create HTML for the new subtask
+        let newSubtaskHTML = `
+            <div class="addedtask" id="edit-addedtask${subtaskId}">
+                <span class="edit-subtask-title">${inputContent}</span>
+                <div class="subtask-buttons">
+                    <button onclick="editSubtask('${subtaskId}')"><img src="./assets/img/edit.png" alt=""></button>
+                    <img src="./assets/img/separator.png" alt="">
+                    <button onclick="deleteSubtask('${subtaskId}')"><img src="./assets/img/delete.png" alt=""></button>
+                </div>
+            </div>`;
+
+        // Append new subtask HTML to the subtasks container
+        subtasksContainer.innerHTML += newSubtaskHTML;
+
+        // Clear input field
+        input.value = "";
     }
-    input.value = "";
+
     return false;
-};
+}
+
 
 /**
  * Enables editing of the specific subtask.
@@ -713,13 +747,48 @@ function editDeleteSubtask(subtaskId) {
     }
 };
 
+/**
+ * Retrieves assigned users based on checkbox selection.
+ * @returns {string[]} An array of assigned users.
+ */
+function editGetAssignedTo() {
+    let assignedToCheckboxes = document.querySelectorAll('input[type="checkbox"][id^="editassignedto_"]:checked');
+    let assignedTo = [];
+
+    assignedToCheckboxes.forEach((checkbox) => {
+        // Splitting the ID to get the key parts
+        let idParts = checkbox.id.split('_');
+
+        // Handling cases with IDs like -O-2Vl5jkNUBw8YFvq0O
+        if (idParts.length >= 3) {
+            let nameSpan = document.getElementById(`editassignname_${idParts[1]}_${idParts.slice(2).join('_')}`);
+            if (nameSpan) {
+                assignedTo.push(nameSpan.innerText.trim());
+            }
+        } else if (idParts.length === 2) {
+            // Handling simpler ID cases, e.g., assignedto_<key>
+            let nameSpan = document.getElementById(`editassignname_${idParts[1]}`);
+            if (nameSpan) {
+                assignedTo.push(nameSpan.innerText.trim());
+            }
+        }
+    });
+
+    console.log(`Assigned to (final): ${assignedTo}`);
+    return assignedTo;
+};
+
 function getUpdatedTaskData() {
     let titleInput = document.getElementById('edit-tasktitle').value;
     let descriptionInput = document.getElementById('edit-description').value;
     let duedateInput = document.getElementById('edit-duedate').value;
     let categoryInput = document.getElementById('edit-taskcategoryinput').value;
-    let subtasks = [...document.querySelectorAll('#edit-addsubtasks .addedtask .subtask-title')].map(span => ({ Titel: span.innerText }));
+
+    // Collect subtasks from the DOM
+    let subtasks = [...document.querySelectorAll('#edit-addsubtasks .edit-subtask-title')].map(span => ({ Titel: span.innerText }));
+
     let prio = null;
+    let assignto = editGetAssignedTo(); // Call editGetAssignedTo to get assigned users
 
     if (activeButton) {
         switch (activeButton.id) {
@@ -744,21 +813,17 @@ function getUpdatedTaskData() {
         duedate: duedateInput,
         category: categoryInput,
         prio: prio,
-        subtask: subtasks
+        subtask: subtasks,
+        assignto: assignto // Include assigned users in the returned object
     };
 }
 
-async function saveUpdatedTask() {
-    const taskid = getCurrentTaskId();  // Get the current task ID
-    console.log('Task ID in saveUpdatedTask:', taskid); // Überprüfe die taskid hier
 
-    if (!taskid) {
-        console.error('Keine gültige Task-ID gefunden.');
-        alert('Fehler: Keine gültige Task-ID gefunden.');
-        return;
-    }
 
-    let updatedData = getUpdatedTaskData(taskid);
+async function saveUpdatedTask(taskid) {
+    console.log('Task ID in saveUpdatedTask:', taskid);
+
+    let updatedData = getUpdatedTaskData(); // Get updated data including assigned users
     let result = await updateTask(taskid, updatedData);
     console.log('Updated task:', result, taskid);
 }
@@ -782,6 +847,7 @@ async function updateTask(taskid, updatedData) {
         console.error("Error updating data:", error);
     }
 }
+
 
 
 async function handleSaveButtonClicked() {
