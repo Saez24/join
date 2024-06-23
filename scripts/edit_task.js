@@ -49,6 +49,10 @@ function fetchEditTask(taskid) {
 
             console.log('Geladene Task-Details:', task);
             renderEditTask(task);
+
+            // Setze die taskid im Dialog nach erfolgreichem Laden
+            let taskDetails = document.getElementById('TaskDetailsDialog');
+            taskDetails.setAttribute('data-taskid', taskid);
         })
         .catch(error => {
             console.error('Fehler beim Laden der Task-Details:', error);
@@ -77,20 +81,17 @@ function renderEditTask(task) {
             let firstInitial = nameParts[0].charAt(0).toUpperCase();
             let lastInitial = nameParts.length > 1 ? nameParts[1].charAt(0).toUpperCase() : '';
 
-            // Generate random color for each button
             let randomColor = "#" + Math.floor(Math.random() * 16777215).toString(16);
 
             assignToContainer.innerHTML += /*html*/ `
-                    <button class="shortname" style="background-color: ${randomColor};"><span>${firstInitial}${lastInitial}</span></button>
+                <button class="shortname" style="background-color: ${randomColor};"><span>${firstInitial}${lastInitial}</span></button>
             `;
 
-            // Add comma and space if not the last element
             if (index < task.assignto.length - 1) {
                 assignToContainer.innerHTML += '';
             }
         });
 
-        // Render Subtasks if available
         if (subtasksContainer && task.subtask) {
             subtasksContainer.innerHTML = ''; // Clear existing subtasks
 
@@ -101,7 +102,7 @@ function renderEditTask(task) {
                     <div class="addedtask" id="addedtask${key}">
                         <span class="subtask-title">${subtask.Titel}</span>
                         <div class="subtask-buttons">
-                            <button onclick="editSubtask('${key}')" ><img src="./assets/img/edit.png" alt=""></button>
+                            <button onclick="editSubtask('${key}')"><img src="./assets/img/edit.png" alt=""></button>
                             <img src="./assets/img/separator.png" alt="">
                             <button onclick="deleteSubtask('${key}')"><img src="./assets/img/delete.png" alt=""></button>
                         </div>
@@ -709,4 +710,74 @@ function editDeleteSubtask(subtaskId) {
     }
 };
 
+// Collects updated task data from the form
+function getUpdatedTaskData() {
+    let titleInput = document.getElementById('edit-tasktitle').value;
+    let descriptionInput = document.getElementById('edit-description').value;
+    let duedateInput = document.getElementById('edit-duedate').value;
+    let categoryInput = document.getElementById('edit-taskcategoryinput').value;
+    let subtasks = [...document.querySelectorAll('#edit-addsubtasks .addedtask .subtask-title')].map(span => ({ Titel: span.innerText }));
 
+    return {
+        title: titleInput,
+        description: descriptionInput,
+        duedate: duedateInput,
+        category: categoryInput,
+        subtask: subtasks
+    };
+}
+
+async function saveUpdatedTask() {
+    const taskid = getCurrentTaskId();  // Get the current task ID
+    console.log('Task ID in saveUpdatedTask:', taskid); // Überprüfe die taskid hier
+
+    if (!taskid) {
+        console.error('Keine gültige Task-ID gefunden.');
+        alert('Fehler: Keine gültige Task-ID gefunden.');
+        return;
+    }
+
+    let updatedData = getUpdatedTaskData(taskid);
+    let result = await updateTask(taskid, updatedData);
+    console.log('Updated task:', result, taskid);
+}
+
+// Updates the task on the server
+async function updateTask(taskid, updatedData) {
+    try {
+        let response = await fetch(`${BASE_URL}tasks/${taskid}.json`, {
+            method: "PATCH",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(updatedData)
+        });
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        return response.json();
+    } catch (error) {
+        console.error("Error updating data:", error);
+    }
+}
+
+async function handleSaveButtonClicked() {
+    let taskid = getCurrentTaskId(); // Hier taskid holen, möglicherweise async
+    if (!taskid) {
+        console.error('Keine gültige Task-ID gefunden.');
+        alert('Fehler: Keine gültige Task-ID gefunden.');
+        return;
+    }
+    await saveUpdatedTask(taskid); // Hier saveUpdatedTask mit taskid aufrufen
+    displayTasks();
+    closeDialogEdit();
+
+}
+
+async function saveUpdatedTask(taskid) {
+    console.log('Task ID in saveUpdatedTask:', taskid); // Überprüfe die taskid hier
+
+    let updatedData = getUpdatedTaskData(taskid);
+    let result = await updateTask(taskid, updatedData);
+    console.log('Updated task:', result, taskid);
+}
