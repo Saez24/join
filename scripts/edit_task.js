@@ -74,43 +74,36 @@ function renderEditTask(task) {
         duedateInput.value = task.duedate || '';
         categoryInput.value = task.category || '';
 
-        assignToContainer.innerHTML = ''; // Clear previous content
+        // Vorherigen Inhalt löschen
+        assignToContainer.innerHTML = '';
 
-        task.assignto.forEach((name, index) => {
-            let nameParts = name.split(' ');
-            let firstInitial = nameParts[0].charAt(0).toUpperCase();
-            let lastInitial = nameParts.length > 1 ? nameParts[1].charAt(0).toUpperCase() : '';
-
-            let randomColor = "#" + Math.floor(Math.random() * 16777215).toString(16);
-
-            assignToContainer.innerHTML += /*html*/ `
-                <button class="shortname" style="background-color: ${randomColor};"><span>${firstInitial}${lastInitial}</span></button>
-            `;
-
-            if (index < task.assignto.length - 1) {
-                assignToContainer.innerHTML += '';
-            }
+        // Checkboxen für zugewiesene Benutzer markieren
+        let checkboxes = document.querySelectorAll("#edit-assignedto .checkbox");
+        checkboxes.forEach(checkbox => {
+            checkbox.checked = task.assignto.includes(checkbox.id);
         });
 
-        // Set priority buttons based on task.priority
+        // UI mit ausgewählten zugewiesenen Benutzern aktualisieren
+        editLoadSelectedAssignTo();
+
+        // Prioritäts-Buttons basierend auf task.priority setzen
         switch (task.prio) {
             case 'urgent':
-                editUrgentButton(); // Aktiviere den Urgent Button
+                editUrgentButton();
                 break;
             case 'medium':
-                editMediumButton(); // Aktiviere den Medium Button
+                editMediumButton();
                 break;
             case 'low':
-                editLowButton(); // Aktiviere den Low Button
+                editLowButton();
                 break;
             default:
-                // Reset all buttons if no priority matches
-                editResetButtonStyles(); // Setze alle Buttons zurück
+                editResetButtonStyles();
                 break;
         }
 
         if (subtasksContainer && task.subtask) {
-            subtasksContainer.innerHTML = ''; // Clear existing subtasks
+            subtasksContainer.innerHTML = '';
 
             Object.keys(task.subtask).forEach(key => {
                 let subtask = task.subtask[key];
@@ -130,6 +123,7 @@ function renderEditTask(task) {
         console.error('Ein oder mehrere Input-Felder nicht gefunden.');
     }
 }
+
 
 /**
  * Ensures the 'style_addtask.css' stylesheet is loaded.
@@ -159,9 +153,6 @@ function closeDialogEdit() {
     showPopup(currentTaskId);
 };
 
-/**
- * Loads names and categories for adding a new task asynchronously when the page loads.
- */
 async function editAddTaskLoadNames() {
     try {
         let response = await fetch(BASE_URL + ".json");
@@ -178,26 +169,25 @@ async function editAddTaskLoadNames() {
     } catch (error) {
         console.error("Error fetching data:", error);
     }
-};
+}
 
 /**
- * Generates HTML for displaying a name with a color-coded short name and a checkbox.
- * @param {string} nameKey - The key of the name.
- * @param {string} name - The name.
- * @param {string} firstInitial - The first initial of the first name.
- * @param {string} lastInitial - The first initial of the last name.
- * @param {number} id - The ID for the HTML element.
- * @returns {string} The generated HTML.
+ * Erzeugt HTML zur Anzeige eines Namens mit einem farbkodierten Kürzel und einer Checkbox.
+ * @param {string} nameKey - Der Schlüssel des Namens.
+ * @param {string} name - Der Name.
+ * @param {string} firstInitial - Der erste Initialbuchstabe des Vornamens.
+ * @param {string} lastInitial - Der erste Initialbuchstabe des Nachnamens.
+ * @returns {string} Das generierte HTML.
  */
-function editGenerateNameHTML(nameKey, name, firstInitial, lastInitial, id) {
+function editGenerateNameHTML(nameKey, name, firstInitial, lastInitial) {
     let randomColor = "#" + Math.floor(Math.random() * 16777215).toString(16);
     return /*html*/ `
         <div class="dropdown_selection" onclick="editDropdownSelectAssignTo(this)">
-            <button class="shortname" style="background-color: ${randomColor};"><span>${firstInitial}${lastInitial}</span></button><span id="edit-assignname_${nameKey}_${id}">${name}</span>
-            <input class="checkbox" type="checkbox" id="edit-assignedto_${nameKey}_${id}" data-initials="${firstInitial}${lastInitial}" data-color="${randomColor}" onchange="editLoadSelectedAssignTo()">
+            <button class="shortname" style="background-color: ${randomColor};"><span>${firstInitial}${lastInitial}</span></button><span id="${nameKey}">${name}</span>
+            <input class="checkbox" type="checkbox" id="${nameKey}" data-initials="${firstInitial}${lastInitial}" data-color="${randomColor}" onchange="editLoadSelectedAssignTo()">
         </div>
     `;
-};
+}
 
 /**
  * Generates the HTML for names, including initials.
@@ -300,11 +290,6 @@ function editAddMoreButton(count, position) {
     return moreButton;
 };
 
-/**
- * Updates the selectedAssignTo div with buttons representing the selected names.
- * This function goes through all checkboxes with the class "checkbox" and, if checked,
- * creates a button with the initials and color associated with the checkbox.
- */
 function editLoadSelectedAssignTo() {
     let selectedAssignToDiv = document.getElementById("edit-selectedAssignTo");
     let checkboxes = document.querySelectorAll("#edit-assignedto .checkbox");
@@ -320,7 +305,7 @@ function editLoadSelectedAssignTo() {
             if (count <= 3) {
                 let button = editCreateButton(checkbox, position);
                 selectedAssignToDiv.appendChild(button);
-                position += 32; // Adjust this value to control the overlap
+                position += 32; // Diesen Wert anpassen, um die Überlappung zu steuern
                 buttonContainer.style.display = 'inline-block'
             }
         }
@@ -333,7 +318,8 @@ function editLoadSelectedAssignTo() {
     if (count === 0) {
         buttonContainer.style.display = 'none'
     }
-};
+}
+
 
 /**
  * Toggles the "selected_dropdown" class on the given element and toggles the associated checkbox state.
@@ -733,7 +719,6 @@ function getUpdatedTaskData() {
     let duedateInput = document.getElementById('edit-duedate').value;
     let categoryInput = document.getElementById('edit-taskcategoryinput').value;
     let subtasks = [...document.querySelectorAll('#edit-addsubtasks .addedtask .subtask-title')].map(span => ({ Titel: span.innerText }));
-
     let prio = null;
 
     if (activeButton) {
@@ -762,7 +747,6 @@ function getUpdatedTaskData() {
         subtask: subtasks
     };
 }
-
 
 async function saveUpdatedTask() {
     const taskid = getCurrentTaskId();  // Get the current task ID
