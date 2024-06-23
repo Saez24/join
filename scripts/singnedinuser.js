@@ -100,12 +100,12 @@ onAuthStateChanged(auth, (user) => {
     if (user) {
         let email = user.email;
         console.log('User email:', email);
-        // document.getElementById('sidebarMenu').style.visibility = "visible";
+        document.getElementById('sidebarMenu').style.visibility = "visible";
         fetchUserData(email);
         renderUserName();
     } else {
         console.log('No user is signed in.');
-        // document.getElementById('sidebarMenu').style.visibility = "hidden";
+        document.getElementById('sidebarMenu').style.visibility = "hidden";
         renderUserName(null); // Display 'GS' if no user is signed in
     }
 });
