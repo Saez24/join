@@ -871,8 +871,9 @@ async function saveUpdatedTask(taskid) {
     console.log('Updated task:', result, taskid);
 };
 
-async function deleteTask(taskid) {
+async function deleteTask() {
     try {
+        let taskid = getCurrentTaskId();
         let response = await fetch(`${BASE_URL}tasks/${taskid}.json`, {
             method: "DELETE",
             headers: {
@@ -886,7 +887,8 @@ async function deleteTask(taskid) {
 
         await response.json(); // Assuming the response body is needed
 
-        closeDialog(); // Call closeDialog() within try block to ensure it executes
+        hidePopup(); // Call closeDialog() within try block to ensure it executes
+        displayTasks();
     } catch (error) {
         console.error("Error deleting task:", error);
     }
