@@ -74,8 +74,8 @@ function renderNameToUserblock(userHTML) {
 };
 
 /**
- * Generates HTML for displaying the user's initials.
- * @param {string|null} name - The user's name. If null, displays 'GS'.
+ * Generates HTML for displaying the user's initials or 'Guest' if the name is null.
+ * @param {string|null} name - The user's name. If null, displays 'Guest'.
  * @returns {string} The generated HTML string.
  */
 function generateNameUserblock(name) {
@@ -87,6 +87,7 @@ function generateNameUserblock(name) {
     } else {
         firstInitial = 'G';
         lastInitial = '';
+        name = 'Guest';
     }
     return /*html*/ `
         <button class="shortname"><h4 id="fullname" style="display: none;">${name}</h4><h2>${firstInitial}${lastInitial}</h2></button>
@@ -99,7 +100,6 @@ function generateNameUserblock(name) {
 onAuthStateChanged(auth, (user) => {
     if (user) {
         let email = user.email;
-        console.log('User email:', email);
         document.getElementById('sidebarMenu').style.visibility = "visible";
         fetchUserData(email);
         renderUserName();
