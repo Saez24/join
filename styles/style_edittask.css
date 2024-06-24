@@ -177,3 +177,10 @@ span {
     gap: 4px;
     height: 38px;
 }
+
+.edit-error-message {
+    display: none;
+    font-size: 14px;
+    color: #ff8190;
+    padding-left: 5px;
+}
