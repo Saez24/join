@@ -505,13 +505,39 @@ function editCloseOnBackground(event) {
 };
 
 /**
- * Sets the minimum date of the date input field to today's date.
- */
+         * Sets the minimum date of the date input field to today's date.
+         */
 function editSetDateRestriction() {
     let today = new Date();
     let formattedDate = today.getFullYear() + '-' + ('0' + (today.getMonth() + 1)).slice(-2) + '-' + ('0' + today.getDate()).slice(-2);
     let dateField = document.getElementById("edit-duedate");
     dateField.min = formattedDate;
+};
+
+/**
+ * Validates that the date input field does not have a past date.
+ * @returns {boolean} True if the date is valid, false otherwise.
+ */
+function editValidateDueDate() {
+    let dateField = document.getElementById("edit-duedate");
+    let selectedDate = new Date(dateField.value);
+    let today = new Date();
+
+    // Set time to 00:00:00 to only compare dates
+    today.setHours(0, 0, 0, 0);
+    selectedDate.setHours(0, 0, 0, 0);
+
+    let errorContainerDate = document.getElementById('edit-error-message-date');
+
+    if (selectedDate < today) {
+        errorContainerDate.textContent = "The due date cannot be in the past.";
+        errorContainerDate.style.display = "block";
+        return false;
+    } else {
+        errorContainerDate.style.display = "none";
+    }
+
+    return true;
 };
 
 /**

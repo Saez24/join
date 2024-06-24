@@ -12,7 +12,7 @@
     <link rel="icon" href="./assets/img/favicon.png" type="image/x-icon">
 </head>
 
-<body onclick="editCloseSelectCategory(), editCloseAssignTo()">
+<body onload="editSetDateRestriction()" onclick="editCloseSelectCategory(), editCloseAssignTo()">
     <h2 class="edit-header">Edit Task</h2>
     <div id="edittask-content" class="edittask-content">
         <button onclick="closeDialogEdit()" class="close_edit_dialog_btn">
@@ -49,8 +49,8 @@
             <div class="edit-right-container">
                 <div class="inputfields">
                     <span class="required">Due Date</span>
-                    <input onfocus="editSetDateRestriction()" id="edit-duedate" name="duedate" class="datefield"
-                        required type="date" placeholder="dd/mm/yyyy">
+                    <input onfocus="editSetDateRestriction()" onsubmit="return editValidateDueDate()" id="edit-duedate"
+                        name="duedate" class="datefield" required type="date" placeholder="dd/mm/yyyy">
                     <div id="edit-error-message-placeholder"><span id="edit-error-message-date"
                             class="error-message">Please enter
                             a Date</span>
