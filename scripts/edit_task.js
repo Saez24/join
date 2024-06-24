@@ -60,7 +60,7 @@ function fetchEditTask(taskid) {
             // Setze die Checkboxen der zugewiesenen Personen auf "checked"
             let assignedToList = task.assignedto || task.assignto; // Überprüfen, welche Eigenschaft existiert
             if (!Array.isArray(assignedToList)) {
-                throw new Error('assignedto ist nicht definiert oder kein Array');
+                // throw new Error('assignedto ist nicht definiert oder kein Array');
             }
 
             assignedToList.forEach(person => {
@@ -72,8 +72,8 @@ function fetchEditTask(taskid) {
             });
         })
         .catch(error => {
-            console.error('Fehler beim Laden der Task-Details:', error);
-            alert('Fehler beim Laden der Task-Details: ' + error.message);
+            // console.error('Fehler beim Laden der Task-Details:', error);
+            // alert('Fehler beim Laden der Task-Details: ' + error.message);
         });
 }
 
@@ -111,7 +111,7 @@ function renderEditAssignTo(task) {
 
     let assignedToList = task.assignedto || task.assignto; // Überprüfen, welche Eigenschaft existiert
     if (!Array.isArray(assignedToList)) {
-        console.error('assignedto ist nicht definiert oder kein Array');
+        // console.error('assignedto ist nicht definiert oder kein Array');
         return;
     }
 
