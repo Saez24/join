@@ -29,7 +29,7 @@ async function loadData(path = "") {
     let response = await fetch(BASE_URL + path + ".json");
     responseToJson = await response.json();
     responseToObject = Object.values(responseToJson);
-    return responseToObject; //alternativ:  return Object.values(await response.json()); um Zeilen zu sparen.
+    return responseToObject; 
 }
 
 
