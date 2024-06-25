@@ -733,20 +733,19 @@ function handleError(error) {
 };
 
 function searchTask() {
-    let search = document.getElementById('search').value;
+    let search = document.getElementById('search').value || '';
     search = search.toLowerCase();
 
     if (search === '') {
         activeSearch = false;
         displayTasks(search);
-    } if (search.length > 3) {
+    } else if (search.length > 3) {
         activeSearch = true;
         displayTasks(search);
     } else {
         return;
     }
 }
-
 
 function shouldCreateTaskElement(task, assignedNamesHTML, search) {
     if (activeSearch) {
@@ -755,12 +754,12 @@ function shouldCreateTaskElement(task, assignedNamesHTML, search) {
     return true;
 }
 
-
 function checkSearchInput(task, assignedNamesHTML, search) {
-    return assignedNamesHTML.toLowerCase().includes(search) ||
-        (task.description && task.description.toLowerCase().includes(search)) ||
-        task.title.toLowerCase().includes(search);
+    return (assignedNamesHTML?.toLowerCase() ?? '').includes(search) ||
+        (task.description?.toLowerCase() ?? '').includes(search) ||
+        (task.title?.toLowerCase() ?? '').includes(search);
 }
+
 
 
 function addEmptyMessage(container, text) {
@@ -914,3 +913,5 @@ document.addEventListener('DOMContentLoaded', (event) => {
         updateArrowVisibility();
     });
 });
+
+

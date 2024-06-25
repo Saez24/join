@@ -68,13 +68,39 @@ function validateTaskInputField(taskDetails) {
     let errorContainerTitle = document.getElementById('tasktitle');
     let errorContainerDate = document.getElementById('duedate');
     let errorContainerCategory = document.getElementById('taskcategoryinput');
-    if (!taskDetails.title || !taskDetails.duedate || !taskDetails.category) {
+
+    let isValid = true;
+
+    if (!taskDetails.title) {
         errorContainerTitle.style.border = '1px solid #ff8190';
-        errorContainerDate.style.border = '1px solid #ff8190';
-        errorContainerCategory.style.border = '1px solid #ff8190';
-        return false;
+        isValid = false;
+    } else {
+        errorContainerTitle.style.border = '';
     }
-    return true;
+
+    if (!taskDetails.duedate) {
+        errorContainerDate.style.border = '1px solid #ff8190';
+        isValid = false;
+    } else {
+        errorContainerDate.style.border = '';
+    }
+
+    if (!taskDetails.category) {
+        errorContainerCategory.style.border = '1px solid #ff8190';
+        isValid = false;
+    } else {
+        errorContainerCategory.style.border = '';
+    }
+
+    // Validate the due date
+    if (taskDetails.duedate && !validateDueDate()) {
+        errorContainerDate.style.border = '1px solid #ff8190';
+        isValid = false;
+    } else {
+        errorContainerDate.style.border = '';
+    }
+
+    return isValid;
 };
 
 /**

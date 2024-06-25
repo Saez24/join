@@ -264,15 +264,24 @@ footer a:hover {
     left: 90px;
 }
 
+.arrow-container {
+    display: flex;
+    align-items: center;
+}
+
+.arrow {
+    cursor: pointer;
+}
+
 @media (max-width: 730px) {
     .signup-container {
         position: relative;
         display: flex;
         text-align: center;
         width: 88%;
-        height: 495px;
+        height: 430px;
         top: 265.5px;
-        padding: 48px 0px 48px 0px;
+        padding: 18px 0px 18px 0px;
         border-radius: 30px;
         background: #ffffff;
         box-shadow: 0px 0px 14px 3px #0000000A;
@@ -283,12 +292,13 @@ footer a:hover {
 
     #signup-form {
         width: 90%;
-        gap: 32px;
+        gap: 18px;
     }
 
     .input-container {
         width: 88%;
         padding: 0px 16px 0px 16px;
+        gap: 12px;
     }
 
 
@@ -306,7 +316,7 @@ footer a:hover {
 
 @media (max-width: 620px) {
     .signup-logo {
-        top: 37px;
+        top: 28px;
         left: 38px;
     }
 
@@ -321,7 +331,7 @@ footer a:hover {
     }
 
     .signup-container {
-        top: 165px;
+        top: 124px;
     }
 
     .error-message {
@@ -330,10 +340,10 @@ footer a:hover {
     }
 
     footer {
-        top: 869px;
+        top: 612px;
     }
 
     .main-page {
-        height: 926px;
+        height: 100vh;
     }
 }

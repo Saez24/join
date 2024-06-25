@@ -124,6 +124,10 @@ function selectIndex() {
     window.location.href = "index.html";
 }
 
+function selectHelp() {
+    window.location.href = "help.html";
+}
+
 
 // document.addEventListener("DOMContentLoaded", function () {
 //     let currentPage = window.location.pathname;

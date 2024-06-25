@@ -60,14 +60,32 @@ function validateName(name, errorContainer) {
     return true;
 };
 
+/**
+ * Validates the email format and updates the error container if the email is invalid.
+ * @param {string} email - The email address to validate.
+ * @param {HTMLElement} errorContainer - The container element to display error messages.
+ * @returns {boolean} True if the email is valid, false otherwise.
+ */
 function validateEmail(email, errorContainer) {
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
     if (email.length < 2) {
         errorContainer.innerHTML = 'Please enter your email.';
         errorContainer.style.display = 'block';
         return false;
     }
+
+    if (!emailPattern.test(email)) {
+        errorContainer.innerHTML = 'Please enter a valid email address.';
+        errorContainer.style.display = 'block';
+        return false;
+    }
+
+    errorContainer.innerHTML = '';
+    errorContainer.style.display = 'none';
     return true;
 };
+
 
 /**
  * Handles the form submission by creating a new user with email and password.
@@ -79,7 +97,7 @@ function validateEmail(email, errorContainer) {
 function handleFormSubmission(email, password, errorContainer) {
     createUserWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
-            window.location.href = "add_task.html";
+            window.location.href = "board.html";
         })
         .catch((error) => {
 
