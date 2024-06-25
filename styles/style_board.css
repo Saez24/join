@@ -215,19 +215,16 @@ body {
 
 .editDeleteWrapper {
     position: fixed;
-    bottom: 20px;
-    right: 20px;
+    bottom: 34px;
+    right: 45px;
     display: flex;
+    gap: 8px;
 }
 
-.deleteContainer {
-    margin-right: 10px;
-}
 
 .deleteContainer:hover {
     font-weight: bold;
     color: #29ABE2;
-    background-color: #f0f0f0;
     border-radius: 10px;
     cursor: pointer;
 }
@@ -235,8 +232,6 @@ body {
 .editContainer:hover {
     font-weight: bold;
     color: #29ABE2;
-    background-color: #f0f0f0;
-    background-color: #f0f0f0;
     border-radius: 10px;
 
 }
@@ -248,9 +243,17 @@ body {
     justify-content: center;
     gap: 8px;
     font-weight: 400;
-    font-size: 16px;
     line-height: 19.2px;
     color: var(--colorBgPrimary);
+}
+
+.editDeleteContainer img {
+    height: 24px;
+    width: 24px;
+}
+
+.editDeleteContainer span {
+    font-size: 16px !important;
 }
 
 .wrapped_maxWidth {
