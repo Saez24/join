@@ -13,6 +13,12 @@ let buttonImages = {
     low: './assets/img/prio_baja.png'
 };
 
+let prioImages = {
+    'edit-urgent': './assets/img/prio_alta.png',
+    'edit-medium': './assets/img/prio_media.png',
+    'edit-low': './assets/img/prio_baja.png'
+};
+
 let buttonNames = {
     urgent: 'Urgent',
     medium: 'Medium',

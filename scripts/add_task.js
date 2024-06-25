@@ -398,15 +398,13 @@ function resetButtonStyles(button) {
  */
 function setActiveButton(button) {
     if (activeButton === button) {
-        resetButtonStyles(button);
-        activeButton = null; // Reset the active button
+
     } else {
         // When clicking on a different button
         if (activeButton) {
             resetButtonStyles(activeButton); // Reset the previously active button
         }
-        button.style.background = buttonColors[button.id].background;
-        button.style.color = buttonColors[button.id].color;
+
         activeButton = button;
     }
 };
@@ -420,7 +418,6 @@ function urgentButton() {
     urgentButton.innerHTML += `Urgent <img src="./assets/img/prio_alta_white.png" alt="">`;
     urgentButton.style.background = buttonColors.urgent.background;
     urgentButton.style.color = buttonColors.urgent.color;
-    // Set the low button as active
     setActiveButton(urgentButton);
 };
 

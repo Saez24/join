@@ -28,7 +28,6 @@ async function openDialogEdit() {
         content.classList.add('edit-task-content-dialog');
         await editAddTaskLoadNames();
     }
-    console.log(taskid);
 
     hidePopup();
 };
@@ -46,7 +45,6 @@ function fetchEditTask(taskid) {
                 throw new Error('Task nicht gefunden');
             }
 
-            console.log('Geladene Task-Details:', task);
             renderEditTask(task);
 
             let taskDetails = document.getElementById('TaskDetailsDialog');
@@ -224,7 +222,6 @@ async function editAddTaskLoadNames() {
 
         editRenderAddTaskNames(sortedKeys, data.names);
         editRenderAddTaskCategories(data.category);
-        console.log(data);
     } catch (error) {
         console.error("Error fetching data:", error);
     }
@@ -607,6 +604,7 @@ function editValidateDueDate() {
 function editResetButtonStyles(button) {
     button.style.background = '';
     button.style.color = '';
+    button.querySelector('img').src = prioImages[button.id];
 };
 
 /**
@@ -616,15 +614,13 @@ function editResetButtonStyles(button) {
  * @param {HTMLElement} button - The HTML element of the button to set as active.
  */
 function editSetActiveButton(button) {
-    if (activeButton === button) {
-        editResetButtonStyles(button);
-        activeButton = null; // Reset the active button
-    } else {
-        // When clicking on a different button
+    if (activeButton !== button) {
+        // Reset previously active button
         if (activeButton) {
-            editResetButtonStyles(activeButton); // Reset the previously active button
+            editResetButtonStyles(activeButton);
         }
 
+        // Set new active button
         activeButton = button;
         console.log(activeButton);
     }
@@ -639,7 +635,7 @@ function editUrgentButton() {
     urgentButton.innerHTML += `Urgent <img src="./assets/img/prio_alta_white.png" alt="">`;
     urgentButton.style.background = buttonColors.urgent.background;
     urgentButton.style.color = buttonColors.urgent.color;
-    editSetActiveButton(urgentButton);
+    editSetActiveButton(urgentButton); // Set as active
 };
 
 /**
@@ -651,7 +647,7 @@ function editMediumButton() {
     mediumButton.innerHTML += `Medium <img src="./assets/img/prio_media_white.png" alt="">`;
     mediumButton.style.background = buttonColors.medium.background;
     mediumButton.style.color = buttonColors.medium.color;
-    editSetActiveButton(mediumButton);
+    editSetActiveButton(mediumButton); // Set as active
 };
 
 /**
@@ -663,7 +659,7 @@ function editLowButton() {
     lowButton.innerHTML += `Low <img src="./assets/img/prio_baja_white.png" alt="">`;
     lowButton.style.background = buttonColors.low.background;
     lowButton.style.color = buttonColors.low.color;
-    editSetActiveButton(lowButton);
+    editSetActiveButton(lowButton); // Set as active
 };
 
 /**
