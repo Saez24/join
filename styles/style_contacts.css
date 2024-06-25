@@ -635,6 +635,10 @@ h2 {
     background-color: #29ABE2;
 }
 
+.invalid-input {
+    border-color: red;
+}
+
 @keyframes slideInFromRight {
     from {
         transform: translateX(100%);

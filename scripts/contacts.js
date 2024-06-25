@@ -55,21 +55,47 @@ async function addContactData(path = "", data = {}) {
 }
 
 async function createContact() {
-    debugger;
-    if (validateContactInputs()) {
-        return;
-    } else {
+    let email = document.getElementById('contact-email').value;
+    let name = document.getElementById('contact-name').value;
+    let phonenumber = document.getElementById('contact-phone').value;
 
-        let email = document.getElementById('contact-email').value;
-        let name = document.getElementById('contact-name').value;
-        let phonenumber = document.getElementById('contact-phone').value;
-
+    if (validateContactInputs(email, name, phonenumber)) {
         slideOutToRight();
         showSuccessfullContactCreation();
 
         await addContactData('names', { 'email': email, 'name': name, 'phonenumber': phonenumber });
         await getNames();
         searchAndRenderLastAddedContact(name);
+    } else {
+        return;
+    }
+}
+
+
+function validateContactInputs(email, name, phonenumber) {
+    let emailInput = document.getElementById('contact-email');
+    let phonenumberInput = document.getElementById('contact-phone');
+    let nameInput = document.getElementById('contact-name');
+
+    nameInput.classList.remove('invalid-input');
+    phonenumberInput.classList.remove('invalid-input');
+    emailInput.classList.remove('invalid-input');
+
+    if (/^\+?\d{4,12}$/.test(phonenumber)) {
+        if (/^[^\s@]+@[^\s@]+\.(com|de|net|org|info|edu|gov|mil|co\.\w{2})$/.test(email)) {
+            if (/^[A-Za-z\u00C0-\u017F]+(?: [A-Za-z\u00C0-\u017F]+)*$/.test(name)) {
+                return true;
+            } else {
+                nameInput.classList.add('invalid-input');
+                return false;
+            }
+        } else {
+            emailInput.classList.add('invalid-input');
+            return false;
+        }
+    } else {
+        phonenumberInput.classList.add('invalid-input');
+        return false;
     }
 }
 
@@ -78,20 +104,20 @@ function searchAndRenderLastAddedContact(name) {
     let lastAddedName = name;
 
     // Select all elements that could contain the contact name
-    const contactElements = document.querySelectorAll(".contact-row");
+    let contactElements = document.querySelectorAll(".contact-row");
 
     // Iterate through the elements to find the one containing the target name
     contactElements.forEach(element => {
         if (element.textContent.includes(lastAddedName)) {
             // Extract parameters from the onclick attribute
-            const onclickAttr = element.getAttribute("onclick");
-            const paramsRegex = /renderContactInformation\(([^)]+)\)/;
-            const match = paramsRegex.exec(onclickAttr);
+            let onclickAttr = element.getAttribute("onclick");
+            let paramsRegex = /renderContactInformation\(([^)]+)\)/;
+            let match = paramsRegex.exec(onclickAttr);
 
             if (match) {
                 // Get the parameters string and split it into an array
-                const paramsString = match[1];
-                const paramsArray = paramsString.split(',').map(param => param.trim().replace(/['"]/g, ''));
+                let paramsString = match[1];
+                let paramsArray = paramsString.split(',').map(param => param.trim().replace(/['"]/g, ''));
 
                 // Call the function with the parameters
                 renderContactInformation(...paramsArray);
@@ -100,19 +126,6 @@ function searchAndRenderLastAddedContact(name) {
         }
     });
 };
-
-
-function validateContactInputs() {
-    let emailValid = document.getElementById('contact-email').checkValidity();
-    let nameValid = document.getElementById('contact-name').checkValidity();
-    let phonenumberValid = document.getElementById('contact-phone').checkValidity();
-
-    if (!emailValid || !nameValid || !phonenumberValid) {
-        return true;
-    } else {
-        return false;
-    }
-}
 
 
 function showSuccessfullContactCreation() {
