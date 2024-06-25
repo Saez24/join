@@ -622,7 +622,6 @@ function editSetActiveButton(button) {
 
         // Set new active button
         activeButton = button;
-        console.log(activeButton);
     }
 };
 
