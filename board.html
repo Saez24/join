@@ -143,8 +143,9 @@
                 </button>
             </div>
         </div>
-        <div id="edit-dialog" class="edit-dialog-bg edit-d_none">
-            <div onclick="" id="edit_task_dialog_content" class="edit_task_dialog">
+        <div onclick="closeDialogEdit()" id="edit-dialog" class="edit-dialog-bg edit-d_none">
+            <div onclick="closeOnBackground(event), editCloseSelectCategory(), editCloseAssignTo(), editCloseAddSubtaskField() "
+                id="edit_task_dialog_content" class="edit_task_dialog">
 
             </div>
         </div>
