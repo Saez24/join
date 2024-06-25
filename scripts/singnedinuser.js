@@ -104,6 +104,7 @@ onAuthStateChanged(auth, (user) => {
         fetchUserData(email);
         renderUserName();
     } else {
+        // window.location.href = "index.html";
         console.log('No user is signed in.');
         // document.getElementById('sidebarMenu').style.visibility = "hidden";
         renderUserName(null); // Display 'GS' if no user is signed in
