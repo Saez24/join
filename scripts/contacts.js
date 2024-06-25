@@ -195,7 +195,7 @@ function closeContactInformation() {
 
 
 function checkResponsive() {
-    if (window.innerWidth < 1401) {
+    if (window.innerWidth < 1251) {
         document.getElementById('contactsLeft').style.display = 'none';
         document.getElementById('mainContacts').style.display = 'flex';
     }
