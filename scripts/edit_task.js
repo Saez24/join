@@ -295,10 +295,18 @@ function editRenderNamesHTML(sortedKeys, names) {
  * Renders names HTML to the DOM.
  * @param {string} namesHTML - The HTML representing names to be rendered.
  */
+// function editRenderNamesToDOM(namesHTML) {
+//     let namesContainer = document.getElementById("edit-assignedto");
+//     namesContainer.innerHTML = namesHTML;
+// };
+
 function editRenderNamesToDOM(namesHTML) {
     let namesContainer = document.getElementById("edit-assignedto");
     namesContainer.innerHTML = namesHTML;
-};
+
+    // Ensure the checkboxes for assigned persons are checked
+    fetchEditTask(getCurrentTaskId());
+}
 
 /**
  * Renders names for adding a new task to the DOM.
