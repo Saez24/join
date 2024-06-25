@@ -234,8 +234,6 @@ function generateSubtaskCountHTML(subtasks, isChecked, taskId) {
     }
 }
 
-
-
 /**
  * Creates a task element.
  * 
@@ -286,8 +284,6 @@ function createTaskHTML(task, taskid, assignedNamesHTML, subtaskCountHTML, prior
                         </svg>
                     </div>
             </div>
-
-
             <p class="HeadlineBox">${task.title}</p>
             ${descriptionSection}
             ${subtaskCountHTML} <!-- Insert subtask count HTML here -->

@@ -50,17 +50,14 @@ function fetchEditTask(taskid) {
             console.log('Geladene Task-Details:', task);
             renderEditTask(task);
 
-            // Setze die taskid im Dialog nach erfolgreichem Laden
             let taskDetails = document.getElementById('TaskDetailsDialog');
             taskDetails.setAttribute('data-taskid', taskid);
 
-            // Render the assignedto buttons
             renderEditAssignTo(task);
 
-            // Setze die Checkboxen der zugewiesenen Personen auf "checked"
-            let assignedToList = task.assignedto || task.assignto; // Überprüfen, welche Eigenschaft existiert
+            let assignedToList = task.assignedto || task.assignto;
             if (!Array.isArray(assignedToList)) {
-                // throw new Error('assignedto ist nicht definiert oder kein Array');
+
             }
 
             assignedToList.forEach(person => {
@@ -72,8 +69,7 @@ function fetchEditTask(taskid) {
             });
         })
         .catch(error => {
-            // console.error('Fehler beim Laden der Task-Details:', error);
-            // alert('Fehler beim Laden der Task-Details: ' + error.message);
+
         });
 }
 
@@ -148,7 +144,7 @@ function renderEditAssignTo(task) {
 }
 
 function renderEditPrio(task) {
-    // Set priority buttons based on task.priority
+
     switch (task.prio) {
         case 'urgent':
             editUrgentButton(); // Aktiviere den Urgent Button
@@ -806,8 +802,6 @@ function editSaveEditedSubtask(subtaskId, event) {
         }
     }
 }
-
-
 
 /**
  * Deletes a subtask and its associated elements from the DOM.
