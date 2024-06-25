@@ -177,7 +177,7 @@ function renderEditSubtasks(subtaskData) {
 
             subtasksContainer.innerHTML += `
                 <div class="addedtask" id="edit-addedtask${key}">
-                    <span class="edit-subtask-title">${subtask.Titel}</span>
+                    <span id="edit-subtask-title" class="edit-subtask-title">${subtask.Titel}</span>
                     <div id="edit-subtask-buttons" class="subtask-buttons">
                         <button onclick="editEditSubtask('edit-addedtask${key}')"><img src="./assets/img/edit.png" alt=""></button>
                         <img src="./assets/img/separator.png" alt="">
@@ -764,21 +764,22 @@ function editAddSubtask() {
 }
 
 
-/**
- * Enables editing of the specific subtask.
- * @param {string} subtaskId - The ID of the subtask to be edited.
- */
 function editEditSubtask(subtaskId) {
     let subtaskElement = document.getElementById(subtaskId);
     if (subtaskElement) {
         let subtaskTitle = subtaskElement.querySelector('.edit-subtask-title');
         let currentText = subtaskTitle.innerText;
         subtaskElement.querySelector('#edit-subtask-buttons').style.display = 'none';
+
+        // Setze Padding-Left des span-Elements auf 0
+        subtaskTitle.style.paddingLeft = '0';
+
         subtaskTitle.innerHTML = `
             <input onclick="editSaveEditedSubtask('${subtaskId}', event)" class="edit-subtask" type="text" id="${subtaskId}-edit" value="${currentText}">
         `;
     }
 }
+
 
 
 function editSaveEditedSubtask(subtaskId, event) {
@@ -794,15 +795,18 @@ function editSaveEditedSubtask(subtaskId, event) {
         let newContent = input.value.trim();
         if (newContent !== "") {
             let subtaskElement = document.getElementById(subtaskId);
-            subtaskElement.querySelector('.edit-subtask-title').innerText = newContent;
+            let subtaskTitle = subtaskElement.querySelector('.edit-subtask-title');
+            subtaskTitle.innerText = newContent;
             subtaskElement.querySelector('#edit-subtask-buttons').style.display = 'flex';
-            document.getElementById(`${subtaskId}`).style.padding = '0';
 
+            // Setze Padding-Left des span-Elements zurück
+            subtaskTitle.style.paddingLeft = '10px';
         } else {
             editDeleteSubtask(subtaskId);
         }
     }
 }
+
 
 
 /**
