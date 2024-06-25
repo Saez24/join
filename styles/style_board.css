@@ -900,9 +900,9 @@ body {
         align-items: flex-start;
         flex-wrap: wrap;
         flex-direction: row;
-        height: auto; /* Use auto to adapt to content */
-        min-height: 200px; /* Adjust min-height as needed */
-        max-height: calc(100vh - 420px); /* Adjust max-height to fit within viewport */
+        height: auto; 
+        min-height: 200px; 
+        max-height: calc(100vh - 360px); 
         overflow-y: auto;
         overflow-x: hidden;
     }
@@ -950,6 +950,14 @@ body {
     .TaskDetails h2 {
         font-size: 24px;
     }
+
+    .toDoBox {
+        font-size: 16px;
+        padding: 18px;
+        min-width: 220px;
+        max-width: 220px;
+    }
+
 }
 
 @media screen and (max-width: 480px) {
