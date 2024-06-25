@@ -161,7 +161,6 @@ async function fetchData(path = "tasks") {
     let response = await fetch(BASE_URL + path + ".json");
     let responseToJson = await response.json();
     let responseToObject = Object.entries(responseToJson).map(([id, task]) => ({ id, ...task }));
-    console.log(responseToJson);
     return responseToObject;
 };
 
@@ -245,7 +244,7 @@ function createTaskElement(task, search) {
     let taskid = task.id; // Use the task ID from Firebase
     let assignedNamesHTML = generateAssignedNamesHTML(task.assignto || []);
     let subtaskCountHTML = generateSubtaskCountHTML(task.subtask || [], false, taskid); // Pass taskid here
-    let priorityImage = priorityImages[task.prio] || './assets/img/prio_media.png';
+    let priorityImage = buttonImages[task.prio] || './assets/img/prio_media.png';
     let categoryColor = CategoryColors[task.category] || { background: '#000000', color: '#FFFFFF' };
     let descriptionSection = task.description ? `<p class="descriptionBox">${task.description}</p>` : '';
 
@@ -369,8 +368,8 @@ async function displayTasks(search) {
     }
 };
 
-// Call the displayTasks function to fetch and display tasks
-displayTasks();
+// // Call the displayTasks function to fetch and display tasks
+// displayTasks();
 
 /**
  * Handles drag start event.
@@ -467,18 +466,18 @@ function removeHighlight(id) {
     document.getElementById(id).classList.remove('drag-area-highlight');
 };
 
-/**
- * Fetches task data from an external data source.
- * @returns {Promise<Array>} An array of tasks.
- */
-async function fetchTaskData() {
-    try {
-        return await fetchData();
-    } catch (error) {
-        console.error('Error fetching task data:', error);
-        throw error;
-    }
-};
+// /**
+//  * Fetches task data from an external data source.
+//  * @returns {Promise<Array>} An array of tasks.
+//  */
+// async function fetchTaskData() {
+//     try {
+//         return await fetchData();
+//     } catch (error) {
+//         console.error('Error fetching task data:', error);
+//         throw error;
+//     }
+// };
 
 /**
  * Finds the selected task from the provided tasks based on its ID.
@@ -498,7 +497,6 @@ function findSelectedTask(tasks, taskid) {
 function extractTaskData(selectedTask) {
     const { assignto = [], subtask = [], prio, category, description, title, duedate } = selectedTask;
     const taskId = selectedTask.id;
-    console.log(taskId);  // Überprüfen Sie, ob die taskId korrekt ist
     return { assignto, subtask, prio, category, description, title, duedate, taskId };
 };
 
@@ -606,7 +604,7 @@ function generateRandomColor() {
  */
 function formatTaskDetails(taskData, htmlContent) {
     const { prio, category, description, title, duedate } = taskData;
-    const priorityImage = priorityImages[prio] || './assets/img/prio_media.png';
+    const priorityImage = buttonImages[prio] || './assets/img/prio_media.png';
     const categoryColor = CategoryColors[category] || { background: '#000000', color: '#FFFFFF' };
 
     const dueDateObj = new Date(duedate);
@@ -705,7 +703,7 @@ function updateTaskDetails(title, description, formattedDueDate, prio, priorityI
  */
 async function renderTaskDialog(taskid, subtaskid) {
     try {
-        const tasks = await fetchTaskData();
+        const tasks = await fetchData();
         const selectedTask = findSelectedTask(tasks, taskid);
         if (!selectedTask) {
             return;

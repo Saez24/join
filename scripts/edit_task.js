@@ -31,7 +31,6 @@ async function openDialogEdit() {
     console.log(taskid);
 
     hidePopup();
-    fetchEditTask(taskid);
 };
 
 function fetchEditTask(taskid) {
@@ -53,7 +52,6 @@ function fetchEditTask(taskid) {
             let taskDetails = document.getElementById('TaskDetailsDialog');
             taskDetails.setAttribute('data-taskid', taskid);
 
-            renderEditAssignTo(task);
 
             let assignedToList = task.assignedto || task.assignto;
             if (!Array.isArray(assignedToList)) {
@@ -73,7 +71,6 @@ function fetchEditTask(taskid) {
         });
 }
 
-
 function renderEditTask(task) {
     let titleInput = document.getElementById('edit-tasktitle');
     let descriptionInput = document.getElementById('edit-description');
@@ -86,7 +83,7 @@ function renderEditTask(task) {
         duedateInput.value = task.duedate || '';
         categoryInput.value = task.category || '';
 
-        renderEditAssignTo(task)
+        renderEditAssignTo(task);
         renderEditPrio(task);
         renderEditSubtasks(task.subtask);
     } else {
@@ -610,7 +607,6 @@ function editValidateDueDate() {
 function editResetButtonStyles(button) {
     button.style.background = '';
     button.style.color = '';
-
 };
 
 /**
@@ -630,6 +626,7 @@ function editSetActiveButton(button) {
         }
 
         activeButton = button;
+        console.log(activeButton);
     }
 };
 
@@ -642,7 +639,6 @@ function editUrgentButton() {
     urgentButton.innerHTML += `Urgent <img src="./assets/img/prio_alta_white.png" alt="">`;
     urgentButton.style.background = buttonColors.urgent.background;
     urgentButton.style.color = buttonColors.urgent.color;
-    // Set the low button as active
     editSetActiveButton(urgentButton);
 };
 

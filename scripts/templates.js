@@ -25,12 +25,6 @@ let buttonColors = {
     low: { background: '#7AE229', color: '#FFFFFF' }
 };
 
-let priorityImages = {
-    urgent: './assets/img/prio_alta.png',
-    medium: './assets/img/prio_media.png',
-    low: './assets/img/prio_baja.png'
-};
-
 let CategoryColors = {
     Finance: { background: '#FF7A00', color: '#FFFFFF' },
     IT: { background: '#FF5EB3', color: '#FFFFFF' },
