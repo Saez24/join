@@ -144,10 +144,6 @@ span {
     font-size: 14px;
 }
 
-.edit-main-addtask {
-    padding-left: 0;
-}
-
 .edit-bottom-container {
     display: flex;
     align-items: center;

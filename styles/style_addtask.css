@@ -417,7 +417,7 @@ label {
 
 .addedtask span {
     padding-left: 10px;
-    padding-right: 12px;
+    padding-right: 14px;
     width: 100%;
     font-size: 14px;
 }
@@ -628,6 +628,11 @@ label {
     }
 
     .shortname {
+        width: 32px;
+        height: 32px;
+    }
+
+    .moreButton {
         width: 32px;
         height: 32px;
     }

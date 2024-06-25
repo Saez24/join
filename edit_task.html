@@ -12,7 +12,7 @@
     <link rel="icon" href="./assets/img/favicon.png" type="image/x-icon">
 </head>
 
-<body onload="editSetDateRestriction()" onclick="editCloseSelectCategory(), editCloseAssignTo()">
+<body onload="editSetDateRestriction()">
     <h2 class="edit-header">Edit Task</h2>
     <div id="edittask-content" class="edittask-content">
         <button onclick="closeDialogEdit()" class="close_edit_dialog_btn">
@@ -85,7 +85,7 @@
                             category</span>
                     </div>
                 </div>
-                <div class="inputfields">
+                <div onclick="editCloseOnBackground(event)" class="inputfields">
                     <span>Subtasks</span>
                     <input onclick="editOpenAddSubtaskField()" id="edit-addsubtask" class="subtask" type="text"
                         placeholder="Add new subtask">
@@ -93,7 +93,7 @@
                         class="aktive-subtask" type="text">
                 </div>
                 <div class="subtask-container">
-                    <div id="edit-addsubtasks">
+                    <div id="edit-addsubtasks" class="edit-subtaskblock">
 
                     </div>
                 </div>

@@ -570,7 +570,7 @@ function saveEditedSubtask(subtaskId, event) {
         if (newContent !== "") {
             document.getElementById(subtaskId).innerHTML = newContent;
             document.getElementById('subtask-buttons').style.display = 'flex';
-            document.getElementById(`${subtaskId}`).style.padding = '10px';
+            document.getElementById(`${subtaskId}`).style.padding = '10px 14px 10px 10px';
         } else {
             deleteSubtask(subtaskId);
         }
