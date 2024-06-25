@@ -647,9 +647,6 @@ h2 {
 
 @media (max-width: 1400px) {
 
-    .main-contacts {
-        display: none;
-    }
 
     .add-contact-btn {
         display: none;
@@ -763,9 +760,9 @@ h2 {
     }
 
     .contacts-left {
-        width: 100%;
-        left: 145px;
-        padding-right: 100px;
+        /* width: 100%; */
+        left: 200px;
+        padding-right: 0;
     }
 
     .arrow-icon {
@@ -791,9 +788,21 @@ h2 {
         margin-top: 96px;
     }
 
+    #betterInATeam {
+        display: none;
+    }
+
 }
 
 @media (max-width: 1200px) {
+    body {
+        justify-content: unset !important;
+    }
+    
+    .main-contacts {
+        display: none;
+    }
+
     .contact-person {
         display: none;
     }
@@ -835,6 +844,10 @@ h2 {
     #contactForString {
         padding-bottom: 100px;
     }
+
+    .contact-summary-headline-name {
+        text-wrap: wrap;
+    }
 }
 
 @media (max-width: 1000px) {
@@ -873,7 +886,6 @@ h2 {
     }
 
     .contact-summary-headline-name {
-        text-wrap: wrap;
         max-width: 380px;
     }
 
@@ -896,9 +908,6 @@ h2 {
         font-size: 20px;
     }
 
-    .vertical-line {
-        display: none;
-    }
 
     .horizontal-line {
         display: unset;
