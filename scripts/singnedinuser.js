@@ -1,5 +1,7 @@
 const BASE_URL = "https://remotestorage-b0ea0-default-rtdb.europe-west1.firebasedatabase.app/"
 
+const publicPages = ['index.html', 'privacy_policy.html', 'legal_notice.html', 'signup.html', 'help.html'];
+
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
 import { getAuth, onAuthStateChanged, signOut, deleteUser } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
@@ -104,12 +106,35 @@ onAuthStateChanged(auth, (user) => {
         fetchUserData(email);
         renderUserName();
     } else {
-        // window.location.href = "index.html";
         console.log('No user is signed in.');
         // document.getElementById('sidebarMenu').style.visibility = "hidden";
         renderUserName(null); // Display 'GS' if no user is signed in
     }
 });
+
+// /** Wenn alles fertig ist muss diese Funktion aktiviert werden und die darüber deaktiviert
+//  * Monitors Firebase authentication state changes and fetches user data if a user is signed in.
+//  */
+// onAuthStateChanged(auth, (user) => {
+//     const currentPage = window.location.pathname.split('/').pop();
+//     if (user) {
+//         let email = user.email;
+//         document.getElementById('sidebarMenu').style.visibility = "visible";
+//         fetchUserData(email);
+//         renderUserName();
+//     } else {
+//         // Überprüft, ob die aktuelle Seite nicht in der Liste der öffentlichen Seiten ist
+//         document.getElementById('sidebarMenu').style.visibility = "hidden";
+//         if (!publicPages.includes(currentPage)) {
+//             window.location.href = "index.html";
+
+//         } else {
+//             console.log('No user is signed in, but accessing a public page.');
+//         }
+
+//         renderUserName(null); // Display 'GS' if no user is signed in
+//     }
+// });
 
 /**
  * Logs out the current user and redirects to the index page.
