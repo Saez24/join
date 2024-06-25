@@ -28,10 +28,8 @@ async function openDialogEdit() {
         content.classList.add('edit-task-content-dialog');
         await editAddTaskLoadNames();
     }
-    console.log(taskid);
 
     hidePopup();
-    fetchEditTask(taskid);
 };
 
 function fetchEditTask(taskid) {
@@ -47,20 +45,15 @@ function fetchEditTask(taskid) {
                 throw new Error('Task nicht gefunden');
             }
 
-            console.log('Geladene Task-Details:', task);
             renderEditTask(task);
 
-            // Setze die taskid im Dialog nach erfolgreichem Laden
             let taskDetails = document.getElementById('TaskDetailsDialog');
             taskDetails.setAttribute('data-taskid', taskid);
 
-            // Render the assignedto buttons
-            renderEditAssignTo(task);
 
-            // Setze die Checkboxen der zugewiesenen Personen auf "checked"
-            let assignedToList = task.assignedto || task.assignto; // Überprüfen, welche Eigenschaft existiert
+            let assignedToList = task.assignedto || task.assignto;
             if (!Array.isArray(assignedToList)) {
-                // throw new Error('assignedto ist nicht definiert oder kein Array');
+
             }
 
             assignedToList.forEach(person => {
@@ -72,11 +65,9 @@ function fetchEditTask(taskid) {
             });
         })
         .catch(error => {
-            // console.error('Fehler beim Laden der Task-Details:', error);
-            // alert('Fehler beim Laden der Task-Details: ' + error.message);
+
         });
 }
-
 
 function renderEditTask(task) {
     let titleInput = document.getElementById('edit-tasktitle');
@@ -90,7 +81,7 @@ function renderEditTask(task) {
         duedateInput.value = task.duedate || '';
         categoryInput.value = task.category || '';
 
-        renderEditAssignTo(task)
+        renderEditAssignTo(task);
         renderEditPrio(task);
         renderEditSubtasks(task.subtask);
     } else {
@@ -148,7 +139,7 @@ function renderEditAssignTo(task) {
 }
 
 function renderEditPrio(task) {
-    // Set priority buttons based on task.priority
+
     switch (task.prio) {
         case 'urgent':
             editUrgentButton(); // Aktiviere den Urgent Button
@@ -177,11 +168,11 @@ function renderEditSubtasks(subtaskData) {
 
             subtasksContainer.innerHTML += `
                 <div class="addedtask" id="edit-addedtask${key}">
-                    <span class="edit-subtask-title">${subtask.Titel}</span>
-                    <div class="subtask-buttons">
-                        <button onclick="editSubtask('${key}')"><img src="./assets/img/edit.png" alt=""></button>
+                    <span id="edit-subtask-title" class="edit-subtask-title">${subtask.Titel}</span>
+                    <div id="edit-subtask-buttons" class="subtask-buttons">
+                        <button onclick="editEditSubtask('edit-addedtask${key}')"><img src="./assets/img/edit.png" alt=""></button>
                         <img src="./assets/img/separator.png" alt="">
-                        <button onclick="deleteSubtask('${key}')"><img src="./assets/img/delete.png" alt=""></button>
+                        <button onclick="editDeleteSubtask('${key}')"><img src="./assets/img/delete.png" alt=""></button>
                     </div>
                 </div>`;
         });
@@ -231,7 +222,6 @@ async function editAddTaskLoadNames() {
 
         editRenderAddTaskNames(sortedKeys, data.names);
         editRenderAddTaskCategories(data.category);
-        console.log(data);
     } catch (error) {
         console.error("Error fetching data:", error);
     }
@@ -295,10 +285,18 @@ function editRenderNamesHTML(sortedKeys, names) {
  * Renders names HTML to the DOM.
  * @param {string} namesHTML - The HTML representing names to be rendered.
  */
+// function editRenderNamesToDOM(namesHTML) {
+//     let namesContainer = document.getElementById("edit-assignedto");
+//     namesContainer.innerHTML = namesHTML;
+// };
+
 function editRenderNamesToDOM(namesHTML) {
     let namesContainer = document.getElementById("edit-assignedto");
     namesContainer.innerHTML = namesHTML;
-};
+
+    // Ensure the checkboxes for assigned persons are checked
+    fetchEditTask(getCurrentTaskId());
+}
 
 /**
  * Renders names for adding a new task to the DOM.
@@ -564,49 +562,13 @@ function editCloseOnBackground(event) {
 };
 
 /**
-         * Sets the minimum date of the date input field to today's date.
-         */
-function editSetDateRestriction() {
-    let today = new Date();
-    let formattedDate = today.getFullYear() + '-' + ('0' + (today.getMonth() + 1)).slice(-2) + '-' + ('0' + today.getDate()).slice(-2);
-    let dateField = document.getElementById("edit-duedate");
-    dateField.min = formattedDate;
-};
-
-/**
- * Validates that the date input field does not have a past date.
- * @returns {boolean} True if the date is valid, false otherwise.
- */
-function editValidateDueDate() {
-    let dateField = document.getElementById("edit-duedate");
-    let selectedDate = new Date(dateField.value);
-    let today = new Date();
-
-    // Set time to 00:00:00 to only compare dates
-    today.setHours(0, 0, 0, 0);
-    selectedDate.setHours(0, 0, 0, 0);
-
-    let errorContainerDate = document.getElementById('edit-error-message-date');
-
-    if (selectedDate < today) {
-        errorContainerDate.textContent = "The due date cannot be in the past.";
-        errorContainerDate.style.display = "block";
-        return false;
-    } else {
-        errorContainerDate.style.display = "none";
-    }
-
-    return true;
-};
-
-/**
  * Resets the background color, text color, and image of the given button to default values.
  * @param {HTMLElement} button - The HTML element of the button whose styles are to be reset.
  */
 function editResetButtonStyles(button) {
     button.style.background = '';
     button.style.color = '';
-
+    button.querySelector('img').src = prioImages[button.id];
 };
 
 /**
@@ -616,15 +578,13 @@ function editResetButtonStyles(button) {
  * @param {HTMLElement} button - The HTML element of the button to set as active.
  */
 function editSetActiveButton(button) {
-    if (activeButton === button) {
-        editResetButtonStyles(button);
-        activeButton = null; // Reset the active button
-    } else {
-        // When clicking on a different button
+    if (activeButton !== button) {
+        // Reset previously active button
         if (activeButton) {
-            editResetButtonStyles(activeButton); // Reset the previously active button
+            editResetButtonStyles(activeButton);
         }
 
+        // Set new active button
         activeButton = button;
     }
 };
@@ -638,8 +598,7 @@ function editUrgentButton() {
     urgentButton.innerHTML += `Urgent <img src="./assets/img/prio_alta_white.png" alt="">`;
     urgentButton.style.background = buttonColors.urgent.background;
     urgentButton.style.color = buttonColors.urgent.color;
-    // Set the low button as active
-    editSetActiveButton(urgentButton);
+    editSetActiveButton(urgentButton); // Set as active
 };
 
 /**
@@ -651,7 +610,7 @@ function editMediumButton() {
     mediumButton.innerHTML += `Medium <img src="./assets/img/prio_media_white.png" alt="">`;
     mediumButton.style.background = buttonColors.medium.background;
     mediumButton.style.color = buttonColors.medium.color;
-    editSetActiveButton(mediumButton);
+    editSetActiveButton(mediumButton); // Set as active
 };
 
 /**
@@ -663,7 +622,7 @@ function editLowButton() {
     lowButton.innerHTML += `Low <img src="./assets/img/prio_baja_white.png" alt="">`;
     lowButton.style.background = buttonColors.low.background;
     lowButton.style.color = buttonColors.low.color;
-    editSetActiveButton(lowButton);
+    editSetActiveButton(lowButton); // Set as active
 };
 
 /**
@@ -735,55 +694,45 @@ function editAddSubtask() {
 
     if (inputContent !== "") {
         let subtasksContainer = document.getElementById("edit-addsubtasks");
-        subtasksContainer.classList.add("subtaskblock");
+        subtasksContainer.classList.add("edit-subtaskblock");
 
-        // Create unique ID for the subtask
-        let subtaskId = "subtask" + subtaskCounter;
-        subtaskCounter++;
+        let subtaskCounter = document.querySelectorAll(`[id^='edit-addedtask']`).length;
+        let subtaskId = `edit-addedtask${subtaskCounter}`;
 
-        // Create HTML for the new subtask
-        let newSubtaskHTML = `
-            <div class="addedtask" id="edit-addedtask${subtaskId}">
-                <span class="edit-subtask-title">${inputContent}</span>
-                <div class="subtask-buttons">
-                    <button onclick="editSubtask('${subtaskId}')"><img src="./assets/img/edit.png" alt=""></button>
+        subtasksContainer.innerHTML += /*html*/ `
+            <div class="addedtask" id="${subtaskId}">
+                <span class="edit-subtask-title" id="${subtaskId}-title"><h5>${inputContent}</h5></span>
+                <div id="edit-subtask-buttons" class="subtask-buttons">
+                    <button onclick="editEditSubtask('${subtaskId}')"><img src="./assets/img/edit.png" alt=""></button>
                     <img src="./assets/img/separator.png" alt="">
-                    <button onclick="deleteSubtask('${subtaskId}')"><img src="./assets/img/delete.png" alt=""></button>
+                    <button onclick="editDeleteSubtask('${subtaskId}')"><img src="./assets/img/delete.png" alt=""></button>
                 </div>
             </div>`;
-
-        // Append new subtask HTML to the subtasks container
-        subtasksContainer.innerHTML += newSubtaskHTML;
-
-        // Clear input field
-        input.value = "";
+        editCloseAddSubtaskField();
     }
-
+    input.value = "";
     return false;
 }
 
 
-/**
- * Enables editing of the specific subtask.
- * @param {string} subtaskId - The ID of the subtask to be edited.
- */
 function editEditSubtask(subtaskId) {
     let subtaskElement = document.getElementById(subtaskId);
     if (subtaskElement) {
-        let currentText = subtaskElement.innerText;
-        document.getElementById('edit-subtask-buttons').style.display = 'none';
-        document.getElementById(`${subtaskId}`).style.paddingLeft = '0';
-        subtaskElement.innerHTML = /*html*/`
-        <input onclick = "editSaveEditedSubtask('${subtaskId}', event)" class="edit-subtask" type="text" id="${subtaskId}-edit" value="${currentText}">
+        let subtaskTitle = subtaskElement.querySelector('.edit-subtask-title');
+        let currentText = subtaskTitle.innerText;
+        subtaskElement.querySelector('#edit-subtask-buttons').style.display = 'none';
+
+        // Setze Padding-Left des span-Elements auf 0
+        subtaskTitle.style.paddingLeft = '0';
+
+        subtaskTitle.innerHTML = `
+            <input onclick="editSaveEditedSubtask('${subtaskId}', event)" class="edit-subtask" type="text" id="${subtaskId}-edit" value="${currentText}">
         `;
     }
-};
+}
 
-/**
- * Saves the edited subtask content.
- * @param {string} subtaskId - The ID of the subtask to be saved.
- * @param {Event} event - The blur event.
- */
+
+
 function editSaveEditedSubtask(subtaskId, event) {
     let input = document.getElementById(subtaskId + '-edit');
     let inputRect = input.getBoundingClientRect();
@@ -796,14 +745,18 @@ function editSaveEditedSubtask(subtaskId, event) {
     } else if (clickX >= checkIconLeft - 2 && clickX < deleteIconLeft - 18) {
         let newContent = input.value.trim();
         if (newContent !== "") {
-            document.getElementById(subtaskId).innerHTML = newContent;
-            document.getElementById('edit-subtask-buttons').style.display = 'flex';
-            document.getElementById(`${subtaskId}`).style.padding = '10px';
+            let subtaskElement = document.getElementById(subtaskId);
+            let subtaskTitle = subtaskElement.querySelector('.edit-subtask-title');
+            subtaskTitle.innerText = newContent;
+            subtaskElement.querySelector('#edit-subtask-buttons').style.display = 'flex';
+
+            // Setze Padding-Left des span-Elements zurück
+            subtaskTitle.style.paddingLeft = '10px';
         } else {
             editDeleteSubtask(subtaskId);
         }
     }
-};
+}
 
 /**
  * Deletes a subtask and its associated elements from the DOM.
@@ -904,6 +857,42 @@ function getUpdatedTaskData() {
 }
 
 /**
+         * Sets the minimum date of the date input field to today's date.
+         */
+function editSetDateRestriction() {
+    let today = new Date();
+    let formattedDate = today.getFullYear() + '-' + ('0' + (today.getMonth() + 1)).slice(-2) + '-' + ('0' + today.getDate()).slice(-2);
+    let dateField = document.getElementById("edit-duedate");
+    dateField.min = formattedDate;
+};
+
+/**
+ * Validates that the date input field does not have a past date.
+ * @returns {boolean} True if the date is valid, false otherwise.
+ */
+function editValidateDueDate() {
+    let dateField = document.getElementById("edit-duedate");
+    let selectedDate = new Date(dateField.value);
+    let today = new Date();
+
+    // Set time to 00:00:00 to only compare dates
+    today.setHours(0, 0, 0, 0);
+    selectedDate.setHours(0, 0, 0, 0);
+
+    let errorContainerDate = document.getElementById('edit-error-message-date');
+
+    if (selectedDate < today) {
+        errorContainerDate.textContent = "The due date cannot be in the past.";
+        errorContainerDate.style.display = "block";
+        return false;
+    } else {
+        errorContainerDate.style.display = "none";
+    }
+
+    return true;
+};
+
+/**
  * Validates task details.
  * @param {Object} taskDetails - An object containing task details.
  * @returns {boolean} Returns true if task details are valid, otherwise false.
@@ -954,7 +943,6 @@ function editValidateTaskInputField(taskDetails) {
         errorContainerCategory.style.border = '';
     }
 
-    // Validate the due date
     if (taskDetails.duedate && !editValidateDueDate()) {
         errorContainerDate.style.border = '1px solid #ff8190';
         isValid = false;
@@ -974,9 +962,11 @@ async function saveUpdatedTask(taskid) {
 
     let updatedData = getUpdatedTaskData();
 
-    // Validate the updated task details
-    if (!editValidateTaskInputField(updatedData),
-        !editValidateTaskDetails(updatedData)) {
+    if (!editValidateTaskInputField(updatedData)) {
+        return;
+    }
+
+    if (!editValidateTaskDetails(updatedData)) {
         return;
     }
 

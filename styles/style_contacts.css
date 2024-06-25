@@ -409,7 +409,7 @@ h2 {
 .contact-person {
     height: 120px;
     width: 120px;
-    background-color: rgb(209, 209, 209); 
+    background-color: rgb(209, 209, 209);
     border: 3px solid white;
     border-radius: 70px;
     box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.1);
@@ -647,9 +647,6 @@ h2 {
 
 @media (max-width: 1400px) {
 
-    .main-contacts {
-        display: none;
-    }
 
     .add-contact-btn {
         display: none;
@@ -752,20 +749,82 @@ h2 {
     }
 
     .contact-row {
-        width: 89%;
+        width: 88%;
     }
 
     #contactForString {
         top: 97px;
-        width: 85%;
+        width: 100%;
         flex: content;
         padding-bottom: 96px;
     }
 
     .contacts-left {
+        width: 456px;
+        left: 231px;
+    }
+
+    .main-contacts-text {
+        left: 246px;
+    }
+
+
+
+    .contact-summary-headline-rightside {
+        flex-direction: row;
+        align-items: center;
+        max-width: calc(100% - 150px);
+        height: 160px;
+    }
+
+
+    ::-webkit-scrollbar-track {
+        margin-bottom: 100px;
+        margin-top: 96px;
+    }
+
+    #contactSummary {
+        left: 250px;
+    }
+
+    .contact-summary-headline-name {
+        font-size: xx-large;
+    }
+
+    h1 {
+        font-size: 50px;
+
+    }
+}
+
+@media (max-width: 1250px) {
+
+    .contacts-left {
+        padding-bottom: 96px;
+        left: 210px;
+        width: 400px;
+    }
+
+    .contact-row {
+        gap: 15px;
+        padding-right: 0;
+        padding-left: 0;
         width: 100%;
-        left: 145px;
-        padding-right: 100px;
+    }
+
+    #contactForString {
+        left: 15px;
+        width: 94%;
+    }
+}
+
+@media (max-width: 1200px) {
+    body {
+        justify-content: unset !important;
+    }
+
+    .main-contacts {
+        display: none;
     }
 
     .arrow-icon {
@@ -779,21 +838,10 @@ h2 {
         cursor: pointer;
     }
 
-    .contact-summary-headline-rightside {
-        flex-direction: row;
-        align-items: center;
-        max-width: calc(100% - 150px);
+    #betterInATeam {
+        display: none;
     }
 
-
-    ::-webkit-scrollbar-track {
-        margin-bottom: 100px;
-        margin-top: 96px;
-    }
-
-}
-
-@media (max-width: 1200px) {
     .contact-person {
         display: none;
     }
@@ -828,10 +876,6 @@ h2 {
         font-size: 16px;
     }
 
-    .contacts-left {
-        padding-bottom: 96px;
-    }
-
     #contactForString {
         padding-bottom: 100px;
     }
@@ -847,14 +891,22 @@ h2 {
     }
 
     #contactForString {
-        width: 80%;
+        width: 71%;
         top: 97px;
         height: 100%;
         padding-bottom: 96px;
+        left: 4px;
     }
 
     .contacts-left {
         top: 0;
+        width: 93%;
+        left: 140px;
+    }
+
+    .contact-row {
+        padding-left: 8px;
+        width: 98%;
     }
 }
 
@@ -873,7 +925,6 @@ h2 {
     }
 
     .contact-summary-headline-name {
-        text-wrap: wrap;
         max-width: 380px;
     }
 
@@ -896,9 +947,6 @@ h2 {
         font-size: 20px;
     }
 
-    .vertical-line {
-        display: none;
-    }
 
     .horizontal-line {
         display: unset;
@@ -1059,6 +1107,7 @@ h2 {
     .yes-no-btn {
         width: 45%;
     }
+
     .contact-summary-headline-name {
         max-width: calc(100% - 200px);
     }

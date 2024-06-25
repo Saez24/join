@@ -13,6 +13,7 @@
     right: 0;
     bottom: 0;
     top: 0;
+    padding: 20px;
 }
 
 .edit_task_dialog {
@@ -23,8 +24,9 @@
     display: flex;
     flex-direction: column;
     right: 0;
-    top: 70px;
-    height: 720px;
+    top: 20px;
+    max-height: 85%;
+    min-height: 80%;
     line-height: 20px;
     opacity: 1;
     position: relative;
@@ -37,8 +39,8 @@
 .close_edit_dialog_btn {
     position: absolute;
     border: 0;
-    top: 44px;
-    right: 4%;
+    top: 20px;
+    right: 20px;
     width: 32px;
     background-color: white;
     cursor: pointer;
@@ -142,10 +144,6 @@
 
 span {
     font-size: 14px;
-}
-
-.edit-main-addtask {
-    padding-left: 0;
 }
 
 .edit-bottom-container {

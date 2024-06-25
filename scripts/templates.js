@@ -13,6 +13,12 @@ let buttonImages = {
     low: './assets/img/prio_baja.png'
 };
 
+let prioImages = {
+    'edit-urgent': './assets/img/prio_alta.png',
+    'edit-medium': './assets/img/prio_media.png',
+    'edit-low': './assets/img/prio_baja.png'
+};
+
 let buttonNames = {
     urgent: 'Urgent',
     medium: 'Medium',
@@ -23,12 +29,6 @@ let buttonColors = {
     urgent: { background: '#FF3D00', color: '#FFFFFF' },
     medium: { background: '#FFA800', color: '#FFFFFF' },
     low: { background: '#7AE229', color: '#FFFFFF' }
-};
-
-let priorityImages = {
-    urgent: './assets/img/prio_alta.png',
-    medium: './assets/img/prio_media.png',
-    low: './assets/img/prio_baja.png'
 };
 
 let CategoryColors = {

@@ -31,7 +31,6 @@ body {
     width: 525px !important;
     display: flex;
     max-height: 85%;
-    min-height: 80%;
     overflow-y: auto;
     flex-direction: column;
     align-items: flex-start;
@@ -163,11 +162,10 @@ body {
     margin-bottom: 1px;
     padding-top: 10px;
     display: flex;
-    gap: 25px;
+    flex-direction: column;
+    gap: 10px;
     width: 100%;
-    flex-wrap: nowrap;
-    overflow-x: auto;
-    padding: 14px
+    padding: 14px;
 }
 
 .subtasksTitle {
@@ -217,19 +215,16 @@ body {
 
 .editDeleteWrapper {
     position: fixed;
-    bottom: 20px;
-    right: 20px;
+    bottom: 34px;
+    right: 45px;
     display: flex;
+    gap: 8px;
 }
 
-.deleteContainer {
-    margin-right: 10px;
-}
 
 .deleteContainer:hover {
     font-weight: bold;
     color: #29ABE2;
-    background-color: #f0f0f0;
     border-radius: 10px;
     cursor: pointer;
 }
@@ -237,8 +232,6 @@ body {
 .editContainer:hover {
     font-weight: bold;
     color: #29ABE2;
-    background-color: #f0f0f0;
-    background-color: #f0f0f0;
     border-radius: 10px;
 
 }
@@ -250,9 +243,17 @@ body {
     justify-content: center;
     gap: 8px;
     font-weight: 400;
-    font-size: 16px;
     line-height: 19.2px;
     color: var(--colorBgPrimary);
+}
+
+.editDeleteContainer img {
+    height: 24px;
+    width: 24px;
+}
+
+.editDeleteContainer span {
+    font-size: 16px !important;
 }
 
 .wrapped_maxWidth {
@@ -359,7 +360,7 @@ body {
     align-items: center;
     font-size: 20px;
     padding: 10px;
-    width: 100%;
+    width: calc(25% - 20px);
 }
 
 .headlineStatusTasks {
@@ -372,7 +373,7 @@ body {
 .taskStatusTitle {
     flex: 1;
     color: #42526E;
-    font-size: 26px;
+    font-size: 22px !important;
     font-weight: 700;
     margin-top: 0;
     margin-bottom: 0;
@@ -392,7 +393,7 @@ body {
 }
 
 .arrow:hover path {
-    fill: #0038FF;
+    fill: #29ABE2;
     filter: drop-shadow(0px 0px 5px rgba(0, 0, 0, 0.3));
 
 }
@@ -403,12 +404,13 @@ body {
     filter: drop-shadow(0px 0px 5px rgba(0, 0, 0, 0.1));
     font-size: 16px;
     padding: 18px;
-    min-width: 250px;
+    min-width: 200px;
     max-width: 250px;
     /* min-height: 240px; */
     height: 100%;
     transition: transform 0.3s ease;
     cursor: grab;
+    margin-bottom: 10px;
 }
 
 .toDoBox:hover {
@@ -700,12 +702,19 @@ body {
         margin: 30px;
         padding-left: 250px;
     }
+
+    .taskStatusTitle {
+        font-size: 22px;
+    }
+
+    .toDoBox {
+        padding: 10px;
+    }
 }
 
 
 @media screen and (max-width: 1470px) {
     .wrapped_maxWidth {
-        max-width: 950px;
         padding-left: 220px;
     }
 
@@ -713,6 +722,60 @@ body {
         width: calc(100% - 10px);
         margin-top: 0;
         margin-left: 10px;
+    }
+}
+
+@media (max-width: 1250px) {
+    .wrapped_maxWidth {
+        max-width: 850px;
+    }
+
+    .boardTasks {
+        display: flex;
+        align-items: flex-start;
+        flex-wrap: wrap;
+        padding-bottom: 100px;
+        flex-direction: row;
+        height: 550px;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
+    .statusTasks {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        font-size: 20px;
+        padding: 10px;
+        width: 100%;
+    }
+
+    .headlineStatusTasks {
+        display: flex;
+        align-items: center;
+        margin: 0;
+        gap: 26px;
+    }
+
+    .tasks {
+        min-height: 300px;
+        margin-top: 10px;
+        margin-bottom: 1px;
+        padding-top: 10px;
+        display: flex;
+        gap: 25px;
+        width: 100%;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        padding: 14px;
+        flex-direction: row
+    }
+
+    .toDoBox {
+        font-size: 16px;
+        padding: 18px;
+        min-width: 200px;
+        max-width: 250px;
     }
 }
 
@@ -744,6 +807,7 @@ body {
         order: 2;
         width: calc(100% - 20px);
         margin: 20px;
+        margin-top: 30px;
     }
 
     .inputSearchTask {
@@ -768,6 +832,8 @@ body {
     .addTaskButton span {
         display: none;
     }
+
+
 }
 
 @media (max-width: 1000px) {
@@ -829,9 +895,53 @@ body {
         height: 30px !important;
     }
 
+    .taskStatusTitle {
+        font-size: 26px !important;
+    }
+
     .boardTasks {
         margin-left: 20px;
         margin-right: 20px;
+        display: flex;
+        align-items: flex-start;
+        flex-wrap: wrap;
+        flex-direction: row;
+        height: auto;
+        min-height: 200px;
+        max-height: calc(100vh - 360px);
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
+
+    .statusTasks {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        font-size: 20px;
+        padding: 10px;
+        width: 100%;
+    }
+
+    .headlineStatusTasks {
+        display: flex;
+        align-items: center;
+        margin: 0;
+        gap: 26px;
+    }
+
+    .tasks {
+        min-height: 300px;
+        margin-top: 10px;
+        margin-bottom: 1px;
+        padding-top: 10px;
+        display: flex;
+        gap: 25px;
+        width: 100%;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        padding: 14px;
+        padding-right: 30px;
     }
 
     .arrowContainer {
@@ -847,6 +957,14 @@ body {
     .TaskDetails h2 {
         font-size: 24px;
     }
+
+    .toDoBox {
+        font-size: 16px;
+        padding: 18px;
+        min-width: 220px;
+        max-width: 220px;
+    }
+
 }
 
 @media screen and (max-width: 480px) {

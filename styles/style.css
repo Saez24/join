@@ -13,22 +13,24 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    overflow: hidden;
+    overflow-x: hidden;
 }
 
 .loading-screen {
     position: fixed;
-    top: 80px;
-    left: 77px;
+    top: 0;
+    left: 0;
     width: 100vw;
     height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     opacity: 1;
     visibility: visible;
     background-color: #f6f7f8;
     z-index: 9999;
     transition: opacity 500ms ease-out, visibility 100ms ease-out;
     animation: resizeLogo 0.5s ease-in-out forwards 500ms;
-
 }
 
 .loading-screen-mobile {
@@ -36,14 +38,16 @@ body {
 }
 
 .logo {
-    width: 100%;
-    height: 100%;
+    width: 80%;
+    height: 80%;
 }
 
 @keyframes resizeLogo {
     0% {
-        max-width: 100vw;
-        max-height: 100vh;
+        width: 95vw;
+        height: 95vh;
+        max-width: 95vw;
+        max-height: 95vh;
     }
 
     15% {
@@ -51,6 +55,10 @@ body {
     }
 
     100% {
+        top: 80px;
+        left: 77px;
+        width: 100.03px;
+        height: 121.97px;
         max-width: 100.03px;
         max-height: 121.97px;
     }
@@ -97,7 +105,7 @@ body {
     text-align: center;
     width: 652px;
     height: 422px;
-    top: 265.5px;
+    top: 180.5px;
     padding: 48px 0px 48px 0px;
     border-radius: 30px;
     background: #ffffff;
@@ -314,7 +322,7 @@ footer {
     display: flex;
     width: 246px;
     height: 35px;
-    top: 949px;
+    bottom: 20px;
     gap: 16px;
     justify-content: space-around;
     align-items: center;
@@ -325,6 +333,7 @@ footer a {
     color: #A8A8A8;
     width: 250px;
     text-align: center;
+    padding-top: 20px;
 }
 
 footer a:hover {
@@ -356,7 +365,7 @@ footer a:hover {
     }
 
     .main-page {
-        height: 926px;
+        height: 100vh;
     }
 
     .loading-screen-mobile {
@@ -431,7 +440,7 @@ footer a:hover {
         display: flex;
         text-align: center;
         width: 88%;
-        top: 124px;
+        top: 85px;
         padding: 48px 0px 48px 0px;
         border-radius: 30px;
         background: #ffffff;
@@ -442,7 +451,8 @@ footer a:hover {
     }
 
     .signup-container {
-        top: 778px;
+        position: relative;
+        top: 680px;
         left: 0;
         right: 0;
 
@@ -499,6 +509,14 @@ footer a:hover {
     }
 
     footer {
-        top: 869px;
+        position: relative;
+        top: 200px;
+        padding-bottom: 20px;
+    }
+}
+
+@media (max-height: 600px) {
+    .main-page {
+        height: 800px;
     }
 }
