@@ -163,8 +163,8 @@ body {
     margin-bottom: 1px;
     padding-top: 10px;
     display: flex;
-    flex-direction: column; /* Change to column to stack tasks vertically */
-    gap: 10px; /* Adjust gap as needed */
+    flex-direction: column; 
+    gap: 10px; 
     width: 100%;
     padding: 14px;
 }

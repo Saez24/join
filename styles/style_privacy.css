@@ -2,11 +2,11 @@ body {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    overflow-y: scroll; /* Stelle sicher, dass das Body-Element scrollbar ist */
+    overflow-y: scroll; 
 }
 
 html {
-    overflow-y: scroll; /* Sicherstellen, dass das HTML-Element scrollbar ist */
+    overflow-y: scroll; 
 }
 
 .everything {
@@ -17,6 +17,7 @@ html {
     padding-left: 232px;
     padding-top: 200px;
     padding-bottom: 100px;
+    max-width: 1200px;
     width: calc(100% - 232px);
     background-color: #F6F7F8;
     overflow-x: hidden;
@@ -70,8 +71,8 @@ mark {
 }
 
 .arrow-container:hover {
-    background-color: #e0e0e0; /* Hellgrauer Kreis */
-    transform: scale(1.1); /* Leicht größerer Kreis und Pfeil */
+    background-color: #e0e0e0; 
+    transform: scale(1.1); 
 }
 
 .arrow {
@@ -81,7 +82,7 @@ mark {
 }
 
 .arrow-container:hover .arrow {
-    transform: scale(1.01); /* Leicht größerer Pfeil */
+    transform: scale(1.01); 
 }
 
 @media screen and (max-width: 750px) {
