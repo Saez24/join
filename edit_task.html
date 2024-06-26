@@ -10,6 +10,12 @@
     <script src="./scripts/add_task.js"></script>
     <script src="./scripts/edit_task.js"></script>
     <script src="./scripts/templates.js"></script>
+    <script src="./scripts/add_task_dropdowns.js"></script>
+    <script src="./scripts/add_task_validations.js"></script>
+    <script src="./scripts/add_task_post.js"></script>
+    <script src="./scripts/edit_task_dropdowns.js"></script>
+    <script src="./scripts/edit_task_validations.js"></script>
+    <script src="./scripts/edit_task_post.js"></script>
     <title>Edit task</title>
     <link rel="icon" href="./assets/img/favicon.png" type="image/x-icon">
 </head>
@@ -91,8 +97,9 @@
                     <span>Subtasks</span>
                     <input onclick="editOpenAddSubtaskField()" id="edit-addsubtask" class="subtask" type="text"
                         placeholder="Add new subtask">
-                    <input onclick="editHandleSubtaskClick(event), editAddSubtask(event)" id="edit-subtask"
-                        class="aktive-subtask" type="text">
+                    <input onclick="editHandleSubtaskClick(event), editAddSubtask(event)"
+                        onkeydown="editCheckEnter(event)" id="edit-subtask" class="aktive-subtask" type="text"
+                        minlength="4" maxlength="20">
                 </div>
                 <div class="subtask-container">
                     <div id="edit-addsubtasks" class="edit-subtaskblock">
