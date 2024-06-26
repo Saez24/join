@@ -806,29 +806,19 @@ h2 {
     .contacts-left {
         padding-bottom: 96px;
         left: 210px;
-        width: 400px;
+        width: 80%;
     }
 
     .contact-row {
         gap: 15px;
         padding-right: 0;
-        padding-left: 0;
-        width: 100%;
+        padding-left: 16px;
+        width: 97%;
     }
 
     #contactForString {
         left: 15px;
         width: 94%;
-    }
-}
-
-@media (max-width: 1200px) {
-    body {
-        justify-content: unset !important;
-    }
-
-    .main-contacts {
-        display: none;
     }
 
     .arrow-icon {
@@ -840,6 +830,16 @@ h2 {
         top: 242px;
         transform: translateY(-50%);
         cursor: pointer;
+    }
+}
+
+@media (max-width: 1200px) {
+    body {
+        justify-content: unset !important;
+    }
+
+    .main-contacts {
+        display: none;
     }
 
     #betterInATeam {
@@ -909,7 +909,6 @@ h2 {
     }
 
     .contact-row {
-        padding-left: 8px;
         width: 98%;
     }
 }
@@ -933,7 +932,7 @@ h2 {
     }
 
     #contactSummary {
-        top: 266px;
+        top: 280px;
         left: 262px;
         gap: 12px;
         width: auto;
