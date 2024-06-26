@@ -330,6 +330,7 @@ body {
     gap: 4px;
     background-color: #2A3647;
     color: white;
+    cursor: pointer;
 }
 
 .addTaskButton img {
@@ -698,7 +699,7 @@ body {
 
 @media screen and (max-width: 1550px) {
     .wrapped_maxWidth {
-        max-width: 1100px;
+        max-width: 1150px;
         margin: 30px;
         padding-left: 250px;
     }
