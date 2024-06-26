@@ -106,9 +106,8 @@ onAuthStateChanged(auth, (user) => {
         fetchUserData(email);
         renderUserName();
     } else {
-        console.log('No user is signed in.');
         // document.getElementById('sidebarMenu').style.visibility = "hidden";
-        renderUserName(null); // Display 'GS' if no user is signed in
+        renderUserName(null);
     }
 });
 
@@ -142,10 +141,8 @@ onAuthStateChanged(auth, (user) => {
  */
 function handleLogout() {
     signOut(auth).then(() => {
-        // Sign-out successful.
         window.location.href = "index.html";
     }).catch((error) => {
-        // An error happened.
         console.error('Error during sign out:', error);
     });
 };

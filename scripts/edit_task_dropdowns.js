@@ -125,16 +125,10 @@ function editRenderNamesHTML(sortedKeys, names) {
  * Renders names HTML to the DOM.
  * @param {string} namesHTML - The HTML representing names to be rendered.
  */
-// function editRenderNamesToDOM(namesHTML) {
-//     let namesContainer = document.getElementById("edit-assignedto");
-//     namesContainer.innerHTML = namesHTML;
-// };
-
 function editRenderNamesToDOM(namesHTML) {
     let namesContainer = document.getElementById("edit-assignedto");
     namesContainer.innerHTML = namesHTML;
 
-    // Ensure the checkboxes for assigned persons are checked
     fetchEditTask(getCurrentTaskId());
 }
 
@@ -196,7 +190,7 @@ function editLoadSelectedAssignTo() {
             if (count <= 3) {
                 let button = editCreateButton(checkbox, position);
                 selectedAssignToDiv.appendChild(button);
-                position += 12; // Adjust this value to control the overlap
+                position += 12;
                 buttonContainer.style.display = 'inline-block'
             }
         }
@@ -256,17 +250,14 @@ function editGetAssignedTo() {
     let assignedTo = [];
 
     assignedToCheckboxes.forEach((checkbox) => {
-        // Splitting the ID to get the key parts
         let idParts = checkbox.id.split('_');
 
-        // Handling cases with IDs like -O-2Vl5jkNUBw8YFvq0O
         if (idParts.length >= 3) {
             let nameSpan = document.getElementById(`editassignname_${idParts[1]}_${idParts.slice(2).join('_')}`);
             if (nameSpan) {
                 assignedTo.push(nameSpan.innerText.trim());
             }
         } else if (idParts.length === 2) {
-            // Handling simpler ID cases, e.g., assignedto_<key>
             let nameSpan = document.getElementById(`editassignname_${idParts[1]}`);
             if (nameSpan) {
                 assignedTo.push(nameSpan.innerText.trim());
@@ -274,7 +265,6 @@ function editGetAssignedTo() {
         }
     });
 
-    console.log(`Assigned to (final): ${assignedTo}`);
     return assignedTo;
 };
 
@@ -324,7 +314,6 @@ function editDropdownSelectCategory(element) {
     if (element.closest("#edit-taskcategory")) {
         let categoryContainer = document.getElementById("edit-taskcategory");
         let checkboxes = categoryContainer.querySelectorAll(".checkbox");
-
         let clickedCheckbox = element.querySelector(".checkbox");
         let isChecked = clickedCheckbox.checked;
 

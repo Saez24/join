@@ -125,17 +125,17 @@ function renderEditPrio(task) {
 
     switch (task.prio) {
         case 'urgent':
-            editUrgentButton(); // Aktiviere den Urgent Button
+            editUrgentButton();
             break;
         case 'medium':
-            editMediumButton(); // Aktiviere den Medium Button
+            editMediumButton();
             break;
         case 'low':
-            editLowButton(); // Aktiviere den Low Button
+            editLowButton();
             break;
         default:
-            // Reset all buttons if no priority matches
-            editResetButtonStyles(); // Setze alle Buttons zurück
+
+            editResetButtonStyles();
             break;
     }
 };
@@ -144,7 +144,7 @@ function renderEditSubtasks(subtaskData) {
     let subtasksContainer = document.getElementById('edit-addsubtasks');
 
     if (subtasksContainer && subtaskData) {
-        subtasksContainer.innerHTML = ''; // Clear existing subtasks
+        subtasksContainer.innerHTML = '';
 
         Object.keys(subtaskData).forEach(key => {
             let subtask = subtaskData[key];
@@ -187,7 +187,6 @@ function closeDialogEdit() {
         dialogslide.classList.remove('slide-out-right');
         dialog.classList.add('edit-d_none');
     }, 300);
-    console.log(currentTaskId);
     showPopup(currentTaskId);
 };
 
@@ -217,12 +216,9 @@ function editResetButtonStyles(button) {
  */
 function editSetActiveButton(button) {
     if (activeButton !== button) {
-        // Reset previously active button
         if (activeButton) {
             editResetButtonStyles(activeButton);
         }
-
-        // Set new active button
         activeButton = button;
     }
 };
@@ -236,7 +232,7 @@ function editUrgentButton() {
     urgentButton.innerHTML += `Urgent <img src="./assets/img/prio_alta_white.png" alt="">`;
     urgentButton.style.background = buttonColors.urgent.background;
     urgentButton.style.color = buttonColors.urgent.color;
-    editSetActiveButton(urgentButton); // Set as active
+    editSetActiveButton(urgentButton);
 };
 
 /**
@@ -248,7 +244,7 @@ function editMediumButton() {
     mediumButton.innerHTML += `Medium <img src="./assets/img/prio_media_white.png" alt="">`;
     mediumButton.style.background = buttonColors.medium.background;
     mediumButton.style.color = buttonColors.medium.color;
-    editSetActiveButton(mediumButton); // Set as active
+    editSetActiveButton(mediumButton);
 };
 
 /**
@@ -260,7 +256,7 @@ function editLowButton() {
     lowButton.innerHTML += `Low <img src="./assets/img/prio_baja_white.png" alt="">`;
     lowButton.style.background = buttonColors.low.background;
     lowButton.style.color = buttonColors.low.color;
-    editSetActiveButton(lowButton); // Set as active
+    editSetActiveButton(lowButton);
 };
 
 /**
@@ -272,7 +268,6 @@ function editOpenAddSubtaskField() {
     addSubtaskField.style.display = 'none';
     subtaskField.style.display = 'block';
 
-    // Set the focus on the specific input field by ID
     let inputField = document.getElementById('edit-subtask');
     if (inputField) {
         inputField.focus();
@@ -300,11 +295,10 @@ function editHandleSubtaskClick(event) {
     let clickX = event.clientX;
     let inputRight = input.getBoundingClientRect().right;
 
-    // Check if the click is within the area of the close.png image (rightmost 28px)
     if (clickX >= inputRight - 28) {
         editAddSubtask();
     }
-    // Check if the click is within the area of the check_black.png image (next 28px from right)
+
     else if (clickX >= inputRight - 56 && clickX < inputRight - 28) {
         editCloseAddSubtaskField();
     }
@@ -316,7 +310,7 @@ function editHandleSubtaskClick(event) {
  */
 function editCheckEnter(event) {
     if (event.key === "Enter") {
-        event.preventDefault(); // Prevent the default form submission behavior
+        event.preventDefault();
         editAddSubtask();
     }
 };

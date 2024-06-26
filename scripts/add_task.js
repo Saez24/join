@@ -23,7 +23,6 @@ async function addTaskLoadNames() {
         renderAddTaskNames(sortedKeys, data.names);
         renderAddTaskCategories(data.category);
         mediumButton();
-        console.log(data);
     } catch (error) {
         console.error("Error fetching data:", error);
     }
@@ -114,7 +113,6 @@ function setActiveButton(button) {
         if (activeButton) {
             resetButtonStyles(activeButton); // Reset the previously active button
         }
-
         activeButton = button;
     }
 };
@@ -192,11 +190,9 @@ function handleSubtaskClick(event) {
     let clickX = event.clientX;
     let inputRight = input.getBoundingClientRect().right;
 
-    // Check if the click is within the area of the close.png image (rightmost 28px)
     if (clickX >= inputRight - 28) {
         addSubtask();
     }
-    // Check if the click is within the area of the check_black.png image (next 28px from right)
     else if (clickX >= inputRight - 56 && clickX < inputRight - 28) {
         closeAddSubtaskField();
     }
@@ -359,7 +355,6 @@ function clearContent() {
     clearAssignedToAndSubtasks();
     removeSelectedDropdownClass();
 
-    // Check if the medium button is not active, then call mediumButton
     let mediumBtn = document.getElementById('medium');
     if (activeButton !== mediumBtn) {
         mediumButton();
