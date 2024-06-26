@@ -725,27 +725,7 @@ h2 {
         display: none;
     }
 
-    .add-contact-mobile {
-        display: flex;
-        position: fixed;
-        bottom: 100px;
-        right: 20px;
-        justify-content: center;
-        align-items: center;
-        width: 56px;
-        height: 56px;
-        border: none;
-        border-radius: 46px;
-        gap: 10px;
-        background-color: #2A3647;
-        box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-        cursor: pointer;
-        z-index: 3;
-    }
 
-    .add-contact-mobile:hover {
-        background-color: #29ABE2;
-    }
 
     .contact-row {
         width: 88%;
@@ -777,7 +757,7 @@ h2 {
 
 
     ::-webkit-scrollbar-track {
-        margin-bottom: 100px;
+        margin-bottom: 147px;
         margin-top: 96px;
     }
 
@@ -813,9 +793,17 @@ h2 {
     #contactForString {
         left: 15px;
         width: 94%;
+        padding-bottom: 147px;
     }
 
 
+    .add-contact-btn {
+        left: calc(204px + 52px);
+    }
+
+    ::-webkit-scrollbar-track {
+        margin-bottom: 97px;
+    }
 }
 
 @media (max-width: 1200px) {
@@ -874,6 +862,28 @@ h2 {
         top: 97px;
     }
 
+    .add-contact-mobile {
+        display: flex;
+        position: fixed;
+        bottom: 100px;
+        right: 20px;
+        justify-content: center;
+        align-items: center;
+        width: 56px;
+        height: 56px;
+        border: none;
+        border-radius: 46px;
+        gap: 10px;
+        background-color: #2A3647;
+        box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+        cursor: pointer;
+        z-index: 3;
+    }
+
+    .add-contact-mobile:hover {
+        background-color: #29ABE2;
+    }
+
     .arrow-icon {
         display: flex;
         position: fixed;
@@ -884,6 +894,7 @@ h2 {
         transform: translateY(-50%);
         cursor: pointer;
     }
+
 }
 
 @media (max-width: 1000px) {
@@ -899,7 +910,7 @@ h2 {
         width: 71%;
         top: 97px;
         height: 100%;
-        padding-bottom: 96px;
+        padding-bottom: 41px;
         left: 4px;
     }
 
@@ -911,6 +922,10 @@ h2 {
 
     .contact-row {
         width: 98%;
+    }
+
+    ::-webkit-scrollbar-track {
+        margin-bottom: 44px;
     }
 }
 
@@ -989,7 +1004,7 @@ h2 {
         left: 0;
         width: 100%;
         right: 0;
-        margin-bottom: 78px;
+        margin-bottom: 133px;
     }
 
     .contacts-left {
@@ -1126,12 +1141,17 @@ h2 {
     }
 
     .contacts-left {
-        width: 98vw;
+        width: 100vw;
     }
 
     .contact-summary-initials {
         width: 120px !important;
         height: 120px !important;
+    }
+
+    .capital-category {
+        padding-left: 10px;
+        width: 84%;
     }
 }
 
@@ -1141,10 +1161,7 @@ h2 {
         width: 100%;
     }
 
-    .capital-category {
-        padding-left: 10px;
-        width: 84%;
-    }
+
 
     .contact-summary-initials {
         width: 80px !important;

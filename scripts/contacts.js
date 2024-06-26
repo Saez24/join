@@ -198,9 +198,9 @@ function renderContactInformation(name, email, color, phone, id) {
 
 
 function closeContactInformation() {
-    if (window.innerWidth < 1401) {
-        document.getElementById('mainContacts').style.display = 'none';
+    if (window.innerWidth < 1201) {
         document.getElementById('contactsLeft').style.display = 'flex';
+        document.getElementById('mainContacts').style.display = 'none';
     }
     let summary = document.getElementById('contactSummary');
     summary.innerHTML = '';
@@ -209,7 +209,7 @@ function closeContactInformation() {
 
 
 function checkResponsive() {
-    if (window.innerWidth < 1251) {
+    if (window.innerWidth < 1201) {
         document.getElementById('contactsLeft').style.display = 'none';
         document.getElementById('mainContacts').style.display = 'flex';
     }
