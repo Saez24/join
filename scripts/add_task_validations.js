@@ -1,6 +1,6 @@
 /**
-         * Sets the minimum date of the date input field to today's date.
-         */
+ * Sets the minimum date of the date input field to today's date.
+ */
 function setDateRestriction() {
     let today = new Date();
     let formattedDate = today.getFullYear() + '-' + ('0' + (today.getMonth() + 1)).slice(-2) + '-' + ('0' + today.getDate()).slice(-2);
@@ -17,7 +17,6 @@ function validateDueDate() {
     let selectedDate = new Date(dateField.value);
     let today = new Date();
 
-    // Set time to 00:00:00 to only compare dates
     today.setHours(0, 0, 0, 0);
     selectedDate.setHours(0, 0, 0, 0);
 

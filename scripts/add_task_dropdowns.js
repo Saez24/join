@@ -143,7 +143,6 @@ function dropdownSelectCategory(element) {
     if (element.closest("#taskcategory")) {
         let categoryContainer = document.getElementById("taskcategory");
         let checkboxes = categoryContainer.querySelectorAll(".checkbox");
-
         let clickedCheckbox = element.querySelector(".checkbox");
         let isChecked = clickedCheckbox.checked;
 

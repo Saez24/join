@@ -8,7 +8,6 @@ async function createTask() {
         !validateTaskInputField(taskDetails)
     ) return;
 
-
     let assignedTo = getAssignedTo();
     let subtasks = getSubtasks();
     let taskData = {
@@ -68,7 +67,6 @@ function validateTaskInputField(taskDetails) {
     let errorContainerTitle = document.getElementById('tasktitle');
     let errorContainerDate = document.getElementById('duedate');
     let errorContainerCategory = document.getElementById('taskcategoryinput');
-
     let isValid = true;
 
     if (!taskDetails.title) {
@@ -92,7 +90,6 @@ function validateTaskInputField(taskDetails) {
         errorContainerCategory.style.border = '';
     }
 
-    // Validate the due date
     if (taskDetails.duedate && !validateDueDate()) {
         errorContainerDate.style.border = '1px solid #ff8190';
         isValid = false;
@@ -112,17 +109,14 @@ function getAssignedTo() {
     let assignedTo = [];
 
     assignedToCheckboxes.forEach((checkbox) => {
-        // Splitting the ID to get the key parts
         let idParts = checkbox.id.split('_');
 
-        // Handling cases with IDs like -O-2Vl5jkNUBw8YFvq0O
         if (idParts.length >= 3) {
             let nameSpan = document.getElementById(`assignname_${idParts[1]}_${idParts.slice(2).join('_')}`);
             if (nameSpan) {
                 assignedTo.push(nameSpan.innerText.trim());
             }
         } else if (idParts.length === 2) {
-            // Handling simpler ID cases, e.g., assignedto_<key>
             let nameSpan = document.getElementById(`assignname_${idParts[1]}`);
             if (nameSpan) {
                 assignedTo.push(nameSpan.innerText.trim());
@@ -130,7 +124,6 @@ function getAssignedTo() {
         }
     });
 
-    console.log(`Assigned to (final): ${assignedTo}`);
     return assignedTo;
 };
 

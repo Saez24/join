@@ -97,8 +97,7 @@ async function saveUpdatedTask(taskid) {
         return;
     }
 
-    let result = await updateTask(taskid, updatedData);
-    console.log('Updated task:', result, taskid);
+    await updateTask(taskid, updatedData);
     displayTasks();
     closeDialogEdit();
 };
