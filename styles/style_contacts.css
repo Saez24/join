@@ -652,11 +652,6 @@ h2 {
 @media (max-width: 1400px) {
 
 
-    .add-contact-btn {
-        display: none;
-    }
-
-
     .contact-burger-menu {
         display: flex;
         position: fixed;
@@ -757,7 +752,6 @@ h2 {
     }
 
     #contactForString {
-        top: 97px;
         width: 100%;
         flex: content;
         padding-bottom: 96px;
@@ -821,21 +815,16 @@ h2 {
         width: 94%;
     }
 
-    .arrow-icon {
-        display: flex;
-        position: fixed;
-        width: 32px;
-        height: 32px;
-        right: 6px;
-        top: 242px;
-        transform: translateY(-50%);
-        cursor: pointer;
-    }
+
 }
 
 @media (max-width: 1200px) {
     body {
         justify-content: unset !important;
+    }
+
+    .add-contact-btn {
+        display: none;
     }
 
     .main-contacts {
@@ -882,6 +871,18 @@ h2 {
 
     #contactForString {
         padding-bottom: 100px;
+        top: 97px;
+    }
+
+    .arrow-icon {
+        display: flex;
+        position: fixed;
+        width: 32px;
+        height: 32px;
+        right: 6px;
+        top: 242px;
+        transform: translateY(-50%);
+        cursor: pointer;
     }
 }
 
