@@ -698,7 +698,7 @@ body {
 
 @media screen and (max-width: 1550px) {
     .wrapped_maxWidth {
-        max-width: 1000px;
+        max-width: 1100px;
         margin: 30px;
         padding-left: 250px;
     }
@@ -708,7 +708,25 @@ body {
     }
 
     .toDoBox {
-        padding: 10px;
+        padding: 18px;
+    }
+
+    .assignedName {
+        width: 35px;
+        height: 35px;
+        line-height: 40px;
+        font-size: 17px;
+        margin-left: -9px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .moreButtonBoard {
+        width: 37px;
+        height: 37px;
+        margin-left: -15px;
+        font-size: 16px;
     }
 }
 
