@@ -5,7 +5,7 @@ let initialsBackgroundColors = [
     '#0038FF', '#00FFFF', '#FF00000', '#FF4646', '#FFBB2B'
 ];
 
-let editingContactId = null; // Globale Variable zur Speicherung der Kontakt-ID während der Bearbeitung
+let editingContactId = null;
 
 
 function slideInFromRight() {
@@ -103,23 +103,18 @@ function validateContactInputs(email, name, phonenumber) {
 function searchAndRenderLastAddedContact(name) {
     let lastAddedName = name;
 
-    // Select all elements that could contain the contact name
     let contactElements = document.querySelectorAll(".contact-row");
 
-    // Iterate through the elements to find the one containing the target name
     contactElements.forEach(element => {
         if (element.textContent.includes(lastAddedName)) {
-            // Extract parameters from the onclick attribute
             let onclickAttr = element.getAttribute("onclick");
             let paramsRegex = /renderContactInformation\(([^)]+)\)/;
             let match = paramsRegex.exec(onclickAttr);
 
             if (match) {
-                // Get the parameters string and split it into an array
                 let paramsString = match[1];
                 let paramsArray = paramsString.split(',').map(param => param.trim().replace(/['"]/g, ''));
 
-                // Call the function with the parameters
                 renderContactInformation(...paramsArray);
                 element.scrollIntoView({ behavior: "smooth", block: "end" });
             }
@@ -147,7 +142,6 @@ async function getNames() {
         }
         let data = await response.json();
 
-        // Validierung der empfangenen Daten
         if (data && data.names && typeof data.names === 'object') {
             let namesArray = Object.entries(data.names);
             renderContacts(namesArray);
@@ -165,7 +159,6 @@ function getRandomColor() {
 }
 
 
-// Funktion zur Gruppierung der Kontakte nach dem Anfangsbuchstaben des Namens
 function groupByInitial(data) {
     return data.reduce((acc, [id, contact]) => {
         const initial = contact.name.charAt(0).toUpperCase();
@@ -248,7 +241,7 @@ function openEditContactOverlay(name, email, phone, color, uniqueId) {
     document.getElementById('edit-contact-phone').value = phone;
     document.getElementById('contactEditProfileInitials').style.background = color;
     document.getElementById('contactEditProfileInitials').innerHTML = getInitials(name);
-    editingContactId = uniqueId; // Speichern der ID des zu bearbeitenden Kontakts
+    editingContactId = uniqueId;
     editSlideInFromRight();
 }
 
@@ -280,7 +273,7 @@ function editSlideOutToRight() {
 
 
 async function editContact(event) {
-    event.preventDefault(); // Verhindert das Standardverhalten des Formulars
+    event.preventDefault();
     let name = document.getElementById('edit-contact-name').value;
     let email = document.getElementById('edit-contact-email').value;
     let phone = document.getElementById('edit-contact-phone').value;
@@ -316,7 +309,7 @@ async function updateContactData(id, data) {
 
 function showSuccessfulEdit() {
     let contactCreated = document.getElementById('contact-created');
-    contactCreated.innerHTML = "Contact successfully edited"; // Änderung der Nachricht
+    contactCreated.innerHTML = "Contact successfully edited";
     contactCreated.classList.add('slide-in-from-right');
 
     setTimeout(() => {
@@ -325,7 +318,6 @@ function showSuccessfulEdit() {
 }
 
 
-// Funktion zum Löschen eines Kontakts
 function openDeleteContactOverlay(uniqueId) {
     const deleteContactOverlay = document.getElementById('delete-contact-overlay');
     if (deleteContactOverlay) {
@@ -381,7 +373,7 @@ async function deleteContact() {
 function showSuccessfulDelete() {
     let contactDeleted = document.getElementById('contact-deleted');
     if (contactDeleted) {
-        contactDeleted.innerHTML = "Contact successfully deleted"; // Anzeige der Nachricht
+        contactDeleted.innerHTML = "Contact successfully deleted";
         contactDeleted.classList.add('slide-in-from-right');
 
         setTimeout(() => {
