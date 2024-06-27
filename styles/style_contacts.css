@@ -733,7 +733,7 @@ h2 {
 
     .contacts-left {
         width: 456px;
-        left: 231px;
+        left: 232px;
     }
 
     .main-contacts-text {
@@ -773,7 +773,7 @@ h2 {
 
     .contacts-left {
         padding-bottom: 96px;
-        left: 210px;
+        left: 232px;
         width: 80%;
     }
 
@@ -911,7 +911,8 @@ h2 {
     .contacts-left {
         top: 0;
         width: 93%;
-        left: 140px;
+        left: 232px;
+        align-items: flex-start;
     }
 
     .contact-row {
