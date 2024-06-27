@@ -57,6 +57,7 @@
     padding-left: 60px;
     margin-right: 35px;
     padding-right: 25px;
+    overflow-x: hidden;
 }
 
 .edit-left-container input {
@@ -118,7 +119,7 @@
 .edit-button-container button {
     position: relative;
     /* Ensures that the left property affects the button's position */
-    margin-left: -25px;
+    margin-left: -22px;
     /* Adjust this value to control the overlap */
     display: inline-block;
 }
@@ -144,6 +145,12 @@
 
 span {
     font-size: 14px;
+}
+
+.edit-subtaskblock {
+    gap: 4px;
+    display: flex;
+    flex-direction: column;
 }
 
 .edit-bottom-container {
@@ -181,4 +188,16 @@ span {
     font-size: 14px;
     color: #ff8190;
     padding-left: 5px;
+}
+
+@media (max-width: 440px) {
+    .edit-task-content-dialog {
+        padding-left: 30px;
+        margin-right: 24px;
+        padding-right: 10px;
+    }
+
+    .edit-prio-buttons {
+        flex-direction: column;
+    }
 }

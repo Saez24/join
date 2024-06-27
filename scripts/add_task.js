@@ -96,6 +96,7 @@ function renderAddTaskNames(sortedKeys, names) {
 function resetButtonStyles(button) {
     button.style.background = '';
     button.style.color = '';
+    console.log(buttonImages[button.id]);
     button.querySelector('img').src = buttonImages[button.id];
 };
 

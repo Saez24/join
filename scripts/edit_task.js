@@ -11,6 +11,11 @@ async function openDialogEdit() {
     await loadDialogContent();
     ensureCssLoaded();
     await adjustContent();
+    // Clear the active button id and reset activeButton
+    if (activeButton) {
+        activeButton.id = '';
+        activeButton = null; // Reset activeButton
+    }
     hidePopup();
 };
 
@@ -18,8 +23,8 @@ async function openDialogEdit() {
  * Loads the content of the dialog from 'edit_task.html' and updates the DOM.
  */
 async function loadDialogContent() {
-    const response = await fetch('./edit_task.html');
-    const htmlContent = await response.text();
+    let response = await fetch('./edit_task.html');
+    let htmlContent = await response.text();
 
     let dialog = document.getElementById('edit-dialog');
     let dialogslide = document.getElementById('edit_task_dialog_content');
@@ -62,7 +67,7 @@ function fetchEditTask(taskid) {
  * @param {string} taskid - The ID of the task to fetch.
  * @returns {Promise<Object>} The task data.
  */
-function fetchTaskData(taskid) {
+async function fetchTaskData(taskid) {
     return fetch(`${BASE_URL}tasks/${taskid}.json`)
         .then(response => {
             if (!response.ok) {
@@ -186,6 +191,11 @@ function closeDialogEdit() {
         dialogslide.classList.remove('slide-in-right')
         dialogslide.classList.remove('slide-out-right');
         dialog.classList.add('edit-d_none');
+        // Clear the active button id and reset activeButton
+        if (activeButton) {
+            activeButton.id = '';
+            activeButton = null; // Reset activeButton
+        }
     }, 300);
     showPopup(currentTaskId);
 };
@@ -205,6 +215,7 @@ function editCloseOnBackground(event) {
 function editResetButtonStyles(button) {
     button.style.background = '';
     button.style.color = '';
+    console.log(prioImages[button.id]);
     button.querySelector('img').src = prioImages[button.id];
 };
 

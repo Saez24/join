@@ -2,7 +2,7 @@
     display: flex;
     gap: 32px;
     padding-left: 60px;
-    padding-right: 60px;
+    padding-right: 30px;
     justify-content: center;
     flex-direction: column;
 }
@@ -607,6 +607,8 @@ label {
 
     .main-addtask {
         gap: 22px;
+        overflow-x: hidden;
+
     }
 
     input {
@@ -676,6 +678,12 @@ label {
     }
 }
 
+@media (max-height: 667px) {
+    .main-addtask {
+        height: 300px !important;
+    }
+}
+
 @media (max-width: 850px) {
     /* body {
         overflow-y: auto !important;
@@ -683,6 +691,10 @@ label {
 
     .addtaskcontainer {
         flex-direction: column;
+        height: 540px;
+        overflow-y: auto;
+        justify-content: flex-start;
+        padding-right: 20px;
     }
 
     .separator {
@@ -822,3 +834,5 @@ label {
         gap: 0;
     }
 }
+
+@media screen {}
