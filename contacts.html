@@ -16,7 +16,7 @@
 </head>
 
 <body>
-    <div id="sidebarContainer" onload="manageStyles()">
+        <div id="sidebarContainer">
         <script type="module" src="./scripts/singnedinuser.js"></script>
     </div>
     <div class="contacts-left" id="contactsLeft">
@@ -99,12 +99,12 @@
     </div>
 
     <!-- CONTACT SUCCESSFULLY CREATED-->
-    <div class="contact-created d-none contact-cont" id="contact-created">
+    <div class="contact-created contact-cont" id="contact-created">
         <p class="#">Contact successfully created</p>
     </div>
 
     <!-- EDIT CONTACT OVERLAY -->
-    <div class="contact-overlay d-flex j-center a-center d-none" id="edit-contact-overlay"
+    <div class="contact-overlay d-flex j-center a-center" id="edit-contact-overlay"
         onclick="closeOverlayWhenGreyAreaWasClicked()">
         <div class="contact-cont d-flex" id="edit-contact-cont">
             <div class="contact-left d-flex f-column j-center">
@@ -154,7 +154,7 @@
     </div>
 
     <!-- CONTACT SUCCESSFULLY EDITED-->
-    <div class="contact-created d-none contact-cont" id="contact-edited">
+    <div class="contact-created contact-cont" id="contact-edited">
         <p class="#">Contact successfully edited</p>
     </div>
     <!-- DELETE CONTACT OVERLAY -->
@@ -168,7 +168,7 @@
         </div>
     </div>
     <!-- CONTACT SUCCESSFULLY DELETED -->
-    <div class="contact-created contact-cont d-none" id="contact-deleted">
+    <div class="contact-created contact-cont" id="contact-deleted">
         <p>Contact successfully deleted</p>
     </div>
 

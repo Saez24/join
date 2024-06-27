@@ -536,7 +536,7 @@ h2 {
 }
 
 .contact-cont {
-    position: fixed;
+    position: relative;
     transform: translateX(100vw);
     transition: transform 300ms ease-out;
 }
@@ -775,6 +775,7 @@ h2 {
         padding-bottom: 96px;
         left: 232px;
         width: 80%;
+        align-items: flex-start;
     }
 
     .contact-row {
@@ -912,7 +913,7 @@ h2 {
         top: 0;
         width: 93%;
         left: 232px;
-        align-items: flex-start;
+        /* align-items: flex-start; */
     }
 
     .contact-row {

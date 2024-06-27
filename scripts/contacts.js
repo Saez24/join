@@ -160,7 +160,7 @@ function getRandomColor() {
 
 
 function groupByInitial(data) {
-    return data.reduce((acc, [id, contact]) => {
+    let grouped = data.reduce((acc, [id, contact]) => {
         const initial = contact.name.charAt(0).toUpperCase();
         if (!acc[initial]) {
             acc[initial] = [];
@@ -168,6 +168,13 @@ function groupByInitial(data) {
         acc[initial].push([id, contact]);
         return acc;
     }, {});
+
+    let sortedGrouped = {};
+    Object.keys(grouped).sort().forEach(key => {
+        sortedGrouped[key] = grouped[key];
+    });
+
+    return sortedGrouped;
 }
 
 function getInitials(name) {
@@ -250,7 +257,6 @@ function editSlideInFromRight() {
     let editContactOverlay = document.getElementById('edit-contact-overlay');
     let editContactCont = document.getElementById('edit-contact-cont');
 
-    editContactOverlay.classList.remove('d-none');
     editContactOverlay.classList.add('slide-in-from-right');
     editContactCont.classList.add('slide-in-from-right');
 
@@ -265,7 +271,6 @@ function editSlideOutToRight() {
     let contactCont = document.getElementById('edit-contact-cont');
 
     contactOverlay.classList.remove('fade-to-grey-overlay');
-    contactOverlay.classList.add('d-none');
 
     setTimeout(() => {
         contactOverlay.classList.remove('slide-in-from-right');
@@ -312,7 +317,6 @@ async function updateContactData(id, data) {
 function showSuccessfulEdit() {
     let contactCreated = document.getElementById('contact-edited');
     contactCreated.innerHTML = "Contact successfully edited";
-    contactCreated.classList.remove('d-none');
     contactCreated.classList.add('slide-in-from-right');
 
     setTimeout(() => {
@@ -377,13 +381,11 @@ function showSuccessfulDelete() {
     let contactDeleted = document.getElementById('contact-deleted');
     if (contactDeleted) {
         contactDeleted.innerHTML = "Contact successfully deleted";
-        contactDeleted.classList.remove('d-none');
         contactDeleted.classList.add('slide-in-from-right');
 
 
         setTimeout(() => {
             contactDeleted.classList.remove('slide-in-from-right');
-            contactDeleted.classList.add('d-none');
         }, 1500);
     } else {
         console.error('contact-deleted Element nicht gefunden');
