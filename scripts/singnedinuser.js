@@ -95,21 +95,6 @@ function generateNameUserblock(name) {
     `;
 };
 
-// /**
-//  * Monitors Firebase authentication state changes and fetches user data if a user is signed in.
-//  */
-// onAuthStateChanged(auth, (user) => {
-//     if (user) {
-//         let email = user.email;
-//         // document.getElementById('sidebarMenu').style.visibility = "visible";
-//         fetchUserData(email);
-//         renderUserName();
-//     } else {
-//         // document.getElementById('sidebarMenu').style.visibility = "hidden";
-//         renderUserName(null);
-//     }
-// });
-
 // /** Wenn alles fertig ist muss diese Funktion aktiviert werden und die darüber deaktiviert
 //  * Monitors Firebase authentication state changes and fetches user data if a user is signed in.
 //  */
