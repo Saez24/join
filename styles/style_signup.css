@@ -80,7 +80,7 @@ body {
 
 #signup-form {
     display: flex;
-    gap: 32px;
+    gap: 16px;
     height: 196px;
     width: 90%;
     flex-direction: column;
@@ -191,7 +191,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    /* padding-top: 32px; */
+    margin-top: -0;
 }
 
 .acceptprivacy-container a {
@@ -255,13 +255,14 @@ footer a:hover {
     color: #29ABE2;
 }
 
+#error-message-placeholder {
+    height: 17px;
+}
+
 .error-message {
     display: none;
     font-size: 14px;
     color: #ff8190;
-    position: absolute;
-    bottom: 180px;
-    left: 90px;
 }
 
 .arrow-container {
@@ -295,7 +296,7 @@ footer a:hover {
 
     #signup-form {
         width: 90%;
-        gap: 18px;
+        gap: 12px;
     }
 
     .input-container {
@@ -340,11 +341,6 @@ footer a:hover {
 
     .signup-container {
         top: 124px;
-    }
-
-    .error-message {
-        bottom: 198px;
-        left: 64px;
     }
 
     footer {
