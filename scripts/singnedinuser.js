@@ -95,7 +95,6 @@ function generateNameUserblock(name) {
     `;
 };
 
-// /** Wenn alles fertig ist muss diese Funktion aktiviert werden und die darüber deaktiviert
 //  * Monitors Firebase authentication state changes and fetches user data if a user is signed in.
 //  */
 onAuthStateChanged(auth, (user) => {
@@ -106,7 +105,6 @@ onAuthStateChanged(auth, (user) => {
         fetchUserData(email);
         renderUserName();
     } else {
-        // Überprüft, ob die aktuelle Seite nicht in der Liste der öffentlichen Seiten ist
         document.getElementById('sidebarMenu').style.visibility = "hidden";
         if (!publicPages.includes(currentPage)) {
             window.location.href = "index.html";
@@ -114,7 +112,7 @@ onAuthStateChanged(auth, (user) => {
         } else {
         }
 
-        renderUserName(null); // Display 'GS' if no user is signed in
+        renderUserName(null);
     }
 });
 
