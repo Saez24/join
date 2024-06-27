@@ -215,7 +215,6 @@ function editCloseOnBackground(event) {
 function editResetButtonStyles(button) {
     button.style.background = '';
     button.style.color = '';
-    console.log(prioImages[button.id]);
     button.querySelector('img').src = prioImages[button.id];
 };
 

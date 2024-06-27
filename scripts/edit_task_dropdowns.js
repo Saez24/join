@@ -31,7 +31,6 @@ function renderEditAssignTo(task) {
 
     let assignedToList = task.assignedto || task.assignto; // Überprüfen, welche Eigenschaft existiert
     if (!Array.isArray(assignedToList)) {
-        // console.error('assignedto ist nicht definiert oder kein Array');
         return;
     }
 

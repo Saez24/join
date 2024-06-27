@@ -97,7 +97,8 @@ function validateEmail(email, errorContainer) {
 function handleFormSubmission(email, password, errorContainer) {
     createUserWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
-            window.location.href = "board.html";
+            window.location.href = "index.html";
+            handleLogout();
         })
         .catch((error) => {
 
@@ -164,7 +165,7 @@ async function postData(path = "names", data = {}) {
         let responseToJson = await response.json();
         return responseToJson;
     } catch (error) {
-        console.error("Error sending data:", error);
+
     }
 };
 
@@ -175,9 +176,9 @@ async function postData(path = "names", data = {}) {
 async function addName(newName) {
     try {
         let result = await postData('names', newName);
-        console.log("New name successfully added:", result);
+
     } catch (error) {
-        console.error("Error adding the new name:", error);
+
     }
 };
 

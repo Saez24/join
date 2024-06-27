@@ -34,11 +34,10 @@ async function fetchUserData(email) {
         let data = await response.json();
         let userNameData = findNameByEmail(data.names, email);
         if (userNameData) {
-            console.log('User name:', userNameData.name);
             renderUserName(userNameData.name);
         }
     } catch (error) {
-        console.error("Error fetching data:", error);
+
     }
 };
 
@@ -96,44 +95,26 @@ function generateNameUserblock(name) {
     `;
 };
 
-/**
- * Monitors Firebase authentication state changes and fetches user data if a user is signed in.
- */
+//  * Monitors Firebase authentication state changes and fetches user data if a user is signed in.
+//  */
 onAuthStateChanged(auth, (user) => {
+    const currentPage = window.location.pathname.split('/').pop();
     if (user) {
         let email = user.email;
-        // document.getElementById('sidebarMenu').style.visibility = "visible";
+        document.getElementById('sidebarMenu').style.visibility = "visible";
         fetchUserData(email);
         renderUserName();
     } else {
-        // document.getElementById('sidebarMenu').style.visibility = "hidden";
+        document.getElementById('sidebarMenu').style.visibility = "hidden";
+        if (!publicPages.includes(currentPage)) {
+            window.location.href = "index.html";
+
+        } else {
+        }
+
         renderUserName(null);
     }
 });
-
-// /** Wenn alles fertig ist muss diese Funktion aktiviert werden und die darüber deaktiviert
-//  * Monitors Firebase authentication state changes and fetches user data if a user is signed in.
-//  */
-// onAuthStateChanged(auth, (user) => {
-//     const currentPage = window.location.pathname.split('/').pop();
-//     if (user) {
-//         let email = user.email;
-//         document.getElementById('sidebarMenu').style.visibility = "visible";
-//         fetchUserData(email);
-//         renderUserName();
-//     } else {
-//         // Überprüft, ob die aktuelle Seite nicht in der Liste der öffentlichen Seiten ist
-//         document.getElementById('sidebarMenu').style.visibility = "hidden";
-//         if (!publicPages.includes(currentPage)) {
-//             window.location.href = "index.html";
-
-//         } else {
-//             console.log('No user is signed in, but accessing a public page.');
-//         }
-
-//         renderUserName(null); // Display 'GS' if no user is signed in
-//     }
-// });
 
 /**
  * Logs out the current user and redirects to the index page.

@@ -350,10 +350,13 @@ body {
     flex-wrap: wrap;
     padding-bottom: 100px;
     flex-direction: row;
-    height: 550px;
-    overflow-y: auto;
-    overflow-x: hidden;
+    overflow-y: auto; 
+    overflow-x: hidden; 
+    height: calc(100vh - 100px); 
+    box-sizing: border-box;
+    padding-bottom: 100px;
 }
+
 
 .statusTasks {
     display: flex;
@@ -753,9 +756,9 @@ body {
         display: flex;
         align-items: flex-start;
         flex-wrap: wrap;
-        padding-bottom: 100px;
+        padding-bottom: 150px;
         flex-direction: row;
-        height: 550px;
+        height: calc(100vh - 100px); 
         overflow-y: auto;
         overflow-x: hidden;
     }
@@ -930,6 +933,8 @@ body {
         max-height: calc(100vh - 360px);
         overflow-y: auto;
         overflow-x: hidden;
+        height: calc(100vh - 100px); 
+        padding-bottom: 10px;
     }
 
 
