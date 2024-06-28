@@ -108,8 +108,6 @@ onAuthStateChanged(auth, (user) => {
         document.getElementById('sidebarMenu').style.visibility = "hidden";
         if (!publicPages.includes(currentPage)) {
             window.location.href = "index.html";
-
-        } else {
         }
 
         renderUserName(null);
