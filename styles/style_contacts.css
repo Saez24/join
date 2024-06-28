@@ -1,6 +1,5 @@
 body {
-    overflow-x: hidden;
-    overflow-y: hidden;
+
     display: flex;
 }
 
@@ -10,7 +9,7 @@ body {
     width: 456px;
     height: 100vh;
     background-color: #ffffff;
-    left: 232px;
+    left: 110px;
     position: relative;
     align-items: center;
 }
@@ -81,7 +80,7 @@ body {
     display: flex;
     position: relative;
     top: 206px;
-    left: 300px;
+    left: 151px;
     gap: 30px;
     height: 73.2px;
     align-items: center;
@@ -273,7 +272,7 @@ h2 {
     width: 800px;
     height: 364px;
     top: 234px;
-    left: 300px;
+    left: 151px;
     gap: 21px;
     flex-direction: column;
 }
@@ -776,7 +775,7 @@ h2 {
     .contacts-left {
         padding-bottom: 96px;
         left: 232px;
-        width: 80%;
+        width: 98vw;
         align-items: flex-start;
     }
 
@@ -784,11 +783,11 @@ h2 {
         gap: 15px;
         padding-right: 0;
         padding-left: 16px;
-        width: 97%;
+        width: 79%;
     }
 
     #contactForString {
-        left: 15px;
+        left: 4px;
         width: 94%;
         padding-bottom: 147px;
     }
@@ -907,16 +906,14 @@ h2 {
         width: 77%;
         top: 97px;
         height: 100%;
-        padding-bottom: 41px;
         left: 4px;
         overflow-x: hidden;
     }
 
     .contacts-left {
         top: 0;
-        width: 93%;
+        width: 93vw;
         left: 232px;
-        /* align-items: flex-start; */
     }
 
     .contact-row {
@@ -1008,7 +1005,7 @@ h2 {
 
     .contacts-left {
         left: 0;
-        width: 99%;
+        width: 99vw;
         padding: 0;
     }
 
@@ -1152,12 +1149,6 @@ h2 {
 }
 
 @media (max-width: 400px) {
-
-    .contacts-left {
-        width: 100%;
-    }
-
-
 
     .contact-summary-initials {
         width: 80px !important;
