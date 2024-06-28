@@ -591,6 +591,7 @@ h2 {
 .contact-created {
     position: fixed;
     top: calc(100vh - 40%);
+    left: calc(100vw - 50%);
     z-index: 1001;
     width: 240px;
     height: 32px;
