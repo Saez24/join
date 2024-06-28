@@ -167,6 +167,7 @@ h2 {
     width: 100%;
     left: 4px;
     height: 78%;
+    padding-left: 10px;
 }
 
 /* Scrollbar styles */
@@ -907,6 +908,7 @@ h2 {
         height: 100%;
         padding-bottom: 41px;
         left: 4px;
+        overflow-x: hidden;
     }
 
     .contacts-left {
@@ -998,7 +1000,7 @@ h2 {
 
     #contactForString {
         left: 0;
-        width: 100%;
+        width: 96%;
         right: 0;
         margin-bottom: 133px;
     }

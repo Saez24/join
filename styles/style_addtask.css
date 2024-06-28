@@ -564,11 +564,11 @@ label {
 
 .task-created {
     position: fixed;
-    top: calc(100vh - 80%);
+    top: calc(100vh - 50%);
     z-index: 1001;
     width: 240px;
     height: 32px;
-    right: 180px;
+    right: 35%;
     border-radius: 10px;
     border: none;
     padding: 16px;

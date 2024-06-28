@@ -350,9 +350,9 @@ body {
     flex-wrap: wrap;
     padding-bottom: 100px;
     flex-direction: row;
-    overflow-y: auto; 
-    overflow-x: hidden; 
-    height: calc(100vh - 100px); 
+    overflow-y: auto;
+    overflow-x: hidden;
+    height: calc(100vh - 100px);
     box-sizing: border-box;
     padding-bottom: 100px;
 }
@@ -737,7 +737,7 @@ body {
 @media screen and (max-width: 1470px) {
     .wrapped_maxWidth {
         padding-left: 260px;
-        padding-right: 20px;
+
     }
 
     .searchTask {
@@ -758,7 +758,7 @@ body {
         flex-wrap: wrap;
         padding-bottom: 150px;
         flex-direction: row;
-        height: calc(100vh - 100px); 
+        height: calc(100vh - 100px);
         overflow-y: auto;
         overflow-x: hidden;
     }
@@ -933,7 +933,7 @@ body {
         max-height: calc(100vh - 360px);
         overflow-y: auto;
         overflow-x: hidden;
-        height: calc(100vh - 100px); 
+        height: calc(100vh - 100px);
         padding-bottom: 10px;
     }
 
