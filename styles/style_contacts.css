@@ -1,6 +1,6 @@
 body {
-
     display: flex;
+    justify-content: flex-start !important;
 }
 
 .contacts-left {
@@ -9,9 +9,10 @@ body {
     width: 456px;
     height: 100vh;
     background-color: #ffffff;
-    left: 110px;
+    left: 234px;
     position: relative;
     align-items: center;
+    z-index: 1;
 }
 
 .contact-row {
@@ -74,6 +75,8 @@ body {
     flex: 1;
     flex-direction: column;
     height: 100vh;
+    left: 120px;
+    position: relative;
 }
 
 .main-contacts-text {
@@ -737,9 +740,6 @@ h2 {
         left: 232px;
     }
 
-    .main-contacts-text {
-        left: 246px;
-    }
 
 
 
@@ -754,10 +754,6 @@ h2 {
     ::-webkit-scrollbar-track {
         margin-bottom: 147px;
         margin-top: 96px;
-    }
-
-    #contactSummary {
-        left: 250px;
     }
 
     .contact-summary-headline-name {
@@ -775,7 +771,7 @@ h2 {
     .contacts-left {
         padding-bottom: 96px;
         left: 232px;
-        width: 98vw;
+        width: 400px;
         align-items: flex-start;
     }
 
@@ -783,7 +779,7 @@ h2 {
         gap: 15px;
         padding-right: 0;
         padding-left: 16px;
-        width: 79%;
+        width: 92%;
     }
 
     #contactForString {
