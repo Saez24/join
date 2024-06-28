@@ -7,7 +7,7 @@ body {
     display: flex;
     flex-direction: column;
     width: 456px;
-    height: 100vh;
+    height: calc(100vh - 98px);
     background-color: #ffffff;
     left: 234px;
     position: relative;
@@ -168,7 +168,7 @@ h2 {
     overflow-y: auto;
     width: 100%;
     left: 4px;
-    height: 78%;
+    height: 86%;
     padding-left: 10px;
 }
 
@@ -254,7 +254,7 @@ h2 {
 
 .capital-category {
     display: flex;
-    width: 352px;
+    width: 80%;
     height: 58px;
     padding: 17px 36px 17px 36px;
     align-items: center;
@@ -771,7 +771,7 @@ h2 {
     .contacts-left {
         padding-bottom: 96px;
         left: 232px;
-        width: 400px;
+        width: 90%;
         align-items: flex-start;
     }
 
@@ -809,6 +809,7 @@ h2 {
 
     .main-contacts {
         display: none;
+
     }
 
     #betterInATeam {
@@ -891,11 +892,11 @@ h2 {
 
 @media (max-width: 1000px) {
     #contactSummary {
-        left: 240px;
+        left: 174px;
     }
 
     .main-contacts-text {
-        left: 240px;
+        left: 174px;
     }
 
     #contactForString {
@@ -929,7 +930,7 @@ h2 {
         flex-direction: column;
         top: 128px;
         gap: 16px;
-        left: 250px;
+        left: 145px;
         position: absolute;
         justify-content: flex-start;
         align-items: baseline;
@@ -941,7 +942,7 @@ h2 {
 
     #contactSummary {
         top: 280px;
-        left: 262px;
+        left: 143px;
         gap: 12px;
         width: auto;
     }
@@ -981,6 +982,7 @@ h2 {
     .main-contacts {
         align-items: flex-start;
         width: 100%;
+        left: 0;
     }
 
     .main-contacts-text {
@@ -1179,4 +1181,8 @@ h2 {
         gap: 12px;
     }
 
+    #contactForString {
+        padding-bottom: 60px;
+        margin-bottom: 60px;
+    }
 }
