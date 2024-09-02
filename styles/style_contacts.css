@@ -4,6 +4,7 @@ body {
 }
 
 .contacts-left {
+    padding-bottom: 96px;
     display: flex;
     flex-direction: column;
     width: 456px;
@@ -166,13 +167,14 @@ h2 {
     top: 200px;
     position: relative;
     overflow-y: auto;
-    width: 100%;
     left: 4px;
     height: 86%;
     padding-left: 10px;
+    left: 4px;
+    width: 94%;
+    padding-bottom: 147px;
 }
 
-/* Scrollbar styles */
 ::-webkit-scrollbar {
     width: 8px;
     height: 53px;
@@ -724,23 +726,14 @@ h2 {
     }
 
 
-
     .contact-row {
         width: 88%;
-    }
-
-    #contactForString {
-        width: 100%;
-        flex: content;
-        padding-bottom: 96px;
     }
 
     .contacts-left {
         width: 456px;
         left: 232px;
     }
-
-
 
 
     .contact-summary-headline-rightside {
@@ -781,13 +774,6 @@ h2 {
         padding-left: 16px;
         width: 92%;
     }
-
-    #contactForString {
-        left: 4px;
-        width: 94%;
-        padding-bottom: 147px;
-    }
-
 
     .add-contact-btn {
         left: calc(204px + 52px);
